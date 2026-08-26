@@ -10,7 +10,7 @@ from __future__ import annotations
 import logging
 import sys
 import time
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 
 from app.briefing.builder import build_briefing
 from app.briefing.models import BriefingStats
@@ -158,8 +158,26 @@ def run(settings: Settings) -> int:
         for entity in event.entities
     }
 
+    # Two different questions, and conflating them was a bug: ingestion asks what has
+    # not been seen yet, the briefing asks what the reader should know now. A re-run
+    # minutes after the last one ingests nothing new, but must still report the day.
+    briefing_cutoff = datetime.now(UTC) - timedelta(hours=settings.briefing_lookback_hours)
+    touched = {event.id: event for event in clustered.events}
+    candidates = list(clustered.events) + [
+        event
+        for event in latest_events(settings.data_dir, event_window)
+        if event.id not in touched and event.last_updated >= briefing_cutoff
+    ]
+    logger.info(
+        "ranking %d events (%d new this run, %d carried from the last %dh)",
+        len(candidates),
+        len(clustered.events),
+        len(candidates) - len(clustered.events),
+        settings.briefing_lookback_hours,
+    )
+
     scored = score_events(
-        clustered.events,
+        candidates,
         profile=profile,
         source_credibility=credibility_by_id(all_sources),
         today=today,
@@ -252,7 +270,9 @@ def run(settings: Settings) -> int:
 
     # Persist and publish before delivering. Delivery is the one stage that depends on
     # somebody else's server, so a failure there must cost nothing.
-    write_briefing(settings.data_dir, briefing)
+    written_path = write_briefing(settings.data_dir, briefing)
+    if written_path is None:
+        logger.warning("this run produced nothing; the previous briefing stands")
     build_site(settings.data_dir, settings.site_dir)
 
     # Advanced only now, and only to the window this run actually covered. A crash before

@@ -184,3 +184,37 @@ def test_the_site_is_rebuilt_from_stored_briefings(tmp_path: Path) -> None:
 def test_building_a_site_with_no_briefings_writes_nothing(tmp_path: Path) -> None:
     assert build_site(tmp_path / "data", tmp_path / "site") == 0
     assert not (tmp_path / "site").exists()
+
+
+def test_an_empty_run_never_overwrites_a_good_briefing(tmp_path: Path) -> None:
+    """Real failure: a re-run three minutes later had an empty ingest window, found no
+    events, and replaced a five-story briefing with a blank page."""
+    write_briefing(tmp_path, briefing())
+    empty = Briefing(day=DAY, generated_at=NOW, stories=[])
+
+    result = write_briefing(tmp_path, empty)
+
+    assert result is None
+    stored = read_briefing(tmp_path, DAY)
+    assert stored is not None
+    assert len(stored.stories) == 1
+
+
+def test_an_empty_briefing_is_stored_when_there_is_nothing_to_lose(tmp_path: Path) -> None:
+    """A genuinely quiet first day should still publish, saying so."""
+    result = write_briefing(tmp_path, Briefing(day=DAY, generated_at=NOW, stories=[]))
+
+    assert result is not None
+    stored = read_briefing(tmp_path, DAY)
+    assert stored is not None
+    assert stored.is_empty
+
+
+def test_a_better_briefing_replaces_an_earlier_one(tmp_path: Path) -> None:
+    write_briefing(tmp_path, briefing(headline="First attempt"))
+
+    write_briefing(tmp_path, briefing(headline="Second attempt"))
+
+    stored = read_briefing(tmp_path, DAY)
+    assert stored is not None
+    assert stored.stories[0].headline == "Second attempt"

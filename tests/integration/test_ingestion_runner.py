@@ -5,11 +5,12 @@ from __future__ import annotations
 import ipaddress
 
 import httpx
+import pytest
 
 from app.core.config import Settings
 from app.core.models import Source, SourceTier
 from app.ingestion.fetcher import SafeFetcher
-from app.ingestion.runner import ingest_all, summarise
+from app.ingestion.runner import ingest_all, ingest_source, summarise
 from app.ingestion.urlguard import IpAddress, Resolver
 
 RSS = b"""<?xml version="1.0"?><rss version="2.0"><channel>
@@ -91,3 +92,62 @@ def test_results_record_timing_for_the_run_log() -> None:
     assert results[0].duration_seconds is not None
     assert results[0].duration_seconds >= 0
     assert results[0].http_status == 200
+
+
+def test_a_transient_failure_is_retried_once(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Two of 25 feeds failed on a live run and both had succeeded minutes earlier."""
+    monkeypatch.setattr("app.ingestion.runner.time.sleep", lambda _: None)
+    attempts = {"n": 0}
+
+    def flaky(request: httpx.Request) -> httpx.Response:
+        attempts["n"] += 1
+        if attempts["n"] == 1:
+            return httpx.Response(403, content=b"bot protection")
+        return httpx.Response(200, content=RSS)
+
+    client = httpx.Client(transport=httpx.MockTransport(flaky), follow_redirects=False)
+    fetcher = SafeFetcher(settings(), client=client, resolver=public_resolver())
+
+    result = ingest_source(fetcher, source("good", "good.example.com"), settings())
+
+    assert result.ok is True
+    assert result.article_count == 2
+    assert attempts["n"] == 2
+
+
+def test_a_persistent_failure_gives_up_after_the_retry(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr("app.ingestion.runner.time.sleep", lambda _: None)
+    attempts = {"n": 0}
+
+    def dead(request: httpx.Request) -> httpx.Response:
+        attempts["n"] += 1
+        return httpx.Response(500, content=b"boom")
+
+    client = httpx.Client(transport=httpx.MockTransport(dead), follow_redirects=False)
+    fetcher = SafeFetcher(settings(), client=client, resolver=public_resolver())
+
+    result = ingest_source(fetcher, source("dead", "dead.example.com"), settings())
+
+    assert result.ok is False
+    assert attempts["n"] == 2
+
+
+def test_an_ssrf_rejection_is_never_retried(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Retrying a security control until it relents is not resilience."""
+    monkeypatch.setattr("app.ingestion.runner.time.sleep", lambda _: None)
+    attempts = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        attempts["n"] += 1
+        return httpx.Response(200, content=RSS)
+
+    def private_resolver(host: str, port: int) -> list[IpAddress]:
+        return [ipaddress.ip_address("10.0.0.5")]
+
+    client = httpx.Client(transport=httpx.MockTransport(handler), follow_redirects=False)
+    fetcher = SafeFetcher(settings(), client=client, resolver=private_resolver)
+
+    result = ingest_source(fetcher, source("internal", "internal.example.com"), settings())
+
+    assert result.ok is False
+    assert attempts["n"] == 0

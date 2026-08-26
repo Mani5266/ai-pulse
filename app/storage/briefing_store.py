@@ -27,9 +27,29 @@ def briefing_path(data_dir: Path, day: date) -> Path:
     return data_dir / BRIEFINGS_DIR / f"{day.isoformat()}.json"
 
 
-def write_briefing(data_dir: Path, briefing: Briefing) -> Path:
-    """Persist one briefing. This happens before delivery is attempted."""
+def write_briefing(data_dir: Path, briefing: Briefing) -> Path | None:
+    """Persist one briefing, unless doing so would destroy a better one.
+
+    A run that produces nothing must not replace a day's briefing with an empty page. This
+    happened: a second run three minutes after the first had an empty ingest window, found
+    no events, and overwrote a five-story briefing with a blank one. Publishing is not
+    supposed to be able to lose work.
+
+    Returns the path written, or None if the existing briefing was kept.
+    """
     path = briefing_path(data_dir, briefing.day)
+
+    if briefing.is_empty:
+        existing = read_briefing(data_dir, briefing.day)
+        if existing is not None and not existing.is_empty:
+            logger.warning(
+                "%s: keeping the existing %d-story briefing rather than overwriting it "
+                "with an empty one",
+                path,
+                len(existing.stories),
+            )
+            return None
+
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = briefing.model_dump(mode="json", exclude_none=True)
     path.write_text(

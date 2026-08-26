@@ -13,7 +13,7 @@ from collections.abc import Sequence
 from datetime import UTC, datetime
 
 from app.core.config import Settings
-from app.core.errors import AIPulseError
+from app.core.errors import AIPulseError, UnsafeURLError
 from app.core.models import FeedResult, Source
 from app.ingestion.feeds import parse_feed
 from app.ingestion.fetcher import SafeFetcher
@@ -21,19 +21,50 @@ from app.ingestion.fetcher import SafeFetcher
 logger = logging.getLogger(__name__)
 
 
-def ingest_source(fetcher: SafeFetcher, source: Source, settings: Settings) -> FeedResult:
-    """Fetch and parse one source. Never raises."""
+FETCH_RETRY_DELAY_SECONDS = 2.0
+"""Pause before the single retry. Long enough to clear a transient refusal, short enough
+that a dead feed costs two seconds rather than a minute."""
+
+
+def ingest_source(
+    fetcher: SafeFetcher, source: Source, settings: Settings, *, retries: int = 1
+) -> FeedResult:
+    """Fetch and parse one source. Never raises.
+
+    One retry, because feed failures are frequently transient: the same URL that returns
+    403 or times out on one attempt serves 50 entries on the next. Two sources of 25 failed
+    on a live run and both had succeeded minutes earlier. A silently missing feed is worse
+    than a slow run, because it costs coverage without reporting anything.
+    """
     started = time.monotonic()
     fetched_at = datetime.now(UTC)
 
-    try:
-        response = fetcher.get(str(source.feed_url))
-    except AIPulseError as exc:
-        logger.warning("%s: fetch failed: %s", source.id, exc)
+    response = None
+    last_error: AIPulseError | None = None
+
+    for attempt in range(retries + 1):
+        if attempt:
+            time.sleep(FETCH_RETRY_DELAY_SECONDS)
+        try:
+            response = fetcher.get(str(source.feed_url))
+            break
+        except UnsafeURLError as exc:
+            # A refusal by the SSRF guard is a decision, not a hiccup. Retrying it would
+            # be retrying a security control until it relents.
+            logger.warning("%s: rejected: %s", source.id, exc)
+            last_error = exc
+            break
+        except AIPulseError as exc:
+            logger.warning(
+                "%s: fetch failed (attempt %d of %d): %s", source.id, attempt + 1, retries + 1, exc
+            )
+            last_error = exc
+
+    if response is None:
         return FeedResult(
             source_id=source.id,
             ok=False,
-            error=f"{type(exc).__name__}: {exc}",
+            error=f"{type(last_error).__name__}: {last_error}",
             duration_seconds=round(time.monotonic() - started, 3),
             fetched_at=fetched_at,
         )

@@ -70,6 +70,15 @@ class Settings(BaseSettings):
     first_run_days: int = Field(default=2, ge=1, le=30)
     """How far back a first run looks, with no previous briefing to anchor to."""
 
+    briefing_lookback_hours: int = Field(default=36, ge=1, le=336)
+    """How far back the *briefing* reports, independent of what this run ingested.
+
+    These are two different questions and conflating them is a bug. Ingestion asks "what
+    have I not seen yet", which is correctly anchored to the last run. The briefing asks
+    "what should this reader know now", which is not: a re-run three minutes after the
+    last one has nothing new to ingest, and would otherwise produce an empty briefing and
+    replace a good one with it."""
+
     max_catchup_days: int = Field(default=7, ge=1, le=90)
     """Cap on the catch-up window. After a long gap, "everything since" is thousands of
     articles and a briefing nobody reads."""

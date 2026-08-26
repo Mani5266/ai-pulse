@@ -205,6 +205,36 @@ sources:
     site_url: https://aws.amazon.com/blogs/machine-learning/
     credibility: 0.8
 
+  # Editorial aggregators. Deliberately low credibility and capped: these are secondary
+  # accounts of announcements the primary tier already carries, so deduplication keeps the
+  # lab's own post and these become corroboration instead. Their value is the editorial
+  # selection itself — an item two newsletters both picked up is one that mattered.
+  - id: tldr-ai
+    name: TLDR AI
+    tier: journalism
+    feed_url: https://tldr.tech/api/rss/ai
+    site_url: https://tldr.tech/ai
+    credibility: 0.7
+    max_items_per_run: 10
+
+  - id: the-rundown
+    name: The Rundown AI
+    tier: journalism
+    feed_url: https://www.therundown.ai/feed
+    site_url: https://www.therundown.ai/
+    credibility: 0.7
+    max_items_per_run: 15
+
+  # Community signal rather than editorial. The points threshold is the filter, and it
+  # surfaces what no lab blog announces: outages, security disclosures, tools that take off.
+  - id: hacker-news
+    name: Hacker News (200+ points)
+    tier: ecosystem
+    feed_url: https://hnrss.org/frontpage?points=200
+    site_url: https://news.ycombinator.com/
+    credibility: 0.65
+    max_items_per_run: 10
+
   - id: simon-willison
     name: Simon Willison
     tier: ecosystem
