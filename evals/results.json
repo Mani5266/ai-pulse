@@ -23,7 +23,7 @@
     "escape_rate": 0.0,
     "structural_escapes": 0,
     "model_escapes": 0,
-    "model_attacks_run": 1,
+    "model_attacks_run": 3,
     "by_category": {}
   }
 }
