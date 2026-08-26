@@ -336,3 +336,70 @@ def test_unparseable_reset_durations_fall_back() -> None:
 
     assert _parse_duration("bogus") is None
     assert _parse_duration("") is None
+
+
+def test_a_daily_limit_stops_immediately_rather_than_waiting(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    """Real failure: a day of testing spent Groq's 200,000 tokens-per-day allowance, and
+    the client spun on 30-second sleeps for a quota that resets in hours."""
+    slept: list[float] = []
+    monkeypatch.setattr("app.llm.provider.time.sleep", slept.append)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(
+            429,
+            headers={"retry-after": "64"},
+            text='{"error":{"message":"Rate limit reached ... on tokens per day (TPD): '
+            'Limit 200000, Used 199722"}}',
+        )
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    provider = GroqProvider(settings(llm_provider="hosted", llm_api_key="sk-test"), client=client)
+
+    assert provider.structured("prompt", ImpactScores) is None
+    assert slept == []
+    assert provider.stats.quota_exhausted is True
+
+
+def test_no_further_calls_are_made_once_the_daily_quota_is_gone(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setattr("app.llm.provider.time.sleep", lambda _: None)
+    calls = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        return httpx.Response(429, text='{"error":{"message":"tokens per day (TPD) exceeded"}}')
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    provider = GroqProvider(settings(llm_provider="hosted", llm_api_key="sk-test"), client=client)
+
+    for _ in range(5):
+        provider.structured("prompt", ImpactScores)
+
+    assert calls["n"] == 1
+
+
+def test_a_per_minute_limit_still_waits(monkeypatch: pytest.MonkeyPatch) -> None:
+    """The two must not be conflated in either direction."""
+    slept: list[float] = []
+    monkeypatch.setattr("app.llm.provider.time.sleep", slept.append)
+    calls = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return httpx.Response(
+                429,
+                headers={"x-ratelimit-reset-tokens": "8s"},
+                text='{"error":{"message":"Rate limit reached on tokens per minute (TPM)"}}',
+            )
+        return httpx.Response(200, json={"choices": [{"message": {"content": VALID}}]})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    provider = GroqProvider(settings(llm_provider="hosted", llm_api_key="sk-test"), client=client)
+
+    assert provider.structured("prompt", ImpactScores) is not None
+    assert slept == [8.0]
+    assert provider.stats.quota_exhausted is False

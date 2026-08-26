@@ -57,6 +57,17 @@ class BudgetExhaustedError(LLMError):
     """The per-run call budget is spent."""
 
 
+class DailyQuotaExceededError(LLMError):
+    """The provider's daily allowance is spent, not merely its per-minute one.
+
+    A distinct error because the correct response is the opposite: a per-minute limit is
+    waited out in seconds, while a daily limit resets in hours. Treating the second as the
+    first makes a run spin on thirty-second sleeps until it is killed by a timeout, having
+    achieved nothing — observed after a day of repeated testing exhausted Groq's 200,000
+    tokens-per-day allowance.
+    """
+
+
 class RateLimitedError(LLMError):
     """The provider is rate limited, and told us how long to wait.
 
@@ -83,6 +94,7 @@ class CallStats:
     invalid_json: int = 0
     schema_violations: int = 0
     rate_limited: int = 0
+    quota_exhausted: bool = False
     seconds: float = 0.0
 
     def as_dict(self) -> dict[str, int | float]:
@@ -94,6 +106,7 @@ class CallStats:
             "invalid_json": self.invalid_json,
             "schema_violations": self.schema_violations,
             "rate_limited": self.rate_limited,
+            "quota_exhausted": int(self.quota_exhausted),
             "seconds": round(self.seconds, 2),
         }
 
@@ -144,6 +157,9 @@ class LLMProvider(ABC):
         on a second attempt; a model that fails twice is not going to succeed on a third,
         and each attempt spends budget.
         """
+        if self.stats.quota_exhausted:
+            return None
+
         for attempt in range(retries + 1):
             if self.remaining <= 0:
                 raise BudgetExhaustedError(f"{self.name}: call budget of {self._budget} exhausted")
@@ -154,6 +170,13 @@ class LLMProvider(ABC):
 
             try:
                 raw = self._complete(prompt)
+            except DailyQuotaExceededError:
+                # Nothing to wait for: the allowance resets in hours, not seconds. Stop
+                # calling and let the pipeline publish what it has.
+                logger.warning("%s: daily allowance spent; no further calls", self.name)
+                self.stats.attempted -= 1
+                self.stats.quota_exhausted = True
+                break
             except RateLimitedError as exc:
                 # Waiting is the correct response; an immediate retry is refused again and
                 # costs budget. The attempt is refunded so a slow provider does not eat
@@ -239,6 +262,19 @@ class OllamaProvider(LLMProvider):
         return content
 
 
+_DAILY_LIMIT_MARKERS = ("per day", "tpd", "rpd")
+
+
+def _is_daily_limit(detail: str) -> bool:
+    """Whether a 429 is the daily allowance rather than the per-minute one.
+
+    Read from the message because the headers do not distinguish them: a per-day rejection
+    still reports a per-minute limit and a full per-minute remainder.
+    """
+    lowered = detail.lower()
+    return any(marker in lowered for marker in _DAILY_LIMIT_MARKERS)
+
+
 def _retry_after(response: httpx.Response, *, default: float = 10.0) -> float:
     """How long the provider says to wait, in seconds.
 
@@ -318,6 +354,9 @@ class GroqProvider(LLMProvider):
             },
         )
         if response.status_code == 429:
+            detail = response.text[:400]
+            if _is_daily_limit(detail):
+                raise DailyQuotaExceededError(f"groq: daily token allowance spent: {detail}")
             raise RateLimitedError("groq: rate limited", _retry_after(response))
         response.raise_for_status()
         choices = response.json().get("choices", [])

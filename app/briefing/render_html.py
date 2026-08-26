@@ -391,6 +391,7 @@ def render_stats_page(health: Health, records: list[RunRecord]) -> str:
         f"<td>{record.articles_fetched}</td>"
         f"<td>{record.articles_in_window}</td>"
         f"<td>{record.events_touched}</td>"
+        f"<td>{record.events_ranked}</td>"
         f"<td>{record.stories_published}</td>"
         f"<td>{record.model_calls}</td>"
         f"<td>{record.duration_seconds:.0f}s</td></tr>"
@@ -442,7 +443,7 @@ def render_stats_page(health: Health, records: list[RunRecord]) -> str:
 <h2>Recent runs</h2>
 <table>
   <thead><tr><th>started</th><th></th><th>feeds</th><th>fetched</th><th>in window</th>
-  <th>events</th><th>stories</th><th>calls</th><th>took</th></tr></thead>
+  <th>new events</th><th>ranked</th><th>stories</th><th>calls</th><th>took</th></tr></thead>
   <tbody>
 {rows}
   </tbody>

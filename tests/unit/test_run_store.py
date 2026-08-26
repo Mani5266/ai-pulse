@@ -199,3 +199,22 @@ def test_the_stats_page_survives_an_empty_history() -> None:
     page = render_stats_page(compute_health([]), [])
 
     assert "0 recorded runs" in page
+
+
+def test_new_and_ranked_events_are_recorded_separately() -> None:
+    """A run can touch nothing and still publish, because the briefing reports 36 hours
+    rather than the last run. Without both numbers the funnel reads as a bug."""
+    stored = RunRecord(
+        started_at=NOW,
+        finished_at=NOW,
+        ok=True,
+        articles_fetched=550,
+        events_touched=0,
+        events_ranked=121,
+        stories_published=5,
+    )
+
+    page = render_stats_page(compute_health([stored]), [stored])
+
+    assert "121" in page
+    assert "ranked" in page

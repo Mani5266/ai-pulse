@@ -18,7 +18,7 @@ from app.briefing.models import BriefingStats
 from app.briefing.render_telegram import render_telegram
 from app.core.config import Settings, get_settings
 from app.core.errors import ConfigError
-from app.delivery.telegram import TelegramDelivery
+from app.delivery.telegram import DeliveryResult, TelegramDelivery
 from app.ingestion.dedup import deduplicate
 from app.ingestion.normalize import enrich_all
 from app.ingestion.recency import filter_recent
@@ -357,11 +357,18 @@ def _run(settings: Settings, started_at: datetime, started: float) -> int:
         ),
     )
 
-    delivery = TelegramDelivery(settings)
-    try:
-        delivered = delivery.send(render_telegram(briefing))
-    finally:
-        delivery.close()
+    # If the earlier briefing was kept, the reader has already had it. Sending an empty
+    # "nothing verified" message would contradict the page they can still see, and would
+    # read as a regression rather than as a quiet day.
+    if written_path is None:
+        logger.info("nothing new to deliver; the previous briefing stands")
+        delivered = DeliveryResult(ok=False, detail="superseded by the existing briefing")
+    else:
+        delivery = TelegramDelivery(settings)
+        try:
+            delivered = delivery.send(render_telegram(briefing))
+        finally:
+            delivery.close()
 
     if delivered.failed:
         logger.warning(
@@ -393,6 +400,7 @@ def _run(settings: Settings, started_at: datetime, started: float) -> int:
             articles_stored=written,
             duplicates_removed=len(deduped.duplicates),
             events_touched=len(clustered.events),
+            events_ranked=len(candidates),
             events_multi_source=len(clustered.multi_source_events),
             events_shortlisted=len(shortlist.selected),
             stories_published=len(briefing.stories),

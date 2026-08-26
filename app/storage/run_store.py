@@ -65,6 +65,14 @@ class RunRecord(BaseModel):
     articles_stored: int = 0
     duplicates_removed: int = 0
     events_touched: int = 0
+    events_ranked: int = 0
+    """Candidates the ranking saw, new and carried together.
+
+    Distinct from ``events_touched``, which counts only what this run created or updated.
+    A run can touch nothing and still publish, because the briefing reports the last 36
+    hours rather than the last run — and without this number the funnel reads as
+    '550 articles, 0 events, 5 stories', which looks like a bug and is not."""
+
     events_multi_source: int = 0
     events_shortlisted: int = 0
     stories_published: int = 0

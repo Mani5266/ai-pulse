@@ -299,3 +299,12 @@ def test_a_briefing_story_links_to_its_timeline(tmp_path: Path) -> None:
     build_site(data_dir, site_dir)
 
     assert 'href="event-evt_1.html"' in (site_dir / "index.html").read_text(encoding="utf-8")
+
+
+def test_a_kept_briefing_reports_that_nothing_was_written(tmp_path: Path) -> None:
+    """The signal the pipeline needs to skip delivery: sending an empty briefing while
+    the reader can still see the earlier one reads as a regression, not a quiet day."""
+    write_briefing(tmp_path, briefing())
+
+    assert write_briefing(tmp_path, Briefing(day=DAY, generated_at=NOW, stories=[])) is None
+    assert write_briefing(tmp_path, briefing(headline="New")) is not None
