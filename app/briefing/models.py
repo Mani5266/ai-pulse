@@ -80,6 +80,12 @@ class Briefing(BaseModel):
 
     day: date
     generated_at: datetime
+    covers_since: datetime | None = None
+    """Start of the window this briefing reports on.
+
+    A briefing that says "today" while covering four days is lying to its reader, so the
+    window it actually covered is carried with it and printed."""
+
     stories: list[Story] = Field(default_factory=list)
     stats: BriefingStats = Field(default_factory=BriefingStats)
 

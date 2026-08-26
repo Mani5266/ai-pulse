@@ -53,6 +53,7 @@ def build_briefing(
     day: date,
     limit: int,
     stats: BriefingStats | None = None,
+    covers_since: datetime | None = None,
 ) -> Briefing:
     """Assemble the day's briefing from the analysed events, best first."""
     stories: list[Story] = []
@@ -90,6 +91,7 @@ def build_briefing(
     return Briefing(
         day=day,
         generated_at=datetime.now(UTC),
+        covers_since=covers_since,
         stories=stories,
         stats=stats or BriefingStats(),
     )

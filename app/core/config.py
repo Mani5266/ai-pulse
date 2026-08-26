@@ -66,6 +66,14 @@ class Settings(BaseSettings):
     max_article_chars: int = Field(default=20_000, ge=500, le=200_000)
     """Cap on stored article text. Bounds both repository growth and prompt size."""
 
+    # --- Recency ---
+    first_run_days: int = Field(default=2, ge=1, le=30)
+    """How far back a first run looks, with no previous briefing to anchor to."""
+
+    max_catchup_days: int = Field(default=7, ge=1, le=90)
+    """Cap on the catch-up window. After a long gap, "everything since" is thousands of
+    articles and a briefing nobody reads."""
+
     # --- Deduplication ---
     dedup_memory_days: int = Field(default=7, ge=1, le=90)
     """How far back deduplication looks. A feed that still lists last week's post must

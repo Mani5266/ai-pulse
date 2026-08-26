@@ -94,8 +94,16 @@ def render_story(story: Story, *, index: int, detailed: bool) -> str:
 
 
 def render_header(briefing: Briefing) -> str:
+    """The header states the window covered, not merely the date.
+
+    A briefing headed "Wednesday" that in fact reports four days of news is lying to its
+    reader, and after a missed run that is exactly what it would be.
+    """
+    covered = ""
+    if briefing.covers_since:
+        covered = f" · since {briefing.covers_since.strftime('%a %d %b %H:%M UTC')}"
     return (
-        f"🤖 <b>AI-PULSE</b> · {briefing.day.strftime('%A, %d %B %Y')}\n"
+        f"🤖 <b>AI-PULSE</b> · {briefing.day.strftime('%A, %d %B %Y')}{covered}\n"
         f"<i>{len(briefing.stories)} stories from "
         f"{briefing.stats.articles} articles</i>"
     )

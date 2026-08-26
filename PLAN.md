@@ -68,8 +68,11 @@ GitHub Actions cron (free on public repos)
 No server, no card, no paid tier, and the git history of `data/` is itself a
 demonstration of the timeline feature.
 
-**Caveat:** GitHub's scheduled workflows can be delayed under load. The pipeline must
-therefore window on `last_briefing_at` (persisted state), never on "the last 24 hours".
+**Caveat:** GitHub's scheduled workflows can be delayed under load. The pipeline
+therefore windows on `last_briefing_at` in `data/state.json`, never on "the last 24 hours",
+so a delayed or missed run is picked up rather than lost. See §2.13 — this was specified
+here from the start, was not built until it failed in the reader's hands, and is the single
+most expensive omission in the project so far.
 
 ### 2.2 Two LLM providers, chosen by environment
 
@@ -302,7 +305,44 @@ mode an unescaped `<` breaks the message and a crafted title could inject markup
 page the same applies. The escaping is not defensive habit, it is the last segment of the
 same untrusted-input path that starts at the RSS fetcher.
 
-### 2.13 arXiv needs its own quota
+### 2.13 A feed's window is not "what is new"
+
+The defect that reached the reader's phone, and the most instructive one so far.
+
+RSS hands over a publisher's *current window*, and its size is entirely the publisher's
+choice. TechCrunch's twenty items are one day; a working engineer's blog with twenty items
+is a year. The pipeline ingested all of it and treated every item as news: 517 articles
+whose publication dates spanned thirteen months, and a "daily briefing" led by a model
+release from four months earlier. Only 22% of what was ingested was less than a day old.
+
+Nothing in the pipeline was wrong in isolation. Dedup, clustering and ranking all worked
+exactly as designed — on the wrong input.
+
+The fix is `data/state.json` plus a recency filter:
+
+- The window runs from the **last successful briefing** to now, so a delayed, skipped or
+  doubled run picks up what it missed instead of losing it.
+- A first run looks back a short default (2 days), because there is nothing to anchor to.
+- A long gap is **clamped** (7 days), because "everything since" after a fortnight is a
+  briefing nobody reads.
+- State advances only after a briefing is actually produced, so a crash re-covers the
+  window rather than skipping it.
+- The briefing header prints the window it covered. A briefing headed "Wednesday" that
+  reports four days of news is lying to its reader.
+
+Filtering happens after fetching, not during: the older half of a feed is still worth
+having, because it is what lets deduplication and clustering recognise a story they have
+already seen.
+
+Measured on the same feeds: 515 articles in, 123 in-window, 392 stale — and the oldest
+story in the briefing is now two days old rather than four months.
+
+**The lesson worth keeping.** §2.1 specified this windowing from the first day of the
+project and it was not built for six phases, because every stage tested green on data that
+was quietly wrong. Unit tests cannot catch an input assumption; only reading the actual
+output can, and in this case a reader did it first.
+
+### 2.14 arXiv needs its own quota
 
 `cs.AI` and `cs.LG` together publish 300-600 papers per day and will drown every other
 source. Research feeds get a separate daily cap and a keyword prefilter before entering

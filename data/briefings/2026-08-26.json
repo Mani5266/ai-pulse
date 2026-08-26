@@ -1,17 +1,111 @@
 {
+  "covers_since": "2026-08-24T12:48:58.894612Z",
   "day": "2026-08-26",
-  "generated_at": "2026-08-26T12:35:50.261374Z",
+  "generated_at": "2026-08-26T12:50:51.028548Z",
   "stats": {
     "articles": 515,
-    "duplicates_removed": 515,
-    "events": 0,
-    "events_shortlisted": 0,
+    "duplicates_removed": 0,
+    "events": 123,
+    "events_shortlisted": 20,
     "feeds_failed": 0,
     "feeds_ok": 22,
-    "model_calls": 0,
+    "model_calls": 25,
     "model_failures": 0,
-    "provider": "ollama:qwen3:4b",
-    "runtime_seconds": 13.9
+    "provider": "groq:openai/gpt-oss-120b",
+    "runtime_seconds": 112.1
   },
-  "stories": []
+  "stories": [
+    {
+      "category": "research",
+      "confidence": 0.9,
+      "developer_impact": "Deploying the model requires MoE routing logic and hardware that can handle 1.8 B active parameters per token; frameworks like vLLM can be used to achieve high‑throughput inference, influencing backend architecture and resource planning.",
+      "event_id": "evt_0b471567f58b9fb3",
+      "first_seen": "2026-08-25T22:30:00Z",
+      "headline": "Giga-Embeddings introduce a 10 B‑parameter Mixture‑of‑Experts encoder with 1.8 B active parameters per token",
+      "last_updated": "2026-08-25T22:30:00Z",
+      "score": 6.39,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Giga-Embeddings: Mixture-of-Experts Encoders for High-Throughput Text Embeddings",
+          "url": "https://arxiv.org/abs/2608.23806"
+        }
+      ],
+      "what_happened": "The authors released Giga‑Embeddings, a family of text‑embedding models that use a sparse 10 B‑parameter Mixture‑of‑Experts architecture. At inference each token activates about 1.8 B parameters. The largest model achieves the highest aggregate scores on English, Russian, multilingual and code MTEB benchmarks and shows strong throughput in vLLM tests.",
+      "why_it_matters": "Higher retrieval quality combined with efficient serving can improve large‑scale similarity search and downstream AI services while keeping latency low, potentially reducing hardware cost per query."
+    },
+    {
+      "category": "ai_agents",
+      "confidence": 0.8,
+      "event_id": "evt_2d6054cc51934d57",
+      "first_seen": "2026-08-26T05:30:00Z",
+      "headline": "Runable raises $21M to expand AI agents for business creation and growth",
+      "last_updated": "2026-08-26T05:30:00Z",
+      "score": 6.242,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Runable hits $21M to bet AI agents can go from building businesses to growing them",
+          "url": "https://techcrunch.com/2026/08/26/runable-hits-21m-to-bet-ai-agents-can-go-from-building-businesses-to-growing-them/"
+        }
+      ],
+      "what_happened": "Runable secured $21 million in funding to develop AI agents that can build and grow businesses. The company reported that 60%–70% of its more than 1 trillion tokens used in the last 90 days came from paying customers.",
+      "why_it_matters": "The funding and strong paying‑customer token usage suggest commercial traction for autonomous AI agents in business contexts, potentially accelerating their adoption for enterprise tasks and revenue generation."
+    },
+    {
+      "category": "infrastructure",
+      "confidence": 0.95,
+      "event_id": "evt_b9406ae170bd9133",
+      "first_seen": "2026-08-25T01:30:00Z",
+      "headline": "OpenAI's Jalapeño chip delivers industry‑leading speed and efficiency for AI inference",
+      "last_updated": "2026-08-25T01:30:00Z",
+      "score": 5.925,
+      "sources": [
+        {
+          "source_id": "openai",
+          "title": "Jalapeño’s first results show industry-leading speed and efficiency in AI inference",
+          "url": "https://openai.com/index/jalapeno-first-results"
+        }
+      ],
+      "what_happened": "OpenAI released first results for its custom inference chip, named Jalapeño, showing faster, more power‑efficient AI inference with higher throughput and lower latency on modern models.",
+      "why_it_matters": "The performance and efficiency gains can reduce compute costs and enable lower‑latency responses for AI services, benefiting large‑scale deployments and real‑time applications."
+    },
+    {
+      "category": "benchmark",
+      "confidence": 0.95,
+      "developer_impact": "Developers running inference workloads could see increased performance and reduced energy costs when targeting the Jalapeño chip, though no specific integration details were provided.",
+      "event_id": "evt_0c7fd51720556fba",
+      "first_seen": "2026-08-25T08:52:04Z",
+      "headline": "OpenAI's Jalapeño chip outperforms state‑of‑the‑art in inference benchmarks",
+      "last_updated": "2026-08-25T08:52:04Z",
+      "score": 5.723,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
+          "url": "https://techcrunch.com/2026/08/25/openais-jalapeno-chip-is-built-for-fast-inference-at-scale-benchmarks-show/"
+        }
+      ],
+      "what_happened": "OpenAI introduced the Jalapeño chip designed for fast, large‑scale inference. In the SemiAnalysis InferenceX benchmark it delivered more tokens per user and higher throughput per kilowatt than existing state‑of‑the‑art hardware.",
+      "why_it_matters": "Higher token throughput and better energy efficiency can lower operating costs and enable faster AI services at scale, benefiting providers that run large inference workloads."
+    },
+    {
+      "category": "ai_agents",
+      "confidence": 0.3,
+      "event_id": "evt_b10425dbb6909dfa",
+      "first_seen": "2026-08-25T13:40:59Z",
+      "headline": "AgentHands research introduces gesture generation for XR agent conversations",
+      "last_updated": "2026-08-25T13:40:59Z",
+      "score": 5.7,
+      "sources": [
+        {
+          "source_id": "google-research",
+          "title": "AgentHands: Generating interactive hand gestures for spatially grounded agent conversations in XR",
+          "url": "https://research.google/blog/agenthands-generating-interactive-hand-gestures-for-spatially-grounded-agent-conversations-in-xr/"
+        }
+      ],
+      "what_happened": "A research project named AgentHands was presented, focusing on generating interactive hand gestures for spatially grounded agent conversations in extended reality (XR). The work is positioned within Human-Computer Interaction and Visualization.",
+      "why_it_matters": "Providing agents with generated hand gestures could make XR interactions more natural and immersive by adding a gestural communication layer to conversations."
+    }
+  ]
 }

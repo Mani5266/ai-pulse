@@ -20,6 +20,7 @@ from app.core.errors import ConfigError
 from app.delivery.telegram import TelegramDelivery
 from app.ingestion.dedup import deduplicate
 from app.ingestion.normalize import enrich_all
+from app.ingestion.recency import filter_recent
 from app.ingestion.runner import ingest_all, summarise
 from app.ingestion.sources import credibility_by_id, enabled_sources, load_sources
 from app.intelligence.clustering import ClusterConfig, cluster_articles
@@ -38,6 +39,7 @@ from app.storage.ndjson_store import (
     read_articles,
     recent_days,
 )
+from app.storage.state import RunState, compute_window, read_state, write_state
 
 logger = logging.getLogger("ai_pulse")
 
@@ -70,6 +72,19 @@ def run(settings: Settings) -> int:
         logger.error("configuration unusable: %s", exc)
         return 2
 
+    state = read_state(settings.data_dir)
+    window = compute_window(
+        state,
+        first_run_days=settings.first_run_days,
+        max_catchup_days=settings.max_catchup_days,
+    )
+    logger.info(
+        "covering %s (%.1f hours%s)",
+        window.start.strftime("%Y-%m-%d %H:%M UTC"),
+        window.hours,
+        ", first run" if window.is_first_run else ", clamped" if window.was_clamped else "",
+    )
+
     logger.info("ingesting %d enabled sources", len(sources))
     results = ingest_all(sources, settings)
     stats = summarise(results)
@@ -83,7 +98,11 @@ def run(settings: Settings) -> int:
     # Articles arrive in source-registry order, which puts first-party announcements
     # before news write-ups of them. Deduplication keeps the first copy it sees, so that
     # ordering decides which copy survives.
-    articles = enrich_all(article for result in results for article in result.articles)
+    # A feed hands over its whole current window, which for a quiet blog is a year. Only
+    # what falls inside this run's window is news; the rest was fetched so that clustering
+    # can still recognise a story it has seen before.
+    recency = filter_recent([article for result in results for article in result.articles], window)
+    articles = enrich_all(recency.fresh)
 
     memory = recent_days(today, settings.dedup_memory_days)
     deduped = deduplicate(
@@ -96,11 +115,13 @@ def run(settings: Settings) -> int:
     written = append_articles(settings.data_dir, today, deduped.unique)
 
     logger.info(
-        "ingestion complete sources=%d ok=%d failed=%d articles=%d",
+        "ingestion complete sources=%d ok=%d failed=%d articles=%d in-window=%d stale=%d",
         stats["sources"],
         stats["ok"],
         stats["failed"],
         stats["articles"],
+        len(recency.fresh),
+        len(recency.stale),
     )
     logger.info(
         "deduplication complete unique=%d removed=%d rate=%.1f%% stored=%d (%s)",
@@ -214,6 +235,7 @@ def run(settings: Settings) -> int:
         stored_articles,
         day=today,
         limit=settings.stories_per_briefing,
+        covers_since=window.start,
         stats=BriefingStats(
             feeds_ok=int(stats["ok"]),
             feeds_failed=int(stats["failed"]),
@@ -232,6 +254,18 @@ def run(settings: Settings) -> int:
     # somebody else's server, so a failure there must cost nothing.
     write_briefing(settings.data_dir, briefing)
     build_site(settings.data_dir, settings.site_dir)
+
+    # Advanced only now, and only to the window this run actually covered. A crash before
+    # this point means the next run re-covers the same span rather than skipping it.
+    write_state(
+        settings.data_dir,
+        RunState(
+            last_briefing_at=window.end,
+            last_run_at=datetime.now(UTC),
+            successful_runs=state.successful_runs + 1,
+            total_runs=state.total_runs + 1,
+        ),
+    )
 
     delivery = TelegramDelivery(settings)
     try:
