@@ -1,0 +1,75 @@
+# Personal relevance profile.
+#
+# This is the only file in the repository that encodes taste rather than engineering.
+# Everything else in the ranking pipeline is derived from the data; this says what the
+# reader actually cares about.
+#
+# `interests` and `low_interest` are matched as whole words against an event's title and
+# entities. `category_weights` scale the deterministic relevance score by what kind of
+# development an event is — research is interesting but there are eighty papers a day,
+# while a model release is rare and consequential.
+
+interests:
+  - agent
+  - agents
+  - agentic
+  - coding agent
+  - llm
+  - inference
+  - open weights
+  - open source
+  - fine-tuning
+  - quantization
+  - context window
+  - reasoning
+  - tool use
+  - evaluation
+  - benchmark
+  - retrieval
+  - embeddings
+  - local model
+  - self-hosted
+  - backend
+  - python
+  - api
+  - sdk
+  - developer
+  - throughput
+  - latency
+  - serving
+  - prompt injection
+  - security
+
+low_interest:
+  - celebrity
+  - influencer
+  - stock
+  - shares
+  - earnings
+  - hiring
+  - webinar
+  - conference schedule
+  - podcast
+  - newsletter
+  - sponsored
+  - partnership announcement
+  - award
+  - anniversary
+
+# 0.0 to 1.0. A category at 1.0 contributes the full category share of the relevance
+# score; a category at 0.2 contributes a fifth of it.
+category_weights:
+  model_release: 1.0
+  ai_agents: 1.0
+  open_source: 0.95
+  developer_tools: 0.9
+  infrastructure: 0.75
+  security: 0.75
+  benchmark: 0.7
+  safety: 0.6
+  research: 0.55
+  policy: 0.4
+  product: 0.4
+  acquisition: 0.35
+  funding: 0.25
+  other: 0.3

@@ -16,8 +16,11 @@ from app.core.errors import ConfigError
 from app.ingestion.dedup import deduplicate
 from app.ingestion.normalize import enrich_all
 from app.ingestion.runner import ingest_all, summarise
-from app.ingestion.sources import enabled_sources, load_sources
+from app.ingestion.sources import credibility_by_id, enabled_sources, load_sources
 from app.intelligence.clustering import ClusterConfig, cluster_articles
+from app.ranking.profile import load_profile
+from app.ranking.scoring import score_events
+from app.ranking.shortlist import build_shortlist
 from app.storage.event_store import latest_events, write_events
 from app.storage.ndjson_store import (
     append_articles,
@@ -49,9 +52,11 @@ def run(settings: Settings) -> int:
     )
 
     try:
-        sources = enabled_sources(load_sources())
+        all_sources = load_sources()
+        sources = enabled_sources(all_sources)
+        profile = load_profile()
     except ConfigError as exc:
-        logger.error("source registry unusable: %s", exc)
+        logger.error("configuration unusable: %s", exc)
         return 2
 
     logger.info("ingesting %d enabled sources", len(sources))
@@ -102,8 +107,6 @@ def run(settings: Settings) -> int:
         existing=latest_events(settings.data_dir, event_window),
         config=ClusterConfig(threshold=settings.cluster_threshold),
     )
-    write_events(settings.data_dir, today, clustered.events)
-
     logger.info(
         "clustering complete events=%d new=%d updated=%d multi_source=%d ratio=%.2f",
         len(clustered.events),
@@ -113,7 +116,50 @@ def run(settings: Settings) -> int:
         clustered.stats()["articles_per_event"],
     )
 
-    # P4: score. P5: LLM. P6: deliver.
+    # Novelty is measured against what the briefing already covered, so the history must
+    # exclude the events this run just touched.
+    touched_ids = {event.id for event in clustered.events}
+    seen_entities = {
+        entity
+        for event in latest_events(settings.data_dir, event_window)
+        if event.id not in touched_ids
+        for entity in event.entities
+    }
+
+    scored = score_events(
+        clustered.events,
+        profile=profile,
+        source_credibility=credibility_by_id(all_sources),
+        today=today,
+        seen_entities=seen_entities,
+    )
+    shortlist = build_shortlist(
+        scored,
+        limit=settings.max_events_to_llm,
+        max_per_category=settings.max_events_per_category,
+    )
+
+    write_events(settings.data_dir, today, [item.with_score() for item in scored])
+
+    stats_line = shortlist.stats()
+    logger.info(
+        "ranking complete considered=%d shortlisted=%d top=%.2f cutoff=%.2f (%s)",
+        stats_line["considered"],
+        stats_line["selected"],
+        stats_line["top_score"],
+        stats_line["cut_off_score"],
+        ", ".join(f"{name}={count}" for name, count in sorted(shortlist.categories().items())),
+    )
+    for item in shortlist.selected[:5]:
+        logger.info(
+            "  %.2f [%s] %s (%d sources)",
+            item.score,
+            item.event.category.value,
+            item.event.canonical_title[:70],
+            item.event.source_count,
+        )
+
+    # P5: LLM. P6: deliver.
 
     if stats["ok"] == 0:
         logger.error("every source failed; nothing to work with")

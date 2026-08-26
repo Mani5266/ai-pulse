@@ -69,6 +69,11 @@ class Settings(BaseSettings):
     """How far back a running event stays open to new articles. Longer than the
     deduplication window: a story can develop for weeks."""
 
+    # --- Ranking ---
+    max_events_per_category: int = Field(default=4, ge=1, le=20)
+    """Cap on how much of the shortlist one category may take. Without it, research
+    fills the briefing: eighty papers a day outnumber every other category combined."""
+
     # --- Pipeline ---
     max_events_to_llm: int = Field(default=20, ge=1, le=100)
     stories_per_briefing: int = Field(default=5, ge=1, le=20)
