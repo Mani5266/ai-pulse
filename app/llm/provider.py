@@ -404,8 +404,10 @@ class GroqProvider(LLMProvider):
         if response.status_code == 429:
             detail = response.text[:400]
             if _is_daily_limit(detail):
-                raise DailyQuotaExceededError(f"groq: daily token allowance spent: {detail}")
-            raise RateLimitedError("groq: rate limited", _retry_after(response))
+                raise DailyQuotaExceededError(
+                    f"{self._label}: daily token allowance spent: {detail}"
+                )
+            raise RateLimitedError(f"{self._label}: rate limited", _retry_after(response))
         if response.status_code in {401, 402, 403}:
             raise ProviderUnusableError(
                 f"{self._label}: HTTP {response.status_code}: {response.text[:200]}"
@@ -413,10 +415,10 @@ class GroqProvider(LLMProvider):
         response.raise_for_status()
         choices = response.json().get("choices", [])
         if not choices:
-            raise LLMError("groq returned no choices")
+            raise LLMError(f"{self._label} returned no choices")
         content = choices[0].get("message", {}).get("content", "")
         if not isinstance(content, str) or not content.strip():
-            raise LLMError("groq returned an empty response")
+            raise LLMError(f"{self._label} returned an empty response")
         return content
 
 
