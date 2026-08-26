@@ -8,6 +8,9 @@
 *.db-journal
 *.sqlite3
 
+# Run logs written by the scheduled tasks
+data/*.log
+
 # Generated site output
 site/
 

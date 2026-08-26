@@ -115,6 +115,13 @@ class Settings(BaseSettings):
     site_dir: Path = Path("site")
     """Generated static site. Gitignored; GitHub Actions publishes it to Pages."""
     log_level: LogLevel = "INFO"
+    log_file: Path | None = None
+    """Optional log file, in addition to stdout.
+
+    Scheduled runs have nowhere to print: Task Scheduler discards stdout, and wrapping the
+    command in a shell to redirect it puts a console in the way — which is how the first
+    scheduled run died, terminated by a CTRL+C the console received when the starting
+    session went away. Logging from inside the process removes the wrapper entirely."""
 
     @field_validator("llm_api_key", "llm_base_url", "telegram_bot_token", "telegram_chat_id")
     @classmethod

@@ -18,6 +18,7 @@ residual risk is measured, not eliminated, and P9 quantifies it.
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -203,3 +204,20 @@ def test_settings_never_place_secrets_in_a_prompt() -> None:
     assert secret is not None
     assert secret not in wrapped
     assert secret not in SYSTEM_PROMPT
+
+
+def test_request_urls_are_not_logged_at_info(tmp_path: Path) -> None:
+    """Telegram carries the bot token in the URL path, and httpx logs URLs at INFO.
+
+    Left alone this writes a live credential to the log file on every delivery, and into
+    any log the user shares while asking for help.
+    """
+    import logging
+
+    from app.core.config import Settings
+    from app.jobs.daily_briefing import configure_logging
+
+    configure_logging(Settings(_env_file=None, log_file=tmp_path / "test.log"))  # type: ignore[call-arg]
+
+    assert logging.getLogger("httpx").level >= logging.WARNING
+    assert logging.getLogger("httpcore").level >= logging.WARNING

@@ -11,6 +11,7 @@ import logging
 import sys
 import time
 from datetime import UTC, datetime, timedelta
+from logging.handlers import RotatingFileHandler
 
 from app.briefing.builder import build_briefing
 from app.briefing.models import BriefingStats
@@ -45,12 +46,37 @@ logger = logging.getLogger("ai_pulse")
 
 
 def configure_logging(settings: Settings) -> None:
-    """Set up structured-ish stdout logging at the configured level."""
+    """Log to stdout, and to a file when one is configured.
+
+    A scheduled run has nowhere to print, so without the file there is no record of what
+    happened at 07:30 beyond a task exit code.
+    """
+    handlers: list[logging.Handler] = [logging.StreamHandler(sys.stdout)]
+
+    if settings.log_file is not None:
+        settings.log_file.parent.mkdir(parents=True, exist_ok=True)
+        handlers.append(
+            RotatingFileHandler(
+                settings.log_file,
+                maxBytes=2 * 1024 * 1024,
+                backupCount=3,
+                encoding="utf-8",
+            )
+        )
+
     logging.basicConfig(
         level=settings.log_level,
         format="%(asctime)s %(levelname)-8s %(name)s %(message)s",
-        stream=sys.stdout,
+        handlers=handlers,
+        force=True,
     )
+
+    # httpx logs every request URL at INFO, and Telegram carries the bot token in the
+    # path: https://api.telegram.org/bot<TOKEN>/sendMessage. At INFO that writes a live
+    # credential into the log file on every delivery, and into any log the user shares.
+    # Raised to WARNING so failures are still visible and successful URLs are not.
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
 
 
 def run(settings: Settings) -> int:

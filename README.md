@@ -111,6 +111,29 @@ python -m app.jobs.daily_briefing
 `.env` is gitignored and must never be committed. Only `.env.example` belongs in the
 repository.
 
+## Running it unattended
+
+Two Windows scheduled tasks, registered against the virtualenv's interpreter directly
+rather than through a shell wrapper — a wrapped command gets a console, and that console
+receives a CTRL+C when the session that started it goes away, which killed the first
+scheduled run mid-flight. Logging therefore happens inside the process, to
+`AI_PULSE_LOG_FILE`.
+
+| Task | Trigger | What it does |
+| --- | --- | --- |
+| `AI-Pulse Bot` | At logon, restarts on failure | Long-polls Telegram and answers |
+| `AI-Pulse Daily Briefing` | 07:30 daily, catches up if missed | Builds and delivers |
+
+```powershell
+Get-ScheduledTask -TaskName "AI-Pulse*"
+Start-ScheduledTask -TaskName "AI-Pulse Daily Briefing"   # run one now
+Get-Content datai-pulse.log -Tail 20
+```
+
+`StartWhenAvailable` is what makes a missed 07:30 run at the next opportunity instead of
+being skipped, which together with windowing on the last briefing means a machine that was
+asleep loses nothing.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
