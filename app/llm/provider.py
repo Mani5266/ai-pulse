@@ -172,6 +172,7 @@ class OllamaProvider(LLMProvider):
         super().__init__(budget=settings.llm_call_budget)
         self._model = settings.llm_model
         self._host = settings.ollama_host.rstrip("/")
+        self._think = settings.ollama_think
         self._owns_client = client is None
         self._client = client or httpx.Client(timeout=httpx.Timeout(settings.llm_timeout))
 
@@ -194,6 +195,7 @@ class OllamaProvider(LLMProvider):
                 ],
                 "stream": False,
                 "format": "json",
+                "think": self._think,
                 "options": {"temperature": 0.2},
             },
         )

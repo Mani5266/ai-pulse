@@ -237,3 +237,30 @@ def test_call_stats_are_reported() -> None:
     assert stats["attempted"] == 3
     assert stats["succeeded"] == 2
     assert stats["retried"] == 1
+
+
+def test_ollama_disables_thinking_by_default() -> None:
+    """Measured: 227s per call with thinking on, 8s with it off, same task."""
+    captured: dict[str, object] = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured.update(json.loads(request.content))
+        return httpx.Response(200, json={"message": {"content": VALID}})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    OllamaProvider(settings(), client=client).structured("prompt", ImpactScores)
+
+    assert captured["think"] is False
+
+
+def test_ollama_thinking_can_be_enabled() -> None:
+    captured: dict[str, object] = {}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        captured.update(json.loads(request.content))
+        return httpx.Response(200, json={"message": {"content": VALID}})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    OllamaProvider(settings(ollama_think=True), client=client).structured("p", ImpactScores)
+
+    assert captured["think"] is True

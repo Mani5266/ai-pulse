@@ -1,6 +1,6 @@
 # AI-Pulse — Build Plan
 
-**Status:** P3 complete
+**Status:** P5 complete
 **Last updated:** 2026-08-26
 
 ---
@@ -85,8 +85,10 @@ This is the reason the abstraction exists. It is not speculative generality.
 
 Free tiers change their terms without notice. The design therefore budgets **<=25 LLM
 calls per pipeline run**, which fits comfortably inside every candidate free tier
-(Gemini, Groq, Cerebras, OpenRouter free models). Verify current quotas before
-committing to one; do not hard-code a provider.
+(Gemini, Groq, Cerebras, OpenRouter free models). **Groq is the chosen hosted provider**,
+for its OpenAI-compatible API shape: swapping to another OpenAI-compatible free tier is a
+base-URL change rather than a rewrite. Local development uses Ollama with `qwen3:4b`,
+which fits the 4 GB of VRAM on the development machine.
 
 ### 2.3 The database is NDJSON in git, not a committed SQLite binary
 
@@ -227,7 +229,50 @@ Closing that gap needs semantics, not string overlap. That is a good use of the 
 adjudicating a shortlist of borderline pairs is exactly the judgement worth a model call,
 and exactly the guess a keyword rule must not make.
 
-### 2.10 arXiv needs its own quota
+### 2.10 The shortlist is where zero cost is actually won
+
+Roughly 500 events a day must become at most 20 before the first model call, and a plain
+top-N by score is the wrong cut twice over.
+
+**Volume would win.** Research produces eighty events a day; every other category produces
+a handful. Top-N hands the briefing to arXiv. So the shortlist takes the best of each
+category in turn, capped at four.
+
+**Corroboration would lose.** An event covered by three independent sources is the
+strongest importance signal available without a model — and on live data the category cap
+was dropping exactly those: a Gemma 4 release covered by three sources lost its slot to
+four single-source blog posts in the same category. Corroborated events therefore bypass
+the cap. The cap exists to stop volume dominating, and corroboration is the opposite of
+volume.
+
+Measured on one real day: 490 events considered, 20 shortlisted across six categories,
+five of them corroborated, scores from 8.00 down to a 6.83 cut-off.
+
+### 2.11 The model gets data, never authority — and never the whole budget
+
+Three properties, each enforced by code rather than by prompt wording.
+
+**No capability to abuse.** The provider exposes exactly one method, `structured()`. No
+shell, no filesystem, no browser, no database write, and no free-text `generate()`. A
+successful prompt injection can produce a wrong summary; it cannot take an action, because
+there is no action to take.
+
+**No unvalidated output.** Every call declares a Pydantic schema with bounded fields and
+`extra="forbid"`. A model that returns 9999 for an impact score, or echoes the system
+prompt, fails validation and the response is discarded rather than coerced. That is what
+turns a successful injection into a dropped call instead of a corrupted briefing.
+
+**No runaway spend.** The provider refuses calls past its budget, and impact scoring holds
+back a reservation for the summaries. The first live run made the case for it: twenty
+events each retrying once consumed the entire forty-call allowance and every summary was
+skipped. Scoring degrades gracefully — the deterministic score stands — but a briefing
+with no prose does not.
+
+The residual risk is stated rather than hidden: none of this stops the model being
+*persuaded* into a misleading summary by a well-written article. P9 measures how often
+that succeeds.
+
+### 2.12 arXiv needs its own quota
 
 `cs.AI` and `cs.LG` together publish 300-600 papers per day and will drown every other
 source. Research feeds get a separate daily cap and a keyword prefilter before entering
@@ -345,21 +390,34 @@ still says what Monday knew.
 *Artifact: the core differentiator exists in code, with its precision limits measured and
 documented rather than assumed.*
 
-### P4 — Deterministic scoring
+### P4 — Deterministic scoring — done
 
-Compute `credibility`, `novelty` and `personal_relevance` in plain Python. Reduce the
-candidate set to the top 20 events before any model is invoked.
+`credibility` from the source registry plus capped corroboration, `novelty` from event and
+entity history, `personal_relevance` from `config/profile.yaml` and the category weights.
+Three sub-scores at 0.15 each: 45% of the importance formula, computed with no model
+involved. The remaining 55% is the three impact scores from P5.
 
-*Artifact: a reproducible ranking with tests.*
+Ties break deterministically — corroboration, then recency, then id — so two runs over the
+same data produce the same order, which is what makes P9 evaluation possible.
 
-### P5 — LLM layer
+*Artifact: a reproducible ranking, and a shortlist that cuts 490 events to 20.*
 
-`LLMProvider` interface with `generate()` and `structured_generate()`; hosted and Ollama
-implementations. Pydantic schemas for every response. Untrusted-document prompt framing.
-Retry-once-then-degrade error handling. Three impact sub-scores plus the editor pass,
-within the 25-call budget.
+### P5 — LLM layer — done
 
-*Artifact: a schema-validated LLM boundary.*
+`LLMProvider` with a single method, `structured()`. There is deliberately no `generate()`
+returning free text: every call site declares a Pydantic schema, so no unvalidated model
+output can reach the application. Two implementations — Groq for CI and production, Ollama
+with `qwen3:4b` for local development.
+
+Untrusted article text is sanitised and wrapped in `<document>` tags whose delimiters
+cannot be escaped. Responses that fail validation are discarded, never coerced. Every
+failure degrades: a scoring failure keeps the deterministic score, a summary failure drops
+the story rather than publishing it unsupported.
+
+The provider enforces the call budget itself, so a loop bug cannot exhaust a free tier
+overnight, and impact scoring reserves budget for the summaries that follow.
+
+*Artifact: a schema-validated model boundary, and 30 injection tests.*
 
 ### P6 — Briefing, Telegram and Pages
 

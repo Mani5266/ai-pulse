@@ -38,6 +38,13 @@ class Settings(BaseSettings):
     llm_api_key: str | None = None
     llm_base_url: str | None = None
     ollama_host: str = "http://localhost:11434"
+    ollama_think: bool = False
+    """Whether to let a reasoning model think before answering.
+
+    Off by default, and the measurement is stark: qwen3:4b took 227 seconds per call with
+    thinking on — long enough that the first attempt hit the timeout and only the retry
+    succeeded — against 8 seconds with it off. Filling a fixed JSON schema from supplied
+    text is extraction, not reasoning, so the deliberation buys nothing here."""
     llm_call_budget: int = Field(default=40, ge=1, le=200)
     """Hard ceiling on model calls per run, enforced by the provider.
 
