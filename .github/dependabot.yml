@@ -1,0 +1,18 @@
+# Upgrades arrive as reviewable pull requests rather than as surprises at 02:00 UTC.
+version: 2
+updates:
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      # One pull request for routine upgrades; a major bump still arrives alone, so the
+      # thing most likely to break the pipeline is the thing that gets read.
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly

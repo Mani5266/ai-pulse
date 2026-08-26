@@ -27,9 +27,12 @@ jobs:
           cache: pip
 
       - name: Install
+        # From the lockfile, not the ranges: an unpinned tree means a build that passed an
+        # hour ago can fail now because something upstream released.
         run: |
           python -m pip install --upgrade pip
-          pip install -e ".[dev]"
+          pip install -r requirements.lock
+          pip install -e . --no-deps
 
       - name: Lint
         run: ruff check .
@@ -42,6 +45,11 @@ jobs:
 
       - name: Test
         run: pytest
+
+      - name: Audit dependencies
+        run: |
+          pip install pip-audit
+          pip-audit --requirement requirements.lock --strict
 
       - name: Evaluate
         # Structural checks only: offline, free, no key. The model layer is run
