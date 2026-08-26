@@ -68,6 +68,20 @@ class DailyQuotaExceededError(LLMError):
     """
 
 
+class ProviderUnusableError(LLMError):
+    """The provider will not serve this run at all: bad key, no credit, account disabled.
+
+    Distinct from a generic failure because retrying cannot help and, more importantly,
+    because a chain must move past it. A 402 from Cerebras sitting second in the chain
+    would otherwise end every run that got as far as it — the generic path returns None,
+    and the chain reads None-without-quota as "the next provider would fail the same way"
+    and stops. It would not: the next provider has a different account.
+
+    Observed with a real key: listing models succeeded while chat completions returned
+    ``402 Payment Required``, so a key that looks valid is not proof a tier is usable.
+    """
+
+
 class RateLimitedError(LLMError):
     """The provider is rate limited, and told us how long to wait.
 
@@ -174,6 +188,14 @@ class LLMProvider(ABC):
                 # Nothing to wait for: the allowance resets in hours, not seconds. Stop
                 # calling and let the pipeline publish what it has.
                 logger.warning("%s: daily allowance spent; no further calls", self.name)
+                self.stats.attempted -= 1
+                self.stats.quota_exhausted = True
+                break
+            except ProviderUnusableError as exc:
+                # Retired for the run for the same reason and by the same flag as a spent
+                # allowance: both mean this provider has nothing more to give, and the flag
+                # is what tells a chain to move on.
+                logger.warning("%s: unusable; no further calls: %s", self.name, exc)
                 self.stats.attempted -= 1
                 self.stats.quota_exhausted = True
                 break
@@ -310,8 +332,8 @@ def _parse_duration(value: str) -> float | None:
 FREE_TIERS: dict[str, tuple[str, str]] = {
     # name: (base URL, a capable default model on that tier)
     "groq": ("https://api.groq.com/openai/v1", "openai/gpt-oss-120b"),
-    "cerebras": ("https://api.cerebras.ai/v1", "llama-3.3-70b"),
-    "openrouter": ("https://openrouter.ai/api/v1", "meta-llama/llama-3.3-70b-instruct:free"),
+    "cerebras": ("https://api.cerebras.ai/v1", "gpt-oss-120b"),
+    "openrouter": ("https://openrouter.ai/api/v1", "nvidia/nemotron-3-super-120b-a12b:free"),
 }
 """Free tiers that speak the OpenAI chat-completions shape.
 
@@ -381,6 +403,10 @@ class GroqProvider(LLMProvider):
             if _is_daily_limit(detail):
                 raise DailyQuotaExceededError(f"groq: daily token allowance spent: {detail}")
             raise RateLimitedError("groq: rate limited", _retry_after(response))
+        if response.status_code in {401, 402, 403}:
+            raise ProviderUnusableError(
+                f"{self._label}: HTTP {response.status_code}: {response.text[:200]}"
+            )
         response.raise_for_status()
         choices = response.json().get("choices", [])
         if not choices:

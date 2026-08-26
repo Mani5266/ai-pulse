@@ -189,3 +189,43 @@ def test_a_per_tier_model_override_is_used() -> None:
     )
 
     assert provider.name == "groq:some-other-model"
+
+
+# --- an unusable provider -----------------------------------------------------
+
+
+def test_a_provider_that_refuses_the_run_hands_over() -> None:
+    """A 402 second in the chain must not end a run the third could have finished."""
+
+    class Unusable(ScriptedProvider):
+        def _complete(self, prompt: str) -> str:
+            from app.llm.provider import ProviderUnusableError
+
+            raise ProviderUnusableError("cerebras: HTTP 402: Payment Required")
+
+    first = Unusable([], budget=5)
+    second = ScriptedProvider([VALID], budget=5)
+
+    result = ChainProvider([first, second]).structured("p", ImpactScores)
+
+    assert result is not None
+    assert second.stats.attempted == 1
+    assert first.stats.quota_exhausted is True
+
+
+def test_an_unusable_provider_is_not_asked_twice() -> None:
+    calls = 0
+
+    class Unusable(ScriptedProvider):
+        def _complete(self, prompt: str) -> str:
+            nonlocal calls
+            calls += 1
+            from app.llm.provider import ProviderUnusableError
+
+            raise ProviderUnusableError("openrouter: HTTP 401: invalid key")
+
+    chain = ChainProvider([Unusable([], budget=5), ScriptedProvider([VALID] * 3, budget=5)])
+    chain.structured("p", ImpactScores)
+    chain.structured("p", ImpactScores)
+
+    assert calls == 1
