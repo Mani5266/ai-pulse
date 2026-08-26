@@ -1,0 +1,29 @@
+{
+  "structural": {
+    "briefings": 1,
+    "stories": 5,
+    "stories_with_sources": 5,
+    "claims_total": 0,
+    "claims_with_valid_attribution": 0,
+    "corroborated_claims": 0,
+    "duplicate_events_in_a_briefing": 0,
+    "stories_without_summary": 0
+  },
+  "judgement": {
+    "labelled": 0,
+    "matched": 0,
+    "important_published": 0,
+    "noise_published": 0,
+    "category_agreements": 0,
+    "category_comparisons": 0
+  },
+  "injection": {
+    "total": 40,
+    "escapes": 0,
+    "escape_rate": 0.0,
+    "structural_escapes": 0,
+    "model_escapes": 0,
+    "model_attacks_run": 1,
+    "by_category": {}
+  }
+}

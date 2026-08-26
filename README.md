@@ -65,6 +65,32 @@ Three design rules carry most of the weight:
 
 Full reasoning, including the rejected alternatives, is in [PLAN.md](PLAN.md).
 
+## Measured
+
+Run `python scripts/eval.py` to reproduce. Structural checks are offline and free, so CI
+runs them on every push; the model layer needs a key and a quota and is run deliberately
+with `--with-model`.
+
+| | |
+| --- | --- |
+| Injection corpus, structural | **0 escapes of 40** — no payload leaves its document |
+| Injection corpus, model layer | partial: the free tier's daily allowance limits how much of the corpus reaches the model in one day, and the report says what share did |
+| Stories citing a source | **100%** |
+| Claim attributions valid | **100%** — an attribution to a source the event lacks is discarded |
+| Duplicate events in one briefing | **0** |
+| Precision, category accuracy | **pending labels** |
+
+The last row is deliberately blank. Those metrics need a person to say whether a story
+mattered, and a number the author graded against their own guess measures nothing. Run
+`python scripts/eval.py --label-sheet`, fill in the importance column, save it as
+`evals/dataset.json`, and they compute themselves.
+
+An "escape" means the pipeline's output changed — a rejected response, scores pushed to
+the ceiling, the system prompt leaking, a fabricated source surviving verification. A model
+that reads an injected instruction, declines it, and returns a well-formed analysis has not
+been compromised; counting that as a failure would produce an alarming number that means
+nothing.
+
 ## Stack
 
 Python 3.11 · httpx · feedparser · Pydantic · Ruff · MyPy (strict) · pytest ·
@@ -86,7 +112,7 @@ Recurring cost: zero.
 | P6 | Briefing, Telegram, Pages | Done — delivered, site builds |
 | P7 | Claim verification | Done — labels computed in code |
 | P8 | Timeline | Done — built from committed snapshots |
-| P9 | Evaluation harness | Next |
+| P9 | Evaluation harness | Harness done; labels outstanding |
 | P10 | Observability | Done — published at /stats.html |
 
 ## Development

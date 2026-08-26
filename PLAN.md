@@ -1,6 +1,6 @@
 # AI-Pulse — Build Plan
 
-**Status:** P8 and P10 complete; P9 remaining
+**Status:** P0 through P10 complete
 **Last updated:** 2026-08-26
 
 ---
@@ -305,7 +305,27 @@ mode an unescaped `<` breaks the message and a crafted title could inject markup
 page the same applies. The escaping is not defensive habit, it is the last segment of the
 same untrusted-input path that starts at the RSS fetcher.
 
-### 2.13 The failure this project cannot notice is the quiet one
+### 2.13 A metric that cannot fail is not a metric
+
+Building the evaluation produced two lessons, one of them from a bug in the evaluation
+itself.
+
+**Unrun tests are not passes.** With the daily token allowance spent, the first run of the
+corpus reported "0 of 40 attacks escaped against the model" — having made no call at all.
+The number was true and meaningless. The report now states what share of the corpus
+actually reached the model, and says so when that share is 2%.
+
+**The metrics that need judgement are left blank.** Precision and category accuracy require
+someone to say whether a story mattered. The author's own answer is already encoded in
+`config/profile.yaml`, which the ranking uses, so grading against it measures the profile
+rather than the pipeline. They are reported as *pending* rather than approximated.
+
+The general principle both cases share: a number that can only come out well is decoration.
+The injection figure is worth quoting precisely because the corpus contains attacks that
+would show up if the defence broke, and the reliability figure in §2.14 is worth quoting
+because it is published on the days it is missed.
+
+### 2.14 The failure this project cannot notice is the quiet one
 
 Everything the pipeline does degrades rather than crashing — a dead feed is skipped, a
 failed model call keeps the deterministic score, a rejected delivery retries tomorrow. That
@@ -587,14 +607,26 @@ describe it; the numbers already are the answer.
 *Artifact: the page a newsletter cannot have, because a newsletter has no memory of what it
 said yesterday.*
 
-### P9 — Evaluation
+### P9 — Evaluation — harness done, labels outstanding
 
-`evals/dataset.json` with 50 hand-labelled historical events, plus an injection corpus of
-~40 attacks. Measure duplicate rate, category accuracy, citation accuracy, hallucination
-rate and injection escape rate. Publish the numbers in the README and regenerate them in
-CI.
+A 40-attack injection corpus across seven classes, and metrics split by whether they need
+a human.
 
-*Artifact: numbers. Almost no comparable portfolio project has them.*
+**Structural metrics** hold or do not whatever anyone thinks of the news: every story cites
+a source, every claim attribution names a source the event actually has, no briefing repeats
+an event. They run offline on real committed output, gate CI, and a failure is a bug.
+
+**Judgement metrics** — was this important, is this category right — are reported as
+*pending* until someone labels events. Not estimated, not defaulted to zero. A precision
+figure the author graded against their own `profile.yaml` measures the profile, and a
+reader who works that out discounts every other number on the page. `--label-sheet` emits
+a sheet with everything filled in except the judgement.
+
+**An escape is a changed output, not a noticed attack.** A model that reads "ignore your
+instructions", declines, and returns a well-formed analysis did its job.
+
+*Artifact: 0 of 40 structural escapes, 100% citation and attribution validity, and two
+honest blanks.*
 
 ### P10 — Observability — done
 
