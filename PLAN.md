@@ -1,6 +1,6 @@
 # AI-Pulse — Build Plan
 
-**Status:** P6 complete
+**Status:** P7 complete
 **Last updated:** 2026-08-26
 
 ---
@@ -305,7 +305,27 @@ mode an unescaped `<` breaks the message and a crafted title could inject markup
 page the same applies. The escaping is not defensive habit, it is the last segment of the
 same untrusted-input path that starts at the RSS fetcher.
 
-### 2.13 A feed's window is not "what is new"
+### 2.13 Corroboration is rarer than the design assumed
+
+Verified against live feeds, and worth recording because it changes what the feature is
+for.
+
+Three real articles about Gemma 4, from Google DeepMind, Hugging Face and Ollama, produced
+four claims — and every one came back `UNVERIFIED`. Correctly: the three articles say
+*different* things about the same model. One announces it, one integrates it, one
+benchmarks it. None asserts the same fact as another, so there is nothing to corroborate.
+The model did not inflate attribution to manufacture agreement, which is the failure this
+design exists to prevent.
+
+The same day's full run produced **zero** multi-source events out of 121.
+
+Two consequences. First, the honest label for most AI news is "single source", because
+most AI news is an organisation announcing its own work — and saying so plainly is worth
+more than a rare `VERIFIED` badge. Second, corroboration as a *ranking* signal is weaker
+than §2.10 assumed, since it fires on so few events; that is a finding for the P9
+evaluation to quantify rather than a bug to fix here.
+
+### 2.14 A feed's window is not "what is new"
 
 The defect that reached the reader's phone, and the most instructive one so far.
 
@@ -506,13 +526,23 @@ server costs nothing and retries next run.
 *Artifact: a briefing on the phone, and a self-contained page per day with every claim
 linked to its source. Deploying to Pages needs the repository pushed.*
 
-### P7 — Claim verification
+### P7 — Claim verification — done
 
-Extract claims from the highest-ranked events, match each claim against the other sources
-inside the same event cluster, and label it `VERIFIED`, `PARTIALLY_VERIFIED`,
-`UNVERIFIED` or `CONTRADICTED`. Render the status as a badge on the public site.
+The model extracts claims and says which documents assert each one. **Code assigns the
+label**, by counting independent sources — the same split as the ranking formula, and for
+the same reason: a model asked "is this verified?" answers confidently either way and
+cannot be checked, while an attribution can be compared against the documents and clicked
+through by a reader.
 
-*Artifact: a visible, screenshot-able capability that very few comparable projects have.*
+An attribution to a source the event does not have is discarded rather than counted, since
+the failure mode of a verification feature is verifying things by inventing witnesses. Two
+articles from one publisher count once: they are not two observations.
+
+Single-source events skip the call entirely. A lone source cannot corroborate itself, so
+the source count already gives the answer, and on a typical day that is most of the
+shortlist.
+
+*Artifact: badges on the public site, and 21 tests pinning the label logic.*
 
 ### P8 — "What changed" timeline
 

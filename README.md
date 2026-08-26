@@ -84,8 +84,8 @@ Recurring cost: zero.
 | P4 | Deterministic scoring | Next |
 | P5 | LLM provider layer | |
 | P6 | Briefing, Telegram, Pages | Done — delivered, site builds |
-| P7 | Claim verification | Next |
-| P8 | Timeline | |
+| P7 | Claim verification | Done — labels computed in code |
+| P8 | Timeline | Next |
 | P9 | Evaluation harness | |
 | P10 | Observability | |
 
