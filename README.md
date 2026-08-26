@@ -86,8 +86,8 @@ Recurring cost: zero.
 | P3 | Event clustering | Done — precision-tuned, under-clusters |
 | P4 | Deterministic scoring | Next |
 | P5 | LLM provider layer | |
-| P6 | Briefing, Telegram, Pages | Next |
-| P7 | Claim verification | |
+| P6 | Briefing, Telegram, Pages | Done — delivered, site builds |
+| P7 | Claim verification | Next |
 | P8 | Timeline | |
 | P9 | Evaluation harness | |
 | P10 | Observability | |

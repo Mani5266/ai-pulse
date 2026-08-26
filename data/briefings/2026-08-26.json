@@ -1,0 +1,17 @@
+{
+  "day": "2026-08-26",
+  "generated_at": "2026-08-26T12:33:00.515926Z",
+  "stats": {
+    "articles": 515,
+    "duplicates_removed": 515,
+    "events": 0,
+    "events_shortlisted": 0,
+    "feeds_failed": 0,
+    "feeds_ok": 22,
+    "model_calls": 0,
+    "model_failures": 0,
+    "provider": "ollama:qwen3:4b",
+    "runtime_seconds": 12.5
+  },
+  "stories": []
+}

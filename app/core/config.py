@@ -95,6 +95,8 @@ class Settings(BaseSettings):
 
     # --- Runtime ---
     data_dir: Path = Path("data")
+    site_dir: Path = Path("site")
+    """Generated static site. Gitignored; GitHub Actions publishes it to Pages."""
     log_level: LogLevel = "INFO"
 
     @field_validator("llm_api_key", "llm_base_url", "telegram_bot_token", "telegram_chat_id")

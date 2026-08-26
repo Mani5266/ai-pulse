@@ -9,10 +9,15 @@ from __future__ import annotations
 
 import logging
 import sys
+import time
 from datetime import UTC, datetime
 
+from app.briefing.builder import build_briefing
+from app.briefing.models import BriefingStats
+from app.briefing.render_telegram import render_telegram
 from app.core.config import Settings, get_settings
 from app.core.errors import ConfigError
+from app.delivery.telegram import TelegramDelivery
 from app.ingestion.dedup import deduplicate
 from app.ingestion.normalize import enrich_all
 from app.ingestion.runner import ingest_all, summarise
@@ -24,6 +29,7 @@ from app.llm.provider import LLMError, LLMProvider, build_provider
 from app.ranking.profile import load_profile
 from app.ranking.scoring import score_events
 from app.ranking.shortlist import build_shortlist
+from app.storage.briefing_store import build_site, write_briefing
 from app.storage.event_store import latest_events, write_events
 from app.storage.ndjson_store import (
     append_articles,
@@ -47,6 +53,7 @@ def configure_logging(settings: Settings) -> None:
 
 def run(settings: Settings) -> int:
     """Run one pipeline pass. Returns a process exit code."""
+    started = time.monotonic()
     logger.info(
         "pipeline start provider=%s model=%s call_budget=%d data_dir=%s",
         settings.llm_provider,
@@ -202,7 +209,46 @@ def run(settings: Settings) -> int:
         headline = story.analysis.headline if story.analysis else story.event.canonical_title
         logger.info("  %.2f %s", story.final_score, headline[:80])
 
-    # P6: deliver.
+    briefing = build_briefing(
+        analysed,
+        stored_articles,
+        day=today,
+        limit=settings.stories_per_briefing,
+        stats=BriefingStats(
+            feeds_ok=int(stats["ok"]),
+            feeds_failed=int(stats["failed"]),
+            articles=int(stats["articles"]),
+            duplicates_removed=len(deduped.duplicates),
+            events=len(clustered.events),
+            events_shortlisted=len(shortlist.selected),
+            model_calls=provider.stats.attempted,
+            model_failures=provider.stats.failed,
+            provider=provider.name,
+            runtime_seconds=round(time.monotonic() - started, 1),
+        ),
+    )
+
+    # Persist and publish before delivering. Delivery is the one stage that depends on
+    # somebody else's server, so a failure there must cost nothing.
+    write_briefing(settings.data_dir, briefing)
+    build_site(settings.data_dir, settings.site_dir)
+
+    delivery = TelegramDelivery(settings)
+    try:
+        delivered = delivery.send(render_telegram(briefing))
+    finally:
+        delivery.close()
+
+    if delivered.failed:
+        logger.warning(
+            "delivery failed: %s (the briefing is saved and will retry)", delivered.detail
+        )
+    logger.info(
+        "briefing complete stories=%d delivered=%s runtime=%.1fs",
+        len(briefing.stories),
+        delivered.ok,
+        briefing.stats.runtime_seconds,
+    )
 
     if stats["ok"] == 0:
         logger.error("every source failed; nothing to work with")

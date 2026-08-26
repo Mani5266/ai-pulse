@@ -1,6 +1,6 @@
 # AI-Pulse — Build Plan
 
-**Status:** P5 complete
+**Status:** P6 complete
 **Last updated:** 2026-08-26
 
 ---
@@ -282,7 +282,27 @@ The residual risk is stated rather than hidden: none of this stops the model bei
 *persuaded* into a misleading summary by a well-written article. P9 measures how often
 that succeeds.
 
-### 2.12 arXiv needs its own quota
+### 2.12 Render once, from data, and never pad a gap
+
+The briefing is a structured record first and text second. Both renderers read the same
+`Briefing` object, which is what stops the Telegram message and the web page from drifting
+apart as either is edited, and what lets the whole archive be regenerated from committed
+JSON — no model calls, no network — when a rendering detail changes.
+
+Two rules in that stage are worth defending:
+
+**A story without a supported summary is dropped.** Falling back to the article's own
+headline and blurb would be easy, would read perfectly well, and would convert the product
+into a feed reader wearing a briefing's clothes. Four verified stories beat five where one
+is unverified, and an empty day says so in as many words.
+
+**Everything is escaped, in both renderers.** Every string in a briefing began as text
+someone published on the internet and passed through a model. In Telegram's HTML parse
+mode an unescaped `<` breaks the message and a crafted title could inject markup; on the
+page the same applies. The escaping is not defensive habit, it is the last segment of the
+same untrusted-input path that starts at the RSS fetcher.
+
+### 2.13 arXiv needs its own quota
 
 `cs.AI` and `cs.LG` together publish 300-600 papers per day and will drown every other
 source. Research feeds get a separate daily cap and a keyword prefilter before entering
@@ -429,12 +449,22 @@ overnight, and impact scoring reserves budget for the summaries that follow.
 
 *Artifact: a schema-validated model boundary, and 30 injection tests.*
 
-### P6 — Briefing, Telegram and Pages
+### P6 — Briefing, Telegram and Pages — done
 
-Select the top five stories. Render the same structured data to a Telegram message and to
-static HTML. Deploy the site from Actions.
+The briefing is built once as structured data and rendered twice, to Telegram and to
+static HTML, so the two outputs cannot drift apart and history can be re-rendered without
+re-running the model.
 
-*Artifact: a live public URL — the single highest-value item on this list.*
+A story with no model-written summary is **dropped, not padded** with the article's own
+headline. That fallback would read fine and would quietly turn the product into a feed
+reader while still looking like a briefing.
+
+Delivery happens last and on purpose: the briefing is persisted and the site rebuilt
+before Telegram is called, so a failure at the one stage that depends on somebody else's
+server costs nothing and retries next run.
+
+*Artifact: a briefing on the phone, and a self-contained page per day with every claim
+linked to its source. Deploying to Pages needs the repository pushed.*
 
 ### P7 — Claim verification
 
