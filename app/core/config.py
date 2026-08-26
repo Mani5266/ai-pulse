@@ -49,6 +49,8 @@ class Settings(BaseSettings):
     http_read_timeout: float = Field(default=15.0, gt=0)
     http_max_response_bytes: int = Field(default=5 * 1024 * 1024, gt=0)
     http_max_redirects: int = Field(default=3, ge=0, le=10)
+    max_article_chars: int = Field(default=20_000, ge=500, le=200_000)
+    """Cap on stored article text. Bounds both repository growth and prompt size."""
 
     # --- Pipeline ---
     max_events_to_llm: int = Field(default=20, ge=1, le=100)

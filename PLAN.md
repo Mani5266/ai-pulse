@@ -1,6 +1,6 @@
 # AI-Pulse — Build Plan
 
-**Status:** P0 in progress
+**Status:** P1 complete
 **Last updated:** 2026-08-26
 
 ---
@@ -99,10 +99,16 @@ data/briefings/2026-08-26.json
 data/state.json                     # last_briefing_at, run counters
 ```
 
-Roughly 300 bytes per article record and ~500 articles per day gives ~55 MB per year,
-which is acceptable. Full article text is retained for 14 days and then dropped; event
-records are retained permanently. A SQLite database is rebuilt from the NDJSON on demand
-for local analysis, and is gitignored.
+**Full article text is never committed.** Measured on a real run of 22 feeds: 515
+articles with full text is 2.0 MB, which is ~730 MB of repository growth per year.
+Deleting those files later would not help, because git history is immutable and the blobs
+stay in it forever. So the persisted record carries identity, provenance, timing and a
+500-character summary — enough for a later day to recognise the story again — and full
+text lives only in memory, during the run, which is when clustering and the LLM need it.
+
+Measured after that change: 515 articles is 252 KB, about 500 bytes per record, or
+roughly 90 MB per year. Event records are retained permanently. A SQLite database is
+rebuilt from the NDJSON on demand for local analysis, and is gitignored.
 
 ### 2.4 Deterministic code first, LLM only where reasoning is required
 
@@ -374,5 +380,5 @@ Every stage must be restartable.
 - Which free LLM tier to standardise on. Decide during P5 after checking current quotas.
 - Whether an event's `category` should be model-assigned or keyword-assigned. Start with
   keywords; revisit if accuracy is poor in P9.
-- Retention policy for full article text. Currently 14 days; revisit once repository
-  growth is measurable.
+- Whether a gitignored local cache of full article text is worth keeping for
+  re-running later phases without re-fetching. Not needed yet.

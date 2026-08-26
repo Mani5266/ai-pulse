@@ -14,6 +14,7 @@ dependencies = [
     "feedparser>=6.0",
     "pydantic>=2.7",
     "pydantic-settings>=2.3",
+    "PyYAML>=6.0",
 ]
 
 [project.optional-dependencies]
@@ -21,6 +22,7 @@ dev = [
     "ruff>=0.6",
     "mypy>=1.11",
     "pytest>=8.3",
+    "types-PyYAML>=6.0",
 ]
 
 [project.scripts]
@@ -48,7 +50,7 @@ select = [
 
 [tool.ruff.lint.per-file-ignores]
 # Asserts are the point of a test, and fake credentials in fixtures are not secrets.
-"tests/**" = ["S101", "S105", "S106"]
+"tests/**" = ["S101", "S104", "S105", "S106", "SIM117"]
 
 [tool.mypy]
 python_version = "3.11"

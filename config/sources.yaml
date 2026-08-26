@@ -1,0 +1,250 @@
+# Source registry.
+#
+# `credibility` feeds the deterministic half of the ranking formula and is set by tier,
+# not by taste:
+#   1.00  primary     first-party announcement from the organisation itself
+#   0.90  research    preprint server; real but unreviewed
+#   0.85  journalism  established outlet with an editorial process
+#   0.70  ecosystem   practitioner blogs and tooling announcements
+#
+# `max_items_per_run` caps a feed's contribution to one run. Research feeds publish
+# hundreds of papers a day and would otherwise drown every other source.
+#
+# Feeds are verified with `python scripts/verify_sources.py`. Anything that fails is set
+# to `enabled: false` with a note rather than deleted, so the next reader does not
+# rediscover the same dead URL.
+
+sources:
+  # --- Tier 1: primary ------------------------------------------------------
+  - id: openai
+    name: OpenAI
+    tier: primary
+    feed_url: https://openai.com/news/rss.xml
+    site_url: https://openai.com/news/
+    credibility: 1.0
+
+  - id: google-deepmind
+    name: Google DeepMind
+    tier: primary
+    feed_url: https://deepmind.google/blog/rss.xml
+    site_url: https://deepmind.google/discover/blog/
+    credibility: 1.0
+
+  - id: google-ai
+    name: Google AI Blog
+    tier: primary
+    feed_url: https://blog.google/technology/ai/rss/
+    site_url: https://blog.google/technology/ai/
+    credibility: 1.0
+
+  - id: meta-ai
+    name: Meta AI
+    tier: primary
+    feed_url: https://ai.meta.com/blog/rss/
+    site_url: https://ai.meta.com/blog/
+    credibility: 1.0
+    enabled: false
+    note: >-
+      Verified 2026-08-26: /blog/rss/ and /blog/feed/ both return 404, and the
+      about.fb.com AI tag feed is also gone. Meta publishes no working RSS. Re-check
+      if that changes; otherwise Meta news arrives via the journalism tier.
+
+  - id: microsoft-research
+    name: Microsoft Research
+    tier: primary
+    feed_url: https://www.microsoft.com/en-us/research/feed/
+    site_url: https://www.microsoft.com/en-us/research/
+    credibility: 1.0
+
+  - id: nvidia
+    name: NVIDIA Blog
+    tier: primary
+    feed_url: https://blogs.nvidia.com/feed/
+    site_url: https://blogs.nvidia.com/
+    credibility: 0.95
+
+  - id: huggingface-blog
+    name: Hugging Face Blog
+    tier: primary
+    feed_url: https://huggingface.co/blog/feed.xml
+    site_url: https://huggingface.co/blog
+    credibility: 0.95
+
+  - id: mistral
+    name: Mistral AI
+    tier: primary
+    feed_url: https://mistral.ai/rss.xml
+    site_url: https://mistral.ai/news
+    credibility: 1.0
+    max_items_per_run: 25
+
+  - id: anthropic
+    name: Anthropic
+    tier: primary
+    feed_url: https://www.anthropic.com/news/rss.xml
+    site_url: https://www.anthropic.com/news
+    credibility: 1.0
+    enabled: false
+    note: >-
+      Verified 2026-08-26: /news/rss.xml and /rss.xml both return 404. Anthropic
+      publishes no public feed, so its announcements arrive via the journalism tier.
+
+  - id: google-research
+    name: Google Research
+    tier: primary
+    feed_url: https://research.google/blog/rss/
+    site_url: https://research.google/blog/
+    credibility: 1.0
+    max_items_per_run: 25
+
+  # --- Tier 2: research -----------------------------------------------------
+  - id: arxiv-cs-ai
+    name: arXiv cs.AI
+    tier: research
+    feed_url: https://rss.arxiv.org/rss/cs.AI
+    site_url: https://arxiv.org/list/cs.AI/recent
+    credibility: 0.9
+    max_items_per_run: 25
+
+  - id: arxiv-cs-lg
+    name: arXiv cs.LG
+    tier: research
+    feed_url: https://rss.arxiv.org/rss/cs.LG
+    site_url: https://arxiv.org/list/cs.LG/recent
+    credibility: 0.9
+    max_items_per_run: 25
+
+  - id: arxiv-cs-cl
+    name: arXiv cs.CL
+    tier: research
+    feed_url: https://rss.arxiv.org/rss/cs.CL
+    site_url: https://arxiv.org/list/cs.CL/recent
+    credibility: 0.9
+    max_items_per_run: 25
+
+  # --- Tier 3: journalism ---------------------------------------------------
+  - id: techcrunch-ai
+    name: TechCrunch AI
+    tier: journalism
+    feed_url: https://techcrunch.com/category/artificial-intelligence/feed/
+    site_url: https://techcrunch.com/category/artificial-intelligence/
+    credibility: 0.85
+
+  - id: the-verge-ai
+    name: The Verge AI
+    tier: journalism
+    feed_url: https://www.theverge.com/rss/ai-artificial-intelligence/index.xml
+    site_url: https://www.theverge.com/ai-artificial-intelligence
+    credibility: 0.85
+
+  - id: ars-technica
+    name: Ars Technica
+    tier: journalism
+    feed_url: https://feeds.arstechnica.com/arstechnica/technology-lab
+    site_url: https://arstechnica.com/
+    credibility: 0.85
+
+  - id: mit-technology-review
+    name: MIT Technology Review
+    tier: journalism
+    feed_url: https://www.technologyreview.com/feed/
+    site_url: https://www.technologyreview.com/
+    credibility: 0.85
+
+  - id: venturebeat-ai
+    name: VentureBeat AI
+    tier: journalism
+    feed_url: https://venturebeat.com/category/ai/feed/
+    site_url: https://venturebeat.com/category/ai/
+    credibility: 0.8
+
+  # --- Tier 4: ecosystem ----------------------------------------------------
+  - id: github-blog
+    name: GitHub Blog
+    tier: ecosystem
+    feed_url: https://github.blog/feed/
+    site_url: https://github.blog/
+    credibility: 0.75
+
+  - id: pytorch
+    name: PyTorch Blog
+    tier: ecosystem
+    feed_url: https://pytorch.org/feed.xml
+    site_url: https://pytorch.org/blog/
+    credibility: 0.8
+    enabled: false
+    note: >-
+      Verified 2026-08-26: HTTP 403 for both /feed.xml and /blog/feed.xml, including
+      with a browser User-Agent. Bot protection, not a dead feed. Do not work around
+      it by spoofing a browser; re-check periodically instead.
+
+  - id: langchain
+    name: LangChain Blog
+    tier: ecosystem
+    feed_url: https://blog.langchain.dev/rss/
+    site_url: https://blog.langchain.dev/
+    credibility: 0.7
+    enabled: false
+    note: >-
+      Verified 2026-08-26: /rss/ returns HTTP 200 with ~200KB of HTML and zero feed
+      entries, on both blog.langchain.dev and blog.langchain.com. The feed became a
+      web page.
+
+  - id: ollama
+    name: Ollama Blog
+    tier: ecosystem
+    feed_url: https://ollama.com/blog/rss.xml
+    site_url: https://ollama.com/blog
+    credibility: 0.75
+    max_items_per_run: 25
+
+  - id: aws-machine-learning
+    name: AWS Machine Learning Blog
+    tier: ecosystem
+    feed_url: https://aws.amazon.com/blogs/machine-learning/feed/
+    site_url: https://aws.amazon.com/blogs/machine-learning/
+    credibility: 0.8
+
+  - id: simon-willison
+    name: Simon Willison
+    tier: ecosystem
+    feed_url: https://simonwillison.net/atom/everything/
+    site_url: https://simonwillison.net/
+    credibility: 0.75
+
+  - id: import-ai
+    name: Import AI
+    tier: ecosystem
+    feed_url: https://importai.substack.com/feed
+    site_url: https://importai.substack.com/
+    credibility: 0.75
+
+  - id: sebastian-raschka
+    name: Ahead of AI
+    tier: ecosystem
+    feed_url: https://magazine.sebastianraschka.com/feed
+    site_url: https://magazine.sebastianraschka.com/
+    credibility: 0.75
+
+  - id: bair
+    name: Berkeley AI Research
+    tier: research
+    feed_url: https://bair.berkeley.edu/blog/feed.xml
+    site_url: https://bair.berkeley.edu/blog/
+    credibility: 0.9
+    max_items_per_run: 10
+    enabled: false
+    note: >-
+      Verified 2026-08-26: connection times out repeatedly. Host problem rather than a
+      retired feed, so keep it and re-check.
+
+  - id: reuters-tech
+    name: Reuters Technology
+    tier: journalism
+    feed_url: https://www.reuters.com/technology/rss
+    site_url: https://www.reuters.com/technology/
+    credibility: 0.95
+    enabled: false
+    note: >-
+      Reuters retired its public RSS service; the URL is kept for the record so the
+      next reader does not rediscover it. Revisit only if Reuters restores feeds.

@@ -80,8 +80,8 @@ Recurring cost: zero.
 | Phase | Scope | State |
 | --- | --- | --- |
 | P0 | Repository, tooling, CI | Done |
-| P1 | Feed ingestion with SSRF protection | Next |
-| P2 | Canonicalization and deduplication | |
+| P1 | Feed ingestion with SSRF protection | Done — 22/22 feeds live, 515 articles/run |
+| P2 | Canonicalization and deduplication | Next |
 | P3 | Event clustering | |
 | P4 | Deterministic scoring | |
 | P5 | LLM provider layer | |
@@ -106,6 +106,7 @@ ruff format --check .
 mypy
 pytest
 
+python scripts/verify_sources.py   # check every feed is still alive
 python -m app.jobs.daily_briefing
 ```
 
