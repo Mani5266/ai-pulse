@@ -1,88 +1,87 @@
 {
-  "covers_since": "2026-08-26T14:15:36.830663Z",
+  "covers_since": "2026-08-26T14:18:35.489226Z",
   "day": "2026-08-26",
-  "generated_at": "2026-08-26T14:20:13.847151Z",
+  "generated_at": "2026-08-26T14:24:33.499718Z",
   "stats": {
-    "articles": 550,
+    "articles": 530,
     "duplicates_removed": 0,
-    "events": 0,
+    "events": 1,
     "events_shortlisted": 20,
-    "feeds_failed": 0,
-    "feeds_ok": 25,
-    "model_calls": 25,
-    "model_failures": 0,
-    "provider": "ollama:qwen3:4b",
-    "runtime_seconds": 98.4
+    "feeds_failed": 1,
+    "feeds_ok": 24,
+    "model_calls": 24,
+    "model_failures": 1,
+    "provider": "groq:openai/gpt-oss-120b",
+    "runtime_seconds": 164.4
   },
   "stories": [
     {
-      "category": "developer_tools",
-      "claims": [],
-      "confidence": 0.85,
-      "developer_impact": "Developers may see faster initial code generation but must adapt to AI-assisted refinement processes and verification systems.",
-      "event_id": "evt_d9920b9c799b358a",
-      "first_seen": "2026-08-26T02:37:55Z",
-      "headline": "AI generates 1M lines of code and refines to reliable software running on millions of machines",
-      "last_updated": "2026-08-26T02:37:55Z",
-      "score": 6.348,
-      "sources": [
-        {
-          "source_id": "simon-willison",
-          "title": "Quoting Paul Dix",
-          "url": "https://simonwillison.net/2026/Aug/26/paul-dix/"
-        }
-      ],
-      "what_happened": "AI systems produced 1 million lines of code and iteratively refined it over months to create reliable software deployed on millions of developer machines. Paul Dix notes this achievement is significant despite potential counterarguments about oracle-based comparisons.",
-      "why_it_matters": "This demonstrates AI's capability to autonomously generate and improve complex code at scale, potentially accelerating software development while challenging traditional engineering practices."
-    },
-    {
-      "category": "research",
-      "claims": [],
-      "confidence": 0.92,
-      "developer_impact": "Developers can implement batched LLM agent inference with improved speed without retraining models, though implementation details require further exploration.",
-      "event_id": "evt_db6df27824e3acb2",
-      "first_seen": "2026-08-25T22:30:00Z",
-      "headline": "AgentSpec improves LLM agent batch inference speed without quality loss",
-      "last_updated": "2026-08-25T22:30:00Z",
-      "score": 6.34,
-      "sources": [
-        {
-          "source_id": "arxiv-cs-cl",
-          "title": "AgentSpec: Speculative Decoding for Batch Inference of LLM Agents",
-          "url": "https://arxiv.org/abs/2608.24004"
-        }
-      ],
-      "what_happened": "Researchers introduced AgentSpec, a speculative decoding method for LLM agents that addresses speed degradation in large batch sizes. Traditional speculative decoding algorithms suffer significant performance drops when handling large batches, but this new approach maintains generation quality while improving inference efficiency for batched agent applications.",
-      "why_it_matters": "This advancement enables real-world deployment of L:LM agent applications that require high throughput without compromising output quality, addressing a critical bottleneck in scaling agent systems for production environments."
-    },
-    {
-      "category": "research",
+      "category": "open_source",
       "claims": [],
       "confidence": 0.95,
-      "developer_impact": "Developers can now integrate simulation-based testing into LLM workflows to validate system responses to interventions without real-world experimentation.",
-      "event_id": "evt_fd16a058ee8e16ad",
-      "first_seen": "2026-08-25T22:30:00Z",
-      "headline": "LLM Agents Conduct Controlled Experiments via Simulation Models",
-      "last_updated": "2026-08-25T22:30:00Z",
-      "score": 5.99,
+      "developer_impact": "The upcoming weight release will allow backend and AI engineers to download and run Ox Alpha locally or in their own pipelines, potentially improving performance of AI services.",
+      "event_id": "evt_34c855ce504c5202",
+      "first_seen": "2026-08-26T14:19:29Z",
+      "headline": "Z.ai confirms it built Ox Alpha model and will release its weights",
+      "last_updated": "2026-08-26T14:19:29Z",
+      "score": 6.498,
       "sources": [
         {
-          "source_id": "arxiv-cs-ai",
-          "title": "LLM Agents Perform Controlled Experiments Using Simulation Models",
-          "url": "https://arxiv.org/abs/2608.23622"
+          "source_id": "techcrunch-ai",
+          "title": "Surprise: Z.ai is the AI lab behind the mysterious Ox Alpha model",
+          "url": "https://techcrunch.com/2026/08/26/surprise-z-ai-is-the-ai-lab-behind-the-mysterious-ox-alpha-model/"
         }
       ],
-      "what_happened": "Researchers developed a multi-agent framework allowing LLMs to perform controlled experiments using simulation models. This addresses the need for LLMs to understand system responses to interventions, which is critical for scientific and engineering tasks beyond text/code generation.",
-      "why_it_matters": "This advancement enables LLMs to simulate and analyze system behavior under controlled conditions, potentially improving accuracy in engineering and scientific applications where intervention effects must be precisely measured."
+      "what_happened": "Z.ai announced that it is the lab behind the Ox Alpha model, an open AI model that has been topping benchmarks and leaderboards, and said the model’s weights will be released soon.",
+      "why_it_matters": "Releasing the weights will let developers and researchers access a high‑performing model, enabling experimentation, fine‑tuning, and integration into applications without needing to train from scratch."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "event_id": "evt_2d6054cc51934d57",
+      "first_seen": "2026-08-26T05:30:00Z",
+      "headline": "Runable raises $21M to expand AI agents for building and growing businesses",
+      "last_updated": "2026-08-26T05:30:00Z",
+      "score": 6.242,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Runable hits $21M to bet AI agents can go from building businesses to growing them",
+          "url": "https://techcrunch.com/2026/08/26/runable-hits-21m-to-bet-ai-agents-can-go-from-building-businesses-to-growing-them/"
+        }
+      ],
+      "what_happened": "Runable announced a $21 million funding round aimed at developing AI agents that can both create and scale businesses. In the past 90 days, the company reported that 60%–70% of its over 1 trillion token usage came from paying customers.",
+      "why_it_matters": "The new capital will allow Runable to accelerate its AI agent platform, reflecting strong commercial demand as indicated by high token consumption from paying users. This suggests growing market interest in autonomous AI tools for business operations."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers will be able to obtain the Ox Alpha weights, integrate the model into their backend or AI pipelines, and fine‑tune it for specific tasks.",
+      "event_id": "evt_d3d327a50eccce99",
+      "first_seen": "2026-08-26T04:34:55Z",
+      "headline": "Z.ai announces Ox Alpha GLM-series model and plans to release its weights",
+      "last_updated": "2026-08-26T04:34:55Z",
+      "score": 6.133,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Z.ai confirms Ox Alpha is a new GLM-series model and will release its weights",
+          "url": "https://www.bloomberg.com/news/articles/2026-08-26/china-s-z-ai-made-ox-alpha-stealth-model-that-rivals-deepseek"
+        }
+      ],
+      "what_happened": "Z.ai confirmed that Ox Alpha, a new model in the GLM series, has been developed and the company intends to make the model weights publicly available.",
+      "why_it_matters": "Releasing the weights allows developers and researchers to download and run the model without training it from scratch, potentially accelerating AI development and increasing competition in the field."
     },
     {
       "category": "research",
       "claims": [],
-      "confidence": 0.95,
-      "developer_impact": "Developers can use this model for high-throughput text embeddings with better performance and efficiency, especially for multilingual and code tasks.",
+      "confidence": 0.78,
+      "developer_impact": "Deploying the model requires inference frameworks that support Mixture‑of‑Experts routing and sparse activation (e.g., vLLM). Engineers may need to provision larger GPU memory for the expert pool and adjust serving pipelines to handle token‑wise expert selection.",
       "event_id": "evt_0b471567f58b9fb3",
       "first_seen": "2026-08-25T22:30:00Z",
-      "headline": "Giga-using Mixture-of-Experts for high-throughput text embeddings",
+      "headline": "Giga-Embeddings introduce a 10 B‑parameter Mixture‑of‑Experts encoder with 1.8 B active parameters per token",
       "last_updated": "2026-08-25T22:30:00Z",
       "score": 5.79,
       "sources": [
@@ -92,28 +91,8 @@
           "url": "https://arxiv.org/abs/2608.23806"
         }
       ],
-      "what_happened": "A new text embedding model called Giga-Embeddings introduces a sparse 1.8B active parameters per token Mixture-of-Experts encoder with 10B parameters. It achieves top performance across English, Russian, multilingual, and code benchmarks using MTEB.",
-      "why_it_matters": "This model offers high retrieval quality with efficient serving, potentially enabling faster and more scalable text embedding applications without sacrificing performance across multiple languages and code."
-    },
-    {
-      "category": "benchmark",
-      "claims": [],
-      "confidence": 0.85,
-      "developer_impact": "Developers may see cost savings from more efficient inference, but specific integration changes are not detailed in the documents.",
-      "event_id": "evt_0c7fd51720556fba",
-      "first_seen": "2026-08-25T08:52:04Z",
-      "headline": "OpenAI's Jalapeño chip outperforms state-of-the-art in inference benchmarks",
-      "last_updated": "2026-08-25T08:52:04Z",
-      "score": 5.173,
-      "sources": [
-        {
-          "source_id": "techcrunch-ai",
-          "title": "OpenAI’s Jalapeño chip is built for fast inference at scale, benchmarks show",
-          "url": "https://techcrunch.com/2026/08/25/openais-jalapeno-chip-is-built-for-fast-inference-at-scale-benchmarks-show/"
-        }
-      ],
-      "what_happened": "OpenAI's Jalape: 1. Tested on SemiAnalysis' InferenceX benchmark, 2. Achieved higher tokens per user and higher throughput per kilowatt than current state-of-the-art solutions.",
-      "why_it_matters": "The chip's improved efficiency could reduce computational costs for AI inference at scale, potentially lowering expenses for large-scale AI deployments."
+      "what_happened": "The paper presents Giga-Embeddings, a family of text‑embedding models that combine strong retrieval quality with efficient serving. Its largest model is a sparse 10 billion‑parameter Mixture‑of‑Experts encoder that activates about 1.8 billion parameters per token. The model achieves the best aggregate scores among the family on English, Russian, multilingual, and code MTEB benchmarks and shows high throughput in vLLM benchmarks.",
+      "why_it_matters": "Higher‑throughput, high‑quality embeddings can improve large‑scale retrieval and similarity‑search systems while keeping latency low, enabling more responsive AI services and reducing compute cost per query."
     }
   ]
 }
