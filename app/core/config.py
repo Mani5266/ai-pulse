@@ -34,11 +34,18 @@ class Settings(BaseSettings):
 
     # --- LLM ---
     llm_provider: LLMProviderName = "ollama"
-    llm_model: str = "llama3.1:8b"
+    llm_model: str = "qwen3:4b"
     llm_api_key: str | None = None
     llm_base_url: str | None = None
     ollama_host: str = "http://localhost:11434"
-    llm_call_budget: int = Field(default=25, ge=1, le=200)
+    llm_call_budget: int = Field(default=40, ge=1, le=200)
+    """Hard ceiling on model calls per run, enforced by the provider.
+
+    A nominal run spends 25: one per shortlisted event, plus one per briefing story. The
+    rest is headroom for the single retry each call is allowed, so a day of flaky responses
+    degrades gracefully instead of stopping halfway through."""
+    llm_timeout: float = Field(default=120.0, gt=0)
+    """Per-call timeout. Generous: a 4B model on a laptop GPU is not fast."""
 
     # --- Delivery ---
     telegram_bot_token: str | None = None

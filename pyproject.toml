@@ -42,6 +42,7 @@ select = [
     "F",    # pyflakes
     "I",    # isort
     "B",    # bugbear
+    "BLE",  # blind except
     "UP",   # pyupgrade
     "S",    # bandit
     "SIM",  # simplify

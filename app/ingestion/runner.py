@@ -46,7 +46,7 @@ def ingest_source(fetcher: SafeFetcher, source: Source, settings: Settings) -> F
             max_chars=settings.max_article_chars,
         )
     # Deliberately broad: a parser crash in one feed must not end the run.
-    except Exception as exc:
+    except Exception as exc:  # noqa: BLE001
         logger.warning("%s: parse failed: %s", source.id, exc)
         return FeedResult(
             source_id=source.id,

@@ -71,7 +71,8 @@ Full reasoning, including the rejected alternatives, is in [PLAN.md](PLAN.md).
 ## Stack
 
 Python 3.11 · httpx · feedparser · Pydantic · Ruff · MyPy (strict) · pytest ·
-GitHub Actions · GitHub Pages · Telegram Bot API · Ollama (local development)
+GitHub Actions · GitHub Pages · Telegram Bot API · Groq free tier (CI) ·
+Ollama (local development)
 
 Recurring cost: zero.
 
@@ -85,7 +86,7 @@ Recurring cost: zero.
 | P3 | Event clustering | Done — precision-tuned, under-clusters |
 | P4 | Deterministic scoring | Next |
 | P5 | LLM provider layer | |
-| P6 | Briefing, Telegram, Pages | |
+| P6 | Briefing, Telegram, Pages | Next |
 | P7 | Claim verification | |
 | P8 | Timeline | |
 | P9 | Evaluation harness | |

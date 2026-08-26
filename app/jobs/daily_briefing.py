@@ -18,6 +18,9 @@ from app.ingestion.normalize import enrich_all
 from app.ingestion.runner import ingest_all, summarise
 from app.ingestion.sources import credibility_by_id, enabled_sources, load_sources
 from app.intelligence.clustering import ClusterConfig, cluster_articles
+from app.llm.analysis import analyse_stories, score_impact
+from app.llm.analysis import summarise as summarise_analysis
+from app.llm.provider import LLMError, LLMProvider, build_provider
 from app.ranking.profile import load_profile
 from app.ranking.scoring import score_events
 from app.ranking.shortlist import build_shortlist
@@ -26,6 +29,7 @@ from app.storage.ndjson_store import (
     append_articles,
     known_content_hashes,
     known_ids,
+    read_articles,
     recent_days,
 )
 
@@ -139,7 +143,33 @@ def run(settings: Settings) -> int:
         max_per_category=settings.max_events_per_category,
     )
 
-    write_events(settings.data_dir, today, [item.with_score() for item in scored])
+    provider = _build_provider(settings)
+    if provider is None:
+        write_events(settings.data_dir, today, [item.with_score() for item in scored])
+        logger.warning("no model available; publishing the deterministic ranking only")
+        return 0
+
+    stored_articles = {
+        article.id: article for article in read_articles(settings.data_dir, today) if article.id
+    }
+    # Each call may retry once, so the reservation is two per briefing story.
+    analysed = score_impact(
+        shortlist.selected,
+        stored_articles,
+        provider,
+        reserve=settings.stories_per_briefing * 2,
+    )
+    analysed = analyse_stories(
+        analysed, stored_articles, provider, limit=settings.stories_per_briefing
+    )
+
+    analysed_ids = {item.event.id for item in analysed}
+    write_events(
+        settings.data_dir,
+        today,
+        [item.with_score() for item in analysed]
+        + [item.with_score() for item in scored if item.event.id not in analysed_ids],
+    )
 
     stats_line = shortlist.stats()
     logger.info(
@@ -159,13 +189,39 @@ def run(settings: Settings) -> int:
             item.event.source_count,
         )
 
-    # P5: LLM. P6: deliver.
+    analysis_stats = summarise_analysis(analysed)
+    logger.info(
+        "analysis complete provider=%s scored=%d degraded=%d summarised=%d calls=%s",
+        provider.name,
+        analysis_stats["model_scored"],
+        analysis_stats["degraded"],
+        analysis_stats["summarised"],
+        provider.stats.as_dict(),
+    )
+    for story in analysed[: settings.stories_per_briefing]:
+        headline = story.analysis.headline if story.analysis else story.event.canonical_title
+        logger.info("  %.2f %s", story.final_score, headline[:80])
+
+    # P6: deliver.
 
     if stats["ok"] == 0:
         logger.error("every source failed; nothing to work with")
         return 1
 
     return 0
+
+
+def _build_provider(settings: Settings) -> LLMProvider | None:
+    """Construct the configured provider, or None if it cannot run.
+
+    A missing API key is a configuration gap, not a crash: the run still produces a
+    deterministically ranked set of events, which is a degraded briefing rather than none.
+    """
+    try:
+        return build_provider(settings)
+    except LLMError as exc:
+        logger.warning("model unavailable: %s", exc)
+        return None
 
 
 def main() -> int:
