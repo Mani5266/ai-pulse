@@ -332,6 +332,9 @@ def _parse_duration(value: str) -> float | None:
 FREE_TIERS: dict[str, tuple[str, str]] = {
     # name: (base URL, a capable default model on that tier)
     "groq": ("https://api.groq.com/openai/v1", "openai/gpt-oss-120b"),
+    # Left in the registry but out of the default chain order: a free key lists models
+    # and then returns 402 on chat completions, so the tier is only usable with a paid
+    # account. Add it back to AI_PULSE_LLM_CHAIN if yours can actually call it.
     "cerebras": ("https://api.cerebras.ai/v1", "gpt-oss-120b"),
     "openrouter": ("https://openrouter.ai/api/v1", "nvidia/nemotron-3-super-120b-a12b:free"),
 }

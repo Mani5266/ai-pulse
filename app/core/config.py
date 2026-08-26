@@ -52,7 +52,7 @@ class Settings(BaseSettings):
     extraction per briefing story. The rest is headroom for the single retry each call is
     allowed, so a day of flaky responses degrades gracefully instead of stopping halfway
     through."""
-    llm_chain: str = "groq,cerebras,openrouter"
+    llm_chain: str = "groq,openrouter"
     """Order in which free tiers are tried, when each has a key.
 
     Every free allowance runs out; Groq's is 200,000 tokens a day, about five runs. With

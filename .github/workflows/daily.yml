@@ -48,9 +48,8 @@ jobs:
           AI_PULSE_LLM_MODEL: openai/gpt-oss-120b
           # The chain order. Tier keys take precedence over AI_PULSE_LLM_API_KEY, and a
           # tier with no secret set is skipped, so an unset key costs nothing.
-          AI_PULSE_LLM_CHAIN: groq,cerebras,openrouter
+          AI_PULSE_LLM_CHAIN: groq,openrouter
           AI_PULSE_GROQ_API_KEY: ${{ secrets.AI_PULSE_GROQ_API_KEY }}
-          AI_PULSE_CEREBRAS_API_KEY: ${{ secrets.AI_PULSE_CEREBRAS_API_KEY }}
           AI_PULSE_OPENROUTER_API_KEY: ${{ secrets.AI_PULSE_OPENROUTER_API_KEY }}
           # Kept so a deployment that has not yet added the tier secrets still runs.
           # Remove once AI_PULSE_GROQ_API_KEY is set in the repository secrets.
