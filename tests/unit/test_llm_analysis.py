@@ -7,12 +7,14 @@ from datetime import UTC, datetime
 
 from app.core.models import Article, Event
 from app.intelligence.categories import Category
+from app.intelligence.verification import VerificationStatus
 from app.llm.analysis import (
     IMPACT_WEIGHT,
     AnalysedEvent,
     analyse_stories,
     score_impact,
     summarise,
+    verify_claims,
 )
 from app.llm.provider import ScriptedProvider
 from app.ranking.scoring import DETERMINISTIC_WEIGHT, ScoredEvent, Scores
@@ -294,3 +296,96 @@ def test_without_a_reservation_scoring_may_spend_everything() -> None:
     score_impact([scored_event(f"evt_{index}") for index in range(20)], ARTICLES, provider)
 
     assert provider.remaining == 0
+
+
+CLAIMS = json.dumps(
+    {
+        "claims": [
+            {
+                "text": "Gemma 4 has 12 billion parameters",
+                "supported_by": ["google-deepmind", "the-verge-ai"],
+                "contradicted_by": [],
+            },
+            {
+                "text": "It scores 71 on MMLU",
+                "supported_by": ["google-deepmind"],
+                "contradicted_by": [],
+            },
+        ]
+    }
+)
+
+
+def multi_source_event(event_id: str = "evt_multi") -> ScoredEvent:
+    base = scored_event(event_id)
+    return ScoredEvent(
+        event=base.event.model_copy(
+            update={"source_ids": ["google-deepmind", "the-verge-ai"], "article_ids": ["a1", "a2"]}
+        ),
+        scores=base.scores,
+    )
+
+
+def test_claims_are_extracted_and_labelled() -> None:
+    provider = ScriptedProvider([CLAIMS])
+    events = [AnalysedEvent(scored=multi_source_event())]
+
+    verified = verify_claims(events, ARTICLES, provider, limit=1)
+
+    assert len(verified[0].claims) == 2
+    assert verified[0].claims[0].status is VerificationStatus.VERIFIED
+    assert verified[0].claims[1].status is VerificationStatus.UNVERIFIED
+
+
+def test_a_single_source_event_costs_no_model_call() -> None:
+    """A single source cannot corroborate itself, so the source count already gives the
+    answer. On a typical day that is most of the shortlist."""
+    provider = ScriptedProvider([CLAIMS])
+    events = [AnalysedEvent(scored=scored_event())]
+
+    verified = verify_claims(events, ARTICLES, provider, limit=1)
+
+    assert provider.stats.attempted == 0
+    assert verified[0].claims == ()
+
+
+def test_a_failed_extraction_leaves_the_story_without_claims() -> None:
+    provider = ScriptedProvider(["nonsense", "still nonsense"])
+    events = [AnalysedEvent(scored=multi_source_event())]
+
+    verified = verify_claims(events, ARTICLES, provider, limit=1)
+
+    assert verified[0].claims == ()
+    assert verified[0].scored is events[0].scored
+
+
+def test_verification_preserves_the_earlier_analysis() -> None:
+    provider = ScriptedProvider([IMPACT, STORY, CLAIMS])
+
+    analysed = score_impact([multi_source_event()], ARTICLES, provider)
+    analysed = analyse_stories(analysed, ARTICLES, provider, limit=1)
+    verified = verify_claims(analysed, ARTICLES, provider, limit=1)
+
+    assert verified[0].impact is not None
+    assert verified[0].analysis is not None
+    assert len(verified[0].claims) == 2
+
+
+def test_only_the_briefing_stories_are_verified() -> None:
+    provider = ScriptedProvider([CLAIMS])
+    events = [AnalysedEvent(scored=multi_source_event(f"evt_{i}")) for i in range(4)]
+
+    verified = verify_claims(events, ARTICLES, provider, limit=1)
+
+    assert provider.stats.attempted == 1
+    assert len(verified) == 4
+
+
+def test_the_run_summary_counts_claims() -> None:
+    provider = ScriptedProvider([CLAIMS])
+    events = [AnalysedEvent(scored=multi_source_event())]
+
+    stats = summarise(verify_claims(events, ARTICLES, provider, limit=1))
+
+    assert stats["claims"] == 2
+    assert stats["corroborated_claims"] == 1

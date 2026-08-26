@@ -73,3 +73,34 @@ class EventPair(BaseModel):
     same_event: bool
     confidence: float = Field(ge=0.0, le=1.0)
     reasoning: str = Field(min_length=1, max_length=300)
+
+
+class ExtractedClaim(BaseModel):
+    """One factual assertion from a story, with the sources that carry it.
+
+    The model's job here stops at extraction and attribution: what was claimed, and which
+    of the supplied documents said it. It is deliberately *not* asked whether the claim is
+    true, or how confident to be — that label is computed in code from the attribution,
+    for the same reason the ranking formula splits that way. A model asked "is this
+    verified?" will answer confidently either way; a model asked "which documents say
+    this?" can be checked against the documents.
+    """
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    text: str = Field(min_length=1, max_length=300)
+    """The claim, stated plainly. One assertion, not a paragraph."""
+
+    supported_by: list[str] = Field(default_factory=list, max_length=8)
+    """Source ids, exactly as they appear in the document tags, that assert this."""
+
+    contradicted_by: list[str] = Field(default_factory=list, max_length=8)
+    """Source ids that assert something incompatible with it."""
+
+
+class ClaimExtraction(BaseModel):
+    """Every claim the model found in one event's documents."""
+
+    model_config = ConfigDict(frozen=True, extra="forbid")
+
+    claims: list[ExtractedClaim] = Field(default_factory=list, max_length=8)

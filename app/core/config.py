@@ -45,12 +45,13 @@ class Settings(BaseSettings):
     thinking on — long enough that the first attempt hit the timeout and only the retry
     succeeded — against 8 seconds with it off. Filling a fixed JSON schema from supplied
     text is extraction, not reasoning, so the deliberation buys nothing here."""
-    llm_call_budget: int = Field(default=40, ge=1, le=200)
+    llm_call_budget: int = Field(default=60, ge=1, le=200)
     """Hard ceiling on model calls per run, enforced by the provider.
 
-    A nominal run spends 25: one per shortlisted event, plus one per briefing story. The
-    rest is headroom for the single retry each call is allowed, so a day of flaky responses
-    degrades gracefully instead of stopping halfway through."""
+    A nominal run spends 30: one per shortlisted event, then a summary and a claim
+    extraction per briefing story. The rest is headroom for the single retry each call is
+    allowed, so a day of flaky responses degrades gracefully instead of stopping halfway
+    through."""
     llm_timeout: float = Field(default=120.0, gt=0)
     """Per-call timeout. Generous: a 4B model on a laptop GPU is not fast."""
 

@@ -27,9 +27,15 @@ import logging
 from dataclasses import dataclass
 
 from app.core.models import Article, Event
-from app.llm.prompts import impact_scoring_prompt, story_analysis_prompt, wrap_documents
+from app.intelligence.verification import VerifiedClaim, classify_claims
+from app.llm.prompts import (
+    claim_extraction_prompt,
+    impact_scoring_prompt,
+    story_analysis_prompt,
+    wrap_documents,
+)
 from app.llm.provider import BudgetExhaustedError, LLMProvider
-from app.llm.schemas import ImpactScores, StoryAnalysis
+from app.llm.schemas import ClaimExtraction, ImpactScores, StoryAnalysis
 from app.ranking.scoring import (
     CREDIBILITY_WEIGHT,
     NOVELTY_WEIGHT,
@@ -70,6 +76,7 @@ class AnalysedEvent:
     scored: ScoredEvent
     impact: ImpactScores | None = None
     analysis: StoryAnalysis | None = None
+    claims: tuple[VerifiedClaim, ...] = ()
 
     @property
     def event(self) -> Event:
@@ -226,9 +233,64 @@ def analyse_stories(
                 logger.warning("call budget exhausted after %d summaries", len(summarised))
                 budget_spent = True
 
-        summarised.append(AnalysedEvent(scored=item.scored, impact=item.impact, analysis=analysis))
+        summarised.append(
+            AnalysedEvent(
+                scored=item.scored, impact=item.impact, analysis=analysis, claims=item.claims
+            )
+        )
 
     return summarised + events[limit:]
+
+
+def verify_claims(
+    events: list[AnalysedEvent],
+    articles: dict[str, Article],
+    provider: LLMProvider,
+    *,
+    limit: int,
+) -> list[AnalysedEvent]:
+    """Extract and classify the claims behind the briefing's stories.
+
+    One call per story, and only for stories with more than one source. A single-source
+    event cannot be corroborated by definition, so spending a call to discover that every
+    claim is UNVERIFIED buys nothing the source count already told us — and on a typical
+    day that is most of the shortlist.
+    """
+    processed: list[AnalysedEvent] = []
+    budget_spent = False
+
+    for item in events[:limit]:
+        claims: tuple[VerifiedClaim, ...] = ()
+        sources = item.event.source_ids
+
+        if len(sources) > 1 and not budget_spent:
+            documents = _documents_for(
+                item.event,
+                articles,
+                max_documents=SUMMARY_DOCUMENTS,
+                max_chars=SUMMARY_CHARS,
+            )
+            prompt = claim_extraction_prompt(documents, ", ".join(sources))
+            try:
+                extraction = provider.structured(prompt, ClaimExtraction)
+            except BudgetExhaustedError:
+                logger.warning("call budget exhausted before claim extraction")
+                budget_spent = True
+                extraction = None
+
+            if extraction is not None:
+                claims = tuple(classify_claims(extraction.claims, sources))
+
+        processed.append(
+            AnalysedEvent(
+                scored=item.scored,
+                impact=item.impact,
+                analysis=item.analysis,
+                claims=claims,
+            )
+        )
+
+    return processed + events[limit:]
 
 
 def summarise(analysed: list[AnalysedEvent]) -> dict[str, int | float]:
@@ -239,4 +301,8 @@ def summarise(analysed: list[AnalysedEvent]) -> dict[str, int | float]:
         "model_scored": scored_by_model,
         "degraded": len(analysed) - scored_by_model,
         "summarised": sum(1 for item in analysed if item.analysis is not None),
+        "claims": sum(len(item.claims) for item in analysed),
+        "corroborated_claims": sum(
+            1 for item in analysed for claim in item.claims if claim.is_corroborated
+        ),
     }

@@ -170,3 +170,35 @@ Guidance:
   - Two products from one company on one day are NOT the same event.
   - When genuinely unsure, answer false. A missed merge costs a duplicate line in the
     briefing; a wrong merge silently deletes a story."""
+
+
+def claim_extraction_prompt(documents: str, sources: str) -> str:
+    """Ask which factual claims the documents make, and which source makes each.
+
+    The question is deliberately narrow. "Is this claim true?" invites a confident guess
+    from world knowledge; "which of these documents says it?" is answerable from the text
+    in front of the model and checkable against it afterwards.
+    """
+    return f"""\
+Extract the factual claims made by the documents below, and attribute each one.
+
+The available source ids are: {sources}
+
+Return JSON with a single field "claims", a list of at most 5 objects:
+  text             the claim in one plain sentence, at most 300 characters
+  supported_by     source ids, from the list above, whose document asserts this claim
+  contradicted_by  source ids whose document asserts something incompatible with it
+
+Rules:
+  - Extract only claims that at least one document actually states. Do not add anything
+    you happen to know.
+  - One assertion per claim. Split "X was released and scores 71" into two claims.
+  - Prefer claims that are checkable: versions, numbers, capabilities, dates, licences.
+    Skip opinion, marketing language, and anything phrased as expectation.
+  - Use only the source ids listed above, spelled exactly. Never invent one.
+  - A source belongs in supported_by only if its own text says the claim. A document that
+    merely mentions the topic does not count as support.
+  - contradicted_by is for genuine disagreement about a fact — a different number, a
+    different date, a denial. Not for one document being less detailed than another.
+
+{documents}"""

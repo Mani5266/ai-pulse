@@ -13,7 +13,7 @@ import logging
 from collections.abc import Sequence
 from datetime import UTC, date, datetime
 
-from app.briefing.models import Briefing, BriefingStats, Source, Story
+from app.briefing.models import Briefing, BriefingStats, Claim, Source, Story
 from app.core.models import Article
 from app.llm.analysis import AnalysedEvent
 
@@ -80,6 +80,15 @@ def build_briefing(
                 score=item.final_score,
                 confidence=analysis.confidence,
                 sources=_sources_for(item.event.article_ids, articles),
+                claims=[
+                    Claim(
+                        text=claim.text,
+                        status=claim.status,
+                        supported_by=claim.supported_by,
+                        contradicted_by=claim.contradicted_by,
+                    )
+                    for claim in item.claims
+                ],
                 first_seen=item.event.first_seen,
                 last_updated=item.event.last_updated,
             )

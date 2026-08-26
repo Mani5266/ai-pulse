@@ -85,6 +85,18 @@ def render_story(story: Story, *, index: int, detailed: bool) -> str:
     else:
         parts.append(_clean(story.what_happened, 200))
 
+    # A sixty-second briefing has no room for a claim list, so only the two things a
+    # reader would act on appear: a disagreement between sources, and how much of the
+    # story more than one source stands behind.
+    for claim in story.contradicted_claims[:1]:
+        parts.append(f"⚠️ <i>Sources disagree:</i> {_clean(claim.text, 180)}")
+
+    if detailed and story.verified_claim_count:
+        parts.append(
+            f"<i>✓ {story.verified_claim_count} of {len(story.claims)} claims corroborated "
+            f"by two or more sources</i>"
+        )
+
     sources = _sources_line(story)
     if sources:
         corroboration = f" ({story.source_count} sources)" if story.source_count > 1 else ""

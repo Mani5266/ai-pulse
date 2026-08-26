@@ -13,6 +13,7 @@ from datetime import date, datetime
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.intelligence.categories import Category
+from app.intelligence.verification import VerificationStatus
 
 
 class Source(BaseModel):
@@ -23,6 +24,17 @@ class Source(BaseModel):
     source_id: str
     title: str
     url: str
+
+
+class Claim(BaseModel):
+    """One checkable assertion behind a story, and how well the sources back it."""
+
+    model_config = ConfigDict(frozen=True)
+
+    text: str
+    status: VerificationStatus
+    supported_by: list[str] = Field(default_factory=list)
+    contradicted_by: list[str] = Field(default_factory=list)
 
 
 class Story(BaseModel):
@@ -39,6 +51,7 @@ class Story(BaseModel):
     score: float
     confidence: float
     sources: list[Source] = Field(default_factory=list)
+    claims: list[Claim] = Field(default_factory=list)
     first_seen: datetime
     last_updated: datetime
 
@@ -54,6 +67,15 @@ class Story(BaseModel):
     @property
     def source_count(self) -> int:
         return len({source.source_id for source in self.sources})
+
+    @property
+    def contradicted_claims(self) -> list[Claim]:
+        """Claims the sources disagree about. The most useful thing to surface."""
+        return [claim for claim in self.claims if claim.status is VerificationStatus.CONTRADICTED]
+
+    @property
+    def verified_claim_count(self) -> int:
+        return sum(1 for claim in self.claims if claim.status is VerificationStatus.VERIFIED)
 
 
 class BriefingStats(BaseModel):

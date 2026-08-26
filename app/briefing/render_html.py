@@ -12,7 +12,8 @@ from __future__ import annotations
 
 from html import escape
 
-from app.briefing.models import Briefing, Story
+from app.briefing.models import Briefing, Claim, Story
+from app.intelligence.verification import VerificationStatus
 
 STYLE = """\
 :root { color-scheme: light dark; --fg:#111; --muted:#666; --bg:#fdfdfc; --line:#e5e5e2;
@@ -37,6 +38,18 @@ h2 { font-size:1.1rem; margin:0 0 .5rem; line-height:1.35; }
 p { margin:.5rem 0; }
 .why { color:var(--muted); }
 .dev { border-left:2px solid var(--line); padding-left:.75rem; font-size:.94rem; }
+.claims { list-style:none; padding:0; margin:.9rem 0 .4rem; font-size:.88rem; }
+.claims li { padding:.35rem 0 .35rem .75rem; border-left:3px solid var(--line);
+             margin-bottom:.3rem; }
+.claims li.verified { border-left-color:#2f855a; }
+.claims li.partial { border-left-color:#b7791f; }
+.claims li.contradicted { border-left-color:#c53030; }
+.badge { font-size:.72rem; text-transform:uppercase; letter-spacing:.05em;
+         color:var(--muted); margin-right:.4rem; white-space:nowrap; }
+.verified .badge { color:#2f855a; }
+.partial .badge { color:#b7791f; }
+.contradicted .badge { color:#c53030; }
+.attr { color:var(--muted); font-size:.78rem; }
 .sources { font-size:.82rem; margin-top:.6rem; }
 .sources a { color:var(--accent); text-decoration:none; border-bottom:1px solid transparent; }
 .sources a:hover { border-bottom-color:var(--accent); }
@@ -46,8 +59,42 @@ footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line);
 """
 
 
+BADGES: dict[VerificationStatus, tuple[str, str]] = {
+    VerificationStatus.VERIFIED: ("verified", "✓ corroborated"),
+    VerificationStatus.PARTIALLY_VERIFIED: ("partial", "~ partly corroborated"),
+    VerificationStatus.UNVERIFIED: ("single", "· single source"),
+    VerificationStatus.CONTRADICTED: ("contradicted", "⚠ sources disagree"),
+}
+
+
 def _esc(text: str) -> str:
     return escape(" ".join(text.split()), quote=True)
+
+
+def render_claims_html(claims: list[Claim]) -> str:
+    """The claims behind a story, each labelled by how many sources carry it.
+
+    This is the part of the page worth reading twice. A briefing that asserts things is
+    ordinary; one that shows which assertions more than one source stands behind, and
+    which are a single company's word, is saying something a reader can act on.
+    """
+    if not claims:
+        return ""
+
+    rows = []
+    for claim in claims:
+        css, label = BADGES[claim.status]
+        attribution = ""
+        if claim.supported_by:
+            attribution = f' <span class="attr">{_esc(", ".join(claim.supported_by))}</span>'
+        elif claim.status is VerificationStatus.UNVERIFIED:
+            attribution = ' <span class="attr">no source could be attributed</span>'
+        rows.append(
+            f'  <li class="{css}"><span class="badge">{_esc(label)}</span> '
+            f"{_esc(claim.text)}{attribution}</li>"
+        )
+
+    return '  <ul class="claims">\n' + "\n".join(rows) + "\n  </ul>"
 
 
 def render_story_html(story: Story, *, lead: bool) -> str:
@@ -56,6 +103,10 @@ def render_story_html(story: Story, *, lead: bool) -> str:
     meta = [f'<span class="tag">{_esc(story.category.value.replace("_", " "))}</span>']
     if story.source_count > 1:
         meta.append(f"{story.source_count} sources")
+    if story.verified_claim_count:
+        meta.append(f"{story.verified_claim_count} corroborated claims")
+    if story.contradicted_claims:
+        meta.append("disputed")
     if story.is_developing:
         meta.append("developing")
     meta.append(f"score {story.score:.1f}")
@@ -70,6 +121,10 @@ def render_story_html(story: Story, *, lead: bool) -> str:
 
     if story.developer_impact:
         parts.append(f'  <p class="dev">{_esc(story.developer_impact)}</p>')
+
+    claims = render_claims_html(story.claims)
+    if claims:
+        parts.append(claims)
 
     if story.sources:
         links = " · ".join(

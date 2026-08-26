@@ -21,7 +21,7 @@ def test_defaults_are_usable_without_any_environment() -> None:
     settings = _settings()
 
     assert settings.llm_provider == "ollama"
-    assert settings.llm_call_budget == 40
+    assert settings.llm_call_budget == 60
     assert settings.max_events_to_llm == 20
     assert settings.stories_per_briefing == 5
     assert settings.data_dir == Path("data")

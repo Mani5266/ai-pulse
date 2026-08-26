@@ -25,7 +25,7 @@ from app.ingestion.recency import filter_recent
 from app.ingestion.runner import ingest_all, summarise
 from app.ingestion.sources import credibility_by_id, enabled_sources, load_sources
 from app.intelligence.clustering import ClusterConfig, cluster_articles
-from app.llm.analysis import analyse_stories, score_impact
+from app.llm.analysis import analyse_stories, score_impact, verify_claims
 from app.llm.analysis import summarise as summarise_analysis
 from app.llm.provider import LLMError, LLMProvider, build_provider
 from app.ranking.profile import load_profile
@@ -224,14 +224,18 @@ def run(settings: Settings) -> int:
     stored_articles = {
         article.id: article for article in read_articles(settings.data_dir, today) if article.id
     }
-    # Each call may retry once, so the reservation is two per briefing story.
+    # Two calls per story now follow scoring — a summary and a claim extraction — and
+    # each may retry once, so the reservation is four per story.
     analysed = score_impact(
         shortlist.selected,
         stored_articles,
         provider,
-        reserve=settings.stories_per_briefing * 2,
+        reserve=settings.stories_per_briefing * 4,
     )
     analysed = analyse_stories(
+        analysed, stored_articles, provider, limit=settings.stories_per_briefing
+    )
+    analysed = verify_claims(
         analysed, stored_articles, provider, limit=settings.stories_per_briefing
     )
 
@@ -263,11 +267,14 @@ def run(settings: Settings) -> int:
 
     analysis_stats = summarise_analysis(analysed)
     logger.info(
-        "analysis complete provider=%s scored=%d degraded=%d summarised=%d calls=%s",
+        "analysis complete provider=%s scored=%d degraded=%d summarised=%d "
+        "claims=%d corroborated=%d calls=%s",
         provider.name,
         analysis_stats["model_scored"],
         analysis_stats["degraded"],
         analysis_stats["summarised"],
+        analysis_stats["claims"],
+        analysis_stats["corroborated_claims"],
         provider.stats.as_dict(),
     )
     for story in analysed[: settings.stories_per_briefing]:
