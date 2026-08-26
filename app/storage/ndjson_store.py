@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 import logging
 from collections.abc import Iterable, Sequence
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 from pydantic import ValidationError
@@ -85,13 +85,37 @@ def read_articles(data_dir: Path, day: date) -> list[Article]:
     return articles
 
 
-def known_urls(data_dir: Path, days: Iterable[date]) -> set[str]:
-    """Every article URL already stored across the given days.
+def read_days(data_dir: Path, days: Iterable[date]) -> list[Article]:
+    """Read several days at once, oldest day first as given."""
+    return [article for day in days for article in read_articles(data_dir, day)]
 
-    P1 uses this to avoid re-appending items that a feed still lists. Real deduplication,
-    across sources and across URL variants, arrives in P2.
+
+def recent_days(today: date, count: int) -> list[date]:
+    """The last ``count`` days, ending today. Used to build the deduplication memory."""
+    return [today - timedelta(days=offset) for offset in range(count)]
+
+
+def known_ids(data_dir: Path, days: Iterable[date]) -> set[str]:
+    """Article ids already stored across the given days.
+
+    This is what stops a feed that still lists last week's post from presenting it as
+    news every morning.
     """
-    return {str(article.url) for day in days for article in read_articles(data_dir, day)}
+    return {article.id for article in read_days(data_dir, days) if article.id}
+
+
+def known_content_hashes(data_dir: Path, days: Iterable[date]) -> set[str]:
+    """Content hashes already stored, so a syndicated copy is recognised across days."""
+    return {article.content_hash for article in read_days(data_dir, days) if article.content_hash}
+
+
+def _identity(article: Article) -> str:
+    """Key used to decide whether a record is already on disk.
+
+    The canonical id when normalisation has run, the raw URL otherwise, so this stays
+    correct for records written before enrichment existed.
+    """
+    return article.id or str(article.url)
 
 
 def append_articles(
@@ -99,9 +123,9 @@ def append_articles(
     day: date,
     articles: Sequence[Article],
     *,
-    skip_urls: set[str] | None = None,
+    skip_ids: set[str] | None = None,
 ) -> int:
-    """Append articles to one day's file, skipping URLs already present.
+    """Append articles to one day's file, skipping records already present.
 
     Returns the number of records actually written. Writing is append-only: a run never
     rewrites history, so a re-run is safe.
@@ -112,15 +136,15 @@ def append_articles(
     path = articles_path(data_dir, day)
     path.parent.mkdir(parents=True, exist_ok=True)
 
-    seen = set(skip_urls or ())
-    seen.update(str(article.url) for article in read_articles(data_dir, day))
+    seen = set(skip_ids or ())
+    seen.update(_identity(article) for article in read_articles(data_dir, day))
 
     lines: list[str] = []
     for article in articles:
-        url = str(article.url)
-        if url in seen:
+        identity = _identity(article)
+        if identity in seen:
             continue
-        seen.add(url)
+        seen.add(identity)
         lines.append(_serialise(article))
 
     if not lines:

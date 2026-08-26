@@ -52,6 +52,15 @@ class Settings(BaseSettings):
     max_article_chars: int = Field(default=20_000, ge=500, le=200_000)
     """Cap on stored article text. Bounds both repository growth and prompt size."""
 
+    # --- Deduplication ---
+    dedup_memory_days: int = Field(default=7, ge=1, le=90)
+    """How far back deduplication looks. A feed that still lists last week's post must
+    not present it as news again."""
+
+    dedup_title_threshold: float = Field(default=0.90, ge=0.5, le=1.0)
+    """Title similarity above which two articles are the same article. Deliberately
+    high; looser grouping is event clustering's job, not deduplication's."""
+
     # --- Pipeline ---
     max_events_to_llm: int = Field(default=20, ge=1, le=100)
     stories_per_briefing: int = Field(default=5, ge=1, le=20)

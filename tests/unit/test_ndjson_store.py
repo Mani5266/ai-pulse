@@ -6,11 +6,14 @@ from datetime import UTC, date, datetime
 from pathlib import Path
 
 from app.core.models import Article
+from app.ingestion.normalize import enrich
 from app.storage.ndjson_store import (
     append_articles,
     articles_path,
-    known_urls,
+    known_content_hashes,
+    known_ids,
     read_articles,
+    recent_days,
 )
 
 DAY = date(2026, 8, 26)
@@ -69,12 +72,12 @@ def test_duplicates_within_one_batch_are_collapsed(tmp_path: Path) -> None:
     assert written == 1
 
 
-def test_skip_urls_argument_is_honoured(tmp_path: Path) -> None:
+def test_skip_ids_argument_is_honoured(tmp_path: Path) -> None:
     written = append_articles(
         tmp_path,
         DAY,
         [article("https://example.com/a")],
-        skip_urls={"https://example.com/a"},
+        skip_ids={"https://example.com/a"},
     )
 
     assert written == 0
@@ -86,14 +89,30 @@ def test_empty_batch_writes_nothing(tmp_path: Path) -> None:
     assert not articles_path(tmp_path, DAY).exists()
 
 
-def test_known_urls_spans_days(tmp_path: Path) -> None:
-    append_articles(tmp_path, DAY, [article("https://example.com/a")])
-    append_articles(tmp_path, date(2026, 8, 25), [article("https://example.com/b")])
+def test_known_ids_and_hashes_span_days(tmp_path: Path) -> None:
+    today = enrich(article("https://example.com/a"))
+    yesterday = enrich(article("https://example.com/b", title="Other"))
+    append_articles(tmp_path, DAY, [today])
+    append_articles(tmp_path, date(2026, 8, 25), [yesterday])
 
-    assert known_urls(tmp_path, [DAY, date(2026, 8, 25)]) == {
-        "https://example.com/a",
-        "https://example.com/b",
-    }
+    days = [DAY, date(2026, 8, 25)]
+
+    assert known_ids(tmp_path, days) == {today.id, yesterday.id}
+    assert known_content_hashes(tmp_path, days) == {today.content_hash, yesterday.content_hash}
+
+
+def test_recent_days_counts_back_from_today() -> None:
+    assert recent_days(DAY, 3) == [DAY, date(2026, 8, 25), date(2026, 8, 24)]
+
+
+def test_enriched_records_are_keyed_by_id_not_url(tmp_path: Path) -> None:
+    """A URL variant of a stored article must not be appended a second time."""
+    append_articles(tmp_path, DAY, [enrich(article("https://example.com/a"))])
+    written = append_articles(
+        tmp_path, DAY, [enrich(article("https://www.example.com/a/?utm_source=x"))]
+    )
+
+    assert written == 0
 
 
 def test_corrupt_line_does_not_lose_the_rest_of_the_day(tmp_path: Path) -> None:

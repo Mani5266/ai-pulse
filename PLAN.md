@@ -1,6 +1,6 @@
 # AI-Pulse — Build Plan
 
-**Status:** P1 complete
+**Status:** P2 complete
 **Last updated:** 2026-08-26
 
 ---
@@ -174,7 +174,27 @@ Removed from the original design, with reasons:
 
 Unused infrastructure is a liability, not a signal of sophistication.
 
-### 2.8 arXiv needs its own quota
+### 2.8 Title similarity needs an identity guard
+
+Character trigrams alone are unsafe on AI headlines. Measured on one real day of 22
+feeds, *every* title pair scoring above 0.85 was a false positive, and each differed only
+in a number or a month:
+
+```
+0.91  "The latest AI news we announced in July 2026"  /  "... in June 2026"
+0.90  "sqlite-utils 4.2.1"                            /  "sqlite-utils 4.2"
+0.83  "Introducing Gemini 3.6 Flash, 3.5 Flash-Lite"  /  "Introducing Gemini 3.5 Flash Cyber"
+```
+
+Two monthly roundups, two releases, two model announcements — all would have been merged.
+Trigram similarity is nearly blind to a three-character difference in a forty-character
+string, and in AI news that difference is frequently the entire identity of the item.
+
+So a merge requires both a high similarity score *and* an identical set of identity
+tokens: every number and every month name in the title. After the guard, that day
+produced zero title merges, which is the correct answer — the pairs were not duplicates.
+
+### 2.9 arXiv needs its own quota
 
 `cs.AI` and `cs.LG` together publish 300-600 papers per day and will drown every other
 source. Research feeds get a separate daily cap and a keyword prefilter before entering
@@ -265,13 +285,17 @@ Security requirements, non-negotiable:
 
 *Artifact: security tests covering each of the above.*
 
-### P2 — Canonicalization and deduplication
+### P2 — Canonicalization and deduplication — done
 
-`CanonicalURLService` (scheme, host, path, sorted query, tracking-parameter removal,
-fragment removal), `HashService` (content hash), and title trigram similarity. No
-embeddings, no model.
+Canonical URLs (https-normalised, `www` stripped, tracking parameters removed, query
+sorted, AMP and index suffixes stripped), a 64-bit article id derived from the canonical
+URL, a content hash over normalised title and summary, and title trigram similarity
+guarded by identity tokens. Three passes, cheapest first. No embeddings, no model.
 
-*Artifact: unit tests built from real duplicate article pairs.*
+Deduplication also reads the last seven days of stored history, so a feed that keeps
+listing last week's post cannot present it as news again.
+
+*Artifact: 62 tests, several built from false positives found on live data.*
 
 ### P3 — Event clustering
 

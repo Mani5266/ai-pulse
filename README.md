@@ -1,6 +1,6 @@
 # AI-Pulse
 
-[![CI](https://github.com/OWNER/ai-pulse/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/ai-pulse/actions/workflows/ci.yml)
+[![CI](https://github.com/Mani5266/ai-pulse/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/ai-pulse/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A multi-source event intelligence pipeline for AI news. It ingests ~500 articles a day
@@ -81,8 +81,8 @@ Recurring cost: zero.
 | --- | --- | --- |
 | P0 | Repository, tooling, CI | Done |
 | P1 | Feed ingestion with SSRF protection | Done — 22/22 feeds live, 515 articles/run |
-| P2 | Canonicalization and deduplication | Next |
-| P3 | Event clustering | |
+| P2 | Canonicalization and deduplication | Done — 3-pass, deterministic |
+| P3 | Event clustering | Next |
 | P4 | Deterministic scoring | |
 | P5 | LLM provider layer | |
 | P6 | Briefing, Telegram, Pages | |
