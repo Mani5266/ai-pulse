@@ -35,7 +35,7 @@ from app.ingestion.urlguard import Resolver, ValidatedTarget, validate_url
 
 logger = logging.getLogger(__name__)
 
-USER_AGENT = "ai-pulse/0.1 (+https://github.com/OWNER/ai-pulse)"
+USER_AGENT = "ai-pulse/0.1 (+https://github.com/Mani5266/ai-pulse)"
 
 REDIRECT_STATUS_CODES: frozenset[int] = frozenset({301, 302, 303, 307, 308})
 

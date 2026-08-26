@@ -1,15 +1,12 @@
 # AI-Pulse
 
-[![CI](https://github.com/Mani5266/ai-pulse/actions/workflows/ci.yml/badge.svg)](https://github.com/OWNER/ai-pulse/actions/workflows/ci.yml)
+[![CI](https://github.com/Mani5266/ai-pulse/actions/workflows/ci.yml/badge.svg)](https://github.com/Mani5266/ai-pulse/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 A multi-source event intelligence pipeline for AI news. It ingests ~500 articles a day
 from ~25 RSS feeds, deduplicates them, clusters them into distinct **events**,
 cross-checks each event's claims against independent sources, ranks them deterministically,
 and publishes a short evidence-backed briefing.
-
-> Replace `OWNER` in the badge URL above with your GitHub username once the repository is
-> pushed, and delete this line.
 
 ## Why this is not a news summarizer
 
