@@ -1,0 +1,86 @@
+name: Daily briefing
+
+on:
+  schedule:
+    # 02:00 UTC is 07:30 IST. GitHub can delay a scheduled run under load, which is
+    # exactly why the pipeline windows on the last briefing rather than on a fixed 24
+    # hours: a late or skipped run picks up what it missed instead of losing it.
+    - cron: "0 2 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  # Never two runs at once: both would append to the same day's data and fight over the
+  # commit.
+  group: daily-briefing
+  cancel-in-progress: false
+
+jobs:
+  brief:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e .
+
+      - name: Build the briefing
+        env:
+          AI_PULSE_LLM_PROVIDER: hosted
+          AI_PULSE_LLM_MODEL: openai/gpt-oss-120b
+          AI_PULSE_LLM_API_KEY: ${{ secrets.AI_PULSE_LLM_API_KEY }}
+          AI_PULSE_TELEGRAM_BOT_TOKEN: ${{ secrets.AI_PULSE_TELEGRAM_BOT_TOKEN }}
+          AI_PULSE_TELEGRAM_CHAT_ID: ${{ secrets.AI_PULSE_TELEGRAM_CHAT_ID }}
+        run: python -m app.jobs.daily_briefing
+
+      - name: Commit the day's data
+        # The repository is the database, so the run's output has to be committed for the
+        # next run to know what this one covered. Nothing is committed when nothing
+        # changed, which keeps a quiet day out of the history.
+        run: |
+          git config user.name "ai-pulse[bot]"
+          git config user.email "ai-pulse[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --staged --quiet; then
+            echo "no new data"
+          else
+            git commit -m "data: briefing for $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+  # A run that fails silently is the failure mode this project is least able to notice,
+  # since nobody is watching at 02:00 UTC. This makes it visible in the Actions tab.
+  report:
+    needs: brief
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say what failed
+        run: |
+          echo "::error::The daily briefing failed. Check the run log above."
+          exit 1
