@@ -1,6 +1,6 @@
 # AI-Pulse — Build Plan
 
-**Status:** P2 complete
+**Status:** P3 complete
 **Last updated:** 2026-08-26
 
 ---
@@ -194,7 +194,40 @@ So a merge requires both a high similarity score *and* an identical set of ident
 tokens: every number and every month name in the title. After the guard, that day
 produced zero title merges, which is the correct answer — the pairs were not duplicates.
 
-### 2.9 arXiv needs its own quota
+### 2.9 Clustering is tuned for precision, and under-clusters
+
+Grouping articles into events is where the product lives or dies, and it is the stage
+where string overlap runs out of road. Three rules survived contact with one real day of
+22 feeds; each replaced something that failed visibly.
+
+**Entities are weighted by specificity.** Treating them alike merged twenty-two separate
+OpenAI articles into one event, because they all said "OpenAI". An organisation is worth
+0.25, a model family or acronym 0.6, a product 0.7, a model family *with a version* 1.0.
+
+**A publisher does not report its own news twice.** Nine unrelated `openai.com` posts
+merged on the word "ChatGPT" alone. Two articles from the same source now need
+near-duplicate wording (0.60) to join, rather than a shared entity.
+
+**Only a model version merges on entities alone.** Everything weaker needs the wording to
+agree as well. An attempt to relax this — mining distinctive capitalised words like
+"Cowork", "Nemotron", "SageMaker" and treating them as decisive — collapsed on contact: a
+single shared "Desktop" merged a story about SpaceX shares with Anthropic's Cowork launch,
+and multi-source events jumped from 8 to 88, nearly all wrong.
+
+The measured result on that day: 515 articles into 490 events, 9 of them corroborated by
+more than one source. Roughly two thirds of those nine are correct on inspection.
+
+**The honest limitation.** Title similarity cannot separate the remaining cases. On the
+true and false pairs from that day, the true ones scored 0.20, 0.23, 0.28 and 0.65 and the
+false ones 0.15, 0.26 and 0.36 — they interleave, so no threshold divides them. Two
+outlets describing one event in genuinely different words stay two events unless they name
+the same model version.
+
+Closing that gap needs semantics, not string overlap. That is a good use of the P5 budget:
+adjudicating a shortlist of borderline pairs is exactly the judgement worth a model call,
+and exactly the guess a keyword rule must not make.
+
+### 2.10 arXiv needs its own quota
 
 `cs.AI` and `cs.LG` together publish 300-600 papers per day and will drown every other
 source. Research feeds get a separate daily cap and a keyword prefilter before entering
@@ -297,13 +330,20 @@ listing last week's post cannot present it as news again.
 
 *Artifact: 62 tests, several built from false positives found on live data.*
 
-### P3 — Event clustering
+### P3 — Event clustering — done
 
-Group articles into events using trigram similarity plus shared named entities. Each
-event carries `event_id`, `canonical_title`, `first_seen`, `last_updated`,
-`article_count`, `category`, `confidence`.
+Entity extraction (lexicon plus version patterns), keyword categorisation into 14
+categories, and single-pass clustering that blends weighted entity overlap with title
+similarity. Events carry `id`, `canonical_title`, `category`, `entities`, `article_ids`,
+`source_ids`, `first_seen` and `last_updated`.
 
-*Artifact: the core differentiator exists in code.*
+Events from the last 14 days take part in matching, so an article published today extends
+Monday's event and moves its `last_updated` — the foundation the P8 timeline reads back.
+Event snapshots are append-only per day; the reader keeps the latest, so Monday's file
+still says what Monday knew.
+
+*Artifact: the core differentiator exists in code, with its precision limits measured and
+documented rather than assumed.*
 
 ### P4 — Deterministic scoring
 

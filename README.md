@@ -82,8 +82,8 @@ Recurring cost: zero.
 | P0 | Repository, tooling, CI | Done |
 | P1 | Feed ingestion with SSRF protection | Done — 22/22 feeds live, 515 articles/run |
 | P2 | Canonicalization and deduplication | Done — 3-pass, deterministic |
-| P3 | Event clustering | Next |
-| P4 | Deterministic scoring | |
+| P3 | Event clustering | Done — precision-tuned, under-clusters |
+| P4 | Deterministic scoring | Next |
 | P5 | LLM provider layer | |
 | P6 | Briefing, Telegram, Pages | |
 | P7 | Claim verification | |

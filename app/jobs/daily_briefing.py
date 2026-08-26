@@ -17,6 +17,8 @@ from app.ingestion.dedup import deduplicate
 from app.ingestion.normalize import enrich_all
 from app.ingestion.runner import ingest_all, summarise
 from app.ingestion.sources import enabled_sources, load_sources
+from app.intelligence.clustering import ClusterConfig, cluster_articles
+from app.storage.event_store import latest_events, write_events
 from app.storage.ndjson_store import (
     append_articles,
     known_content_hashes,
@@ -94,7 +96,24 @@ def run(settings: Settings) -> int:
         or "no duplicates",
     )
 
-    # P3: cluster. P4: score. P5: LLM. P6: deliver.
+    event_window = list(reversed(recent_days(today, settings.event_memory_days)))
+    clustered = cluster_articles(
+        deduped.unique,
+        existing=latest_events(settings.data_dir, event_window),
+        config=ClusterConfig(threshold=settings.cluster_threshold),
+    )
+    write_events(settings.data_dir, today, clustered.events)
+
+    logger.info(
+        "clustering complete events=%d new=%d updated=%d multi_source=%d ratio=%.2f",
+        len(clustered.events),
+        len(clustered.new_event_ids),
+        len(clustered.updated_event_ids),
+        len(clustered.multi_source_events),
+        clustered.stats()["articles_per_event"],
+    )
+
+    # P4: score. P5: LLM. P6: deliver.
 
     if stats["ok"] == 0:
         logger.error("every source failed; nothing to work with")

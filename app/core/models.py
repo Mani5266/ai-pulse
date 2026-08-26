@@ -12,6 +12,8 @@ from enum import StrEnum
 
 from pydantic import BaseModel, ConfigDict, Field, HttpUrl
 
+from app.intelligence.categories import Category
+
 
 class SourceTier(StrEnum):
     """Where a source sits in the credibility hierarchy.
@@ -94,3 +96,43 @@ class FeedResult(BaseModel):
     @property
     def article_count(self) -> int:
         return len(self.articles)
+
+
+class Event(BaseModel):
+    """One real-world development, and every article covering it.
+
+    This, not the article, is the unit the rest of the pipeline reasons about. Four
+    outlets writing about one model release is one event with four sources, which is both
+    what the briefing should say and a signal that the release matters.
+
+    ``first_seen`` and ``last_updated`` are what make the timeline in P8 possible: an
+    event announced on Monday and shipped on Wednesday is one record with two dates, not
+    two unrelated stories.
+    """
+
+    model_config = ConfigDict(frozen=True)
+
+    id: str = Field(min_length=1)
+    canonical_title: str = Field(min_length=1)
+    category: Category
+    entities: list[str] = Field(default_factory=list)
+    article_ids: list[str] = Field(default_factory=list)
+    source_ids: list[str] = Field(default_factory=list)
+    first_seen: datetime
+    last_updated: datetime
+
+    # Populated in P4.
+    importance_score: float | None = None
+
+    # Populated in P5.
+    description: str | None = None
+    confidence: float | None = None
+
+    @property
+    def article_count(self) -> int:
+        return len(self.article_ids)
+
+    @property
+    def source_count(self) -> int:
+        """Independent sources covering the event. A corroboration signal for ranking."""
+        return len(self.source_ids)

@@ -61,6 +61,14 @@ class Settings(BaseSettings):
     """Title similarity above which two articles are the same article. Deliberately
     high; looser grouping is event clustering's job, not deduplication's."""
 
+    # --- Clustering ---
+    cluster_threshold: float = Field(default=0.45, ge=0.1, le=1.0)
+    """Blended entity-and-title score above which an article joins an existing event."""
+
+    event_memory_days: int = Field(default=14, ge=1, le=180)
+    """How far back a running event stays open to new articles. Longer than the
+    deduplication window: a story can develop for weeks."""
+
     # --- Pipeline ---
     max_events_to_llm: int = Field(default=20, ge=1, le=100)
     stories_per_briefing: int = Field(default=5, ge=1, le=20)
