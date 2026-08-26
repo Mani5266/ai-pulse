@@ -307,34 +307,57 @@ def _parse_duration(value: str) -> float | None:
     return minutes * 60 + seconds
 
 
-class GroqProvider(LLMProvider):
-    """Hosted inference on Groq's free tier. The CI and production path.
+FREE_TIERS: dict[str, tuple[str, str]] = {
+    # name: (base URL, a capable default model on that tier)
+    "groq": ("https://api.groq.com/openai/v1", "openai/gpt-oss-120b"),
+    "cerebras": ("https://api.cerebras.ai/v1", "llama-3.3-70b"),
+    "openrouter": ("https://openrouter.ai/api/v1", "meta-llama/llama-3.3-70b-instruct:free"),
+}
+"""Free tiers that speak the OpenAI chat-completions shape.
 
-    Groq speaks the OpenAI chat-completions shape, which keeps this implementation small
-    and makes swapping to another OpenAI-compatible free tier a base-URL change rather
-    than a rewrite.
+All three are the same client with a different base URL, which is the whole reason the
+chain is cheap to build: adding a provider is a row here, not a class. Verify the model
+names before relying on them — catalogues change, and Groq's did during this project."""
+
+
+class GroqProvider(LLMProvider):
+    """An OpenAI-compatible hosted tier. Named for the first one this project used.
+
+    Groq, Cerebras and OpenRouter all speak the same chat-completions shape, so one
+    implementation covers them and a second provider is a base URL rather than a rewrite.
     """
 
-    DEFAULT_BASE_URL = "https://api.groq.com/openai/v1"
+    DEFAULT_BASE_URL = FREE_TIERS["groq"][0]
 
-    def __init__(self, settings: Settings, *, client: httpx.Client | None = None) -> None:
+    def __init__(
+        self,
+        settings: Settings,
+        *,
+        client: httpx.Client | None = None,
+        base_url: str | None = None,
+        model: str | None = None,
+        api_key: str | None = None,
+        label: str | None = None,
+    ) -> None:
         super().__init__(budget=settings.llm_call_budget)
-        if not settings.llm_api_key:
+        key = api_key or settings.llm_api_key
+        if not key:
             raise LLMError("AI_PULSE_LLM_API_KEY is required for the hosted provider")
-        self._model = settings.llm_model
-        self._base_url = (settings.llm_base_url or self.DEFAULT_BASE_URL).rstrip("/")
+        self._label = label or "groq"
+        self._model = model or settings.llm_model
+        self._base_url = (base_url or settings.llm_base_url or self.DEFAULT_BASE_URL).rstrip("/")
         self._owns_client = client is None
         self._client = client or httpx.Client(
             timeout=httpx.Timeout(settings.llm_timeout),
             headers={
-                "Authorization": f"Bearer {settings.llm_api_key}",
+                "Authorization": f"Bearer {key}",
                 "Content-Type": "application/json",
             },
         )
 
     @property
     def name(self) -> str:
-        return f"groq:{self._model}"
+        return f"{self._label}:{self._model}"
 
     def close(self) -> None:
         if self._owns_client:
@@ -396,7 +419,36 @@ class ScriptedProvider(LLMProvider):
 
 
 def build_provider(settings: Settings) -> LLMProvider:
-    """Construct the provider the configuration asks for."""
+    """Construct the provider, or the chain of them, that configuration asks for.
+
+    A chain is built whenever more than one free tier has a key. Order follows
+    ``AI_PULSE_LLM_CHAIN``: first is the one whose output you want, the rest exist so the
+    run finishes rather than being truncated when an allowance runs out.
+    """
     if settings.llm_provider == "ollama":
         return OllamaProvider(settings)
-    return GroqProvider(settings)
+
+    from app.llm.chain import ChainProvider
+
+    links: list[LLMProvider] = []
+    for tier in settings.chain_order():
+        key = settings.key_for(tier)
+        if not key:
+            continue
+        base_url, default_model = FREE_TIERS[tier]
+        links.append(
+            GroqProvider(
+                settings,
+                base_url=base_url,
+                model=settings.model_for(tier) or default_model,
+                api_key=key,
+                label=tier,
+            )
+        )
+
+    if not links:
+        # No tier-specific key configured; fall back to the single-key configuration,
+        # which is what an existing deployment and every test still use.
+        return GroqProvider(settings)
+
+    return links[0] if len(links) == 1 else ChainProvider(links)

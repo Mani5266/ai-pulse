@@ -1,0 +1,47 @@
+name: Bot
+
+on:
+  schedule:
+    # Every five minutes, which is the shortest interval GitHub accepts. A reply
+    # therefore arrives on the next tick rather than at once — that is the price of
+    # needing no machine, and it is why serve_bot still exists for anyone who wants
+    # instant answers and has somewhere to run it.
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  # Two drains at once would both read the same unconfirmed updates and answer twice.
+  group: bot
+  cancel-in-progress: false
+
+jobs:
+  answer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.runtime.lock
+          pip install -e . --no-deps
+
+      - name: Answer whatever is waiting
+        env:
+          AI_PULSE_TELEGRAM_BOT_TOKEN: ${{ secrets.AI_PULSE_TELEGRAM_BOT_TOKEN }}
+          AI_PULSE_TELEGRAM_CHAT_ID: ${{ secrets.AI_PULSE_TELEGRAM_CHAT_ID }}
+          # Guests read the briefing committed to this repository. No model key is
+          # supplied on purpose: this job answers from stored data and must not be able
+          # to spend the allowance even if a command slipped through.
+          AI_PULSE_PUBLIC_READ_ONLY: "true"
+        run: python -m app.jobs.poll_bot

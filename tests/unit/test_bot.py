@@ -416,3 +416,47 @@ def test_a_reply_goes_to_whoever_asked(tmp_path: Path) -> None:
     bot.poll_once()
 
     assert sent == [STRANGER]
+
+
+def test_drain_confirms_updates_so_they_are_not_answered_twice(tmp_path: Path) -> None:
+    """A scheduled run has no next poll to confirm on, so without an explicit confirm
+    every run would re-read and re-answer the same messages forever."""
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        url = str(request.url)
+        if "getUpdates" in url:
+            calls.append(url)
+            if len(calls) == 1:
+                return httpx.Response(
+                    200,
+                    json={
+                        "ok": True,
+                        "result": [
+                            {"update_id": 9, "message": {"chat": {"id": int(OWNER)}, "text": "hi"}}
+                        ],
+                    },
+                )
+            return httpx.Response(200, json={"ok": True, "result": []})
+        return httpx.Response(200, json={"ok": True})
+
+    write_briefing(tmp_path, briefing())
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    bot = BriefingBot(settings(tmp_path), client=client)
+
+    assert bot.drain() == 1
+    # The confirming call carries an offset past the handled update.
+    assert any("offset=10" in url for url in calls)
+
+
+def test_drain_with_nothing_waiting_confirms_nothing(tmp_path: Path) -> None:
+    calls: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls.append(str(request.url))
+        return httpx.Response(200, json={"ok": True, "result": []})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+
+    assert BriefingBot(settings(tmp_path), client=client).drain() == 0
+    assert len(calls) == 1

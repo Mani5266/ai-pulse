@@ -52,6 +52,26 @@ class Settings(BaseSettings):
     extraction per briefing story. The rest is headroom for the single retry each call is
     allowed, so a day of flaky responses degrades gracefully instead of stopping halfway
     through."""
+    llm_chain: str = "groq,cerebras,openrouter"
+    """Order in which free tiers are tried, when each has a key.
+
+    Every free allowance runs out; Groq's is 200,000 tokens a day, about five runs. With
+    one key that is a single point of failure with a known failure time. The chain moves
+    to the next tier when one says its daily allowance is spent, so the briefing finishes
+    instead of being published without prose. First in the list is the one whose output
+    you want; the rest are there so the run completes."""
+
+    groq_api_key: str | None = None
+    cerebras_api_key: str | None = None
+    openrouter_api_key: str | None = None
+    """Per-tier keys. A tier with no key is skipped, so a chain of one is just a provider."""
+
+    groq_model: str | None = None
+    cerebras_model: str | None = None
+    openrouter_model: str | None = None
+    """Per-tier model overrides. Each tier has a different catalogue and they change:
+    Groq's did during this project, so nothing here is hard-coded as permanent."""
+
     llm_timeout: float = Field(default=120.0, gt=0)
     """Per-call timeout. Generous: a 4B model on a laptop GPU is not fast."""
 
@@ -135,7 +155,18 @@ class Settings(BaseSettings):
     scheduled run died, terminated by a CTRL+C the console received when the starting
     session went away. Logging from inside the process removes the wrapper entirely."""
 
-    @field_validator("llm_api_key", "llm_base_url", "telegram_bot_token", "telegram_chat_id")
+    @field_validator(
+        "llm_api_key",
+        "llm_base_url",
+        "telegram_bot_token",
+        "telegram_chat_id",
+        "groq_api_key",
+        "cerebras_api_key",
+        "openrouter_api_key",
+        "groq_model",
+        "cerebras_model",
+        "openrouter_model",
+    )
     @classmethod
     def _empty_string_is_none(cls, value: str | None) -> str | None:
         """Treat an empty environment variable as unset.
@@ -147,6 +178,21 @@ class Settings(BaseSettings):
             return None
         stripped = value.strip()
         return stripped or None
+
+    def chain_order(self) -> list[str]:
+        """Tier names to try, in order, ignoring anything unrecognised."""
+        from app.llm.provider import FREE_TIERS
+
+        names = [name.strip().lower() for name in self.llm_chain.split(",")]
+        return [name for name in names if name in FREE_TIERS]
+
+    def key_for(self, tier: str) -> str | None:
+        """The key configured for one tier, if any."""
+        return getattr(self, f"{tier}_api_key", None)
+
+    def model_for(self, tier: str) -> str | None:
+        """The model override configured for one tier, if any."""
+        return getattr(self, f"{tier}_model", None)
 
     @property
     def telegram_enabled(self) -> bool:

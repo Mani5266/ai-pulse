@@ -254,6 +254,36 @@ class BriefingBot:
             return GUEST_HELP
         return latest_reply(self._settings.data_dir)
 
+    def confirm(self) -> None:
+        """Tell Telegram the handled updates are done with.
+
+        Telegram holds an update until a later ``getUpdates`` carries an offset past it.
+        A long-running bot confirms implicitly on its next poll; a process that exits
+        after one pass has no next poll, so without this every run would re-read and
+        re-answer the same messages forever.
+        """
+        if self._offset is None:
+            return
+        try:
+            self._client.get(
+                f"{API_BASE}/bot{self._token}/getUpdates",
+                params={"offset": self._offset, "timeout": 0},
+            )
+        except httpx.HTTPError as exc:
+            logger.warning("bot: confirming updates failed: %s", exc)
+
+    def drain(self) -> int:
+        """Answer everything waiting, confirm it, and return. For scheduled runs.
+
+        The whole point of a one-shot mode: a bot that runs on a five-minute cron needs no
+        machine of its own, which is what takes the project off a laptop without paying
+        for a server. The cost is latency — a reply arrives on the next tick — so this is
+        the trade for free hosting, not an improvement on long-polling.
+        """
+        handled = self.poll_once()
+        self.confirm()
+        return handled
+
     def poll_once(self) -> int:
         """Poll, answer whatever arrived, and report how many messages were handled."""
         handled = 0
