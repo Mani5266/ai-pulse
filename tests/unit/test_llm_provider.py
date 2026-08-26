@@ -264,3 +264,75 @@ def test_ollama_thinking_can_be_enabled() -> None:
     OllamaProvider(settings(ollama_think=True), client=client).structured("p", ImpactScores)
 
     assert captured["think"] is True
+
+
+def test_rate_limiting_waits_instead_of_burning_budget(monkeypatch: pytest.MonkeyPatch) -> None:
+    """Live failure: 14 of 25 hosted calls failed because a token-per-minute limit was
+    retried against immediately instead of waited out."""
+    slept: list[float] = []
+    monkeypatch.setattr("app.llm.provider.time.sleep", slept.append)
+    calls = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return httpx.Response(429, headers={"x-ratelimit-reset-tokens": "12.5s"}, json={})
+        return httpx.Response(200, json={"choices": [{"message": {"content": VALID}}]})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    provider = GroqProvider(settings(llm_provider="hosted", llm_api_key="sk-test"), client=client)
+
+    assert provider.structured("prompt", ImpactScores) is not None
+    assert slept == [12.5]
+    # The refused attempt is refunded: waiting is not a failed try.
+    assert provider.stats.attempted == 1
+    assert provider.stats.rate_limited == 1
+
+
+def test_the_backoff_is_capped(monkeypatch: pytest.MonkeyPatch) -> None:
+    """A twenty-minute reset must not stall the run for twenty minutes."""
+    slept: list[float] = []
+    monkeypatch.setattr("app.llm.provider.time.sleep", slept.append)
+    calls = {"n": 0}
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return httpx.Response(429, headers={"x-ratelimit-reset-requests": "20m9.6s"}, json={})
+        return httpx.Response(200, json={"choices": [{"message": {"content": VALID}}]})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    provider = GroqProvider(settings(llm_provider="hosted", llm_api_key="sk-test"), client=client)
+    provider.structured("prompt", ImpactScores)
+
+    assert slept == [30.0]
+
+
+def test_persistent_rate_limiting_gives_up(monkeypatch: pytest.MonkeyPatch) -> None:
+    monkeypatch.setattr("app.llm.provider.time.sleep", lambda _: None)
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(429, headers={"retry-after": "1"}, json={})
+
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    provider = GroqProvider(settings(llm_provider="hosted", llm_api_key="sk-test"), client=client)
+
+    assert provider.structured("prompt", ImpactScores) is None
+    assert provider.remaining > 0
+
+
+@pytest.mark.parametrize(
+    ("value", "expected"),
+    [("43.455s", 43.455), ("2m30s", 150.0), ("20m9.6s", 1209.6), ("12", 12.0)],
+)
+def test_reset_durations_are_parsed(value: str, expected: float) -> None:
+    from app.llm.provider import _parse_duration
+
+    assert _parse_duration(value) == expected
+
+
+def test_unparseable_reset_durations_fall_back() -> None:
+    from app.llm.provider import _parse_duration
+
+    assert _parse_duration("bogus") is None
+    assert _parse_duration("") is None

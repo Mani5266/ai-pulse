@@ -48,6 +48,20 @@ MAX_DOCUMENTS_PER_EVENT = 4
 """Articles shown to the model per event. Four independent accounts are enough to judge a
 development, and each additional one costs prompt tokens for less and less."""
 
+SCORING_DOCUMENTS = 3
+SCORING_CHARS = 600
+"""Scoring needs to know what happened, not to read the article.
+
+Groq's free tier limits tokens per minute, not requests, and the first hosted run proved
+the cost of ignoring that: twenty scoring calls at 4,000 characters each exhausted the
+per-minute token allowance, and 14 of 25 calls failed. Trimming the scoring prompt cuts
+token spend roughly fourfold for no measurable loss — the impact of a release is legible
+from its headline and first paragraph."""
+
+SUMMARY_DOCUMENTS = 4
+SUMMARY_CHARS = 1500
+"""Summarising is the one task that genuinely benefits from more text."""
+
 
 @dataclass(frozen=True, slots=True)
 class AnalysedEvent:
@@ -95,7 +109,13 @@ class AnalysedEvent:
         return self.event.model_copy(update=update)
 
 
-def _documents_for(event: Event, articles: dict[str, Article]) -> str:
+def _documents_for(
+    event: Event,
+    articles: dict[str, Article],
+    *,
+    max_documents: int = MAX_DOCUMENTS_PER_EVENT,
+    max_chars: int = SUMMARY_CHARS,
+) -> str:
     """Build the untrusted-document block for one event.
 
     Articles are looked up by id; any that are missing — pruned by retention, or from an
@@ -103,7 +123,7 @@ def _documents_for(event: Event, articles: dict[str, Article]) -> str:
     the model is never handed an empty document set.
     """
     documents: list[tuple[str, str, str | None]] = []
-    for article_id in event.article_ids[:MAX_DOCUMENTS_PER_EVENT]:
+    for article_id in event.article_ids[:max_documents]:
         article = articles.get(article_id)
         if article is None:
             continue
@@ -114,7 +134,7 @@ def _documents_for(event: Event, articles: dict[str, Article]) -> str:
             (event.source_ids[0] if event.source_ids else "unknown", event.canonical_title, None)
         )
 
-    return wrap_documents(documents)
+    return wrap_documents(documents, max_chars=max_chars)
 
 
 def score_impact(
@@ -150,7 +170,9 @@ def score_impact(
             continue
 
         prompt = impact_scoring_prompt(
-            _documents_for(item.event, articles),
+            _documents_for(
+                item.event, articles, max_documents=SCORING_DOCUMENTS, max_chars=SCORING_CHARS
+            ),
             item.event.category.value,
         )
 
@@ -192,7 +214,11 @@ def analyse_stories(
     for item in events[:limit]:
         analysis = None
         if not budget_spent:
-            prompt = story_analysis_prompt(_documents_for(item.event, articles))
+            prompt = story_analysis_prompt(
+                _documents_for(
+                    item.event, articles, max_documents=SUMMARY_DOCUMENTS, max_chars=SUMMARY_CHARS
+                )
+            )
             try:
                 analysis = provider.structured(prompt, StoryAnalysis)
             except BudgetExhaustedError:

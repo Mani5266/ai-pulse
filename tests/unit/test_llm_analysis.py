@@ -166,13 +166,26 @@ def test_documents_are_wrapped_before_reaching_the_model() -> None:
     assert "Article a1" in prompt
 
 
-def test_documents_are_capped_per_event() -> None:
+def test_scoring_prompts_are_kept_small() -> None:
+    """Groq's free tier limits tokens per minute, so scoring sends less than summarising.
+
+    Measured: 4,000-character scoring prompts exhausted the per-minute allowance and 14 of
+    25 calls failed.
+    """
     many = {f"a{index}": article(f"a{index}") for index in range(10)}
-    provider = ScriptedProvider([IMPACT])
+    provider = ScriptedProvider([IMPACT, STORY])
 
     score_impact([scored_event(article_ids=list(many))], many, provider)
+    scoring_prompt = provider.prompts[0]
 
-    assert provider.prompts[0].count("<document") == 4
+    analyse_stories(
+        [AnalysedEvent(scored=scored_event(article_ids=list(many)))], many, provider, limit=1
+    )
+    summary_prompt = provider.prompts[1]
+
+    assert scoring_prompt.count("<document") == 3
+    assert summary_prompt.count("<document") == 4
+    assert len(scoring_prompt) < len(summary_prompt)
 
 
 def test_a_missing_article_falls_back_to_the_event_title() -> None:

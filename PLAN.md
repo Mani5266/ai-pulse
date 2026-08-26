@@ -268,6 +268,16 @@ events each retrying once consumed the entire forty-call allowance and every sum
 skipped. Scoring degrades gracefully — the deterministic score stands — but a briefing
 with no prose does not.
 
+**And the free tier limits tokens, not requests.** Groq allows 8,000 tokens per minute on
+the chosen model, against 1,000 requests per day — so the binding constraint is prompt
+size, not call count. The first hosted run sent 4,000 characters per scoring call and 14 of
+25 calls failed, because a token ceiling was being retried against immediately rather than
+waited out. Two fixes: the provider now reads the reset headers and sleeps (refunding the
+attempt, since waiting is not a failed try), and scoring sends 600 characters from each of
+three articles where summarising still sends 1,500 from four. Scoring needs to know what
+happened; only summarising needs to read. Re-measured: 25 of 25 calls succeeded, three
+short waits, 2m24s end to end.
+
 The residual risk is stated rather than hidden: none of this stops the model being
 *persuaded* into a misleading summary by a well-written article. P9 measures how often
 that succeeds.

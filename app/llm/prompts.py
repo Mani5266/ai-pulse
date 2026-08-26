@@ -73,18 +73,30 @@ def sanitise_document(text: str, *, max_chars: int = MAX_DOCUMENT_CHARS) -> str:
     return cleaned
 
 
-def wrap_document(source: str, title: str, body: str | None = None) -> str:
+def wrap_document(
+    source: str, title: str, body: str | None = None, *, max_chars: int = MAX_DOCUMENT_CHARS
+) -> str:
     """Wrap one article as a labelled, sanitised document block."""
     parts = [sanitise_document(title, max_chars=300)]
     if body:
-        parts.append(sanitise_document(body))
+        parts.append(sanitise_document(body, max_chars=max_chars))
     inner = "\n".join(parts)
     return f'<document source="{sanitise_document(source, max_chars=60)}">\n{inner}\n</document>'
 
 
-def wrap_documents(documents: list[tuple[str, str, str | None]]) -> str:
-    """Wrap several articles. Each tuple is ``(source, title, body)``."""
-    return "\n\n".join(wrap_document(source, title, body) for source, title, body in documents)
+def wrap_documents(
+    documents: list[tuple[str, str, str | None]], *, max_chars: int = MAX_DOCUMENT_CHARS
+) -> str:
+    """Wrap several articles. Each tuple is ``(source, title, body)``.
+
+    ``max_chars`` is per document, and the caller sets it by task. Scoring needs to know
+    what happened, not to read the whole article; summarising needs more. On a free tier
+    limited by tokens per minute rather than by requests, that difference decides whether a
+    run completes or is throttled to a halt.
+    """
+    return "\n\n".join(
+        wrap_document(source, title, body, max_chars=max_chars) for source, title, body in documents
+    )
 
 
 def impact_scoring_prompt(documents: str, category: str) -> str:

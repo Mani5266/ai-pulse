@@ -29,6 +29,7 @@ from __future__ import annotations
 import json
 import logging
 import re
+import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from typing import TypeVar
@@ -56,6 +57,21 @@ class BudgetExhaustedError(LLMError):
     """The per-run call budget is spent."""
 
 
+class RateLimitedError(LLMError):
+    """The provider is rate limited, and told us how long to wait.
+
+    Distinct from a generic failure because the response is different: waiting works,
+    while retrying immediately burns budget to be refused again. Groq's free tier limits
+    tokens per minute rather than requests, so a run of twenty scoring calls hits it
+    routinely — measured, on the first hosted run: 14 of 25 calls failed and the budget
+    was exhausted, purely from immediate retries against a token ceiling.
+    """
+
+    def __init__(self, message: str, retry_after: float) -> None:
+        super().__init__(message)
+        self.retry_after = retry_after
+
+
 @dataclass
 class CallStats:
     """What this run spent. Reported in the run log and the P10 dashboard."""
@@ -66,6 +82,7 @@ class CallStats:
     retried: int = 0
     invalid_json: int = 0
     schema_violations: int = 0
+    rate_limited: int = 0
     seconds: float = 0.0
 
     def as_dict(self) -> dict[str, int | float]:
@@ -76,6 +93,7 @@ class CallStats:
             "retried": self.retried,
             "invalid_json": self.invalid_json,
             "schema_violations": self.schema_violations,
+            "rate_limited": self.rate_limited,
             "seconds": round(self.seconds, 2),
         }
 
@@ -96,8 +114,10 @@ def extract_json(text: str) -> str:
 class LLMProvider(ABC):
     """A source of schema-validated structured output."""
 
-    def __init__(self, *, budget: int) -> None:
+    def __init__(self, *, budget: int, max_backoff: float = 30.0, max_waits: int = 40) -> None:
         self._budget = budget
+        self._max_backoff = max_backoff
+        self._max_waits = max_waits
         self.stats = CallStats()
 
     @property
@@ -134,6 +154,19 @@ class LLMProvider(ABC):
 
             try:
                 raw = self._complete(prompt)
+            except RateLimitedError as exc:
+                # Waiting is the correct response; an immediate retry is refused again and
+                # costs budget. The attempt is refunded so a slow provider does not eat
+                # the allowance.
+                wait = min(exc.retry_after, self._max_backoff)
+                self.stats.attempted -= 1
+                self.stats.rate_limited += 1
+                if self.stats.rate_limited > self._max_waits:
+                    logger.warning("%s: rate limited too often, giving up", self.name)
+                    break
+                logger.info("%s: rate limited, waiting %.1fs", self.name, wait)
+                time.sleep(wait)
+                continue
             except Exception as exc:  # noqa: BLE001 - every provider failure is recoverable
                 logger.warning("%s: call failed: %s: %s", self.name, type(exc).__name__, exc)
                 continue
@@ -206,6 +239,38 @@ class OllamaProvider(LLMProvider):
         return content
 
 
+def _retry_after(response: httpx.Response, *, default: float = 10.0) -> float:
+    """How long the provider says to wait, in seconds.
+
+    Groq reports both a request and a token reset; the token one is what bites on the free
+    tier, so the longer of the two is used.
+    """
+    candidates: list[float] = []
+    for header in ("retry-after", "x-ratelimit-reset-tokens", "x-ratelimit-reset-requests"):
+        value = response.headers.get(header)
+        if value:
+            parsed = _parse_duration(value)
+            if parsed is not None:
+                candidates.append(parsed)
+    return max(candidates) if candidates else default
+
+
+def _parse_duration(value: str) -> float | None:
+    """Parse "43.455s", "2m30s" or a bare number of seconds."""
+    value = value.strip()
+    try:
+        return float(value)
+    except ValueError:
+        pass
+
+    match = re.fullmatch(r"(?:(\d+(?:\.\d+)?)m)?(?:(\d+(?:\.\d+)?)s)?", value)
+    if not match or not any(match.groups()):
+        return None
+    minutes = float(match.group(1) or 0)
+    seconds = float(match.group(2) or 0)
+    return minutes * 60 + seconds
+
+
 class GroqProvider(LLMProvider):
     """Hosted inference on Groq's free tier. The CI and production path.
 
@@ -253,7 +318,7 @@ class GroqProvider(LLMProvider):
             },
         )
         if response.status_code == 429:
-            raise LLMError("groq: rate limited")
+            raise RateLimitedError("groq: rate limited", _retry_after(response))
         response.raise_for_status()
         choices = response.json().get("choices", [])
         if not choices:
