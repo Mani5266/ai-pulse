@@ -1,6 +1,6 @@
 # AI-Pulse — Build Plan
 
-**Status:** P8 complete
+**Status:** P8 and P10 complete; P9 remaining
 **Last updated:** 2026-08-26
 
 ---
@@ -305,7 +305,29 @@ mode an unescaped `<` breaks the message and a crafted title could inject markup
 page the same applies. The escaping is not defensive habit, it is the last segment of the
 same untrusted-input path that starts at the RSS fetcher.
 
-### 2.13 Corroboration is rarer than the design assumed
+### 2.13 The failure this project cannot notice is the quiet one
+
+Everything the pipeline does degrades rather than crashing — a dead feed is skipped, a
+failed model call keeps the deterministic score, a rejected delivery retries tomorrow. That
+is the right behaviour and it has a cost: **a badly degraded run still produces a briefing
+that reads perfectly well.**
+
+A feed that started returning 403 last Tuesday, a model failing schema validation on one
+story a day, a shortlist that has quietly been 60% research for a week — none of these
+raise an error, and none are visible in the output. The only way to see them is to record
+what each run did and look at the series.
+
+Hence run records, and hence publishing them. Three choices worth stating:
+
+- **Failures are recorded first.** The record for a failed run is the more useful of the
+  two, so it is written before the exception is allowed to propagate.
+- **Medians, not means.** One rate-limit storm should not move the number that describes a
+  typical day.
+- **The reliability figure is published even when it is missed.** The 95% target is a claim
+  the project makes about itself; a page that could only ever show success would not be
+  evidence of anything.
+
+### 2.14 Corroboration is rarer than the design assumed
 
 Verified against live feeds, and worth recording because it changes what the feature is
 for.
@@ -574,13 +596,23 @@ CI.
 
 *Artifact: numbers. Almost no comparable portfolio project has them.*
 
-### P10 — Observability and documentation
+### P10 — Observability — done
 
-Per-run statistics — feeds fetched, feeds failed, articles ingested, events produced,
-deduplication rate, LLM calls, wall-clock runtime — rendered on the public site.
-Architecture diagram and decision log in `docs/`.
+Every run appends a record to `data/runs/YYYY-MM.ndjson`: the window it covered, each
+feed's outcome, the funnel stage by stage, the model's call statistics, and whether
+delivery succeeded. **A failed run is recorded too**, before the exit code propagates —
+nobody is watching at 02:00 UTC, and a failure that writes nothing is a failure nobody can
+diagnose afterwards.
 
-*Artifact: evidence that it runs unattended.*
+`stats.html` publishes the result: the success rate against the 95% target, the median
+day, and any feed that keeps failing. Published rather than logged, because a project that
+claims a reliability figure should show it — including on the days it misses. A dashboard
+that can only display good news is decoration.
+
+The bot's `/status` reads the same records, so it can describe a run that failed. A
+briefing cannot.
+
+*Artifact: evidence that it runs unattended, and the numbers to prove or disprove it.*
 
 P0 through P6 produce a working product with a public URL. P7 through P10 are what make
 it worth reading. Do not stop at P6.

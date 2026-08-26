@@ -30,6 +30,7 @@ import logging
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
+from html import escape
 from pathlib import Path
 
 import httpx
@@ -39,6 +40,7 @@ from app.briefing.render_telegram import render_telegram
 from app.core.config import Settings
 from app.delivery.telegram import API_BASE, TelegramDelivery
 from app.storage.briefing_store import all_briefings
+from app.storage.run_store import compute_health, read_runs
 
 logger = logging.getLogger(__name__)
 
@@ -99,28 +101,43 @@ def latest_reply(data_dir: Path) -> str:
 
 
 def status_reply(data_dir: Path) -> str:
-    """What the last run achieved, for when the answer looks wrong and you want to know why."""
-    briefings = all_briefings(data_dir)
-    if not briefings:
-        return "No runs recorded yet."
+    """The last run, and the health of every run before it.
 
-    briefing = briefings[0]
-    stats = briefing.stats
-    covered = (
-        briefing.covers_since.strftime("%a %d %b %H:%M UTC") if briefing.covers_since else "unknown"
-    )
-    return (
-        f"🤖 <b>Last run</b> · {briefing.generated_at.strftime('%a %d %b %H:%M UTC')}\n\n"
-        f"Covering since: {covered}\n"
-        f"Feeds: {stats.feeds_ok} ok, {stats.feeds_failed} failed\n"
-        f"Articles: {stats.articles} · duplicates removed: {stats.duplicates_removed}\n"
-        f"Events: {stats.events} · shortlisted: {stats.events_shortlisted}\n"
-        f"Model: {stats.provider} · {stats.model_calls} calls, "
-        f"{stats.model_failures} failures\n"
-        f"Stories published: {len(briefing.stories)}\n"
-        f"Runtime: {stats.runtime_seconds:.0f}s\n"
-        f"Archive: {len(briefings)} briefings"
-    )
+    Read from the run history rather than from the briefing, so a *failed* run — the case
+    actually worth asking about — is reported too. A briefing cannot describe the run that
+    failed to produce it.
+    """
+    records = read_runs(data_dir)
+    if not records:
+        return "No runs recorded yet. Send /refresh to make one."
+
+    latest = records[0]
+    health = compute_health(records)
+
+    lines = [
+        f"🤖 <b>Last run</b> · {latest.started_at.strftime('%a %d %b %H:%M UTC')} · "
+        f"{'ok' if latest.ok else '⚠️ failed'}",
+        "",
+        f"Feeds: {latest.feeds_ok}/{len(latest.feeds)}",
+        f"Articles: {latest.articles_fetched} fetched, {latest.articles_in_window} in window",
+        f"Events: {latest.events_touched} · shortlisted {latest.events_shortlisted}",
+        f"Stories: {latest.stories_published} · delivered {'yes' if latest.delivered else 'no'}",
+        f"Model: {latest.provider} · {latest.model_calls} calls, {latest.model_failures} failed",
+        f"Runtime: {latest.duration_seconds:.0f}s",
+        "",
+        f"<b>Across {health.runs} runs</b>: {health.success_rate:.0%} produced a briefing "
+        f"(target 95%)",
+    ]
+
+    if latest.error:
+        lines.insert(2, f"Error: {escape(latest.error[:200], quote=False)}")
+
+    if health.failing_feeds:
+        worst = list(health.failing_feeds.items())[:3]
+        broken = ", ".join(f"{source_id} ({count})" for source_id, count in worst)
+        lines.append(f"Feeds needing attention: {escape(broken, quote=False)}")
+
+    return "\n".join(lines)
 
 
 class BriefingBot:

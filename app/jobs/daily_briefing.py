@@ -40,6 +40,7 @@ from app.storage.ndjson_store import (
     read_articles,
     recent_days,
 )
+from app.storage.run_store import FeedOutcome, RunRecord, write_run
 from app.storage.state import RunState, compute_window, read_state, write_state
 
 logger = logging.getLogger("ai_pulse")
@@ -80,8 +81,34 @@ def configure_logging(settings: Settings) -> None:
 
 
 def run(settings: Settings) -> int:
-    """Run one pipeline pass. Returns a process exit code."""
+    """Run one pipeline pass, recording what happened either way.
+
+    A failed run leaves a record behind before the exit code propagates: nobody is
+    watching at 02:00 UTC, and a failure that writes nothing is a failure nobody can
+    diagnose later.
+    """
+    started_at = datetime.now(UTC)
     started = time.monotonic()
+
+    try:
+        return _run(settings, started_at, started)
+    except Exception as exc:
+        logger.exception("pipeline failed")
+        write_run(
+            settings.data_dir,
+            RunRecord(
+                started_at=started_at,
+                finished_at=datetime.now(UTC),
+                ok=False,
+                duration_seconds=round(time.monotonic() - started, 1),
+                error=f"{type(exc).__name__}: {exc}",
+            ),
+        )
+        raise
+
+
+def _run(settings: Settings, started_at: datetime, started: float) -> int:
+    """The pipeline itself."""
     logger.info(
         "pipeline start provider=%s model=%s call_budget=%d data_dir=%s",
         settings.llm_provider,
@@ -96,6 +123,16 @@ def run(settings: Settings) -> int:
         profile = load_profile()
     except ConfigError as exc:
         logger.error("configuration unusable: %s", exc)
+        write_run(
+            settings.data_dir,
+            RunRecord(
+                started_at=started_at,
+                finished_at=datetime.now(UTC),
+                ok=False,
+                duration_seconds=round(time.monotonic() - started, 1),
+                error=f"configuration: {exc}",
+            ),
+        )
         return 2
 
     state = read_state(settings.data_dir)
@@ -330,6 +367,47 @@ def run(settings: Settings) -> int:
         logger.warning(
             "delivery failed: %s (the briefing is saved and will retry)", delivered.detail
         )
+    write_run(
+        settings.data_dir,
+        RunRecord(
+            started_at=started_at,
+            finished_at=datetime.now(UTC),
+            ok=True,
+            duration_seconds=briefing.stats.runtime_seconds,
+            window_start=window.start,
+            window_hours=round(window.hours, 2),
+            first_run=window.is_first_run,
+            window_clamped=window.was_clamped,
+            feeds=[
+                FeedOutcome(
+                    source_id=result.source_id,
+                    ok=result.ok,
+                    articles=result.article_count,
+                    error=result.error,
+                    duration_seconds=result.duration_seconds,
+                )
+                for result in results
+            ],
+            articles_fetched=int(stats["articles"]),
+            articles_in_window=len(recency.fresh),
+            articles_stored=written,
+            duplicates_removed=len(deduped.duplicates),
+            events_touched=len(clustered.events),
+            events_multi_source=len(clustered.multi_source_events),
+            events_shortlisted=len(shortlist.selected),
+            stories_published=len(briefing.stories),
+            provider=provider.name,
+            model_calls=provider.stats.attempted,
+            model_failures=provider.stats.failed,
+            model_rate_limited=provider.stats.rate_limited,
+            schema_violations=provider.stats.schema_violations,
+            claims_extracted=int(analysis_stats["claims"]),
+            claims_corroborated=int(analysis_stats["corroborated_claims"]),
+            delivered=delivered.ok,
+            delivery_error=delivered.detail or None,
+        ),
+    )
+
     logger.info(
         "briefing complete stories=%d delivered=%s runtime=%.1fs",
         len(briefing.stories),

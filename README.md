@@ -87,7 +87,7 @@ Recurring cost: zero.
 | P7 | Claim verification | Done — labels computed in code |
 | P8 | Timeline | Done — built from committed snapshots |
 | P9 | Evaluation harness | Next |
-| P10 | Observability | |
+| P10 | Observability | Done — published at /stats.html |
 
 ## Development
 

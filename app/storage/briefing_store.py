@@ -21,9 +21,11 @@ from app.briefing.render_html import (
     render_event_page,
     render_html,
     render_index,
+    render_stats_page,
 )
 from app.intelligence.timeline import build_timelines, developing_timelines
 from app.storage.event_store import event_days
+from app.storage.run_store import compute_health, read_runs
 
 logger = logging.getLogger(__name__)
 
@@ -140,6 +142,14 @@ def build_site(data_dir: Path, site_dir: Path) -> int:
         if timeline.event_id in published
     ]
     (site_dir / "developing.html").write_text(render_developing(developing), encoding="utf-8")
+    pages += 1
+
+    # The pipeline's own numbers, published rather than logged. A project that claims 95%
+    # reliability should show the figure, including on the days it does not meet it.
+    records = read_runs(data_dir)
+    (site_dir / "stats.html").write_text(
+        render_stats_page(compute_health(records), records), encoding="utf-8"
+    )
     pages += 1
 
     logger.info(

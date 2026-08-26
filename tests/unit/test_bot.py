@@ -19,6 +19,7 @@ from app.delivery.bot import (
 )
 from app.intelligence.categories import Category
 from app.storage.briefing_store import write_briefing
+from app.storage.run_store import RunRecord, write_run
 
 OWNER = "6706372259"
 STRANGER = "999999999"
@@ -91,13 +92,49 @@ def test_help_lists_the_commands(tmp_path: Path) -> None:
     assert bot.handle(Update(update_id=2, chat_id=OWNER, text="/help")) == HELP_TEXT
 
 
-def test_status_reports_what_the_last_run_did(tmp_path: Path) -> None:
-    write_briefing(tmp_path, briefing())
+def test_status_reports_the_last_run_and_the_history(tmp_path: Path) -> None:
+    """Read from run records, not the briefing, so a failed run is reportable too."""
+    write_run(
+        tmp_path,
+        RunRecord(
+            started_at=NOW,
+            finished_at=NOW,
+            ok=True,
+            articles_fetched=515,
+            provider="groq:openai/gpt-oss-120b",
+            model_calls=25,
+            stories_published=5,
+            delivered=True,
+        ),
+    )
 
     reply = status_reply(tmp_path)
 
     assert "515" in reply
     assert "groq" in reply
+    assert "100%" in reply
+
+
+def test_status_reports_a_failed_run(tmp_path: Path) -> None:
+    """A briefing cannot describe the run that failed to produce it."""
+    write_run(
+        tmp_path,
+        RunRecord(
+            started_at=NOW,
+            finished_at=NOW,
+            ok=False,
+            error="LLMError: provider unreachable",
+        ),
+    )
+
+    reply = status_reply(tmp_path)
+
+    assert "failed" in reply
+    assert "provider unreachable" in reply
+
+
+def test_status_before_any_run_says_so(tmp_path: Path) -> None:
+    assert "No runs recorded" in status_reply(tmp_path)
 
 
 def test_refresh_runs_the_pipeline(tmp_path: Path) -> None:
