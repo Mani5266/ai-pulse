@@ -218,3 +218,84 @@ def test_a_better_briefing_replaces_an_earlier_one(tmp_path: Path) -> None:
     stored = read_briefing(tmp_path, DAY)
     assert stored is not None
     assert stored.stories[0].headline == "Second attempt"
+
+
+def test_the_site_includes_event_timelines(tmp_path: Path) -> None:
+    """Timelines are rebuilt from the snapshots the pipeline already committed."""
+    from datetime import date as _date
+
+    from app.core.models import Event
+    from app.intelligence.categories import Category
+    from app.storage.event_store import write_events
+
+    data_dir, site_dir = tmp_path / "data", tmp_path / "site"
+
+    def snapshot(articles: int, sources: list[str], day: _date) -> Event:
+        when = datetime(day.year, day.month, day.day, 9, 0, tzinfo=UTC)
+        return Event(
+            id="evt_1",
+            canonical_title="Gemma 4 released",
+            category=Category.MODEL_RELEASE,
+            entities=["model:gemma-4"],
+            article_ids=[f"a{i}" for i in range(articles)],
+            source_ids=sources,
+            first_seen=datetime(2026, 8, 24, 9, 0, tzinfo=UTC),
+            last_updated=when,
+            importance_score=7.0,
+        )
+
+    write_events(
+        data_dir, _date(2026, 8, 24), [snapshot(1, ["google-deepmind"], _date(2026, 8, 24))]
+    )
+    write_events(data_dir, DAY, [snapshot(3, ["google-deepmind", "ollama"], DAY)])
+    write_briefing(data_dir, briefing())
+
+    build_site(data_dir, site_dir)
+
+    page = site_dir / "event-evt_1.html"
+    assert page.exists()
+    body = page.read_text(encoding="utf-8")
+    assert "picked up by ollama" in body
+    assert "first reported" in body
+    assert (site_dir / "developing.html").exists()
+
+
+def test_events_that_never_reached_a_briefing_get_no_page(tmp_path: Path) -> None:
+    """A page for an event that was ranked and not published would be an archive of what
+    was deliberately left out."""
+
+    from app.core.models import Event
+    from app.intelligence.categories import Category
+    from app.storage.event_store import write_events
+
+    data_dir, site_dir = tmp_path / "data", tmp_path / "site"
+    write_events(
+        data_dir,
+        DAY,
+        [
+            Event(
+                id="evt_unpublished",
+                canonical_title="Never made the cut",
+                category=Category.OTHER,
+                entities=[],
+                article_ids=["a1"],
+                source_ids=["example"],
+                first_seen=NOW,
+                last_updated=NOW,
+            )
+        ],
+    )
+    write_briefing(data_dir, briefing())
+
+    build_site(data_dir, site_dir)
+
+    assert not (site_dir / "event-evt_unpublished.html").exists()
+
+
+def test_a_briefing_story_links_to_its_timeline(tmp_path: Path) -> None:
+    data_dir, site_dir = tmp_path / "data", tmp_path / "site"
+    write_briefing(data_dir, briefing())
+
+    build_site(data_dir, site_dir)
+
+    assert 'href="event-evt_1.html"' in (site_dir / "index.html").read_text(encoding="utf-8")

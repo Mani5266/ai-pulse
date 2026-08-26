@@ -85,8 +85,8 @@ Recurring cost: zero.
 | P5 | LLM provider layer | |
 | P6 | Briefing, Telegram, Pages | Done — delivered, site builds |
 | P7 | Claim verification | Done — labels computed in code |
-| P8 | Timeline | Next |
-| P9 | Evaluation harness | |
+| P8 | Timeline | Done — built from committed snapshots |
+| P9 | Evaluation harness | Next |
 | P10 | Observability | |
 
 ## Development

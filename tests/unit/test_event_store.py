@@ -7,7 +7,13 @@ from pathlib import Path
 
 from app.core.models import Event
 from app.intelligence.categories import Category
-from app.storage.event_store import events_path, latest_events, read_events, write_events
+from app.storage.event_store import (
+    event_days,
+    events_path,
+    latest_events,
+    read_events,
+    write_events,
+)
 
 MONDAY = date(2026, 8, 24)
 WEDNESDAY = date(2026, 8, 26)
@@ -98,3 +104,23 @@ def test_a_corrupt_line_does_not_lose_the_file(tmp_path: Path) -> None:
     write_events(tmp_path, MONDAY, [event("evt_b")])
 
     assert {item.id for item in read_events(tmp_path, MONDAY)} == {"evt_a", "evt_b"}
+
+
+def test_event_days_lists_what_is_actually_stored(tmp_path: Path) -> None:
+    """Derived from the directory, not from briefings: a day can produce events without
+    producing a briefing, and inferring the window from briefings would drop it."""
+    write_events(tmp_path, MONDAY, [event("evt_a")])
+    write_events(tmp_path, WEDNESDAY, [event("evt_b", updated=WEDNESDAY)])
+
+    assert event_days(tmp_path) == [MONDAY, WEDNESDAY]
+
+
+def test_event_days_is_empty_before_the_first_run(tmp_path: Path) -> None:
+    assert event_days(tmp_path) == []
+
+
+def test_a_stray_file_does_not_break_the_day_listing(tmp_path: Path) -> None:
+    write_events(tmp_path, MONDAY, [event("evt_a")])
+    (tmp_path / "events" / "notes.ndjson").write_text("{}", encoding="utf-8")
+
+    assert event_days(tmp_path) == [MONDAY]

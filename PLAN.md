@@ -1,6 +1,6 @@
 # AI-Pulse — Build Plan
 
-**Status:** P7 complete
+**Status:** P8 complete
 **Last updated:** 2026-08-26
 
 ---
@@ -544,13 +544,26 @@ shortlist.
 
 *Artifact: badges on the public site, and 21 tests pinning the label logic.*
 
-### P8 — "What changed" timeline
+### P8 — "What changed" timeline — done
 
-A page per event showing its development day by day: announced, then available via API,
-then adopted. This is what makes the system an intelligence timeline rather than a daily
-newsletter.
+A page per published event, listing every day the story actually moved: first reported,
+articles added, picked up by a new outlet, score changed. Plus a `developing.html` index of
+the stories still moving.
 
-*Artifact: the story to tell in an interview.*
+**It needed no new data.** Every run already wrote an append-only snapshot of the events it
+touched, one file per day, because §2.3 chose that format precisely so this would be
+possible later. The timeline is a fold over files already in git.
+
+**A day only appears if something changed.** A run touches an event whenever its articles
+are re-seen, so listing every snapshot would produce a timeline of heartbeats. An entry
+survives only when the article count, source count, title or score actually moved.
+
+**What changed is computed, never narrated.** The difference between two snapshots is
+arithmetic — two more articles, one new source, the score up by 0.4. No model is asked to
+describe it; the numbers already are the answer.
+
+*Artifact: the page a newsletter cannot have, because a newsletter has no memory of what it
+said yesterday.*
 
 ### P9 — Evaluation
 

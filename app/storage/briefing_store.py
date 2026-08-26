@@ -16,7 +16,14 @@ from pathlib import Path
 from pydantic import ValidationError
 
 from app.briefing.models import Briefing
-from app.briefing.render_html import render_html, render_index
+from app.briefing.render_html import (
+    render_developing,
+    render_event_page,
+    render_html,
+    render_index,
+)
+from app.intelligence.timeline import build_timelines, developing_timelines
+from app.storage.event_store import event_days
 
 logger = logging.getLogger(__name__)
 
@@ -87,10 +94,12 @@ def all_briefings(data_dir: Path) -> list[Briefing]:
 
 
 def build_site(data_dir: Path, site_dir: Path) -> int:
-    """Regenerate the whole static site from stored briefings.
+    """Regenerate the whole static site from stored briefings and event snapshots.
 
-    Returns the number of pages written. The site directory is generated output and is
-    gitignored; GitHub Actions publishes it to Pages.
+    Returns the number of pages written. Everything is rebuilt from committed data with no
+    model calls and no network, which is what lets a rendering change be applied to the
+    whole archive at once. The site directory is generated output and is gitignored;
+    GitHub Actions publishes it to Pages.
     """
     briefings = all_briefings(data_dir)
     if not briefings:
@@ -108,5 +117,35 @@ def build_site(data_dir: Path, site_dir: Path) -> int:
     (site_dir / "index.html").write_text(render_html(briefings[0]), encoding="utf-8")
     (site_dir / "archive.html").write_text(render_index(briefings), encoding="utf-8")
 
-    logger.info("site rebuilt: %d briefings", len(briefings))
-    return len(briefings) + 2
+    pages = len(briefings) + 2
+
+    # Timelines are reconstructed from the same snapshots the pipeline already committed,
+    # oldest day first. Only events that appear in a briefing get a page: the rest were
+    # ranked and not published, and a page for them would be an archive of what was
+    # deliberately left out.
+    published = {story.event_id for briefing in briefings for story in briefing.stories}
+    timelines = build_timelines(data_dir, event_days(data_dir))
+
+    for event_id, timeline in timelines.items():
+        if event_id not in published:
+            continue
+        (site_dir / f"event-{event_id}.html").write_text(
+            render_event_page(timeline), encoding="utf-8"
+        )
+        pages += 1
+
+    developing = [
+        timeline
+        for timeline in developing_timelines(timelines.values())
+        if timeline.event_id in published
+    ]
+    (site_dir / "developing.html").write_text(render_developing(developing), encoding="utf-8")
+    pages += 1
+
+    logger.info(
+        "site rebuilt: %d briefings, %d event timelines (%d developing)",
+        len(briefings),
+        sum(1 for event_id in timelines if event_id in published),
+        len(developing),
+    )
+    return pages

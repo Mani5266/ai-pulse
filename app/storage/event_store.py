@@ -35,6 +35,27 @@ def events_path(data_dir: Path, day: date) -> Path:
     return data_dir / EVENTS_DIR / f"{day.isoformat()}.ndjson"
 
 
+def event_days(data_dir: Path) -> list[date]:
+    """Every day that has an event snapshot, oldest first.
+
+    Read from the directory rather than inferred from briefings: a day can produce events
+    without producing a briefing — the model was unavailable, or nothing cleared the bar —
+    and deriving the timeline window from briefings alone would silently drop that day's
+    history.
+    """
+    directory = data_dir / EVENTS_DIR
+    if not directory.exists():
+        return []
+
+    days: list[date] = []
+    for path in sorted(directory.glob("*.ndjson")):
+        try:
+            days.append(date.fromisoformat(path.stem))
+        except ValueError:
+            logger.warning("%s: unexpected file name in the events directory", path)
+    return days
+
+
 def read_events(data_dir: Path, day: date) -> list[Event]:
     """Read one day's event snapshots, in file order."""
     path = events_path(data_dir, day)
