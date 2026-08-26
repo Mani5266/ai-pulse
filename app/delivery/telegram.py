@@ -54,9 +54,16 @@ class TelegramDelivery:
         if self._owns_client:
             self._client.close()
 
-    def send(self, message: str) -> DeliveryResult:
-        """Send one message. Never raises."""
-        if not self._enabled:
+    def send(self, message: str, *, chat_id: str | None = None) -> DeliveryResult:
+        """Send one message. Never raises.
+
+        ``chat_id`` overrides the configured destination, which is what lets the bot
+        answer whoever asked rather than always answering its owner.
+        """
+        destination = chat_id or self._chat_id
+        if not self._enabled and destination is None:
+            return DeliveryResult(ok=False, detail="telegram not configured")
+        if not self._token:
             return DeliveryResult(ok=False, detail="telegram not configured")
         if not message.strip():
             return DeliveryResult(ok=False, detail="refusing to send an empty message")
@@ -65,7 +72,7 @@ class TelegramDelivery:
             response = self._client.post(
                 f"{API_BASE}/bot{self._token}/sendMessage",
                 json={
-                    "chat_id": self._chat_id,
+                    "chat_id": destination,
                     "text": message,
                     "parse_mode": "HTML",
                     # The briefing already links its sources; previews would bury them

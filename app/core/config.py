@@ -56,6 +56,17 @@ class Settings(BaseSettings):
     """Per-call timeout. Generous: a 4B model on a laptop GPU is not fast."""
 
     # --- Delivery ---
+    public_read_only: bool = False
+    """Let anyone read the briefing from the bot, for a demo.
+
+    Read-only in the strict sense: a stranger gets the stored briefing, which costs a file
+    read and nothing else. Commands that spend the model budget or expose run internals
+    stay with the owner, so opening this cannot cost money and cannot leak operations."""
+
+    public_reply_seconds: float = Field(default=20.0, ge=0.0)
+    """Minimum gap between replies to one chat, when public mode is on. Cheap protection
+    against someone holding down the send key."""
+
     telegram_bot_token: str | None = None
     telegram_chat_id: str | None = None
 

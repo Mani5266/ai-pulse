@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import json
 from collections.abc import Callable
 from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
@@ -280,3 +281,138 @@ def test_a_server_error_while_polling_is_survivable(tmp_path: Path) -> None:
     bot = make_bot(tmp_path, handler)
 
     assert bot.poll_once() == 0
+
+
+# --- public read-only mode ----------------------------------------------------
+
+
+def public(tmp_path: Path, **overrides: object) -> BriefingBot:
+    def handler(request: httpx.Request) -> httpx.Response:
+        return httpx.Response(200, json={"ok": True, "result": []})
+
+    values: dict[str, object] = {"public_read_only": True, "public_reply_seconds": 0}
+    values.update(overrides)
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    return BriefingBot(settings(tmp_path, **values), client=client)
+
+
+def test_a_guest_gets_the_briefing_when_public_mode_is_on(tmp_path: Path) -> None:
+    write_briefing(tmp_path, briefing())
+    bot = public(tmp_path)
+
+    reply = bot.handle(Update(update_id=1, chat_id=STRANGER, text="hi"))
+
+    assert reply is not None
+    assert "Gemma 4 released" in reply
+
+
+def test_a_guest_still_cannot_spend_the_model_budget(tmp_path: Path) -> None:
+    """The whole point of read-only: opening the bot must not open the wallet."""
+    calls: list[str] = []
+    client = httpx.Client(
+        transport=httpx.MockTransport(lambda r: httpx.Response(200, json={"ok": True}))
+    )
+
+    def refresh() -> str:
+        calls.append("ran")
+        return "done"
+
+    bot = BriefingBot(
+        settings(tmp_path, public_read_only=True, public_reply_seconds=0),
+        client=client,
+        refresh=refresh,
+    )
+
+    reply = bot.handle(Update(update_id=1, chat_id=STRANGER, text="/refresh"))
+
+    assert calls == []
+    assert reply is not None
+    assert "owner" in reply
+
+
+def test_a_guest_cannot_read_run_internals(tmp_path: Path) -> None:
+    bot = public(tmp_path)
+
+    reply = bot.handle(Update(update_id=1, chat_id=STRANGER, text="/status"))
+
+    assert reply is not None
+    assert "owner" in reply
+
+
+def test_a_guest_help_does_not_advertise_owner_commands(tmp_path: Path) -> None:
+    bot = public(tmp_path)
+
+    reply = bot.handle(Update(update_id=1, chat_id=STRANGER, text="/start"))
+
+    assert reply is not None
+    assert "/refresh" not in reply
+    assert "github.io" in reply
+
+
+def test_a_guest_is_rate_limited(tmp_path: Path) -> None:
+    write_briefing(tmp_path, briefing())
+    bot = public(tmp_path, public_reply_seconds=60)
+
+    first = bot.handle(Update(update_id=1, chat_id=STRANGER, text="hi"))
+    second = bot.handle(Update(update_id=2, chat_id=STRANGER, text="hi again"))
+
+    assert first is not None
+    assert second is None
+
+
+def test_the_rate_limit_is_per_chat(tmp_path: Path) -> None:
+    write_briefing(tmp_path, briefing())
+    bot = public(tmp_path, public_reply_seconds=60)
+
+    bot.handle(Update(update_id=1, chat_id=STRANGER, text="hi"))
+    other = bot.handle(Update(update_id=2, chat_id="123123123", text="hi"))
+
+    assert other is not None
+
+
+def test_the_owner_is_not_rate_limited(tmp_path: Path) -> None:
+    write_briefing(tmp_path, briefing())
+    bot = public(tmp_path, public_reply_seconds=60)
+
+    first = bot.handle(Update(update_id=1, chat_id=OWNER, text="hi"))
+    second = bot.handle(Update(update_id=2, chat_id=OWNER, text="hi"))
+
+    assert first is not None
+    assert second is not None
+
+
+def test_public_mode_is_off_by_default(tmp_path: Path) -> None:
+    """Opening the bot has to be a deliberate act, not a default."""
+    bot = make_bot(tmp_path)
+
+    assert bot.handle(Update(update_id=1, chat_id=STRANGER, text="hi")) is None
+
+
+def test_a_reply_goes_to_whoever_asked(tmp_path: Path) -> None:
+    """Without the chat override every answer would be sent to the owner, so a guest's
+    question would be answered to somebody else."""
+    sent: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        if "getUpdates" in str(request.url):
+            return httpx.Response(
+                200,
+                json={
+                    "ok": True,
+                    "result": [
+                        {"update_id": 7, "message": {"chat": {"id": int(STRANGER)}, "text": "hi"}}
+                    ],
+                },
+            )
+        sent.append(json.loads(request.content)["chat_id"])
+        return httpx.Response(200, json={"ok": True})
+
+    write_briefing(tmp_path, briefing())
+    client = httpx.Client(transport=httpx.MockTransport(handler))
+    bot = BriefingBot(
+        settings(tmp_path, public_read_only=True, public_reply_seconds=0), client=client
+    )
+
+    bot.poll_once()
+
+    assert sent == [STRANGER]

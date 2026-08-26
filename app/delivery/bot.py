@@ -27,6 +27,7 @@ model budget.
 from __future__ import annotations
 
 import logging
+import time
 from collections.abc import Callable
 from dataclasses import dataclass
 from datetime import UTC, datetime, timedelta
@@ -57,6 +58,16 @@ HELP_TEXT = (
     "<b>/status</b> — what the last run did\n\n"
     "Any other message returns the latest briefing."
 )
+
+GUEST_HELP = (
+    "🤖 <b>AI-PULSE</b>\n\n"
+    "A daily briefing on AI, built from ~25 sources and published at\n"
+    "https://mani5266.github.io/ai-pulse/\n\n"
+    "Send anything to read the latest one.\n"
+    "Source: https://github.com/Mani5266/ai-pulse"
+)
+
+OWNER_ONLY = "That command is for the bot's owner. Send anything else for the briefing."
 
 
 @dataclass(frozen=True, slots=True)
@@ -154,6 +165,9 @@ class BriefingBot:
         self._token = settings.telegram_bot_token
         self._owner = settings.telegram_chat_id
         self._refresh = refresh
+        self._public = settings.public_read_only
+        self._reply_gap = settings.public_reply_seconds
+        self._last_reply: dict[str, float] = {}
         self._offset: int | None = None
         self._owns_client = client is None
         # Slightly longer than the poll, so the long poll is never cut off by the timeout.
@@ -198,11 +212,13 @@ class BriefingBot:
         owner is answered with nothing at all — not an error, which would confirm the bot
         exists and is worth probing.
         """
-        if update.chat_id != self._owner:
-            logger.warning("bot: ignoring a message from an unknown chat")
-            return None
-
         command = update.text.split()[0].lower() if update.text else ""
+
+        if update.chat_id != self._owner:
+            if not self._public:
+                logger.warning("bot: ignoring a message from an unknown chat")
+                return None
+            return self._guest_reply(update, command)
 
         if command in {"/start", "/help"}:
             return HELP_TEXT
@@ -215,6 +231,29 @@ class BriefingBot:
             return self._refresh()
         return latest_reply(self._settings.data_dir)
 
+    def _guest_reply(self, update: Update, command: str) -> str | None:
+        """What a stranger gets in public mode: the briefing, and nothing that costs.
+
+        Commands that spend the model budget or describe the pipeline's internals are
+        refused rather than silently ignored, because a guest who typed ``/refresh``
+        should learn why nothing happened.
+        """
+        if command in {"/refresh", "/status"}:
+            return OWNER_ONLY
+
+        now = time.monotonic()
+        last = self._last_reply.get(update.chat_id)
+        if last is not None and now - last < self._reply_gap:
+            # Silence rather than a "slow down" message, which would itself be a reply
+            # worth spamming for.
+            logger.info("bot: rate limiting a guest chat")
+            return None
+        self._last_reply[update.chat_id] = now
+
+        if command in {"/start", "/help"}:
+            return GUEST_HELP
+        return latest_reply(self._settings.data_dir)
+
     def poll_once(self) -> int:
         """Poll, answer whatever arrived, and report how many messages were handled."""
         handled = 0
@@ -222,6 +261,8 @@ class BriefingBot:
             reply = self.handle(update)
             if reply is None:
                 continue
-            self._delivery.send(reply)
+            # Answer whoever asked. Without the override every reply would go to the
+            # configured owner, so a guest's question would be answered to someone else.
+            self._delivery.send(reply, chat_id=update.chat_id)
             handled += 1
         return handled
