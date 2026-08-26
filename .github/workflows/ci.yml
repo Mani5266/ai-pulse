@@ -42,3 +42,8 @@ jobs:
 
       - name: Test
         run: pytest
+
+      - name: Evaluate
+        # Structural checks only: offline, free, no key. The model layer is run
+        # deliberately with --with-model, because it costs quota.
+        run: python scripts/eval.py
