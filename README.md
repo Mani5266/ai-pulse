@@ -229,26 +229,28 @@ repository.
 
 ## Running it unattended
 
-Two Windows scheduled tasks, registered against the virtualenv's interpreter directly
-rather than through a shell wrapper — a wrapped command gets a console, and that console
-receives a CTRL+C when the session that started it goes away, which killed the first
-scheduled run mid-flight. Logging therefore happens inside the process, to
-`AI_PULSE_LOG_FILE`.
+Nothing runs on a laptop. The pipeline is a GitHub Actions workflow, the site is Pages, and
+the bot is a Cloudflare Worker on a webhook — none of which needs a machine of yours to be
+awake, and all of which are free.
 
-| Task | Trigger | What it does |
+| Where | What runs | When |
 | --- | --- | --- |
-| `AI-Pulse Bot` | At logon, restarts on failure | Long-polls Telegram and answers |
-| `AI-Pulse Daily Briefing` | 07:30 daily, catches up if missed | Builds and delivers |
+| GitHub Actions | The pipeline, committing `data/` and deploying Pages | 02:00 UTC, retried at 08:00 if the first was skipped |
+| GitHub Pages | The site, and `bot.json` — every reply the bot can give | Deployed by the run above |
+| Cloudflare Workers | The Telegram webhook | On each message, in about a second |
 
-```powershell
-Get-ScheduledTask -TaskName "AI-Pulse*"
-Start-ScheduledTask -TaskName "AI-Pulse Daily Briefing"   # run one now
-Get-Content data\ai-pulse.log -Tail 20
+```bash
+gh workflow run "Daily briefing"   # build one now
+gh workflow run "Publish site"     # re-render from committed data; no model, no quota
+gh run list --limit 5
 ```
 
-`StartWhenAvailable` is what makes a missed 07:30 run at the next opportunity instead of
-being skipped, which together with windowing on the last briefing means a machine that was
-asleep loses nothing.
+This did run on Windows Task Scheduler first, and `PLAN.md` §2.1 keeps the reason it moved:
+a scheduled task is only as reliable as the machine under it, and the first one died to a
+CTRL+C its console received when the starting session went away. Two things outlived that
+decision and are still here — logging happens inside the process rather than through a
+shell redirect (`AI_PULSE_LOG_FILE`), and the recency window follows the last briefing
+rather than the clock, so a skipped run costs a delay and nothing else.
 
 ## License
 

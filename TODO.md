@@ -19,7 +19,8 @@ degraded-run alerting.
 
 The `Bot` workflow is **disabled on purpose**. Telegram allows one consumer per token and
 the webhook is it; re-enabling the schedule would make two processes fight over the queue.
-The Windows task `AI-Pulse Bot` is likewise redundant and can be removed.
+Both Windows scheduled tasks have been removed for the same reason: nothing in this
+project now depends on one machine being awake.
 
 `PLAN.md` §2 holds every design decision, including the ones that were wrong first. Read it
 before changing the pipeline — most of those sections exist because something failed in a
