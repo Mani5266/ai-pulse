@@ -58,3 +58,20 @@ jobs:
         # Structural checks only: offline, free, no key. The model layer is run
         # deliberately with --with-model, because it costs quota.
         run: python scripts/eval.py
+
+  # The Telegram webhook. It is the only code a reader touches directly and the only part
+  # the Python suite cannot reach, so it gets its own gate rather than a manual check.
+  worker:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Test the worker
+        working-directory: worker
+        run: node --test

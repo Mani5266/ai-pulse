@@ -6,6 +6,11 @@ on:
     # exactly why the pipeline windows on the last briefing rather than on a fixed 24
     # hours: a late or skipped run picks up what it missed instead of losing it.
     - cron: "0 2 * * *"
+    # A second attempt, six hours later, because GitHub skips scheduled runs under load
+    # without saying so — the 02:00 run on 27 August never fired at all. The `decide` job
+    # below turns this into a no-op on every day the first run landed, so the cost of the
+    # safety net is one 20-second job.
+    - cron: "0 8 * * *"
   workflow_dispatch:
 
 permissions:
@@ -20,7 +25,38 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Has today already been covered? A second scheduled attempt must not rebuild a briefing
+  # that worked: `write_briefing` refuses to replace a good briefing with an empty one, but
+  # a five-story briefing replaced by a two-story one is a loss it cannot see. Cheaper and
+  # safer to not run at all.
+  decide:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - uses: actions/checkout@v5
+
+      - id: check
+        env:
+          # A hand-dispatched run always runs: somebody asked for it on purpose.
+          MANUAL: ${{ github.event_name != 'schedule' }}
+        run: |
+          today="data/briefings/$(date -u +%Y-%m-%d).json"
+          if [ "$MANUAL" = "true" ]; then
+            echo "dispatched by hand; running"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          elif [ -f "$today" ]; then
+            echo "$today already exists; nothing to do"
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "no briefing for today yet; running"
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
   brief:
+    needs: decide
+    if: needs.decide.outputs.run == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     environment:

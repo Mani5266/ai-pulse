@@ -1,0 +1,10 @@
+{
+  "name": "ai-pulse-bot",
+  "private": true,
+  "type": "module",
+  "description": "Telegram webhook for AI-Pulse. Holds no project text: every reply is rendered by the Python pipeline and published as bot.json.",
+  "scripts": {
+    "test": "node --test",
+    "deploy": "wrangler deploy"
+  }
+}

@@ -31,6 +31,16 @@ const OWNER_COMMANDS = new Set(["/status", "/refresh"]);
 const REFRESH_UNAVAILABLE =
   "Rebuilding is not available here. The briefing is rebuilt by the daily run.";
 
+/**
+ * The one piece of text this file owns, because it is about this file failing.
+ *
+ * Everything else the bot says is rendered by the pipeline and read from the feed — which
+ * is exactly why it cannot be used to report that the feed could not be read.
+ */
+const FEED_UNAVAILABLE =
+  "⚠️ Could not reach the briefing just now. It is published at\n" +
+  "https://mani5266.github.io/ai-pulse/ — try again in a minute.";
+
 export default {
   async fetch(request, env) {
     // Telegram only ever POSTs. Anything else is a scanner, a browser, or a mistake, and
@@ -68,10 +78,12 @@ export default {
     try {
       reply = await answer(command, String(chatId), env);
     } catch (error) {
-      // The briefing is published and the site is up; this Worker failing to read it is
-      // not worth a retry storm from Telegram.
+      // Answering nothing is the worst option available: the reader is left staring at a
+      // bot that did not respond, with no way to tell a broken deployment from a message
+      // that never arrived. Pages serves a 404 for a moment during every deploy, so this
+      // path is reached in normal operation and has to say something.
       console.log(`feed unavailable: ${error}`);
-      return new Response("ok");
+      reply = FEED_UNAVAILABLE;
     }
 
     if (reply) {
