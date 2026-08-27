@@ -69,7 +69,7 @@ class RunRecord(BaseModel):
     """Candidates the ranking saw, new and carried together.
 
     Distinct from ``events_touched``, which counts only what this run created or updated.
-    A run can touch nothing and still publish, because the briefing reports the last 36
+    A run can touch nothing and still publish, because the briefing reports the last 24
     hours rather than the last run — and without this number the funnel reads as
     '550 articles, 0 events, 5 stories', which looks like a bug and is not."""
 

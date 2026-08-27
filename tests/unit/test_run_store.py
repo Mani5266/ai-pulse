@@ -202,7 +202,7 @@ def test_the_stats_page_survives_an_empty_history() -> None:
 
 
 def test_new_and_ranked_events_are_recorded_separately() -> None:
-    """A run can touch nothing and still publish, because the briefing reports 36 hours
+    """A run can touch nothing and still publish, because the briefing reports 24 hours
     rather than the last run. Without both numbers the funnel reads as a bug."""
     stored = RunRecord(
         started_at=NOW,

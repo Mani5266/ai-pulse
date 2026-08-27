@@ -88,13 +88,22 @@ for a quiet engineering blog. Filtering on "what the feed gave us" is therefore 
 at all: the first run of this pipeline ingested 517 articles spanning thirteen months and
 published a "daily briefing" containing releases from April.
 
-So the window is anchored on `last_briefing_at` in `data/state.json`, never on a fixed 24
-hours. A run that is delayed, skipped, or run twice still covers exactly what has not been
-reported. The catch-up is clamped, because "everything since" after a two-week gap is
-thousands of articles and a briefing nobody reads.
+So the window is anchored on `last_briefing_at` in `data/state.json` rather than on a clock
+hour. A run that is delayed or run twice still covers exactly what has not been reported.
 
-This is also why a skipped scheduled run is survivable: the next run covers what the missed
-one would have.
+Above that anchor sits a hard cap: **nothing older than 24 hours reaches a briefing.** This
+is a daily briefing, and a story the reader was told about yesterday is not news today.
+
+The cap needs both halves to hold, and this is the part that is easy to get wrong.
+`briefing_lookback_hours` filters *carried* events — ones stored by an earlier run — but
+articles this run ingests become **new** events, and new events enter the briefing without
+passing that filter at all. Capping the lookback alone would therefore still deliver
+three-day-old stories after a three-day gap, because the ingestion window would have
+reached back and collected them. `max_catchup_days` closes that route.
+
+The cost is real and worth stating: after a skipped run, news from inside the gap is not
+reported late — it is not reported at all. A recency rule that lets yesterday through is
+not a recency rule, so the window is the thing that gives.
 
 ### Clustering — `app/intelligence/clustering.py`
 

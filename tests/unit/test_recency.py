@@ -46,30 +46,60 @@ def test_a_first_run_looks_back_a_short_default() -> None:
 
 
 def test_a_later_run_anchors_to_the_last_briefing() -> None:
-    """Not to a fixed 24 hours: a run can be delayed, skipped, or run twice."""
-    yesterday = NOW - timedelta(hours=26)
-    window = compute_window(RunState(last_briefing_at=yesterday), now=NOW)
+    """Within the cap, the anchor is the last briefing rather than a fixed clock hour.
 
-    assert window.start == yesterday
+    A run can be delayed, run twice, or start late, and the window follows what was
+    actually covered rather than assuming a tidy 24 hours passed.
+    """
+    earlier = NOW - timedelta(hours=20)
+    window = compute_window(RunState(last_briefing_at=earlier), now=NOW)
+
+    assert window.start == earlier
     assert window.is_first_run is False
-    assert window.hours == 26
+    assert window.hours == 20
+    assert window.was_clamped is False
 
 
-def test_a_missed_day_is_picked_up_rather_than_lost() -> None:
+def test_nothing_older_than_a_day_is_ingested_after_a_missed_run() -> None:
+    """A daily briefing does not report the day before yesterday.
+
+    This is the ingestion half of the 24-hour rule. Capping only the briefing lookback
+    would not hold: articles ingested by this run become *new* events, and new events
+    enter the briefing without passing the lookback filter, so a two-day catch-up would
+    deliver two-day-old stories as though they had just happened.
+
+    The cost is explicit — news from inside the gap is not reported late, it is not
+    reported at all. That is what a hard recency rule buys and what it costs.
+    """
     two_days_ago = NOW - timedelta(days=2)
     window = compute_window(RunState(last_briefing_at=two_days_ago), now=NOW)
 
-    assert window.start == two_days_ago
-    assert window.hours == 48
+    assert window.was_clamped is True
+    assert window.start == NOW - timedelta(hours=24)
+    assert window.hours == 24
 
 
 def test_a_long_gap_is_clamped() -> None:
-    """After a fortnight away, "everything since" is a briefing nobody reads."""
+    """After a fortnight away, "everything since" is a briefing nobody reads.
+
+    Still parameterised: a deployment that wants a weekly digest rather than a daily
+    briefing raises the cap, and the clamp keeps working at whatever value it is given.
+    """
     long_ago = NOW - timedelta(days=30)
     window = compute_window(RunState(last_briefing_at=long_ago), now=NOW, max_catchup_days=7)
 
     assert window.was_clamped is True
     assert window.start == NOW - timedelta(days=7)
+
+
+def test_the_default_cap_is_one_day() -> None:
+    """Pins the promise rather than the plumbing: no story older than 24 hours, ever."""
+    from app.core.config import Settings
+
+    settings = Settings(_env_file=None)  # type: ignore[call-arg]
+
+    assert settings.max_catchup_days == 1
+    assert settings.briefing_lookback_hours == 24
 
 
 def test_the_window_covers_its_start_inclusively() -> None:

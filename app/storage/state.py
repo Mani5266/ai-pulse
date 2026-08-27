@@ -107,14 +107,18 @@ def compute_window(
     state: RunState,
     *,
     now: datetime | None = None,
-    first_run_days: int = 2,
-    max_catchup_days: int = 7,
+    first_run_days: int = 1,
+    max_catchup_days: int = 1,
 ) -> Window:
     """Work out what this run should cover.
 
     On a first run there is nothing to anchor to, so a short default is used: enough to
     produce a real briefing, short enough that it is recognisably news rather than an
     archive.
+
+    These defaults deliberately match the ones in :class:`app.core.config.Settings`. They
+    were allowed to diverge once — the settings said one thing and this signature another —
+    which meant a test calling this directly measured behaviour the pipeline did not have.
     """
     end = now or datetime.now(UTC)
 

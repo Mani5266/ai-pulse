@@ -123,21 +123,40 @@ class Settings(BaseSettings):
     """Cap on stored article text. Bounds both repository growth and prompt size."""
 
     # --- Recency ---
-    first_run_days: int = Field(default=2, ge=1, le=30)
-    """How far back a first run looks, with no previous briefing to anchor to."""
+    first_run_days: int = Field(default=1, ge=1, le=30)
+    """How far back a first run looks, with no previous briefing to anchor to.
 
-    briefing_lookback_hours: int = Field(default=36, ge=1, le=336)
+    One day, matching the cap that governs every run after it. A fresh clone's first
+    briefing is thinner for it, which is the honest outcome: a briefing that opened with
+    two-day-old stories would be claiming to be something it is not."""
+
+    briefing_lookback_hours: int = Field(default=24, ge=1, le=336)
     """How far back the *briefing* reports, independent of what this run ingested.
 
     These are two different questions and conflating them is a bug. Ingestion asks "what
     have I not seen yet", which is correctly anchored to the last run. The briefing asks
     "what should this reader know now", which is not: a re-run three minutes after the
     last one has nothing new to ingest, and would otherwise produce an empty briefing and
-    replace a good one with it."""
+    replace a good one with it.
 
-    max_catchup_days: int = Field(default=7, ge=1, le=90)
+    24 hours is a product decision, not a technical one: this is a *daily* briefing, and a
+    story the reader was told about yesterday is not news today. It was 36 for a while, on
+    the theory that a slightly generous window covers a late run. It does — and it also
+    puts day-old stories in front of somebody who already read them."""
+
+    max_catchup_days: int = Field(default=1, ge=1, le=90)
     """Cap on the catch-up window. After a long gap, "everything since" is thousands of
-    articles and a briefing nobody reads."""
+    articles and a briefing nobody reads.
+
+    This is the other half of the 24-hour rule, and capping only the briefing lookback
+    would not have worked: articles ingested by *this* run become new events, and new
+    events enter the briefing without passing the lookback filter at all. A three-day gap
+    with a seven-day catch-up therefore delivered three-day-old stories as though they had
+    just happened. One day here means nothing older than 24 hours is ever ingested, so
+    nothing older than 24 hours can reach a briefing by either route.
+
+    The cost is stated plainly: after a skipped run, news from the gap is not reported
+    late — it is not reported at all. That is the trade a hard recency rule makes."""
 
     # --- Deduplication ---
     dedup_memory_days: int = Field(default=7, ge=1, le=90)
