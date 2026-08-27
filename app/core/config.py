@@ -87,6 +87,18 @@ class Settings(BaseSettings):
     """Minimum gap between replies to one chat, when public mode is on. Cheap protection
     against someone holding down the send key."""
 
+    bot_allow_refresh: bool = True
+    """Whether the long-running bot may run the pipeline on /refresh.
+
+    True where the bot shares a filesystem with the pipeline — a laptop, a VPS. False in a
+    container, where a run would spend the model allowance to write a briefing into an
+    ephemeral layer that the next deploy discards, and could replace a good briefing with a
+    worse one built without a model key. The scheduled worker in ``poll_bot`` never offers
+    refresh at all, for the same reason and one more: it has minutes, and a run takes two.
+
+    Set it false and the owner asking for /refresh is told plainly that this process cannot,
+    which is the existing answer for a bot wired without one."""
+
     telegram_bot_token: str | None = None
     telegram_chat_id: str | None = None
 

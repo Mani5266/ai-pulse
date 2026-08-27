@@ -132,3 +132,45 @@ def test_a_crashed_pipeline_answers_instead_of_going_silent(
 
     assert "ValueError" in reply
     assert "feed registry is unreadable" in reply
+
+
+def test_refresh_is_offered_when_the_pipeline_shares_this_filesystem(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    captured: dict[str, object] = {}
+
+    def fake_bot(_settings: Settings, *, refresh: object = None) -> FakeBot:
+        captured["refresh"] = refresh
+        return FakeBot()
+
+    monkeypatch.setattr(serve_bot, "get_settings", lambda: settings(tmp_path))
+    monkeypatch.setattr(serve_bot, "BriefingBot", fake_bot)
+    monkeypatch.setattr(serve_bot, "_running", False)
+
+    assert serve_bot.main() == 0
+    assert captured["refresh"] is not None
+
+
+def test_refresh_is_withheld_in_a_container(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """A run inside the image writes to a layer the next deploy discards.
+
+    Worse, the image carries no model key, so the briefing it produced would be the
+    deterministic one — a good briefing replaced by a thinner one, permanently, because
+    nothing in the container can commit the result back.
+    """
+    captured: dict[str, object] = {}
+
+    def fake_bot(_settings: Settings, *, refresh: object = None) -> FakeBot:
+        captured["refresh"] = refresh
+        return FakeBot()
+
+    monkeypatch.setattr(
+        serve_bot, "get_settings", lambda: settings(tmp_path, bot_allow_refresh=False)
+    )
+    monkeypatch.setattr(serve_bot, "BriefingBot", fake_bot)
+    monkeypatch.setattr(serve_bot, "_running", False)
+
+    assert serve_bot.main() == 0
+    assert captured["refresh"] is None

@@ -15,10 +15,18 @@ COPY app ./app
 COPY config ./config
 RUN pip install --no-cache-dir -e . --no-deps
 
-# The data directory holds the briefings the bot serves. Mount it, or let the container
-# start empty and pull from the repository at build time — the bot answers from whatever
-# is in data/briefings.
-COPY data ./data
+# The briefings the bot serves, and the run history `/status` folds. Only these two: the
+# article and event records are the pipeline's working set, reach roughly 90 MB a year,
+# and the bot never opens them.
+#
+# They are baked in at build time, which means the image goes stale the moment the next
+# briefing is published. That is deliberate and it is handled outside the container: the
+# daily workflow redeploys after it commits, so the running machine carries the briefing
+# that was published minutes earlier. A bot that fetched its own data would put a network
+# call and a second failure mode inside the reply path to solve a problem the deploy
+# already solves.
+COPY data/briefings ./data/briefings
+COPY data/runs ./data/runs
 
 # Long-polling, so no port is exposed and no inbound traffic is needed.
 CMD ["python", "-u", "-m", "app.jobs.serve_bot"]

@@ -70,6 +70,22 @@ jobs:
             git push
           fi
 
+      # The bot serves the briefings baked into its image, so a new briefing means a new
+      # image. Skipped entirely when FLY_API_TOKEN is unset, which is the state of any
+      # fork and of this repository until the bot is actually deployed — the scheduled
+      # worker in bot.yml is the free alternative and needs none of this.
+      #
+      # Deliberately not `needs`-gated on the Pages deploy below: a failure to redeploy
+      # the bot must not cost the day's briefing, which is already committed and served.
+      - name: Redeploy the bot, if there is one
+        if: ${{ env.FLY_API_TOKEN != '' }}
+        continue-on-error: true
+        env:
+          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+        run: |
+          curl -L https://fly.io/install.sh | sh
+          "$HOME/.fly/bin/flyctl" deploy --remote-only --wait-timeout 300
+
       - uses: actions/configure-pages@v5
 
       - uses: actions/upload-pages-artifact@v3

@@ -254,8 +254,37 @@ process where one is available.
 dropped under load without notice: on 26 August a `*/5` bot schedule landed three times in
 six hours, and the 02:00 run on the 27th was skipped entirely. The pipeline tolerates this
 because the recency window follows the last briefing rather than the clock. A person waiting
-for a bot reply does not, which is the standing argument for moving only the bot to a real
-process.
+for a bot reply does not — a message sent at 01:00 was answered at 08:12.
+
+### The bot as a process
+
+`Dockerfile` and `fly.toml` deploy `serve_bot` to a single shared-cpu-1x machine, where one
+long poll is held open and a reply takes seconds. Three things make that work, and each is
+a decision rather than a detail.
+
+**The image carries only `data/briefings` and `data/runs`.** The article and event records
+are the pipeline's working set, reach roughly 90 MB a year, and the bot never opens them.
+
+**Data is baked in, and the deploy is what refreshes it.** `daily.yml` redeploys after it
+commits the day's briefing, so the running machine carries what was published minutes
+earlier. The alternative — a bot that fetches its own data — puts a network call and a
+second failure mode inside the reply path to solve a problem the deploy already solves.
+The step is skipped when `FLY_API_TOKEN` is unset, so a fork costs nothing, and it is
+`continue-on-error` because a failed redeploy must not cost a briefing that is already
+committed and served.
+
+**`/refresh` is off in the container** (`AI_PULSE_BOT_ALLOW_REFRESH=false`). A run there
+would spend the model allowance to write into a layer the next deploy discards, and the
+image holds no model key, so what it wrote would be the deterministic briefing — a good one
+replaced by a thinner one, with nothing able to commit the result back.
+
+**Only one process may poll a token.** Telegram allows a single `getUpdates` consumer; a
+second gets `409 Conflict: terminated by other getUpdates request` and the two take turns
+stealing each other's queue. `bot.yml` must be disabled before the machine starts:
+
+```bash
+gh workflow disable Bot
+```
 
 ---
 

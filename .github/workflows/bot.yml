@@ -1,6 +1,13 @@
 name: Bot
 
 on:
+  # DO NOT run this at the same time as a deployed always-on bot. Telegram allows one
+  # `getUpdates` consumer per token: the second gets `409 Conflict: terminated by other
+  # getUpdates request`, and the two processes take turns stealing each other's queue.
+  # If the Fly machine is running, disable this schedule:
+  #
+  #     gh workflow disable Bot
+  #
   schedule:
     # Every five minutes, which is the shortest interval GitHub accepts. A reply
     # therefore arrives on the next tick rather than at once — that is the price of

@@ -1,0 +1,37 @@
+# The image is a bot that reads two directories and holds one connection open. Everything
+# below is either useless to it or grows without bound, and a container image is the wrong
+# place for either.
+
+.git
+.github
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.mypy_cache
+.ruff_cache
+.env
+.env.example
+
+# The pipeline's working set. `data/events` alone reaches roughly 90 MB a year and the bot
+# never opens it: `/latest` renders a stored briefing and `/status` folds the run history,
+# so `data/briefings` and `data/runs` are the whole of what it needs.
+#
+# Named individually rather than excluding `data` and re-admitting two children. The
+# re-inclusion form reads better and depends on how a builder resolves an exception under
+# an excluded parent, which is not the same everywhere; a build that silently ships 90 MB,
+# or one that fails on a missing COPY, is not worth the tidier file.
+data/articles
+data/events
+data/ai-pulse.log
+data/state.json
+
+site
+tests
+evals
+scripts
+docs
+PLAN.md
+TODO.md
+CONTRIBUTING.md
+requirements.lock

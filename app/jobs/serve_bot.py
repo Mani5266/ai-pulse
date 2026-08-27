@@ -65,7 +65,14 @@ def main() -> int:
     signal.signal(signal.SIGINT, _stop)
     signal.signal(signal.SIGTERM, _stop)
 
-    bot = BriefingBot(settings, refresh=lambda: refresh_and_report(settings))
+    # No refresh in a container: the run would write into an ephemeral layer the next
+    # deploy discards, and without a model key it could replace a good briefing with a
+    # worse one. See ``Settings.bot_allow_refresh``.
+    refresh = (lambda: refresh_and_report(settings)) if settings.bot_allow_refresh else None
+    if refresh is None:
+        logger.info("bot: refresh is disabled in this process")
+
+    bot = BriefingBot(settings, refresh=refresh)
     logger.info("bot: listening. Send /help in Telegram.")
 
     try:
