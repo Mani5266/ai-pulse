@@ -3,8 +3,9 @@
 Hand this to a fresh session. It carries only outstanding work, plus the context that is
 not visible in the code.
 
-P0–P10 are complete and the pipeline runs unattended. Hardening items 1–3 (pinned
-dependencies, dependency auditing, weekly feed verification) are done and pushed.
+P0–P10 are complete and the pipeline runs unattended. Hardening items 1–4 (pinned
+dependencies, dependency auditing, weekly feed verification, a fallback model provider)
+are done and pushed.
 
 | | |
 | --- | --- |
@@ -13,7 +14,7 @@ dependencies, dependency auditing, weekly feed verification) are done and pushed
 | Telegram bot | @Mani_aipulse_bot — `/latest`, `/refresh`, `/status`, `/help` |
 | Daily run | GitHub Actions, 02:00 UTC (07:30 IST), commits `data/` back |
 | Local bot | Windows task `AI-Pulse Bot`, starts at logon |
-| Tests | 578 passing; ruff, mypy strict, pip-audit and the structural evaluation gate CI |
+| Tests | 606 passing; ruff, mypy strict, pip-audit and the structural evaluation gate CI |
 
 `PLAN.md` §2 holds every design decision, including the ones that were wrong first. Read it
 before changing the pipeline — most of those sections exist because something failed in a
@@ -23,13 +24,7 @@ way that was not obvious.
 
 ## Blocked, not forgotten
 
-Three things are waiting on something external rather than on a decision.
-
-**Confirm CI passes with the pinned install.** The lockfiles are verified locally but have
-never completed a CI run: GitHub Actions was in a major outage when they were pushed, so
-runs sat queued and two unrelated commits reported `startup_failure`. Check
-`gh run list --workflow=CI --limit 3` once Actions recovers. This is the only part of the
-hardening work that is unverified in CI.
+Two things are waiting on something external rather than on a decision.
 
 **Run the injection corpus against the model, in full.** The README quotes the structural
 result (0 of 40) and deliberately does not quote a model figure, because the best coverage
@@ -60,29 +55,21 @@ exist. **Do not fill these in on the owner's behalf.**
 
 ## Hardening, remaining
 
-Items 1–3 are done. These are what is left, in priority order. Roughly half a day.
+Items 1–4 are done. These are what is left, in priority order. Roughly half a day.
 
-### 4. Wire a fallback model provider
-
-Groq's free tier is the only provider configured for production. When its terms change,
-every run degrades to the deterministic ranking — which works, and is the point of the
-design, but produces a briefing with no prose. `LLMProvider` exists to make a second
-provider cheap; it simply is not configured. Cerebras or OpenRouter, selected when the
-first raises `DailyQuotaExceededError`.
-
-### 5. Write the documents the layout already promises
+### 4. Write the documents the layout already promises
 
 `docs/ARCHITECTURE.md` and `docs/SECURITY.md` are named in the project structure and were
 never written, and there is no `SECURITY.md` or `CONTRIBUTING.md` at the root. Most of the
 content already exists in `PLAN.md` §2 and needs lifting rather than composing. For a public
 repository this is the cheapest credibility available.
 
-### 6. Measure coverage
+### 5. Measure coverage
 
-578 tests is a count, not a claim about what is covered. `pytest-cov` with a floor in CI
+606 tests is a count, not a claim about what is covered. `pytest-cov` with a floor in CI
 turns it into one.
 
-### 7. Alert on a degraded run, not only a failed one
+### 6. Alert on a degraded run, not only a failed one
 
 GitHub emails the owner when a scheduled workflow fails, so an outright failure is not
 silent. A run that *succeeds* while publishing two stories instead of five is silent, and
@@ -123,8 +110,15 @@ Move only when one of these becomes true:
 | `data/` outgrows git — about 90 MB a year, so years away | Turso or Postgres, keep the NDJSON export |
 | A real API is needed rather than a static site | Then FastAPI earns its place; it was cut for good reason |
 
-The only one worth considering within months is moving the **bot**, which currently stops
-answering whenever the laptop sleeps.
+The only one worth considering within months is moving the **bot**. `bot.yml` already took
+it off the laptop, so it no longer stops when the machine sleeps — but a scheduled workflow
+is not a substitute for a process. The cron asks for `*/5`; on 26 August the runs actually
+landed at 18:28, 20:30 and 23:59, and the daily 02:00 UTC run on the 27th was skipped
+outright and had to be dispatched by hand. GitHub drops scheduled runs under load and never
+says so. The pipeline survives this by design — the recency window follows
+`last_briefing_at`, so a late run collects what a skipped one missed — but a person who
+messages the bot has no such cover and waits hours for a reply. Long polling on Fly.io's
+free tier answers in seconds; `serve_bot` is already the entry point for it.
 
 **Deliberately not on any list:** Docker, Kubernetes, Postgres, a message queue, a FastAPI
 layer, multi-region anything. Each is a moving part with no user. `PLAN.md` §31 is the
@@ -135,9 +129,11 @@ argument, and unused infrastructure reads as cargo cult rather than as rigour.
 ## Context that is not obvious
 
 **The free tier's real limit is 200,000 tokens per day**, not the per-minute figure the
-headers advertise. One full run costs roughly 40,000, so the day supports about five runs:
-the cron, plus a few `/refresh` calls or one evaluation. Plan the day's model work around
-that. A 429 whose message names a daily limit stops the run immediately instead of sleeping
+headers advertise. One full run costs roughly 40,000, so one tier supports about five runs a
+day: the cron, plus a few `/refresh` calls or one evaluation. The chain buys a second
+allowance rather than a larger one — when Groq is spent the run continues on OpenRouter, so
+the day's capacity is roughly doubled, but each tier still stops dead at its own limit. Plan
+the day's model work around that. A 429 whose message names a daily limit stops the run immediately instead of sleeping
 — see `DailyQuotaExceededError`. The headers cannot be used to tell the two apart: a
 per-day rejection still reports a per-minute limit and a full per-minute remainder.
 
