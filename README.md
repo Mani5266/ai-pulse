@@ -85,8 +85,14 @@ To run the model locally instead of through an API, install [Ollama](https://oll
 VRAM and takes about six seconds a call with thinking disabled, which is the default — see
 `AI_PULSE_OLLAMA_THINK` and the note beside it for why.
 
-`python -m app.jobs.serve_bot` runs the Telegram bot, which answers `/latest`, `/refresh`
-and `/status`.
+`python -m app.jobs.serve_bot` runs the Telegram bot locally, answering `/latest`,
+`/refresh` and `/status` by long polling.
+
+The deployed bot does not run this. It is a Cloudflare Worker on a webhook — free, always
+on, and replying in about a second — and it contains none of the project's text: the daily
+run renders every reply it can give and publishes them as `bot.json` alongside the site,
+and the Worker picks one by command. See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) and
+`worker/`.
 
 ## Why this is not a news summarizer
 

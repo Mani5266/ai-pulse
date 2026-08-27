@@ -12,10 +12,14 @@ degraded-run alerting.
 | --- | --- |
 | Live site | https://mani5266.github.io/ai-pulse/ |
 | Repository | https://github.com/Mani5266/ai-pulse (public) |
-| Telegram bot | @Mani_aipulse_bot — `/latest`, `/refresh`, `/status`, `/help` |
+| Telegram bot | @Mani_aipulse_bot — send anything for the briefing; `/status` and `/help` |
+| Bot runtime | Cloudflare Worker on a webhook, https://ai-pulse-bot.mani5266.workers.dev — replies in about a second, free |
 | Daily run | GitHub Actions, 02:00 UTC (07:30 IST), commits `data/` back |
-| Local bot | Windows task `AI-Pulse Bot`, starts at logon |
-| Tests | 630 passing, 93% branch coverage; ruff, mypy strict, pip-audit and the structural evaluation gate CI |
+| Tests | 642 passing, 94% branch coverage; ruff, mypy strict, pip-audit and the structural evaluation gate CI |
+
+The `Bot` workflow is **disabled on purpose**. Telegram allows one consumer per token and
+the webhook is it; re-enabling the schedule would make two processes fight over the queue.
+The Windows task `AI-Pulse Bot` is likewise redundant and can be removed.
 
 `PLAN.md` §2 holds every design decision, including the ones that were wrong first. Read it
 before changing the pipeline — most of those sections exist because something failed in a
