@@ -1,0 +1,39 @@
+# The webhook bot, on Cloudflare's free tier.
+#
+# Deploy from this directory:
+#
+#   npx wrangler login
+#   npx wrangler deploy
+#   npx wrangler secret put TELEGRAM_BOT_TOKEN
+#   npx wrangler secret put WEBHOOK_SECRET      # any long random string
+#   npx wrangler secret put OWNER_CHAT_ID
+#
+# Then point Telegram at it. `secret_token` is what stops anyone who guesses the URL from
+# forging updates, and it must match WEBHOOK_SECRET exactly:
+#
+#   curl -sS "https://api.telegram.org/bot<TOKEN>/setWebhook" \
+#     -d "url=https://ai-pulse-bot.<subdomain>.workers.dev" \
+#     -d "secret_token=<WEBHOOK_SECRET>"
+#
+# Setting a webhook turns off long polling at Telegram's end, so `bot.yml` stops being able
+# to answer anything. Disable it in the same sitting:
+#
+#   gh workflow disable Bot
+#
+# To go back: `curl "https://api.telegram.org/bot<TOKEN>/deleteWebhook"` then
+# `gh workflow enable Bot`.
+
+name = "ai-pulse-bot"
+main = "index.js"
+compatibility_date = "2026-08-01"
+
+# No triggers and no routes: the only way in is the webhook URL, and it is guarded by the
+# secret header rather than by being hard to guess.
+
+[vars]
+# Where the daily run publishes every reply this bot can give. Not a secret — it is the
+# same public site a reader visits, and the Worker reads nothing else.
+FEED_URL = "https://mani5266.github.io/ai-pulse/bot.json"
+
+[observability]
+enabled = true

@@ -18,6 +18,7 @@ from app.briefing.models import BriefingStats
 from app.briefing.render_telegram import render_telegram
 from app.core.config import Settings, get_settings
 from app.core.errors import ConfigError
+from app.delivery.bot_feed import build_bot_feed
 from app.delivery.health import report_degraded
 from app.delivery.telegram import DeliveryResult, TelegramDelivery
 from app.ingestion.dedup import deduplicate
@@ -345,6 +346,9 @@ def _run(settings: Settings, started_at: datetime, started: float) -> int:
     if written_path is None:
         logger.warning("this run produced nothing; the previous briefing stands")
     build_site(settings.data_dir, settings.site_dir)
+    # The webhook bot's answers, published alongside the site it reads them from. Cheap,
+    # and it keeps every word the bot says authored in Python rather than in a Worker.
+    build_bot_feed(settings.data_dir, settings.site_dir)
 
     # Advanced only now, and only to the window this run actually covered. A crash before
     # this point means the next run re-covers the same span rather than skipping it.

@@ -256,10 +256,42 @@ six hours, and the 02:00 run on the 27th was skipped entirely. The pipeline tole
 because the recency window follows the last briefing rather than the clock. A person waiting
 for a bot reply does not — a message sent at 01:00 was answered at 08:12.
 
+### The bot as a webhook
+
+The fix that keeps the project free is to stop polling. Telegram will POST an update to a
+URL instead, and a Cloudflare Worker answers it in about a second on a free allowance of
+100,000 requests a day — no process, no machine, no card.
+
+The problem with putting the bot in a Worker is that a Worker is JavaScript, and
+re-implementing `render_telegram` there would put two renderers in one project and
+guarantee they drift. So nothing is re-implemented. `app/delivery/bot_feed.py` renders
+**every reply the bot can give** during the daily run and publishes them to the site as
+`bot.json`; `worker/index.js` picks a field by command and posts it verbatim. The Worker
+holds no project text, no formatting, and no idea what a briefing is.
+
+One thing is genuinely the Worker's: **staleness**. The file is written when the briefing
+is published and read whenever somebody asks, so the gap between those two moments is the
+one thing the publisher cannot know. `generated_at` travels in the feed for exactly that.
+
+Two guards matter. The endpoint checks `X-Telegram-Bot-Api-Secret-Token` against a secret
+given to `setWebhook` — without it, anyone who guesses the URL can forge an update and make
+the bot message its owner. And a malformed body returns 200, because anything else makes
+Telegram retry an update that will never parse, forever.
+
+Setting a webhook turns off long polling at Telegram's end, so `bot.yml` stops being able
+to answer anything and must be disabled in the same sitting:
+
+```bash
+gh workflow disable Bot
+```
+
 ### The bot as a process
 
 `Dockerfile` and `fly.toml` deploy `serve_bot` to a single shared-cpu-1x machine, where one
-long poll is held open and a reply takes seconds. Three things make that work, and each is
+long poll is held open and a reply takes seconds. **This is the paid path** — Fly withdrew
+its free allowance for new organisations, and a machine of this size is roughly $2 a month.
+Kept because it is the right shape for a VPS, an Oracle Always Free instance, or anywhere
+else that takes a container; the webhook above is what this project actually runs. Three things make that work, and each is
 a decision rather than a detail.
 
 **The image carries only `data/briefings` and `data/runs`.** The article and event records
