@@ -35,7 +35,12 @@ from dataclasses import dataclass
 from itertools import combinations
 
 from app.core.models import Event
-from app.intelligence.entities import has_conflicting_version, weighted_overlap
+from app.intelligence.entities import (
+    DECISIVE_WEIGHT,
+    has_conflicting_version,
+    strongest_shared,
+    weighted_overlap,
+)
 from app.intelligence.similarity import signatures_agree, title_similarity
 
 logger = logging.getLogger(__name__)
@@ -53,6 +58,21 @@ ENTITY_WEIGHT = 0.5
 Higher than clustering's blend, because wording is precisely what has already failed by
 the time a pair reaches here. Two events naming the same specific product are worth asking
 about even when the headlines read nothing alike."""
+
+GATE_TITLE_SIMILARITY = 0.35
+"""Wording strong enough to carry a pair with no entity evidence at all.
+
+Below clustering's own gate, because a pair only reaches this module after clustering has
+already declined it — insisting on the same evidence twice would guarantee an empty list."""
+
+CORROBORATING_ENTITIES = 2
+"""Shared entities that together count as evidence when none of them is decisive.
+
+Measured, not chosen. On live data the real duplicate — two outlets on one OpenAI incident
+— shared ``org:openai`` and ``org:huggingface``: two organisations, neither decisive on its
+own, and wording of 0.195. Three unrelated stories shared exactly one generic entity,
+``term:url``, with wording of 0.04. No threshold on entity *weight* separates those two
+cases: the junk entity scores 0.6 and the real ones score 0.25. The count does."""
 
 
 @dataclass(frozen=True, slots=True)
@@ -84,17 +104,27 @@ def candidate_pairs(
 ) -> list[Candidate]:
     """The pairs worth spending a model call on, strongest first.
 
-    Three filters run before scoring, and each one exists to protect a decision made
-    earlier in the pipeline rather than to save a call:
+        Three filters run before scoring, and each one exists to protect a decision made
+        earlier in the pipeline rather than to save a call:
 
-    - **Conflicting versions never pair.** "Gemma 4" and "Gemma 3" are two releases, and
-      no amount of similar wording makes them one. This is clustering's rule, applied here
-      so adjudication cannot undo it.
-    - **Disagreeing identity signatures never pair.** Same reasoning: a differing number,
-      version or month is the whole difference between two monthly roundups.
-    - **Different categories never pair.** A model release and a funding round are not the
-      same development even when both name the same company, and the category came from
-      the pipeline rather than from a guess.
+        - **Conflicting versions never pair.** "Gemma 4" and "Gemma 3" are two releases, and
+          no amount of similar wording makes them one. This is clustering's rule, applied here
+          so adjudication cannot undo it.
+        - **Disagreeing identity signatures never pair.** Same reasoning: a differing number,
+          version or month is the whole difference between two monthly roundups.
+        - **Different categories never pair.** A model release and a funding round are not the
+          same development even when both name the same company, and the category came from
+          the pipeline rather than from a guess.
+
+    A fourth filter is arithmetic rather than policy. ``weighted_overlap`` reports total
+        agreement whenever two events share their whole entity set, however thin that set is,
+        and thin sets are common: on live data three unrelated stories — a Tailscale tool, a
+        GitHub outage tracker and a visa policy change — each carried ``term:url`` and nothing
+        else, so all three paired with each other at 0.5. That would have spent three of five
+        calls on nonsense and invited a model to delete one of them.
+
+        So a pair must carry evidence of one of three kinds: a decisive shared entity, two
+        shared entities that corroborate each other, or wording that agrees on its own.
     """
     scored: list[Candidate] = []
 
@@ -106,6 +136,15 @@ def candidate_pairs(
         if has_conflicting_version(left_entities, right_entities):
             continue
         if not signatures_agree(left.canonical_title, right.canonical_title):
+            continue
+
+        wording = title_similarity(left.canonical_title, right.canonical_title)
+        shared = left_entities & right_entities
+        if not (
+            strongest_shared(left_entities, right_entities) >= DECISIVE_WEIGHT
+            or len(shared) >= CORROBORATING_ENTITIES
+            or wording >= GATE_TITLE_SIMILARITY
+        ):
             continue
 
         similarity = _blended(left, right)

@@ -122,6 +122,54 @@ def test_a_single_event_produces_no_pairs() -> None:
     assert candidate_pairs([event("evt_a", "Something happened")]) == []
 
 
+def test_one_generic_shared_entity_is_not_evidence() -> None:
+    """Three unrelated live stories paired at 0.5 because each carried `term:url` and
+
+    nothing else. `weighted_overlap` reports total agreement when two thin entity sets
+    match, which would have spent three of five model calls on nonsense and invited a
+    merge that deletes a story. Note the junk entity weighs 0.6 and the real duplicate's
+    entities weigh 0.25, so no weight threshold separates these — only the count does.
+    """
+    left = event("evt_a", "Tailcat is like netcat over a mesh network", entities=["term:url"])
+    right = event("evt_b", "State Department pauses visa applications", entities=["term:url"])
+
+    assert candidate_pairs([left, right]) == []
+
+
+def test_two_shared_entities_corroborate_each_other() -> None:
+    """The real 27 August duplicate: two organisations shared, wording of only 0.195."""
+    left = event(
+        "evt_a",
+        "OpenAI's rogue AI model incident was worse than we thought",
+        entities=["org:openai", "org:huggingface"],
+    )
+    right = event(
+        "evt_b",
+        "The inside story on why OpenAI agents hacked Hugging Face",
+        entities=["org:openai", "org:huggingface"],
+    )
+
+    assert len(candidate_pairs([left, right])) == 1
+
+
+def test_a_decisive_shared_entity_is_enough_on_its_own() -> None:
+    """A model family plus version. The only entity strong enough to carry a pair alone."""
+    left = event("evt_a", "Containment failure at a frontier lab", entities=["model:gemma-4"])
+    right = event(
+        "evt_b", "Weights published under a permissive licence", entities=["model:gemma-4"]
+    )
+
+    assert len(candidate_pairs([left, right])) == 1
+
+
+def test_strong_wording_stands_in_for_entity_evidence() -> None:
+    """Two near-identical headlines naming nothing known are still one story."""
+    left = event("evt_a", "Regulators open an inquiry into autonomous coding agents")
+    right = event("evt_b", "Regulators open an inquiry into autonomous agents")
+
+    assert len(candidate_pairs([left, right])) == 1
+
+
 # --- what a merge keeps --------------------------------------------------------
 
 
