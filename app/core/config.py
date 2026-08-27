@@ -90,6 +90,18 @@ class Settings(BaseSettings):
     telegram_bot_token: str | None = None
     telegram_chat_id: str | None = None
 
+    alert_on_degraded: bool = True
+    """Send a Telegram notice when a run succeeds but produces less than it should.
+
+    GitHub emails on a failed workflow, so an outright failure is already loud. The quiet
+    failure is a run that exits zero and publishes two stories instead of five, and this is
+    what makes that audible. See :mod:`app.delivery.health`."""
+
+    alert_min_stories: int = Field(default=3, ge=0, le=20)
+    """Fewer stories than this is treated as degraded — but only when the shortlist held
+    at least this many to begin with. A genuinely quiet day publishes what it has and says
+    nothing, because a briefing is never padded to reach a number."""
+
     # --- Ingestion ---
     http_connect_timeout: float = Field(default=5.0, gt=0)
     http_read_timeout: float = Field(default=15.0, gt=0)

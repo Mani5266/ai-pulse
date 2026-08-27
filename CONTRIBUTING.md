@@ -30,12 +30,18 @@ ruff check .
 ruff format --check .
 mypy
 pytest
+pytest --cov     # the coverage floor, as CI runs it
 ```
 
-All four run in CI on every push, along with `pip-audit` against the lockfiles and
+All of these run in CI on every push, along with `pip-audit` against the lockfiles and
 `scripts/eval.py`, which fails the build if the structural injection corpus reports an
-escape. Nothing in the test suite needs network access, a model, or credentials — if a
-change makes a test need one of those, the change is what needs fixing.
+escape.
+
+`--cov` is not in `addopts` on purpose: it would make running a single test file fail a
+whole-project floor, which trains people to pass `--no-cov` and defeats the point.
+
+Nothing in the test suite needs network access, a model, or credentials — if a change makes
+a test need one of those, the change is what needs fixing.
 
 ## What a good pull request looks like
 

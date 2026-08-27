@@ -22,6 +22,7 @@ dev = [
     "ruff>=0.6",
     "mypy>=1.11",
     "pytest>=8.3",
+    "pytest-cov>=5.0",
     "types-PyYAML>=6.0",
 ]
 
@@ -67,3 +68,27 @@ ignore_missing_imports = true
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-q --strict-markers"
+
+# Coverage is a floor, not a target. 100% is reachable by testing that code runs rather
+# than that it is right, and a suite written to satisfy a percentage is worse than one
+# written to catch a bug. The floor exists to make a drop visible: a module added without
+# tests, or a branch quietly deleted from a test, fails the build instead of passing
+# unnoticed. Nothing is excluded from measurement — an omit list is how a coverage number
+# becomes a lie.
+[tool.coverage.run]
+source = ["app"]
+branch = true
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+fail_under = 88
+exclude_lines = [
+    "pragma: no cover",
+    # Module entry guards. Reached by the process, never by the test runner.
+    'if __name__ == "__main__":',
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    # Abstract method bodies.
+    '^\s*\.\.\.$',
+]

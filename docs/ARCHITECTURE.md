@@ -288,9 +288,22 @@ Two conventions are worth knowing:
 Every stage is restartable, and the worst case is a briefing that is less good rather than a
 day that is lost.
 
-The failure this design cannot see is the quiet one: a run that *succeeds* while publishing
-two stories instead of five. GitHub emails on a failed workflow and says nothing about a
-thin one. `PLAN.md` §2.14 states the problem; a threshold alert is on the list in `TODO.md`.
+### The quiet failure
+
+GitHub emails on a failed workflow and says nothing about a thin one, so the failure this
+design could not see was the run that *succeeds* while publishing two stories instead of
+five. `app/delivery/health.py` closes that: it reads the run record the pipeline has just
+written and sends one Telegram notice when the run was degraded.
+
+**Quiet is not degraded, and that distinction is the whole module.** Every check compares an
+output against the input that was available to it, never against a fixed expectation. Two
+stories from a shortlist of two is the pipeline working, and says nothing. Two stories from
+a shortlist of twenty is a fault, and speaks. The same rule governs the rest: a run with no
+model provider, half the model calls failing, a schema violation, a quarter of the feed
+registry failing at once, or a briefing that was saved but not delivered.
+
+A single dead feed deliberately does not alert. Slow rot is the weekly `feeds.yml`
+workflow's job, and an alert that fires every morning is one nobody reads.
 
 ---
 
@@ -300,6 +313,17 @@ Tests live in `tests/{unit,integration,security}/` and run without network acces
 model, and without credentials. Everything that touches the outside world takes an
 injectable client or resolver, which is why the SSRF guard can be tested against a fake
 resolver and the fetcher against a mock transport.
+
+Coverage is measured with branch coverage over `app/` and currently sits at **93%**, with a
+floor of 88% enforced in CI. The floor is a floor, not a target: 100% is reachable by
+testing that code runs rather than that it is right, and a suite written to satisfy a
+percentage is worse than one written to catch a bug. What the floor buys is visibility — a
+module added without tests, or a branch quietly deleted from a test, fails the build instead
+of passing unnoticed. Nothing is excluded from measurement, because an omit list is how a
+coverage number becomes a lie.
+
+`--cov` is passed by the CI step rather than set in `addopts`, so running one test file
+locally does not fail a whole-project floor.
 
 The suite is not the only gate. CI also runs `pip-audit` against pinned lockfiles and
 `scripts/eval.py`, which fails the build if the structural injection corpus reports an

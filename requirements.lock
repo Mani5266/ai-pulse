@@ -12,6 +12,8 @@ certifi==2026.7.22
     #   httpx
 colorama==0.4.6
     # via pytest
+coverage==7.15.4
+    # via pytest-cov
 feedparser==6.0.14
     # via ai-pulse (pyproject.toml)
 feedparser-sgmllib==2.1.0
@@ -39,7 +41,9 @@ packaging==26.3
 pathspec==1.1.1
     # via mypy
 pluggy==1.6.0
-    # via pytest
+    # via
+    #   pytest
+    #   pytest-cov
 pydantic==2.13.4
     # via
     #   ai-pulse (pyproject.toml)
@@ -51,6 +55,10 @@ pydantic-settings==2.15.0
 pygments==2.21.0
     # via pytest
 pytest==9.1.1
+    # via
+    #   ai-pulse (pyproject.toml)
+    #   pytest-cov
+pytest-cov==7.1.0
     # via ai-pulse (pyproject.toml)
 python-dotenv==1.2.3
     # via pydantic-settings

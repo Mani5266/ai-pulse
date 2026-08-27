@@ -18,6 +18,7 @@ from app.briefing.models import BriefingStats
 from app.briefing.render_telegram import render_telegram
 from app.core.config import Settings, get_settings
 from app.core.errors import ConfigError
+from app.delivery.health import report_degraded
 from app.delivery.telegram import DeliveryResult, TelegramDelivery
 from app.ingestion.dedup import deduplicate
 from app.ingestion.normalize import enrich_all
@@ -374,47 +375,49 @@ def _run(settings: Settings, started_at: datetime, started: float) -> int:
         logger.warning(
             "delivery failed: %s (the briefing is saved and will retry)", delivered.detail
         )
-    write_run(
-        settings.data_dir,
-        RunRecord(
-            started_at=started_at,
-            finished_at=datetime.now(UTC),
-            ok=True,
-            duration_seconds=briefing.stats.runtime_seconds,
-            window_start=window.start,
-            window_hours=round(window.hours, 2),
-            first_run=window.is_first_run,
-            window_clamped=window.was_clamped,
-            feeds=[
-                FeedOutcome(
-                    source_id=result.source_id,
-                    ok=result.ok,
-                    articles=result.article_count,
-                    error=result.error,
-                    duration_seconds=result.duration_seconds,
-                )
-                for result in results
-            ],
-            articles_fetched=int(stats["articles"]),
-            articles_in_window=len(recency.fresh),
-            articles_stored=written,
-            duplicates_removed=len(deduped.duplicates),
-            events_touched=len(clustered.events),
-            events_ranked=len(candidates),
-            events_multi_source=len(clustered.multi_source_events),
-            events_shortlisted=len(shortlist.selected),
-            stories_published=len(briefing.stories),
-            provider=provider.name,
-            model_calls=provider.stats.attempted,
-            model_failures=provider.stats.failed,
-            model_rate_limited=provider.stats.rate_limited,
-            schema_violations=provider.stats.schema_violations,
-            claims_extracted=int(analysis_stats["claims"]),
-            claims_corroborated=int(analysis_stats["corroborated_claims"]),
-            delivered=delivered.ok,
-            delivery_error=delivered.detail or None,
-        ),
+    record = RunRecord(
+        started_at=started_at,
+        finished_at=datetime.now(UTC),
+        ok=True,
+        duration_seconds=briefing.stats.runtime_seconds,
+        window_start=window.start,
+        window_hours=round(window.hours, 2),
+        first_run=window.is_first_run,
+        window_clamped=window.was_clamped,
+        feeds=[
+            FeedOutcome(
+                source_id=result.source_id,
+                ok=result.ok,
+                articles=result.article_count,
+                error=result.error,
+                duration_seconds=result.duration_seconds,
+            )
+            for result in results
+        ],
+        articles_fetched=int(stats["articles"]),
+        articles_in_window=len(recency.fresh),
+        articles_stored=written,
+        duplicates_removed=len(deduped.duplicates),
+        events_touched=len(clustered.events),
+        events_ranked=len(candidates),
+        events_multi_source=len(clustered.multi_source_events),
+        events_shortlisted=len(shortlist.selected),
+        stories_published=len(briefing.stories),
+        provider=provider.name,
+        model_calls=provider.stats.attempted,
+        model_failures=provider.stats.failed,
+        model_rate_limited=provider.stats.rate_limited,
+        schema_violations=provider.stats.schema_violations,
+        claims_extracted=int(analysis_stats["claims"]),
+        claims_corroborated=int(analysis_stats["corroborated_claims"]),
+        delivered=delivered.ok,
+        delivery_error=delivered.detail or None,
     )
+    write_run(settings.data_dir, record)
+
+    # An alert about a run that succeeded, which is the failure nobody would otherwise see.
+    # After the record is written, so a lost alert never costs the record.
+    report_degraded(settings, record)
 
     logger.info(
         "briefing complete stories=%d delivered=%s runtime=%.1fs",

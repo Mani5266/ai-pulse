@@ -44,7 +44,10 @@ jobs:
         run: mypy
 
       - name: Test
-        run: pytest
+        # Coverage is measured here rather than in `addopts`, so that running one test file
+        # locally does not fail a whole-project floor. The floor itself lives in
+        # `[tool.coverage.report]`, and `--cov` is what turns it on.
+        run: pytest --cov
 
       - name: Audit dependencies
         run: |

@@ -3,9 +3,10 @@
 Hand this to a fresh session. It carries only outstanding work, plus the context that is
 not visible in the code.
 
-P0–P10 are complete and the pipeline runs unattended. Hardening items 1–5 (pinned
-dependencies, dependency auditing, weekly feed verification, a fallback model provider,
-and the architecture and security documents) are done and pushed.
+P0–P10 are complete and the pipeline runs unattended. Every hardening item is done and
+pushed: pinned dependencies, dependency auditing, weekly feed verification, a fallback
+model provider, the architecture and security documents, a coverage floor, and
+degraded-run alerting.
 
 | | |
 | --- | --- |
@@ -14,7 +15,7 @@ and the architecture and security documents) are done and pushed.
 | Telegram bot | @Mani_aipulse_bot — `/latest`, `/refresh`, `/status`, `/help` |
 | Daily run | GitHub Actions, 02:00 UTC (07:30 IST), commits `data/` back |
 | Local bot | Windows task `AI-Pulse Bot`, starts at logon |
-| Tests | 606 passing; ruff, mypy strict, pip-audit and the structural evaluation gate CI |
+| Tests | 630 passing, 93% branch coverage; ruff, mypy strict, pip-audit and the structural evaluation gate CI |
 
 `PLAN.md` §2 holds every design decision, including the ones that were wrong first. Read it
 before changing the pipeline — most of those sections exist because something failed in a
@@ -55,19 +56,7 @@ exist. **Do not fill these in on the owner's behalf.**
 
 ## Hardening, remaining
 
-Items 1–5 are done. These are what is left, in priority order. Roughly two hours.
-
-### 4. Measure coverage
-
-606 tests is a count, not a claim about what is covered. `pytest-cov` with a floor in CI
-turns it into one.
-
-### 5. Alert on a degraded run, not only a failed one
-
-GitHub emails the owner when a scheduled workflow fails, so an outright failure is not
-silent. A run that *succeeds* while publishing two stories instead of five is silent, and
-that is the more likely failure. The run records already hold everything needed; a check
-that posts to Telegram when stories fall below a threshold would close it.
+All seven are done.
 
 ---
 

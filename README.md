@@ -161,6 +161,7 @@ with `--with-model`.
 | Stories citing a source | **100%** |
 | Claim attributions valid | **100%** — an attribution to a source the event lacks is discarded |
 | Duplicate events in one briefing | **0** |
+| Test coverage | **93%** of `app/`, branch coverage, floor of 88% enforced in CI |
 | Precision, category accuracy | **pending labels** |
 
 The last row is deliberately blank. Those metrics need a person to say whether a story
