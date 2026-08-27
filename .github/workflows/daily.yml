@@ -129,7 +129,7 @@ jobs:
           path: site
 
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   # A run that fails silently is the failure mode this project is least able to notice,
   # since nobody is watching at 02:00 UTC. This makes it visible in the Actions tab.
