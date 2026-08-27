@@ -134,10 +134,13 @@ Two layers are reported separately, because they fail independently:
 - **`structural`** runs without a model. Does sanitisation neutralise the delimiter, and
   does the payload stay inside its document? **0 escapes of 40.** A failure here is a bug in
   this repository, and CI fails the build on one.
-- **`model`** runs against the configured provider. **Partial coverage.** The free tier's
-  daily allowance runs out after a handful of attacks, so the report states what share of
-  the corpus actually reached the model, and the README quotes no model figure. A number
-  earned at partial coverage is not the number.
+- **`model`** runs against the configured provider. **0 escapes of 40, at full coverage**,
+  run on 27 August 2026 against the production chain. This number was unavailable until the
+  chain existed: one free tier's daily allowance ran out after three or four attacks, and
+  the report said what share had reached the model rather than quoting an escape count,
+  because a number earned at partial coverage is not the number. Two tiers finish the
+  corpus. A failure here is a property of the model rather than a bug in this repository,
+  and the schema is what contains it.
 
 ---
 

@@ -157,7 +157,7 @@ with `--with-model`.
 | | |
 | --- | --- |
 | Injection corpus, structural | **0 escapes of 40** — no payload leaves its document |
-| Injection corpus, model layer | partial: the free tier's daily allowance limits how much of the corpus reaches the model in one day, and the report says what share did |
+| Injection corpus, model layer | **0 escapes of 40** — full coverage, run 2026-08-27 against the production chain |
 | Stories citing a source | **100%** |
 | Claim attributions valid | **100%** — an attribution to a source the event lacks is discarded |
 | Duplicate events in one briefing | **0** |

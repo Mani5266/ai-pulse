@@ -25,18 +25,18 @@ way that was not obvious.
 
 ## Blocked, not forgotten
 
-Two things are waiting on something external rather than on a decision.
+One thing is waiting on something external rather than on a decision.
 
-**Run the injection corpus against the model, in full.** The README quotes the structural
-result (0 of 40) and deliberately does not quote a model figure, because the best coverage
-achieved so far is 8% — the free tier's daily token allowance runs out after three or four
-attacks. Run it at the start of a day, before anything else spends quota:
+The injection corpus is no longer among them. It ran at full coverage on 27 August 2026 —
+40 of 40 attacks against the model, zero escapes — which is what the provider chain was
+built for: a single free tier ran out after three or four attacks, and two tiers finished
+the corpus. Re-run it after any change to `app/llm/prompts.py`, early in the day:
 
 ```bash
 python scripts/eval.py --with-model
 ```
 
-If the report still says "only N% of the corpus reached it", report that rather than the
+If a future report says "only N% of the corpus reached it", report that rather than the
 escape count. A number earned at partial coverage is not the number.
 
 **Label events, for precision and category accuracy.** Both are blank by design. They need
