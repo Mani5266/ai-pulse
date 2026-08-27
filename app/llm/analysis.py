@@ -27,15 +27,17 @@ import logging
 from dataclasses import dataclass
 
 from app.core.models import Article, Event
+from app.intelligence.pairing import candidate_pairs, merge_events
 from app.intelligence.verification import VerifiedClaim, classify_claims
 from app.llm.prompts import (
     claim_extraction_prompt,
+    event_pair_prompt,
     impact_scoring_prompt,
     story_analysis_prompt,
     wrap_documents,
 )
 from app.llm.provider import BudgetExhaustedError, LLMProvider
-from app.llm.schemas import ClaimExtraction, ImpactScores, StoryAnalysis
+from app.llm.schemas import ClaimExtraction, EventPair, ImpactScores, StoryAnalysis
 from app.ranking.scoring import (
     CREDIBILITY_WEIGHT,
     NOVELTY_WEIGHT,
@@ -142,6 +144,93 @@ def _documents_for(
         )
 
     return wrap_documents(documents, max_chars=max_chars)
+
+
+MERGE_CONFIDENCE = 0.7
+"""How sure the model must be before two events become one.
+
+Asymmetric on purpose, and the prompt says the same thing in words: a missed merge costs a
+duplicate line in the briefing, while a wrong merge silently deletes a story that nobody
+will ever know was there. Uncertainty therefore has to resolve to "leave them apart".
+"""
+
+
+def merge_duplicates(
+    shortlist: list[ScoredEvent],
+    provider: LLMProvider,
+    *,
+    limit: int = 5,
+    reserve: int = 0,
+) -> tuple[list[ScoredEvent], int]:
+    """Ask the model whether any shortlisted pair is one story, and fold the ones that are.
+
+    Returns the shortlist and how many merges happened, so the caller can log a number
+    rather than infer one from a length that also changes for other reasons.
+
+    Runs before impact scoring, which is what makes it worth its calls twice over: a merged
+    pair costs one scoring call instead of two, and frees a briefing slot that a duplicate
+    would have taken. Never raises — a failed adjudication leaves both events standing,
+    which is the state the pipeline was already in.
+    """
+    if len(shortlist) < 2:
+        return shortlist, 0
+
+    by_id = {item.event.id: item for item in shortlist}
+    candidates = candidate_pairs([item.event for item in shortlist], limit=limit)
+    if not candidates:
+        return shortlist, 0
+
+    absorbed: set[str] = set()
+    merges = 0
+
+    for candidate in candidates:
+        # A chain — A merged into B, now B against C — is left for the next run rather
+        # than resolved transitively here. Two merges deep is where a wrong one stops
+        # being recoverable by reading the briefing.
+        if candidate.left.id in absorbed or candidate.right.id in absorbed:
+            continue
+        if provider.remaining <= reserve:
+            logger.info("stopping adjudication after %d pairs to reserve budget", merges)
+            break
+
+        left, right = by_id[candidate.left.id], by_id[candidate.right.id]
+        prompt = event_pair_prompt(
+            left.event.canonical_title,
+            ", ".join(left.event.source_ids),
+            right.event.canonical_title,
+            ", ".join(right.event.source_ids),
+        )
+
+        try:
+            verdict = provider.structured(prompt, EventPair)
+        except BudgetExhaustedError:
+            logger.warning("call budget exhausted during adjudication")
+            break
+
+        if verdict is None or not verdict.same_event or verdict.confidence < MERGE_CONFIDENCE:
+            continue
+
+        # The higher-scored event keeps its identity: the briefing was going to publish
+        # that wording, and the merge should read as a story with more sources rather than
+        # as a rewrite.
+        keep, drop = (left, right) if left.score >= right.score else (right, left)
+        by_id[keep.event.id] = ScoredEvent(
+            event=merge_events(keep.event, drop.event), scores=keep.scores
+        )
+        absorbed.add(drop.event.id)
+        merges += 1
+        logger.info(
+            "merged %s into %s (confidence %.2f): %s",
+            drop.event.id,
+            keep.event.id,
+            verdict.confidence,
+            verdict.reasoning,
+        )
+
+    if not merges:
+        return shortlist, 0
+
+    return [by_id[item.event.id] for item in shortlist if item.event.id not in absorbed], merges
 
 
 def score_impact(

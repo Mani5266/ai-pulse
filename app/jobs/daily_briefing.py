@@ -27,7 +27,7 @@ from app.ingestion.recency import filter_recent
 from app.ingestion.runner import ingest_all, summarise
 from app.ingestion.sources import credibility_by_id, enabled_sources, load_sources
 from app.intelligence.clustering import ClusterConfig, cluster_articles
-from app.llm.analysis import analyse_stories, score_impact, verify_claims
+from app.llm.analysis import analyse_stories, merge_duplicates, score_impact, verify_claims
 from app.llm.analysis import summarise as summarise_analysis
 from app.llm.provider import LLMError, LLMProvider, build_provider
 from app.ranking.profile import load_profile
@@ -263,10 +263,23 @@ def _run(settings: Settings, started_at: datetime, started: float) -> int:
     stored_articles = {
         article.id: article for article in read_articles(settings.data_dir, today) if article.id
     }
+    # Repair what clustering deliberately left apart, before anything is scored: a merged
+    # pair costs one impact call instead of two and frees a briefing slot a duplicate would
+    # have taken. Reserves the same budget the scoring below does, so adjudication can
+    # never be the reason a briefing has no prose.
+    selected, merged = merge_duplicates(
+        shortlist.selected,
+        provider,
+        limit=settings.pair_adjudication_limit,
+        reserve=settings.stories_per_briefing * 4,
+    )
+    if merged:
+        logger.info("adjudication merged %d duplicate pair(s) before scoring", merged)
+
     # Two calls per story now follow scoring — a summary and a claim extraction — and
     # each may retry once, so the reservation is four per story.
     analysed = score_impact(
-        shortlist.selected,
+        selected,
         stored_articles,
         provider,
         reserve=settings.stories_per_briefing * 4,

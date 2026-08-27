@@ -171,6 +171,19 @@ class Settings(BaseSettings):
     cluster_threshold: float = Field(default=0.45, ge=0.1, le=1.0)
     """Blended entity-and-title score above which an article joins an existing event."""
 
+    pair_adjudication_limit: int = Field(default=5, ge=0, le=20)
+    """How many candidate duplicate pairs a run may ask the model about. 0 disables it.
+
+    Clustering under-clusters on purpose, and the cost is real: on 27 August one OpenAI
+    incident took two of five briefing slots because two outlets described it in different
+    words and neither named a shared version. String matching provably cannot decide that
+    — on live data the true and false pairs' similarity scores interleave — so a small
+    number of pairs go to the model instead.
+
+    Five is the whole budget for it. The pairs are drawn from the shortlist and ranked by
+    cheap signals first, so the fifth-best candidate is already well past the point of
+    being plausible."""
+
     event_memory_days: int = Field(default=14, ge=1, le=180)
     """How far back a running event stays open to new articles. Longer than the
     deduplication window: a story can develop for weeks."""

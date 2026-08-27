@@ -12,6 +12,7 @@ from app.llm.analysis import (
     IMPACT_WEIGHT,
     AnalysedEvent,
     analyse_stories,
+    merge_duplicates,
     score_impact,
     summarise,
     verify_claims,
@@ -389,3 +390,140 @@ def test_the_run_summary_counts_claims() -> None:
 
     assert stats["claims"] == 2
     assert stats["corroborated_claims"] == 1
+
+
+# --- duplicate adjudication ---------------------------------------------------
+
+SAME = json.dumps({"same_event": True, "confidence": 0.9, "reasoning": "One incident."})
+DIFFERENT = json.dumps({"same_event": False, "confidence": 0.9, "reasoning": "Two releases."})
+UNSURE = json.dumps({"same_event": True, "confidence": 0.4, "reasoning": "Possibly the same."})
+
+
+def agent_event(event_id: str, title: str, *, source: str, score: float = 6.0) -> ScoredEvent:
+    """Two of these differ in wording but describe one development."""
+    return ScoredEvent(
+        event=Event(
+            id=event_id,
+            canonical_title=title,
+            category=Category.AI_AGENTS,
+            entities=["openai", "hugging face"],
+            article_ids=[f"art_{event_id}"],
+            source_ids=[source],
+            first_seen=NOW,
+            last_updated=NOW,
+        ),
+        scores=Scores(credibility=score, novelty=score, personal_relevance=score),
+    )
+
+
+def duplicate_pair() -> list[ScoredEvent]:
+    return [
+        agent_event(
+            "evt_a",
+            "OpenAI's unreleased model escaped containment and hacked Hugging Face",
+            source="theverge",
+            score=7.0,
+        ),
+        agent_event(
+            "evt_b",
+            "OpenAI agents hacked Hugging Face after being trained to cheat",
+            source="techcrunch",
+            score=5.0,
+        ),
+    ]
+
+
+def test_a_confirmed_duplicate_is_folded_into_the_higher_scored_event() -> None:
+    """The 27 August defect: one incident took two of five briefing slots."""
+    provider = ScriptedProvider([SAME])
+
+    selected, merges = merge_duplicates(duplicate_pair(), provider)
+
+    assert merges == 1
+    assert len(selected) == 1
+    assert selected[0].event.id == "evt_a"
+    assert selected[0].event.source_ids == ["theverge", "techcrunch"]
+
+
+def test_a_merge_leaves_the_briefing_a_free_slot() -> None:
+    """The point of the exercise: a slot returned to a story that is not a repeat."""
+    other = agent_event("evt_c", "Regulators open an inquiry into agents", source="ft")
+    provider = ScriptedProvider([SAME])
+
+    selected, _ = merge_duplicates([*duplicate_pair(), other], provider)
+
+    assert [item.event.id for item in selected] == ["evt_a", "evt_c"]
+
+
+def test_a_rejected_pair_leaves_both_events_standing() -> None:
+    provider = ScriptedProvider([DIFFERENT])
+
+    selected, merges = merge_duplicates(duplicate_pair(), provider)
+
+    assert merges == 0
+    assert len(selected) == 2
+
+
+def test_an_unconfident_yes_is_not_a_merge() -> None:
+    """A wrong merge deletes a story silently, so uncertainty resolves to leaving them apart."""
+    provider = ScriptedProvider([UNSURE])
+
+    selected, merges = merge_duplicates(duplicate_pair(), provider)
+
+    assert merges == 0
+    assert len(selected) == 2
+
+
+def test_nothing_is_asked_when_no_pair_is_plausible() -> None:
+    """No candidates means no calls: adjudication is free on a day with no duplicates."""
+    left = agent_event("evt_a", "Qwen ships a multimodal model", source="qwen")
+    right = agent_event("evt_b", "Regulators publish a ruling", source="ft")
+    right = ScoredEvent(
+        event=right.event.model_copy(update={"entities": ["eu"]}), scores=right.scores
+    )
+    provider = ScriptedProvider([SAME])
+
+    selected, merges = merge_duplicates([left, right], provider)
+
+    assert merges == 0
+    assert len(selected) == 2
+    assert provider.stats.attempted == 0
+
+
+def test_a_single_event_is_never_adjudicated() -> None:
+    provider = ScriptedProvider([SAME])
+
+    selected, merges = merge_duplicates([agent_event("evt_a", "One story", source="x")], provider)
+
+    assert (len(selected), merges) == (1, 0)
+    assert provider.stats.attempted == 0
+
+
+def test_adjudication_respects_the_reserve() -> None:
+    """Merging must never be the reason a briefing has no prose."""
+    provider = ScriptedProvider([SAME], budget=4)
+
+    selected, merges = merge_duplicates(duplicate_pair(), provider, reserve=4)
+
+    assert merges == 0
+    assert len(selected) == 2
+    assert provider.stats.attempted == 0
+
+
+def test_a_failed_adjudication_is_not_fatal() -> None:
+    """A provider with nothing scripted raises inside; both events must survive it."""
+    provider = ScriptedProvider([])
+
+    selected, merges = merge_duplicates(duplicate_pair(), provider)
+
+    assert merges == 0
+    assert len(selected) == 2
+
+
+def test_adjudication_is_disabled_by_a_zero_limit() -> None:
+    provider = ScriptedProvider([SAME])
+
+    selected, merges = merge_duplicates(duplicate_pair(), provider, limit=0)
+
+    assert (len(selected), merges) == (2, 0)
+    assert provider.stats.attempted == 0
