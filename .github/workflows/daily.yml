@@ -46,14 +46,11 @@ jobs:
         env:
           AI_PULSE_LLM_PROVIDER: hosted
           AI_PULSE_LLM_MODEL: openai/gpt-oss-120b
-          # The chain order. Tier keys take precedence over AI_PULSE_LLM_API_KEY, and a
-          # tier with no secret set is skipped, so an unset key costs nothing.
+          # The chain order. A tier with no secret set is skipped, so an unset key costs
+          # nothing; the run continues on whichever tiers do have one.
           AI_PULSE_LLM_CHAIN: groq,openrouter
           AI_PULSE_GROQ_API_KEY: ${{ secrets.AI_PULSE_GROQ_API_KEY }}
           AI_PULSE_OPENROUTER_API_KEY: ${{ secrets.AI_PULSE_OPENROUTER_API_KEY }}
-          # Kept so a deployment that has not yet added the tier secrets still runs.
-          # Remove once AI_PULSE_GROQ_API_KEY is set in the repository secrets.
-          AI_PULSE_LLM_API_KEY: ${{ secrets.AI_PULSE_LLM_API_KEY }}
           AI_PULSE_TELEGRAM_BOT_TOKEN: ${{ secrets.AI_PULSE_TELEGRAM_BOT_TOKEN }}
           AI_PULSE_TELEGRAM_CHAT_ID: ${{ secrets.AI_PULSE_TELEGRAM_CHAT_ID }}
         run: python -m app.jobs.daily_briefing
