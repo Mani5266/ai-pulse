@@ -213,3 +213,82 @@ def test_the_label_sheet_explains_what_to_do() -> None:
 
     assert "important" in sheet["instructions"]
     assert "dataset.json" in sheet["instructions"]
+
+
+# --- a generated sheet is not a dataset ---------------------------------------
+
+
+def test_an_unfilled_sheet_reports_nothing() -> None:
+    """The bug this guards: the sheet arrives with `category` already filled in.
+
+    Counting those rows graded the pipeline against its own answer and printed
+    "category accuracy 100%" off a sheet nobody had touched.
+    """
+    sheet = json.loads(label_sheet([briefing(story("evt_1"), story("evt_2"))]))
+    dataset = Dataset.model_validate(sheet)
+
+    report = measure_judgement([briefing(story("evt_1"), story("evt_2"))], dataset)
+
+    assert report.is_pending is True
+    assert report.labelled == 0
+    assert report.category_accuracy is None
+
+
+def test_only_rows_with_an_importance_are_counted() -> None:
+    dataset = Dataset(
+        labelled=[
+            LabelledEvent(
+                event_id="evt_1",
+                day=DAY.isoformat(),
+                headline="A headline",
+                importance="important",
+                category=Category.MODEL_RELEASE,
+            ),
+            LabelledEvent(
+                event_id="evt_2",
+                day=DAY.isoformat(),
+                headline="A headline",
+                importance="",
+                category=Category.MODEL_RELEASE,
+            ),
+        ]
+    )
+
+    report = measure_judgement([briefing(story("evt_1"), story("evt_2"))], dataset)
+
+    assert report.labelled == 1
+    assert report.matched == 1
+
+
+def test_an_importance_is_read_regardless_of_case_or_padding() -> None:
+    """A hand-edited file is not a form. ' Important ' is a judgement."""
+    dataset = Dataset(
+        labelled=[
+            LabelledEvent(
+                event_id="evt_1",
+                day=DAY.isoformat(),
+                headline="A headline",
+                importance="  Important  ",
+            )
+        ]
+    )
+
+    report = measure_judgement([briefing(story("evt_1"))], dataset)
+
+    assert report.labelled == 1
+    assert report.important_published == 1
+
+
+def test_an_unrecognised_importance_is_not_a_judgement() -> None:
+    dataset = Dataset(
+        labelled=[
+            LabelledEvent(
+                event_id="evt_1",
+                day=DAY.isoformat(),
+                headline="A headline",
+                importance="TODO",
+            )
+        ]
+    )
+
+    assert measure_judgement([briefing(story("evt_1"))], dataset).is_pending is True

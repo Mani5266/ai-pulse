@@ -1,0 +1,85 @@
+{
+  "instructions": "Set importance on each row to important, marginal or noise. Change category only where the pipeline got it wrong. Save as evals/dataset.json with the rows under a 'labelled' key.",
+  "labelled": [
+    {
+      "event_id": "evt_9082a4f8fe53acf1",
+      "day": "2026-08-27",
+      "headline": "MacroAgent introduces LLM‑designed contour algorithms for regularity‑aware macro legalization",
+      "importance": "",
+      "category": "research",
+      "notes": ""
+    },
+    {
+      "event_id": "evt_877d7d7e9c86335b",
+      "day": "2026-08-27",
+      "headline": "OpenAI agents hacked Hugging Face after being inadvertently trained to cheat and communicate",
+      "importance": "",
+      "category": "ai_agents",
+      "notes": ""
+    },
+    {
+      "event_id": "evt_6ce111fca8c9e483",
+      "day": "2026-08-27",
+      "headline": "AFDBench introduced as first benchmark for AI-generated meteorological reasoning and forecast discussions",
+      "importance": "",
+      "category": "research",
+      "notes": ""
+    },
+    {
+      "event_id": "evt_8e2bea08b7f2937c",
+      "day": "2026-08-27",
+      "headline": "Qwen releases Qwen3.8-Flash-Next, a multimodal MoE model previewing Qwen4 architecture",
+      "importance": "",
+      "category": "model_release",
+      "notes": ""
+    },
+    {
+      "event_id": "evt_d72d406cd08e09bc",
+      "day": "2026-08-27",
+      "headline": "New Fisher Information-based Adaptive Mixed-Precision Quantization Method Reduces LLM Inference Cost",
+      "importance": "",
+      "category": "research",
+      "notes": ""
+    },
+    {
+      "event_id": "evt_d9920b9c799b358a",
+      "day": "2026-08-26",
+      "headline": "AI generates 1M LOC software with refinement to production scale",
+      "importance": "",
+      "category": "developer_tools",
+      "notes": ""
+    },
+    {
+      "event_id": "evt_db6df27824e3acb2",
+      "day": "2026-08-26",
+      "headline": "AgentSpec improves LLM agent inference speed for large batches",
+      "importance": "",
+      "category": "research",
+      "notes": ""
+    },
+    {
+      "event_id": "evt_0b471567f58b9fb3",
+      "day": "2026-08-26",
+      "headline": "Giga-using Mixture-of-Experts for high-throughput text embeddings",
+      "importance": "",
+      "category": "research",
+      "notes": ""
+    },
+    {
+      "event_id": "evt_0c7fd51720556fba",
+      "day": "2026-08-26",
+      "headline": "OpenAI's Jalapeño chip outperforms state-of-the-art in inference benchmarks",
+      "importance": "",
+      "category": "benchmark",
+      "notes": ""
+    },
+    {
+      "event_id": "evt_fd16a058ee8e16ad",
+      "day": "2026-08-26",
+      "headline": "LLM Agents Conduct Controlled Experiments via Simulation Models",
+      "importance": "",
+      "category": "research",
+      "notes": ""
+    }
+  ]
+}

@@ -32,6 +32,10 @@ logger = logging.getLogger(__name__)
 DEFAULT_DATASET = Path("evals/dataset.json")
 
 
+JUDGEMENTS: frozenset[str] = frozenset({"important", "marginal", "noise"})
+"""The only values that count as a person having looked at a row."""
+
+
 class LabelledEvent(BaseModel):
     """One human judgement about one event."""
 
@@ -41,12 +45,34 @@ class LabelledEvent(BaseModel):
     day: str
     headline: str
     importance: str
-    """One of: important, marginal, noise. The reader's call, not the pipeline's."""
+    """One of: important, marginal, noise. The reader's call, not the pipeline's.
+
+    Empty until somebody fills it in, which is what :attr:`is_judged` tests."""
 
     category: Category | None = None
-    """The category a reader would have given it, when it differs from the pipeline's."""
+    """The category a reader would have given it.
+
+    The sheet pre-fills this with the pipeline's own answer, because a person cannot
+    correct a category they cannot see. That makes it worthless as evidence on its own —
+    see :attr:`is_judged`."""
 
     notes: str = ""
+
+    @property
+    def judgement(self) -> str:
+        """The importance, normalised. A hand-edited file is not a form."""
+        return self.importance.strip().lower()
+
+    @property
+    def is_judged(self) -> bool:
+        """Has a person actually ruled on this row?
+
+        Only ``importance`` proves it. ``category`` arrives pre-filled from the pipeline,
+        so counting a row because its category is set would grade the pipeline against its
+        own guess — an unfilled sheet reported 100% category accuracy before this existed,
+        which is precisely the number this project refuses to publish.
+        """
+        return self.judgement in JUDGEMENTS
 
 
 class Dataset(BaseModel):
@@ -57,8 +83,13 @@ class Dataset(BaseModel):
     labelled: list[LabelledEvent] = Field(default_factory=list)
 
     @property
+    def judged(self) -> list[LabelledEvent]:
+        """Only the rows a person has ruled on. A generated sheet is not a dataset."""
+        return [item for item in self.labelled if item.is_judged]
+
+    @property
     def is_empty(self) -> bool:
-        return not self.labelled
+        return not self.judged
 
 
 class StructuralReport(BaseModel):
@@ -192,7 +223,7 @@ def measure_judgement(briefings: Sequence[Briefing], dataset: Dataset) -> Judgem
     if dataset.is_empty:
         return JudgementReport()
 
-    labels = {item.event_id: item for item in dataset.labelled}
+    labels = {item.event_id: item for item in dataset.judged}
     published = {story.event_id: story for briefing in briefings for story in briefing.stories}
 
     matched = 0
@@ -206,9 +237,9 @@ def measure_judgement(briefings: Sequence[Briefing], dataset: Dataset) -> Judgem
         if label is None:
             continue
         matched += 1
-        if label.importance == "important":
+        if label.judgement == "important":
             important += 1
-        elif label.importance == "noise":
+        elif label.judgement == "noise":
             noise += 1
         if label.category is not None:
             comparisons += 1
@@ -216,7 +247,7 @@ def measure_judgement(briefings: Sequence[Briefing], dataset: Dataset) -> Judgem
                 agreements += 1
 
     return JudgementReport(
-        labelled=len(dataset.labelled),
+        labelled=len(dataset.judged),
         matched=matched,
         important_published=important,
         noise_published=noise,

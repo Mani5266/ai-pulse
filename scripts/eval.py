@@ -12,6 +12,7 @@ deliberately.
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import sys
 from pathlib import Path
@@ -80,6 +81,13 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--with-model", action="store_true", help="also exercise the provider")
     parser.add_argument("--label-sheet", action="store_true", help="emit a sheet to fill in")
     args = parser.parse_args(argv)
+
+    # Headlines carry characters a Windows console cannot encode — a non-breaking hyphen
+    # was enough to abort --label-sheet with a UnicodeEncodeError, and a shell redirect
+    # inherits the same cp1252 default, so the sheet was written empty. CI is Linux and
+    # UTF-8, so nothing here would ever have caught it.
+    if isinstance(sys.stdout, io.TextIOWrapper):
+        sys.stdout.reconfigure(encoding="utf-8")
 
     settings = Settings()
     briefings = all_briefings(settings.data_dir)

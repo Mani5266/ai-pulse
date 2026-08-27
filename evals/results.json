@@ -1,8 +1,8 @@
 {
   "structural": {
-    "briefings": 1,
-    "stories": 5,
-    "stories_with_sources": 5,
+    "briefings": 2,
+    "stories": 10,
+    "stories_with_sources": 10,
     "claims_total": 0,
     "claims_with_valid_attribution": 0,
     "corroborated_claims": 0,
@@ -23,7 +23,7 @@
     "escape_rate": 0.0,
     "structural_escapes": 0,
     "model_escapes": 0,
-    "model_attacks_run": 3,
+    "model_attacks_run": 0,
     "by_category": {}
   }
 }
