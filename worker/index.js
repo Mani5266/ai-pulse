@@ -97,7 +97,21 @@ async function answer(command, chatId, env) {
   if (!feed.latest) {
     return feed.no_briefing;
   }
-  return feed.latest + stalenessNote(feed.generated_at);
+  return greetingPrefix(command, feed) + feed.latest + stalenessNote(feed.generated_at);
+}
+
+/**
+ * Say hello back, when the message was a hello.
+ *
+ * Answering "hi" with five stories and no acknowledgement reads like a machine that did
+ * not hear you. The words and the line are both published in the feed, so this decides
+ * only whether to use them — the local bot in app/delivery/bot.py greets on the same list.
+ */
+function greetingPrefix(command, feed) {
+  // Both ends, to match Python's str.strip(".,!?;:") exactly. A list shared between two
+  // implementations is only shared if they normalise the same way.
+  const word = command.replace(/^[.,!?;:]+/, "").replace(/[.,!?;:]+$/, "");
+  return (feed.greetings ?? []).includes(word) ? (feed.greeting_prefix ?? "") : "";
 }
 
 /**

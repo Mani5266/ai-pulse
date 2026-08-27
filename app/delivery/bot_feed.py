@@ -23,7 +23,7 @@ import logging
 from pathlib import Path
 
 from app.briefing.render_telegram import render_telegram
-from app.delivery.bot import GUEST_HELP, OWNER_ONLY, status_reply
+from app.delivery.bot import GREETING_PREFIX, GREETINGS, GUEST_HELP, OWNER_ONLY, status_reply
 from app.storage.briefing_store import all_briefings
 
 logger = logging.getLogger(__name__)
@@ -58,6 +58,11 @@ def build_bot_feed(data_dir: Path, site_dir: Path) -> Path | None:
         "owner_only": OWNER_ONLY,
         "status": status_reply(data_dir),
         "no_briefing": NO_BRIEFING,
+        # Somebody who says hello gets an answer before the wall of text. The list travels
+        # with the reply rather than living in the Worker, so both bots greet on the same
+        # words and adding one is a Python change under test.
+        "greetings": sorted(GREETINGS),
+        "greeting_prefix": GREETING_PREFIX,
     }
 
     site_dir.mkdir(parents=True, exist_ok=True)

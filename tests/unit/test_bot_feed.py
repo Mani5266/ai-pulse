@@ -112,3 +112,34 @@ def test_the_feed_holds_no_credentials(tmp_path: Path) -> None:
     # settings prefix that would mean configuration had leaked into published output.
     for marker in ("gsk_", "sk-or-", "csk-", "api.telegram.org", "AI_PULSE_"):
         assert marker not in raw
+
+
+# --- greetings ----------------------------------------------------------------
+
+
+def test_the_feed_publishes_the_greeting_words_and_line(tmp_path: Path) -> None:
+    """The Worker owns no word list of its own; it matches against this one."""
+    data, site = tmp_path / "data", tmp_path / "site"
+    write_briefing(data, briefing())
+
+    path = build_bot_feed(data, site)
+    assert path is not None
+    feed = json.loads(path.read_text(encoding="utf-8"))
+
+    assert "hi" in feed["greetings"]
+    assert "hello" in feed["greetings"]
+    assert feed["greeting_prefix"].strip()
+
+
+def test_the_published_greetings_are_the_ones_the_local_bot_uses(tmp_path: Path) -> None:
+    """Two bots, one list. A divergence here is one bot greeting and the other not."""
+    from app.delivery.bot import GREETINGS
+
+    data, site = tmp_path / "data", tmp_path / "site"
+    write_briefing(data, briefing())
+
+    path = build_bot_feed(data, site)
+    assert path is not None
+    feed = json.loads(path.read_text(encoding="utf-8"))
+
+    assert set(feed["greetings"]) == set(GREETINGS)

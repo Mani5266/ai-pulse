@@ -1,0 +1,58 @@
+name: Publish site
+
+# Rebuild the site and the bot feed from data that is already committed, and deploy.
+#
+# The daily run does this too, at the end of a two-minute pipeline that spends a day's
+# model allowance and advances the recency window. Neither is acceptable for a rendering
+# change: correcting a template should not cost quota, and it should not shorten the next
+# real run by moving `last_briefing_at`.
+#
+# Nothing here fetches, calls a model, or writes to `data/`.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  # Shares a group with nothing, but must never overlap itself: two deploys of the same
+  # artifact race, and the loser is whichever finishes second.
+  group: publish-site
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.runtime.lock
+          pip install -e . --no-deps
+
+      - name: Rebuild the site
+        run: python scripts/publish_site.py
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

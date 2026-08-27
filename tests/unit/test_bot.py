@@ -12,6 +12,7 @@ import httpx
 from app.briefing.models import Briefing, BriefingStats, Source, Story
 from app.core.config import Settings
 from app.delivery.bot import (
+    GREETING_PREFIX,
     HELP_TEXT,
     BriefingBot,
     Update,
@@ -460,3 +461,71 @@ def test_drain_with_nothing_waiting_confirms_nothing(tmp_path: Path) -> None:
 
     assert BriefingBot(settings(tmp_path), client=client).drain() == 0
     assert len(calls) == 1
+
+
+# --- greetings ----------------------------------------------------------------
+
+
+def test_saying_hello_gets_a_hello_before_the_briefing(tmp_path: Path) -> None:
+    """Five stories and no acknowledgement reads like a machine that did not hear you."""
+    write_briefing(tmp_path, briefing())
+    bot = make_bot(tmp_path)
+
+    reply = bot.handle(Update(update_id=1, chat_id=OWNER, text="hi"))
+
+    assert reply is not None
+    assert reply.startswith(GREETING_PREFIX)
+    assert "Gemma 4 released" in reply
+
+
+def test_a_greeting_with_a_question_still_greets(tmp_path: Path) -> None:
+    write_briefing(tmp_path, briefing())
+    bot = make_bot(tmp_path)
+
+    reply = bot.handle(Update(update_id=1, chat_id=OWNER, text="hello, what happened today?"))
+
+    assert reply is not None
+    assert reply.startswith(GREETING_PREFIX)
+
+
+def test_a_word_that_merely_starts_like_a_greeting_is_not_one(tmp_path: Path) -> None:
+    """ "hiring" begins with "hi". Matching on a prefix would greet half the news."""
+    write_briefing(tmp_path, briefing())
+    bot = make_bot(tmp_path)
+
+    reply = bot.handle(Update(update_id=1, chat_id=OWNER, text="hiring freeze at OpenAI"))
+
+    assert reply is not None
+    assert not reply.startswith(GREETING_PREFIX)
+
+
+def test_a_plain_question_gets_the_briefing_unadorned(tmp_path: Path) -> None:
+    write_briefing(tmp_path, briefing())
+    bot = make_bot(tmp_path)
+
+    reply = bot.handle(Update(update_id=1, chat_id=OWNER, text="whats today news"))
+
+    assert reply is not None
+    assert not reply.startswith(GREETING_PREFIX)
+    assert "Gemma 4 released" in reply
+
+
+def test_a_guest_who_says_hello_is_greeted_too(tmp_path: Path) -> None:
+    write_briefing(tmp_path, briefing())
+    bot = make_bot(tmp_path, public_read_only=True)
+
+    reply = bot.handle(Update(update_id=1, chat_id=STRANGER, text="hey"))
+
+    assert reply is not None
+    assert reply.startswith(GREETING_PREFIX)
+
+
+def test_latest_asked_by_command_is_not_greeted(tmp_path: Path) -> None:
+    """/latest is a request for the briefing, not a conversation."""
+    write_briefing(tmp_path, briefing())
+    bot = make_bot(tmp_path)
+
+    reply = bot.handle(Update(update_id=1, chat_id=OWNER, text="/latest"))
+
+    assert reply is not None
+    assert not reply.startswith(GREETING_PREFIX)

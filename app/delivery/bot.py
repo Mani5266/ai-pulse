@@ -69,6 +69,52 @@ GUEST_HELP = (
 
 OWNER_ONLY = "That command is for the bot's owner. Send anything else for the briefing."
 
+GREETINGS: frozenset[str] = frozenset(
+    {
+        "hi",
+        "hii",
+        "hiii",
+        "hey",
+        "heyy",
+        "hello",
+        "helo",
+        "hlo",
+        "yo",
+        "sup",
+        "hai",
+        "hola",
+        "namaste",
+        "gm",
+        "morning",
+        "good",  # opens "good morning", "good evening", "good afternoon"
+        "start",
+    }
+)
+"""Openers that deserve an answer rather than a wall of text.
+
+Matched on the first word only, so "hi what happened today" is a greeting and "hiring
+freeze at OpenAI" is not — the whole first word has to be one of these. Deliberately
+generous about spelling: somebody typing "hlo" on a phone means hello."""
+
+GREETING_PREFIX = "👋 Hi. Here is today's briefing.\n\n"
+"""Prepended to the briefing when the message was a greeting.
+
+A bot that answers "hello" with five stories and no acknowledgement reads like a machine
+that did not hear you. One line fixes that, and it costs nothing: the briefing underneath
+is the same stored text."""
+
+
+def is_greeting(text: str) -> bool:
+    """Is this an opener rather than a question?
+
+    First word only, lowercased, with trailing punctuation removed so that "hi!" and
+    "hello," count. An empty message is not a greeting: it is nothing at all.
+    """
+    words = text.strip().split()
+    if not words:
+        return False
+    return words[0].lower().strip(".,!?;:") in GREETINGS
+
 
 @dataclass(frozen=True, slots=True)
 class Update:
@@ -102,13 +148,18 @@ def _staleness_note(briefing: Briefing) -> str:
     return f"\n\n<i>This briefing is {hours:.0f} hours old. Send /refresh to rebuild it.</i>"
 
 
-def latest_reply(data_dir: Path) -> str:
-    """The stored briefing, rendered, with a note if it has gone stale."""
+def latest_reply(data_dir: Path, *, text: str = "") -> str:
+    """The stored briefing, rendered, with a note if it has gone stale.
+
+    ``text`` is the message that asked for it, used only to decide whether to say hello
+    first. Passing nothing gives the bare briefing, which is what /latest wants.
+    """
     briefings = all_briefings(data_dir)
     if not briefings:
         return "No briefing has been produced yet. Send <b>/refresh</b> to build the first one."
     briefing = briefings[0]
-    return render_telegram(briefing) + _staleness_note(briefing)
+    prefix = GREETING_PREFIX if text and is_greeting(text) else ""
+    return prefix + render_telegram(briefing) + _staleness_note(briefing)
 
 
 def status_reply(data_dir: Path) -> str:
@@ -229,7 +280,7 @@ class BriefingBot:
                 return "Refreshing is not available in this process."
             logger.info("bot: refresh requested")
             return self._refresh()
-        return latest_reply(self._settings.data_dir)
+        return latest_reply(self._settings.data_dir, text=update.text)
 
     def _guest_reply(self, update: Update, command: str) -> str | None:
         """What a stranger gets in public mode: the briefing, and nothing that costs.
@@ -252,7 +303,7 @@ class BriefingBot:
 
         if command in {"/start", "/help"}:
             return GUEST_HELP
-        return latest_reply(self._settings.data_dir)
+        return latest_reply(self._settings.data_dir, text=update.text)
 
     def confirm(self) -> None:
         """Tell Telegram the handled updates are done with.
