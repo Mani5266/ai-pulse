@@ -459,7 +459,7 @@ ai-pulse/
 ├── tests/{unit,integration,security}/
 ├── evals/               dataset + injection corpus
 ├── data/                NDJSON, committed
-├── docs/                ARCHITECTURE.md, SECURITY.md, DECISIONS.md
+├── docs/                ARCHITECTURE.md, SECURITY.md (decisions live in §2 here)
 ├── site/                generated static site
 └── .github/workflows/   ci.yml, daily.yml
 ```

@@ -134,16 +134,19 @@ Everything above `[ score:llm ]` is deterministic and unit-testable without a mo
 Three design rules carry most of the weight:
 
 1. **Deterministic filtering runs before the first model call.** At most 20 events reach
-   the LLM, and the run is capped at 25 model calls, so the pipeline fits inside any free
-   API tier.
+   the LLM, a nominal run spends about 30 calls, and the run is capped at 60, so the
+   pipeline fits inside any free API tier.
 2. **The LLM receives data, never authority.** No shell, no filesystem, no browser, no
-   database write, no network. Article text is wrapped in `<DOCUMENT>` tags and the system
+   database write, no network. Article text is wrapped in `<document>` tags and the system
    prompt declares it untrusted. Every response is validated against a Pydantic schema.
 3. **Git is the database.** Article and event records are committed as NDJSON, so the
    repository history *is* the timeline. A SQLite database is rebuilt from it on demand
    and is gitignored.
 
-Full reasoning, including the rejected alternatives, is in [PLAN.md](PLAN.md).
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) walks the pipeline stage by stage, and
+[docs/SECURITY.md](docs/SECURITY.md) covers the threat model, the SSRF guard and the
+prompt-injection boundary — including what they do not defend against. Full reasoning,
+including the rejected alternatives, is in [PLAN.md](PLAN.md).
 
 ## Measured
 

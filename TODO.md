@@ -3,9 +3,9 @@
 Hand this to a fresh session. It carries only outstanding work, plus the context that is
 not visible in the code.
 
-P0–P10 are complete and the pipeline runs unattended. Hardening items 1–4 (pinned
-dependencies, dependency auditing, weekly feed verification, a fallback model provider)
-are done and pushed.
+P0–P10 are complete and the pipeline runs unattended. Hardening items 1–5 (pinned
+dependencies, dependency auditing, weekly feed verification, a fallback model provider,
+and the architecture and security documents) are done and pushed.
 
 | | |
 | --- | --- |
@@ -55,21 +55,14 @@ exist. **Do not fill these in on the owner's behalf.**
 
 ## Hardening, remaining
 
-Items 1–4 are done. These are what is left, in priority order. Roughly half a day.
+Items 1–5 are done. These are what is left, in priority order. Roughly two hours.
 
-### 4. Write the documents the layout already promises
-
-`docs/ARCHITECTURE.md` and `docs/SECURITY.md` are named in the project structure and were
-never written, and there is no `SECURITY.md` or `CONTRIBUTING.md` at the root. Most of the
-content already exists in `PLAN.md` §2 and needs lifting rather than composing. For a public
-repository this is the cheapest credibility available.
-
-### 5. Measure coverage
+### 4. Measure coverage
 
 606 tests is a count, not a claim about what is covered. `pytest-cov` with a floor in CI
 turns it into one.
 
-### 6. Alert on a degraded run, not only a failed one
+### 5. Alert on a degraded run, not only a failed one
 
 GitHub emails the owner when a scheduled workflow fails, so an outright failure is not
 silent. A run that *succeeds* while publishing two stories instead of five is silent, and
