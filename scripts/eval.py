@@ -72,6 +72,14 @@ def _format(structure: StructuralReport, judgement: JudgementReport, injection: 
             if accuracy is not None
             else "  category accuracy         no categories corrected",
         ]
+        if not judgement.is_owner_judgement:
+            lines += [
+                "",
+                f"  These labels were written by {judgement.labelled_by}, not by the",
+                "  repository owner. Precision asks whether the pipeline picked what this",
+                "  reader wanted, so treat the figure as a draft to correct rather than a",
+                "  measurement to publish.",
+            ]
 
     return "\n".join(lines)
 

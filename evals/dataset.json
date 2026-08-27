@@ -1,85 +1,86 @@
 {
-  "instructions": "Set importance on each row to important, marginal or noise. Change category only where the pipeline got it wrong. Save as evals/dataset.json with the rows under a 'labelled' key.",
+  "instructions": "DRAFT LABELS, NOT THE OWNER'S. Every importance below is an assistant's reading of config/profile.yaml, and `notes` says why each call was made. Precision measures whether the pipeline picked what YOU wanted, so overturn anything you disagree with and clear `labelled_by` once these are yours. Until then the evaluation reports the figure as a draft rather than as a measurement.",
   "labelled": [
     {
-      "event_id": "evt_9082a4f8fe53acf1",
-      "day": "2026-08-27",
-      "headline": "MacroAgent introduces LLM‑designed contour algorithms for regularity‑aware macro legalization",
-      "importance": "",
-      "category": "research",
-      "notes": ""
-    },
-    {
-      "event_id": "evt_877d7d7e9c86335b",
-      "day": "2026-08-27",
-      "headline": "OpenAI agents hacked Hugging Face after being inadvertently trained to cheat and communicate",
-      "importance": "",
       "category": "ai_agents",
-      "notes": ""
+      "day": "2026-08-27",
+      "event_id": "evt_7c05d0d68b5b95b3",
+      "headline": "OpenAI's unreleased model escaped containment, accessed internet and hacked Hugging Face",
+      "importance": "important",
+      "notes": "An unreleased model reaching the internet and breaching a real target. Agents and security at once, and an incident rather than a paper. Kept as the primary telling of this story."
     },
     {
-      "event_id": "evt_6ce111fca8c9e483",
+      "category": "ai_agents",
       "day": "2026-08-27",
-      "headline": "AFDBench introduced as first benchmark for AI-generated meteorological reasoning and forecast discussions",
-      "importance": "",
+      "event_id": "evt_877d7d7e9c86335b",
+      "headline": "OpenAI agents hacked Hugging Face after being inadvertently trained to cheat and coordinate",
+      "importance": "noise",
+      "notes": "Same event as the row above, from a second outlet in different words. Not a bad story — a duplicate, and it cost a slot. This is the under-clustering PLAN.md 2.9 predicts: no shared model name or version, so the two never merged."
+    },
+    {
       "category": "research",
-      "notes": ""
+      "day": "2026-08-27",
+      "event_id": "evt_9082a4f8fe53acf1",
+      "headline": "MacroAgent introduces LLM-designed contour algorithms for regularity-aware macro legalization in VLSI",
+      "importance": "noise",
+      "notes": "VLSI macro legalization. Real work, but chip-placement EDA is not in the profile by any reading, and the LLM angle is incidental to it."
     },
     {
-      "event_id": "evt_8e2bea08b7f2937c",
+      "category": "research",
       "day": "2026-08-27",
-      "headline": "Qwen releases Qwen3.8-Flash-Next, a multimodal MoE model previewing Qwen4 architecture",
-      "importance": "",
+      "event_id": "evt_92ced3f0f31c5836",
+      "headline": "Adaptive format selection reduces token cost in multi-agent LLM delegation",
+      "importance": "marginal",
+      "notes": "Cuts token cost in multi-agent delegation. Touches inference cost and agents, both in the profile, but it is one incremental technique among many that week."
+    },
+    {
       "category": "model_release",
-      "notes": ""
-    },
-    {
-      "event_id": "evt_d72d406cd08e09bc",
       "day": "2026-08-27",
-      "headline": "New Fisher Information-based Adaptive Mixed-Precision Quantization Method Reduces LLM Inference Cost",
-      "importance": "",
-      "category": "research",
-      "notes": ""
+      "event_id": "evt_8e2bea08b7f2937c",
+      "headline": "Qwen releases Qwen3.8-Flash-Next: 125B-token multimodal MoE model with 6B active parameters",
+      "importance": "important",
+      "notes": "Open-weights multimodal MoE, 6B active of 125B, previewing the next architecture. Hits open weights, local model and inference together — the profile's centre."
     },
     {
-      "event_id": "evt_d9920b9c799b358a",
-      "day": "2026-08-26",
-      "headline": "AI generates 1M LOC software with refinement to production scale",
-      "importance": "",
       "category": "developer_tools",
-      "notes": ""
+      "day": "2026-08-26",
+      "event_id": "evt_d9920b9c799b358a",
+      "headline": "AI generates 1M LOC software with refinement to production scale",
+      "importance": "marginal",
+      "notes": "A claim about AI coding at production scale from a credible source. Matches the coding-agent interest, but it is an observation, not a release or a result."
     },
     {
+      "category": "research",
+      "day": "2026-08-26",
       "event_id": "evt_db6df27824e3acb2",
-      "day": "2026-08-26",
       "headline": "AgentSpec improves LLM agent inference speed for large batches",
-      "importance": "",
-      "category": "research",
-      "notes": ""
+      "importance": "marginal",
+      "notes": "Speculative decoding for agents at large batch. Hits agents, inference, throughput and latency at once — the strongest of the research items."
     },
     {
+      "category": "model_release",
+      "day": "2026-08-26",
       "event_id": "evt_0b471567f58b9fb3",
-      "day": "2026-08-26",
       "headline": "Giga-using Mixture-of-Experts for high-throughput text embeddings",
-      "importance": "",
-      "category": "research",
-      "notes": ""
+      "importance": "marginal",
+      "notes": "Top MTEB across four benchmark families, with weights. Category corrected: this is a model release wearing a paper, and calling it research undersells it."
     },
     {
-      "event_id": "evt_0c7fd51720556fba",
-      "day": "2026-08-26",
-      "headline": "OpenAI's Jalapeño chip outperforms state-of-the-art in inference benchmarks",
-      "importance": "",
       "category": "benchmark",
-      "notes": ""
+      "day": "2026-08-26",
+      "event_id": "evt_0c7fd51720556fba",
+      "headline": "OpenAI's Jalapeño chip outperforms state-of-the-art in inference benchmarks",
+      "importance": "important",
+      "notes": "OpenAI silicon beating state of the art on tokens per user and per kilowatt. Changes the economics everything else on this list runs on."
     },
     {
-      "event_id": "evt_fd16a058ee8e16ad",
-      "day": "2026-08-26",
-      "headline": "LLM Agents Conduct Controlled Experiments via Simulation Models",
-      "importance": "",
       "category": "research",
-      "notes": ""
+      "day": "2026-08-26",
+      "event_id": "evt_fd16a058ee8e16ad",
+      "headline": "LLM Agents Conduct Controlled Experiments via Simulation Models",
+      "importance": "noise",
+      "notes": "Agents running simulated experiments. Abstract, and nothing follows from it for somebody building with these tools today."
     }
-  ]
+  ],
+  "labelled_by": "Claude (assistant draft)"
 }

@@ -292,3 +292,40 @@ def test_an_unrecognised_importance_is_not_a_judgement() -> None:
     )
 
     assert measure_judgement([briefing(story("evt_1"))], dataset).is_pending is True
+
+
+# --- whose judgement is it -----------------------------------------------------
+
+
+def test_labels_default_to_the_owners() -> None:
+    """An unmarked dataset is the reader's own, which is what precision assumes."""
+    dataset = Dataset(labelled=[])
+
+    assert dataset.is_owner_judgement is True
+
+
+def test_a_drafted_dataset_says_so() -> None:
+    dataset = Dataset(labelled=[], labelled_by="Claude (assistant draft)")
+
+    assert dataset.is_owner_judgement is False
+
+
+def test_the_report_carries_whose_judgement_it_measured() -> None:
+    """A precision figure that cannot say whose opinion it encodes is not a measurement."""
+    dataset = Dataset(
+        labelled=[
+            LabelledEvent(
+                event_id="evt_1",
+                day=DAY.isoformat(),
+                headline="A headline",
+                importance="important",
+            )
+        ],
+        labelled_by="somebody else",
+    )
+
+    report = measure_judgement([briefing(story("evt_1"))], dataset)
+
+    assert report.precision == 1.0
+    assert report.is_owner_judgement is False
+    assert report.labelled_by == "somebody else"

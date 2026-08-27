@@ -82,6 +82,20 @@ class Dataset(BaseModel):
 
     labelled: list[LabelledEvent] = Field(default_factory=list)
 
+    labelled_by: str = ""
+    """Who made these judgements. Empty means the repository owner.
+
+    Precision is the one metric here that is not computed from the data, and its whole
+    value rests on whose opinion it encodes: it asks whether the pipeline picked what *this
+    reader* wanted. A draft written by somebody or something else is a useful starting
+    point and is not that number. Recording the difference costs one string; not recording
+    it means publishing a figure that quietly claims to be something it is not."""
+
+    @property
+    def is_owner_judgement(self) -> bool:
+        """True when the labels are the reader's own, which is what precision assumes."""
+        return not self.labelled_by.strip()
+
     @property
     def judged(self) -> list[LabelledEvent]:
         """Only the rows a person has ruled on. A generated sheet is not a dataset."""
@@ -142,9 +156,17 @@ class JudgementReport(BaseModel):
     category_agreements: int = 0
     category_comparisons: int = 0
 
+    labelled_by: str = ""
+    """Carried through from the dataset so a report cannot state precision without also
+    stating whose opinion produced it. Empty means the repository owner."""
+
     @property
     def is_pending(self) -> bool:
         return self.labelled == 0
+
+    @property
+    def is_owner_judgement(self) -> bool:
+        return not self.labelled_by.strip()
 
     @property
     def precision(self) -> float | None:
@@ -247,6 +269,7 @@ def measure_judgement(briefings: Sequence[Briefing], dataset: Dataset) -> Judgem
                 agreements += 1
 
     return JudgementReport(
+        labelled_by=dataset.labelled_by,
         labelled=len(dataset.judged),
         matched=matched,
         important_published=important,

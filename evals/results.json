@@ -10,12 +10,13 @@
     "stories_without_summary": 0
   },
   "judgement": {
-    "labelled": 0,
-    "matched": 0,
-    "important_published": 0,
-    "noise_published": 0,
-    "category_agreements": 0,
-    "category_comparisons": 0
+    "labelled": 10,
+    "matched": 10,
+    "important_published": 3,
+    "noise_published": 3,
+    "category_agreements": 9,
+    "category_comparisons": 10,
+    "labelled_by": "Claude (assistant draft)"
   },
   "injection": {
     "total": 40,
@@ -23,7 +24,7 @@
     "escape_rate": 0.0,
     "structural_escapes": 0,
     "model_escapes": 0,
-    "model_attacks_run": 40,
+    "model_attacks_run": 0,
     "by_category": {}
   }
 }
