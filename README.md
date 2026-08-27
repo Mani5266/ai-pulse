@@ -16,9 +16,16 @@ ten minutes.
 
 ### 1. Get two credentials
 
-**A model API key.** [console.groq.com/keys](https://console.groq.com/keys) — free tier, no
-card. The free allowance is 200,000 tokens a day; one run costs roughly 40,000, so a daily
-briefing plus a few manual runs fits comfortably.
+**Model API keys — one is enough, two is better.** Both free, neither needs a card:
+
+- [console.groq.com/keys](https://console.groq.com/keys) — 200,000 tokens a day. One run
+  costs roughly 40,000.
+- [openrouter.ai/keys](https://openrouter.ai/keys) — a second free allowance.
+
+The run uses them as a chain. When Groq's allowance is spent mid-run, the next call goes to
+OpenRouter and the briefing finishes instead of degrading to a headline list. That is not
+theoretical: it happened on the first day this shipped, and it is also what let the
+prompt-injection corpus run at full coverage — one tier ran out after four attacks.
 
 **A Telegram bot,** if you want the briefing on your phone. Message
 [@BotFather](https://t.me/BotFather), send `/newbot`, and keep the token. Then message your
@@ -33,9 +40,14 @@ Fork the repository, then under **Settings → Secrets and variables → Actions
 
 | Secret | Value |
 | --- | --- |
-| `AI_PULSE_LLM_API_KEY` | your Groq key |
+| `AI_PULSE_GROQ_API_KEY` | your Groq key |
+| `AI_PULSE_OPENROUTER_API_KEY` | your OpenRouter key — optional, and the difference between a briefing that finishes and one that stops halfway |
 | `AI_PULSE_TELEGRAM_BOT_TOKEN` | your bot token, if using Telegram |
 | `AI_PULSE_TELEGRAM_CHAT_ID` | your chat id, if using Telegram |
+
+A tier with no key is skipped, so an unset one costs nothing. `AI_PULSE_LLM_API_KEY` still
+works for a single-provider deployment, but the per-tier names are what the workflow reads
+first.
 
 To find your chat id, message your bot and then open
 `https://api.telegram.org/bot<YOUR_TOKEN>/getUpdates` — it is the `chat.id` field.
@@ -109,50 +121,140 @@ attaches a verification status to every material claim.
 
 ## Architecture
 
+One principle decides everything below it: **deterministic code does the work, and the
+model is asked only for judgement it is genuinely better at.** That is not taste. A free
+tier allows 200,000 tokens a day, and sending five hundred articles to a model would spend
+it before the first briefing was written. Cutting five hundred to twenty in ordinary Python
+is what makes the whole thing cost nothing.
+
 ```
    RSS feeds (~25)
         |
-   [ fetch ]        SSRF guard, timeouts, size caps, redirect limit
+   [ fetch ]        SSRF validation per hop, 5 MB cap, 3 redirects, timeouts
         |
    [ normalize ]    URL canonicalization, content hash
         |
    [ dedupe ]       URL hash, content hash, title trigram similarity
         |
-   [ cluster ]      articles -> events
+   [ recency ]      window follows the last briefing; nothing older than 24h
         |
-   [ score:code ]   credibility, novelty, personal_relevance -> top 20
+   [ cluster ]      articles -> events (trigram overlap + shared entities)
         |
-   [ score:llm ]    technical / industry / developer impact
+   [ score:code ]   credibility, novelty, personal relevance -> top 20    <- 500 to 20 here
+        |
+   [ score:llm ]    technical / industry / developer impact, schema-validated
         |
    [ verify ]       claims cross-checked within the event cluster
         |
-   [ rank ]         deterministic weighted score
+   [ rank ]         weighted score over all six sub-scores
         |
-   [ edit ]         top 5 stories -> briefing
+   [ edit ]         top 5 events -> briefing
         |
    +----------------+----------------+
    |                                 |
 GitHub Pages                     Telegram
+(public, permanent)              (private, ~1s)
 ```
 
-Everything above `[ score:llm ]` is deterministic and unit-testable without a model.
+Everything above `[ score:llm ]` runs without a model and is unit-tested without one.
 
-Three design rules carry most of the weight:
+### The six-part score, and which half the model touches
 
-1. **Deterministic filtering runs before the first model call.** At most 20 events reach
-   the LLM, a nominal run spends about 30 calls, and the run is capped at 60, so the
-   pipeline fits inside any free API tier.
-2. **The LLM receives data, never authority.** No shell, no filesystem, no browser, no
-   database write, no network. Article text is wrapped in `<document>` tags and the system
-   prompt declares it untrusted. Every response is validated against a Pydantic schema.
-3. **Git is the database.** Article and event records are committed as NDJSON, so the
-   repository history *is* the timeline. A SQLite database is rebuilt from it on demand
-   and is gitignored.
+| Sub-score | Weight | Source |
+| --- | --- | --- |
+| `credibility` | 0.15 | Source registry, plus corroboration across sources |
+| `novelty` | 0.15 | Event history — is this new, or the same story again? |
+| `personal_relevance` | 0.15 | `config/profile.yaml` |
+| `technical_impact` | 0.20 | Model |
+| `industry_impact` | 0.15 | Model |
+| `developer_impact` | 0.20 | Model |
 
-[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) walks the pipeline stage by stage, and
-[docs/SECURITY.md](docs/SECURITY.md) covers the threat model, the SSRF guard and the
-prompt-injection boundary — including what they do not defend against. Full reasoning,
-including the rejected alternatives, is in [PLAN.md](PLAN.md).
+The first design had the model produce five of the six and called the result
+deterministic. A weighted average of model guesses is not deterministic. Splitting it this
+way makes half the formula reproducible and lets the deterministic half do the cutting
+**before the first model call**.
+
+### Three rules for the model
+
+**It gets data, never authority.** Structured text in, structured JSON out. No shell, no
+filesystem, no network, no database write. Nothing it returns is executed, and nothing it
+returns decides what the pipeline does next — only what a number is. A test asserts the
+provider class exposes no method named `run`, `execute`, `shell`, `read_file`, `fetch` or
+`tools`, so the property cannot be lost by accident.
+
+**Every response is schema-validated.** One that does not fit is discarded, not parsed
+leniently. One retry, then the event keeps only its deterministic score and the run
+continues.
+
+**The budget is quota and wall-clock, not money.** 60 calls per run, 120 seconds per call.
+A nominal run spends about 30.
+
+### The provider chain
+
+`AI_PULSE_LLM_CHAIN` names free tiers in order — `groq,openrouter`. A chain advances only
+when a link has nothing left to give: a spent daily allowance, or HTTP 401/402/403. Never
+on malformed JSON, a schema violation, or a timeout, because those mean the *task* is hard
+rather than the *provider* finished, and moving on would burn a second free allowance on
+the same failure.
+
+That distinction came from a real defect. A Cerebras key listed models happily and returned
+`402 Payment Required` on every completion. Sitting second in the chain, it fell into the
+generic error path — which returns nothing without marking the provider spent, and a
+chain reads that as "the next one fails the same way" and stops. It would have ended every
+run that reached it.
+
+### Git is the database
+
+NDJSON, one object per line, partitioned by UTC date, committed:
+
+```
+data/articles/2026-08-27.ndjson    data/briefings/2026-08-27.json
+data/events/2026-08-27.ndjson      data/runs/2026-08.ndjson
+```
+
+A committed SQLite binary would bloat the repository and diff as noise. Line-oriented JSON
+appends cleanly and diffs as added lines, so the git history of `data/` *is* the timeline
+the product promises. Keys are written sorted, so a re-run that changes nothing produces no
+diff.
+
+### Where it runs
+
+No server, and nothing on a laptop.
+
+| Where | What | When |
+| --- | --- | --- |
+| GitHub Actions | The pipeline; commits `data/`, deploys Pages | 02:00 UTC, retried 08:00 if skipped |
+| GitHub Pages | The site, and `bot.json` — every reply the bot can give | Deployed by the run above |
+| Cloudflare Workers | The Telegram webhook | Per message, ~1 second |
+
+The bot is a webhook rather than a poller because GitHub throttles scheduled runs — a `*/5`
+cron landed three times in six hours. The Worker holds **no project text**: the daily run
+renders every reply it can give into `bot.json`, and the Worker picks one by command. Two
+renderers would drift; this way there is one, in Python, under test.
+
+### When something breaks
+
+| Failure | Response |
+| --- | --- |
+| One feed fails | Logged, recorded in run stats, run continues |
+| A response fails validation | Retry once, mark the event `llm_failed`, continue |
+| A provider is spent or unusable | Advance to the next link in the chain |
+| Every provider is gone | Publish on the deterministic ranking, without prose |
+| Telegram delivery fails | The briefing is already saved; the next run retries |
+| The pipeline crashes | `state.json` advances only on success, so the next run re-covers the window |
+
+The failure this design could not see was the *quiet* one — a run that succeeds while
+publishing two stories instead of five. GitHub emails on a failed workflow and says nothing
+about a thin one. `app/delivery/health.py` closes that: it reads the run record and sends a
+Telegram notice when the run was degraded. Quiet is not degraded, and the distinction is
+the whole module — two stories from a shortlist of two is the pipeline working; two from a
+shortlist of twenty is a fault.
+
+[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) walks every stage and the constraint that put
+it there. [docs/SECURITY.md](docs/SECURITY.md) covers the threat model, the SSRF guard and
+the prompt-injection boundary — including what they do not defend against. `PLAN.md` §2 is
+the decision record, including the decisions that were wrong first.
+
 
 ## Measured
 
@@ -167,7 +269,8 @@ with `--with-model`.
 | Stories citing a source | **100%** |
 | Claim attributions valid | **100%** — an attribution to a source the event lacks is discarded |
 | Duplicate events in one briefing | **0** |
-| Test coverage | **93%** of `app/`, branch coverage, floor of 88% enforced in CI |
+| Test coverage | **94%** of `app/`, branch coverage, floor of 88% enforced in CI |
+| Tests | **651** Python, **24** JavaScript for the webhook |
 | Precision, category accuracy | **pending labels** |
 
 The last row is deliberately blank. Those metrics need a person to say whether a story
@@ -183,27 +286,36 @@ nothing.
 
 ## Stack
 
-Python 3.11 · httpx · feedparser · Pydantic · Ruff · MyPy (strict) · pytest ·
-GitHub Actions · GitHub Pages · Telegram Bot API · Groq free tier (CI) ·
-Ollama (local development)
+Python 3.11 · httpx · feedparser · Pydantic · Ruff · MyPy (strict) · pytest · pytest-cov ·
+GitHub Actions · GitHub Pages · Cloudflare Workers · Telegram Bot API ·
+Groq and OpenRouter free tiers · Ollama (local development)
 
-Recurring cost: zero.
+Recurring cost: zero. No card is required for any of it.
+
+Deliberately absent: Docker, Kubernetes, Postgres, a message queue, a web framework. Each
+was considered and cut — `PLAN.md` §31 is the argument. Infrastructure with no user reads
+as cargo cult rather than as rigour, and a `Dockerfile` that nothing deployed was deleted
+for exactly that reason.
 
 ## Status
 
 | Phase | Scope | State |
 | --- | --- | --- |
 | P0 | Repository, tooling, CI | Done |
-| P1 | Feed ingestion with SSRF protection | Done — 22/22 feeds live, 515 articles/run |
+| P1 | Feed ingestion with SSRF protection | Done — 24/25 feeds live, ~530 articles/run |
 | P2 | Canonicalization and deduplication | Done — 3-pass, deterministic |
 | P3 | Event clustering | Done — precision-tuned, under-clusters |
-| P4 | Deterministic scoring | Done — 490 events cut to 20 |
+| P4 | Deterministic scoring | Done — ~500 events cut to 20 before the first model call |
 | P5 | LLM provider layer | Done — schema-validated, budget-capped |
 | P6 | Briefing, Telegram, Pages | Done — delivered, site builds |
 | P7 | Claim verification | Done — labels computed in code |
 | P8 | Timeline | Done — built from committed snapshots |
 | P9 | Evaluation harness | Harness done; labels outstanding |
 | P10 | Observability | Done — published at /stats.html |
+
+Hardening, all done: pinned dependencies, `pip-audit` in CI, weekly feed verification, a
+fallback model provider, architecture and security documents, a coverage floor, and
+alerting on a degraded run.
 
 ## Development
 
@@ -219,10 +331,18 @@ ruff check .
 ruff format --check .
 mypy
 pytest
+pytest --cov                       # the coverage floor, as CI enforces it
+
+cd worker && node --test           # the Telegram webhook
+cd ..
 
 python scripts/verify_sources.py   # check every feed is still alive
 python -m app.jobs.daily_briefing
+python scripts/publish_site.py     # re-render the site from committed data; no model
 ```
+
+`--cov` is not in `addopts` on purpose: it would make running one test file fail a
+whole-project floor, which trains people to pass `--no-cov` and defeats the point.
 
 `.env` is gitignored and must never be committed. Only `.env.example` belongs in the
 repository.
