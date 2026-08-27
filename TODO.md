@@ -93,19 +93,16 @@ Move only when one of these becomes true:
 | --- | --- |
 | Runs needed more than a few times a day | €4/month VPS, systemd timer |
 | Repository goes private, so Actions minutes are metered | The same VPS |
-| The bot must be always-on and off the laptop | Fly.io free tier, or the VPS |
 | `data/` outgrows git — about 90 MB a year, so years away | Turso or Postgres, keep the NDJSON export |
 | A real API is needed rather than a static site | Then FastAPI earns its place; it was cut for good reason |
 
-The only one worth considering within months is moving the **bot**. `bot.yml` already took
-it off the laptop, so it no longer stops when the machine sleeps — but a scheduled workflow
-is not a substitute for a process. The cron asks for `*/5`; on 26 August the runs actually
-landed at 18:28, 20:30 and 23:59, and the daily 02:00 UTC run on the 27th was skipped
-outright and had to be dispatched by hand. GitHub drops scheduled runs under load and never
-says so. The pipeline survives this by design — the recency window follows
-`last_briefing_at`, so a late run collects what a skipped one missed — but a person who
-messages the bot has no such cover and waits hours for a reply. Long polling on Fly.io's
-free tier answers in seconds; `serve_bot` is already the entry point for it.
+None of these is close, and the one that was is now solved. The bot used to answer on a
+`*/5` schedule that GitHub throttled to three runs in six hours, so a message could wait
+until morning. It is a Cloudflare Worker on a webhook now: about a second, free, and no
+machine of ours involved. The container that was drafted to fix it — `Dockerfile`,
+`fly.toml` — has been removed rather than kept warm. It cost roughly $2 a month, this
+project's premise is zero cost, and infrastructure nothing deploys is the cargo cult named
+two paragraphs below.
 
 **Deliberately not on any list:** Docker, Kubernetes, Postgres, a message queue, a FastAPI
 layer, multi-region anything. Each is a moving part with no user. `PLAN.md` §31 is the
