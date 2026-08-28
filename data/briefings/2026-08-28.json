@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-08-27T14:14:43.284087Z",
+  "day": "2026-08-28",
+  "generated_at": "2026-08-28T14:17:16.931111Z",
+  "stats": {
+    "articles": 527,
+    "duplicates_removed": 0,
+    "events": 109,
+    "events_shortlisted": 20,
+    "feeds_failed": 1,
+    "feeds_ok": 24,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 153.7
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can adopt the deterministic, tool‑grounded multi‑agent architecture as a reference for building financial QA systems, requiring integration of external calculation tools and managing agent coordination to guarantee reproducible results.",
+      "event_id": "evt_f3a4701b135347c8",
+      "first_seen": "2026-08-28T04:00:00Z",
+      "headline": "CIFQA framework introduces deterministic, tool‑grounded multi‑agent LLMs for accurate financial query answering",
+      "last_updated": "2026-08-28T04:00:00Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "CIFQA: A Deterministic Tool-Grounded Multi-Agent LLM Framework for Financial Query Answering",
+          "url": "https://arxiv.org/abs/2608.26114"
+        }
+      ],
+      "what_happened": "The paper CIFQA (arXiv:2608.26114v1) presents a new deterministic, tool‑grounded multi‑agent large language model framework designed for calculation‑intensive financial question answering. It targets exact reasoning over structured rates, temporal conditions, numerical formulas, and rule‑based constraints, addressing the tendency of standard LLMs to produce numerically incorrect but plausible answers.",
+      "why_it_matters": "By ensuring deterministic execution and precise tool integration, CIFQA aims to reduce numerical errors in financial calculations, improving reliability for applications that require exact financial reasoning such as risk analysis, compliance, and automated advisory services."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers of medical LLMs may need to adopt CARE's causal alignment and exploration techniques, which could involve new RL training loops, modified loss functions, and additional tooling for credit assignment, but the paper does not detail specific APIs or libraries.",
+      "event_id": "evt_5413cacb7968c78f",
+      "first_seen": "2026-08-28T04:00:00Z",
+      "headline": "CARE framework introduced to improve causal reasoning in medical large language models",
+      "last_updated": "2026-08-28T04:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "CARE: Causally-Aligned Reasoning Exploration for Medical Large Language Models",
+          "url": "https://arxiv.org/abs/2608.26147"
+        }
+      ],
+      "what_happened": "Researchers presented CARE (Causally-Aligned Reasoning Exploration), a new approach for training medical LLMs. It targets the scarcity of expert-annotated data by using reinforcement learning while addressing two known problems: autoregressive credit‑assignment failure and gradient‑variance explosion, which can cause models to produce correct answers for the wrong reasons.",
+      "why_it_matters": "By mitigating the \"Right Answer, Wrong Reason\" trap, CARE aims to make medical LLM outputs more trustworthy and aligned with true clinical reasoning, potentially improving safety and efficacy of AI‑assisted diagnostics and treatment recommendations."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Backend and AI engineers can now use the FedCMAPSS benchmark to train and compare federated learning algorithms for RUL prediction, integrating it with existing FL frameworks (e.g., TensorFlow Federated, PySyft) and leveraging its evaluation metrics to assess model performance across distributed clients.",
+      "event_id": "evt_62284d0edfcb91d9",
+      "first_seen": "2026-08-28T04:00:00Z",
+      "headline": "New FedCMAPSS benchmark enables federated learning research for remaining useful life estimation",
+      "last_updated": "2026-08-28T04:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "FedCMAPSS: A Benchmark for Federated Learning in Remaining Useful Life Estimation",
+          "url": "https://arxiv.org/abs/2608.26433"
+        }
+      ],
+      "what_happened": "The authors introduced FedCMAPSS, a benchmark that provides a dataset and evaluation framework specifically for applying federated learning to remaining useful life (RUL) estimation tasks. It addresses the prior absence of a common evaluation platform for FL‑based prognostics models.",
+      "why_it_matters": "By offering a standardized, privacy‑preserving testbed, FedCMAPSS facilitates reproducible research and accelerates development of robust RUL models without requiring raw sensor data sharing, which is critical for Industry 4.0 deployments where data scarcity and confidentiality are concerns."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers of LLM‑enabled robots receive a concrete, eight‑part template and design guidelines that can be directly applied to craft prompts, improving persona consistency, safety, and predictability without extensive trial‑and‑error.",
+      "event_id": "evt_70ee64ba58194281",
+      "first_seen": "2026-08-28T04:00:00Z",
+      "headline": "Framework and eight-component prompt template introduced for LLM-based robot personas",
+      "last_updated": "2026-08-28T04:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Why did My Robot Just Change Personality? Prompting Guidelines for a Grounded Robot Persona in LLM-Based HRI",
+          "url": "https://arxiv.org/abs/2608.26182"
+        }
+      ],
+      "what_happened": "The paper presents a new framework for designing prompts used by large language models in social robots and proposes a structured prompt template that consists of eight functional components. The framework aims to address underspecified prompt design that can cause hallucinated capabilities, unclear behavioural boundaries, and misleading robot personas.",
+      "why_it_matters": "A clearer, component‑based prompt structure can reduce hallucinations and ambiguous behavior in robot‑human interactions, leading to more reliable and trustworthy social robots. This helps ensure that robot personas are grounded and behave within defined limits, which is critical for safe deployment of LLM‑driven robots."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "Developers may need to integrate LLM APIs into multi‑stage workflows, implement agents for guideline verification, and handle data preprocessing for ICU datasets. The study suggests a modular architecture where each step can be independently improved or swapped.",
+      "event_id": "evt_8146504a8eb67b82",
+      "first_seen": "2026-08-28T04:00:00Z",
+      "headline": "Study compares standalone LLM to agentic pipeline for explaining ICU mortality predictions on eICU data",
+      "last_updated": "2026-08-28T04:00:00Z",
+      "score": 5.39,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Standalone LLM and a Pre-specified Agentic Pipeline for Explaining ICU Mortality Predictions: a Feasibility Study on the eICU Demo Dataset",
+          "url": "https://arxiv.org/abs/2608.26109"
+        }
+      ],
+      "what_happened": "A feasibility study was conducted using the eICU Demo Dataset to compare two approaches for generating explanations of ICU mortality predictions: a standalone large language model (LLM) and a pre‑specified multi‑step agentic pipeline that separates data interpretation, guideline checking, and final explanation. The study preserves the original comparison between the two methods while evaluating their ability to produce clinically useful narratives.",
+      "why_it_matters": "Providing narrative explanations for mortality risk predictions could make machine‑learning outputs more actionable for clinicians at the bedside, addressing the limitation of existing feature‑attribution methods that lack clinical context. If successful, such pipelines may increase trust and adoption of predictive models in intensive care settings."
+    }
+  ]
+}
