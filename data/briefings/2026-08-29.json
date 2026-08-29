@@ -1,0 +1,165 @@
+{
+  "covers_since": "2026-08-28T14:14:43.284087Z",
+  "day": "2026-08-29",
+  "generated_at": "2026-08-29T08:55:29.945417Z",
+  "stats": {
+    "articles": 453,
+    "duplicates_removed": 0,
+    "events": 12,
+    "events_shortlisted": 18,
+    "feeds_failed": 1,
+    "feeds_ok": 24,
+    "model_calls": 24,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 121.4
+  },
+  "stories": [
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.85,
+      "event_id": "evt_14adab6546acabca",
+      "first_seen": "2026-08-28T19:30:38Z",
+      "headline": "Anthropic researcher shows self-improving AI improves on all misalignment benchmarks",
+      "last_updated": "2026-08-28T19:30:38Z",
+      "score": 5.062,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "An Anthropic researcher just gave us a peek at self-improving AI",
+          "url": "https://techcrunch.com/2026/08/28/an-anthropic-researcher-just-gave-us-a-peek-at-self-improving-ai/"
+        }
+      ],
+      "what_happened": "An Anthropic researcher demonstrated that an automated system could self‑improve on ten specific benchmarks measuring misaligned behaviors, achieving better performance on each benchmark without any degradation in overall performance.",
+      "why_it_matters": "The result suggests AI systems may be able to autonomously reduce misaligned or unsafe behaviors while maintaining overall capability, a step toward safer, more reliable AI and a potential shift in how alignment research is approached."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers can invoke the vphone-cli to launch a virtual iPhone locally on macOS that supports Virtualization.framework, enabling local iOS testing and possible inclusion in CI pipelines; requires compatible Mac hardware and macOS version.",
+      "event_id": "evt_bd488c1cb70b7284",
+      "first_seen": "2026-08-28T23:02:21Z",
+      "headline": "Tool enables booting a virtual iPhone on macOS via Virtualization.framework",
+      "last_updated": "2026-08-28T23:02:21Z",
+      "score": 4.603,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Boot a Virtual iPhone via Apple's Virtualization.framework",
+          "url": "https://github.com/Lakr233/vphone-cli"
+        }
+      ],
+      "what_happened": "A GitHub project (vphone-cli) shows that Apple’s Virtualization.framework can be used to start a virtual iPhone instance, effectively emulating iOS hardware on a Mac machine.",
+      "why_it_matters": "It gives developers a software‑only way to run iOS environments without needing physical devices, simplifying testing, automation, and integration of iOS components with backend or AI workflows."
+    },
+    {
+      "category": "security",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "hacker-news",
+            "simon-willison"
+          ],
+          "text": "A rumor of a bug is enough to find a security exploit these days."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Anil Madhavapeddy is a professor of computer science at Cambridge."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Anil Madhavapeddy is a core maintainer of the OCaml compiler."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Security issues in OCaml projects are seeing evidence of attempted exploits within minutes of patches being shared for discussion."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "A typical security issue takes a few days to be exploited, and a release within a week or two is reasonable."
+        }
+      ],
+      "confidence": 0.78,
+      "developer_impact": "Developers, especially those using OCaml or similar languages, may need to treat patch discussions as sensitive, limit public exposure of fixes, monitor for immediate exploit attempts, and consider faster release or hot‑patch mechanisms to mitigate the shortened exposure window.",
+      "event_id": "evt_a3d40848cd03fefd",
+      "first_seen": "2026-08-28T15:58:46Z",
+      "headline": "Rumors of bugs trigger exploit attempts within minutes in OCaml projects",
+      "last_updated": "2026-08-28T22:12:02Z",
+      "score": 4.463,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Just the rumour of a bug is enough to find an exploit these days",
+          "url": "https://anil.recoil.org/notes/rumour-is-the-exploit"
+        },
+        {
+          "source_id": "simon-willison",
+          "title": "Just a rumour of a bug is enough to find a security exploit these days",
+          "url": "https://simonwillison.net/2026/Aug/28/just-a-rumour-of-a-bug/"
+        }
+      ],
+      "what_happened": "Anil Madhavapeddy reported that security issues in OCaml projects are seeing attempted exploits within minutes of patches being shared for discussion, with a specific instance where exploit attempts began about ten minutes after a patch was posted. This is much faster than the usual few days to weeks before exploitation.",
+      "why_it_matters": "The rapid turnaround shrinks the safe window for fixing vulnerabilities, increasing the risk that attackers can weaponize a bug before a full release is available. It pressures maintainers to accelerate disclosure and patching processes and raises concerns about public discussion of unpatched bugs."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers can download the model weights, incorporate them into applications, and fine‑tune for specific tasks.",
+      "event_id": "evt_4424584ee706d4b4",
+      "first_seen": "2026-08-28T15:20:13Z",
+      "headline": "GLM-5.3 model released with open weights",
+      "last_updated": "2026-08-28T15:20:13Z",
+      "score": 4.353,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "GLM-5.3 is now open-weight",
+          "url": "https://huggingface.co/zai-org/GLM-5.3"
+        }
+      ],
+      "what_happened": "The GLM-5.3 language model has been released as open-weight, making its parameters publicly available.",
+      "why_it_matters": "Open-weight release allows broader research and integration, enabling developers to experiment, fine‑tune, and deploy the model without licensing restrictions."
+    },
+    {
+      "category": "policy",
+      "claims": [],
+      "confidence": 1.0,
+      "developer_impact": "Developers can configure the SchedulingConfig setting in SageMaker Inference Components to control model placement across AZs, enabling Multi‑AZ HA without extra hosting resources.",
+      "event_id": "evt_248c8d39f0ea5514",
+      "first_seen": "2026-08-28T16:20:40Z",
+      "headline": "Salesforce achieves Multi-AZ high availability using SageMaker Inference Component placement",
+      "last_updated": "2026-08-28T16:20:40Z",
+      "score": 4.2,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Spreading the load: How Salesforce met Multi-AZ HA with SageMaker Inference Components",
+          "url": "https://aws.amazon.com/blogs/machine-learning/spreading-the-load-how-salesforce-met-multi-az-ha-with-sagemaker-inference-components/"
+        }
+      ],
+      "what_happened": "Salesforce used Amazon SageMaker AI Inference Component placement, specifically the SchedulingConfig parameter, to distribute copies of their models across multiple Availability Zones. This satisfied their Multi-AZ high‑availability compliance requirements while keeping the cost efficiency of multi‑model co‑hosting.",
+      "why_it_matters": "The approach shows that high availability can be attained without provisioning separate infrastructure for each zone, reducing operational cost and complexity while meeting compliance standards for critical services."
+    }
+  ]
+}
