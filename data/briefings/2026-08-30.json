@@ -1,0 +1,164 @@
+{
+  "covers_since": "2026-08-29T08:53:28.557726Z",
+  "day": "2026-08-30",
+  "generated_at": "2026-08-30T08:12:48.173673Z",
+  "stats": {
+    "articles": 454,
+    "duplicates_removed": 0,
+    "events": 11,
+    "events_shortlisted": 11,
+    "feeds_failed": 1,
+    "feeds_ok": 24,
+    "model_calls": 17,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 88.4
+  },
+  "stories": [
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Hy4 has 770 billion total parameters."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Hy4 has 49 billion active parameters."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Hy4 supports a context window of 1 million tokens."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The Hy4 model occupies 1.56 terabytes on Hugging Face."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "hacker-news"
+          ],
+          "text": "Tencent released and open‑sourced the Hy4 preview."
+        }
+      ],
+      "confidence": 0.78,
+      "developer_impact": "Developers can download the 1.56 TB weight files from Hugging Face and use the provided chat_template.jinja for inference or fine‑tuning, but will need substantial GPU/CPU resources and storage. The longer context window may simplify prompt engineering for tasks requiring extensive context.",
+      "event_id": "evt_3bde8d5646784908",
+      "first_seen": "2026-08-29T19:33:23Z",
+      "headline": "Tencent releases Hy4 preview, a 770B-parameter open-weight LLM with 1M-token context",
+      "last_updated": "2026-08-29T23:53:13Z",
+      "score": 5.588,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Hy4 preview",
+          "url": "https://www.tencent.com/tencent-releases-and-open-sources-tencent-hy4-preview/"
+        },
+        {
+          "source_id": "simon-willison",
+          "title": "Introducing Hy4 Preview",
+          "url": "https://simonwillison.net/2026/Aug/29/hy4/"
+        }
+      ],
+      "what_happened": "Tencent announced the Hy4 preview, an open-weight text‑only large language model. It has 770 billion total parameters, 49 billion active parameters, a 1 million token context window, and the model files total about 1.56 TB on Hugging Face. This follows the earlier Hy3 model (295 B total, 21 B active, 256 k token context).",
+      "why_it_matters": "The size and context length represent a significant step up from Hy3, enabling longer‑range reasoning and more complex prompts. The public release on Hugging Face makes a very large Chinese‑origin LLM accessible for research and experimentation, potentially influencing model scaling trends and multilingual AI development."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers may need to integrate or adapt to Nvidia's traffic‑control features or APIs to benefit from the efficiency improvements, though specific changes are not detailed in the source.",
+      "event_id": "evt_ec3126d6bd370413",
+      "first_seen": "2026-08-29T13:00:00Z",
+      "headline": "Nvidia introduces data center systems that use smarter traffic control to boost AI efficiency",
+      "last_updated": "2026-08-29T13:00:00Z",
+      "score": 5.267,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Nvidia’s AI advantage is moving beyond the GPU",
+          "url": "https://techcrunch.com/2026/08/29/nvidias-ai-advantage-is-moving-beyond-the-gpu/"
+        }
+      ],
+      "what_happened": "Nvidia announced a new generation of data center systems that improve AI performance by employing smarter traffic control mechanisms instead of relying solely on additional GPU processing cycles.",
+      "why_it_matters": "The efficiency gains can lower compute costs and power consumption for AI workloads, enabling more work to be done on existing hardware and potentially improving overall data‑center economics."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Backend and AI engineers may see increased demand for building pipelines that ingest, clean, and share large biomedical datasets, as well as for developing AI models that operate on openly available data. Smaller, AI‑focused biotech firms like VZVC could create new integration points for AI services and APIs.",
+      "event_id": "evt_0a6f07cbdcc6e807",
+      "first_seen": "2026-08-29T17:36:47Z",
+      "headline": "Vijay Pande leaves a16z biotech unit to launch AI-native VZVC, urging open data for medical AI",
+      "last_updated": "2026-08-29T17:36:47Z",
+      "score": 3.462,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "“We’re not doing 30 bets a year”: Vijay Pande on betting small after running $4 billion at a16z",
+          "url": "https://techcrunch.com/2026/08/29/were-not-doing-30-bets-a-year-vijay-pande-on-betting-small-after-running-4-billion-at-a16z/"
+        }
+      ],
+      "what_happened": "Vijay Pande departed a16z's roughly $4 billion biotech practice last year and founded VZVC, a much smaller AI‑native venture. In discussing the move, he described biology moving from a pure discovery discipline toward an engineering approach, noted that clinical trials remain extremely costly, and argued that open, shared datasets—not proprietary ones—are essential for AI to transform medicine.",
+      "why_it_matters": "If biology is treated as engineering, AI tools can be applied more systematically, potentially accelerating drug development. Open datasets would lower barriers for model training and validation, addressing the high cost of clinical trials and enabling broader collaboration across the biotech ecosystem."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.8,
+      "event_id": "evt_c96d24f3b302ab0e",
+      "first_seen": "2026-08-29T12:00:00Z",
+      "headline": "Musicians-turned-detectives are tracking AI‑generated music and exposing false claims",
+      "last_updated": "2026-08-29T12:00:00Z",
+      "score": 3.362,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Musicians-turned-detectives are hunting for AI grifters",
+          "url": "https://www.theverge.com/entertainment/985866/h4rris-nihil-young-edm-suno-ai"
+        }
+      ],
+      "what_happened": "As generative audio tools improve, AI‑generated songs that copy human artists are proliferating online. Some creators openly acknowledge using AI, while others deny it. In response, a group of musicians has begun investigating and identifying those who falsely claim their work is original, labeling them as AI grifters.",
+      "why_it_matters": "The rise of undisclosed AI‑generated music raises concerns about copyright, authenticity, and trust in online content. Detecting misrepresentation helps protect artists’ rights and informs listeners about the true origins of the music they consume."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "No additional age‑verification code or compliance processes are required for projects using Linux or software under the listed open‑source licenses.",
+      "event_id": "evt_e674ad11b5955b45",
+      "first_seen": "2026-08-30T03:15:36Z",
+      "headline": "California lawmakers exempt Linux and open‑source software from new age‑verification law",
+      "last_updated": "2026-08-30T03:15:36Z",
+      "score": 2.903,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "California lawmakers unanimously pass Linux exemption from age-verification law",
+          "url": "https://www.tomshardware.com/software/linux/california-lawmakers-unanimously-pass-linux-exemption-from-age-verification-law-software-distributed-under-the-gpl-mit-bsd-and-apache-licenses-are-exempt"
+        }
+      ],
+      "what_happened": "The California legislature voted unanimously to exempt Linux and other software distributed under GPL, MIT, BSD and Apache licenses from the state's recently enacted age‑verification requirements.",
+      "why_it_matters": "The exemption removes the need for developers and distributors of Linux‑based or similarly licensed open‑source software to implement age‑verification mechanisms to comply with the law, avoiding added compliance overhead and potential legal risk."
+    }
+  ]
+}
