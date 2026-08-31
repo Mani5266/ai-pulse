@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-08-30T08:32:02.732596Z",
+  "day": "2026-08-31",
+  "generated_at": "2026-08-31T08:34:44.590978Z",
+  "stats": {
+    "articles": 525,
+    "duplicates_removed": 0,
+    "events": 85,
+    "events_shortlisted": 20,
+    "feeds_failed": 1,
+    "feeds_ok": 24,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 161.9
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers will need to integrate federated learning infrastructure with LLM‑based agents, handle secure model aggregation, and adapt existing EHR pipelines to support distributed, privacy‑preserving training and inference across sites.",
+      "event_id": "evt_4d9ba65d928070f9",
+      "first_seen": "2026-08-31T04:00:00Z",
+      "headline": "FedEHR-Agents enable federated, autonomous LLM-driven EHR modeling across hospitals",
+      "last_updated": "2026-08-31T04:00:00Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "FedEHR-Agents: Federated Agentic Optimization for Automated EHR Modeling",
+          "url": "https://arxiv.org/abs/2608.27856"
+        }
+      ],
+      "what_happened": "The paper introduces FedEHR-Agents, a framework that combines federated learning with autonomous large‑language‑model agents to automate electronic health record (EHR) modeling workflows across multiple hospitals while keeping patient‑level data on‑site.",
+      "why_it_matters": "By allowing cross‑institution collaboration without sharing raw EHR data, the approach can improve model quality and generalization for clinical tasks while respecting privacy regulations, potentially accelerating AI adoption in healthcare."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers using GDN or KDA can integrate DAMP’s mixed‑precision quantization into their inference pipelines to save GPU memory and improve throughput, though they will need to adopt the new quantization code and possibly adjust training to accommodate the precision changes.",
+      "event_id": "evt_148c6c4e315ab497",
+      "first_seen": "2026-08-31T04:00:00Z",
+      "headline": "DAMP introduces decay-aware mixed-precision quantization for recurrent states in GDN/KDA models",
+      "last_updated": "2026-08-31T04:00:00Z",
+      "score": 6.07,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "DAMP: Decay-Aware Mixed-Precision Recurrent-State Quantization",
+          "url": "https://arxiv.org/abs/2608.27513"
+        }
+      ],
+      "what_happened": "The paper DAMP: Decay-Aware Mixed-Precision Recurrent-State Quantization proposes a quantization scheme that stores the fixed-size recurrent states used by Gated DeltaNet and Kimi Delta Attention in lower precision, while accounting for decay characteristics, to reduce the FP32 memory and bandwidth demands during inference.",
+      "why_it_matters": "By cutting the memory footprint and bandwidth of recurrent-state updates, DAMP enables more efficient inference for long‑sequence language models, potentially allowing larger contexts or models on the same GPU resources and lowering operational costs."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Implementing the new output head requires integrating an HNSW vector index (or similar ANN structure) into the inference pipeline and modifying the output layer to perform a max‑inner‑product search before final scoring. Existing models can keep their trained weights; only the inference code changes.",
+      "event_id": "evt_e8eb764492cfd1fa",
+      "first_seen": "2026-08-31T04:00:00Z",
+      "headline": "Vector-indexed output head replaces dense projection to speed LLM inference",
+      "last_updated": "2026-08-31T04:00:00Z",
+      "score": 6.04,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Accelerating LLM Inference via Vector Index Based Output Embeddings",
+          "url": "https://arxiv.org/abs/2608.27460"
+        }
+      ],
+      "what_happened": "The paper proposes reformulating the output projection and top‑k token selection in autoregressive LLM decoding as a maximum inner product search over token embeddings. Instead of a dense matrix multiply against the full vocabulary, an HNSW‑based vector index is used to retrieve a small candidate set of high‑scoring tokens, which are then scored to produce the final top‑k output.",
+      "why_it_matters": "By avoiding a full dense projection, the approach removes a major memory‑bandwidth bottleneck that dominates inference for compact LLMs with large multilingual vocabularies. Retrieving only a few candidate tokens reduces compute and memory traffic, potentially lowering latency and cost of serving such models."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Backend and AI engineers can integrate a compact, multimodal safety module that supports custom policies and multiple languages with modest compute, simplifying safety pipeline implementation and potentially reducing latency and cost.",
+      "event_id": "evt_1e4ec3c41470e0ec",
+      "first_seen": "2026-08-31T04:00:00Z",
+      "headline": "Nemotron 3.5 introduces a compact multimodal, multilingual content safety moderator",
+      "last_updated": "2026-08-31T04:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Nemotron 3.5 Content Safety Moderator: A Compact Multimodal, Multilingual, and Reasoning Enabled Content Safety Moderator",
+          "url": "https://arxiv.org/abs/2608.27548"
+        }
+      ],
+      "what_happened": "The paper announces Nemotron 3.5 Content Safety Moderator, a new model that can evaluate text, images, documents, screenshots, and generated responses. It combines broad coverage, custom policy control, multilingual support, and reasoning abilities while keeping compute requirements low.",
+      "why_it_matters": "As AI applications expand beyond text, developers need safety guards that work across media types and languages. A low‑cost, configurable moderator can help enforce domain‑specific policies, reduce risky outputs, and lower infrastructure expenses for production systems."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.62,
+      "developer_impact": "Developers building backend pipelines for LLM training or inference may adopt PACE to achieve more accurate and faster content extraction across varied publishers, potentially reducing reliance on expensive LLM calls and simplifying handling of complex page structures.",
+      "event_id": "evt_50f3e4108132ef6a",
+      "first_seen": "2026-08-31T04:00:00Z",
+      "headline": "PACE introduces publisher-adaptive web content extraction using agentic automation",
+      "last_updated": "2026-08-31T04:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "PACE: Publisher-Adaptive Content Extraction via Agentic Automation",
+          "url": "https://arxiv.org/abs/2608.27466"
+        }
+      ],
+      "what_happened": "The paper titled \"PACE: Publisher-Adaptive Content Extraction via Agentic Automation\" (arXiv:2608.27466v1) presents a new method for extracting web content that aims to balance accuracy, scalability, and adaptability. It addresses brittleness of general-purpose extractors on publisher‑specific layouts and the high cost and latency of direct LLM‑based extraction, proposing an agentic automation approach to improve extraction of metadata, images, tables, and other rich targets.",
+      "why_it_matters": "Improved extraction can make LLM data pipelines more reliable and efficient, reducing the need for costly, latency‑heavy LLM calls while handling diverse publisher formats. This could lower operational expenses and increase throughput for systems that ingest large volumes of web content."
+    }
+  ]
+}
