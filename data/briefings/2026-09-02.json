@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-09-01T07:38:26.325710Z",
+  "day": "2026-09-02",
+  "generated_at": "2026-09-02T07:03:23.773108Z",
+  "stats": {
+    "articles": 520,
+    "duplicates_removed": 0,
+    "events": 121,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 140.4
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers can adopt REAL-Q's gradient‑descent‑based quantization to achieve better accuracy‑resource trade‑offs in LLM deployment pipelines, potentially requiring integration of the new optimizer into existing model compression toolchains.",
+      "event_id": "evt_fa47e7a40218fa2d",
+      "first_seen": "2026-09-02T04:00:00Z",
+      "headline": "REAL-Q introduces dynamic gradient descent for end-to-end LLM quantization",
+      "last_updated": "2026-09-02T04:00:00Z",
+      "score": 6.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "REAL-Q: E2E LLM Quantization via Dynamic Gradient Descent",
+          "url": "https://arxiv.org/abs/2609.00049"
+        }
+      ],
+      "what_happened": "The paper presents REAL-Q, a new post‑training quantization (PTQ) method for large language models that replaces the traditional single closed‑form second‑order solver with a dynamic gradient descent approach. This technique avoids the heavy approximations of global loss and the static Hessian freezing used in prior PTQ methods, enabling more accurate layer‑wise quantization.",
+      "why_it_matters": "By reducing approximation errors in PTQ, REAL-Q can maintain higher model accuracy while still meeting strict resource constraints, making it easier to deploy LLMs on limited‑hardware environments without sacrificing performance."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "The work suggests new model architectures that integrate generative AI with domain‑specific mechanistic constraints, which may require backend engineers to handle hybrid pipelines, custom loss functions, and larger scientific datasets. It could inspire tooling for explainable AI in materials science, but no concrete APIs or libraries are detailed yet.",
+      "event_id": "evt_199ba73ff1111eb3",
+      "first_seen": "2026-09-02T04:00:00Z",
+      "headline": "ArXiv paper proposes generative AI to add mechanistic reasoning to corrosion predictions",
+      "last_updated": "2026-09-02T04:00:00Z",
+      "score": 6.04,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Generative artificial intelligence for reliable mechanistic reasoning for corrosion",
+          "url": "https://arxiv.org/abs/2609.00099"
+        }
+      ],
+      "what_happened": "A new arXiv pre‑print (arXiv:2609.00099v1) introduces a generative artificial‑intelligence approach aimed at providing mechanistically defensible reasoning for corrosion. Existing machine‑learning models can predict corrosion rates from composition, microstructure, and environment but lack explanatory power. The proposed method seeks to combine accurate retrieval with explanations of the underlying mechanisms, addressing a gap in safety‑critical materials engineering.",
+      "why_it_matters": "Corrosion is estimated to cost about 4% of global GDP, so more reliable, explainable predictions could enable earlier mitigation and safer material design. Mechanistic insight helps engineers trust AI recommendations, potentially reducing failures and maintenance costs in critical infrastructure."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers using Astra will encounter stricter safety controls and may need to follow new usage guidelines or integration checks due to the stronger release safeguards.",
+      "event_id": "evt_f2694bfa96c49e91",
+      "first_seen": "2026-09-01T13:00:00Z",
+      "headline": "OpenAI's Astra model meets Critical cybersecurity capability threshold",
+      "last_updated": "2026-09-01T13:00:00Z",
+      "score": 5.85,
+      "sources": [
+        {
+          "source_id": "openai",
+          "title": "Path to Astra: critical capabilities and frontier safeguards",
+          "url": "https://openai.com/index/path-to-astra"
+        }
+      ],
+      "what_happened": "OpenAI announced that its Astra model is the first model to satisfy the Critical cybersecurity capability threshold defined in the company's Preparedness Framework, and it includes stronger safeguards for release.",
+      "why_it_matters": "Meeting this threshold signals that Astra has enhanced security and safety features, which can reduce the risk of misuse and increase trust for users deploying the model in security‑sensitive contexts."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.78,
+      "event_id": "evt_e698148a3f7fc433",
+      "first_seen": "2026-09-01T21:19:20Z",
+      "headline": "NVIDIA and CrowdStrike announce new agentic cybersecurity system called SafeMind",
+      "last_updated": "2026-09-01T21:19:20Z",
+      "score": 5.748,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "NVIDIA and CrowdStrike Strengthen Agentic Cybersecurity Frontier",
+          "url": "https://blogs.nvidia.com/blog/nvidia-crowdstrike-fal-con-2026/"
+        }
+      ],
+      "what_happened": "At CrowdStrike's Fal.Con 2026, NVIDIA CEO Jensen Huang and CrowdStrike CEO George Kurtz announced a partnership to launch CrowdStrike SafeMind, an agentic cybersecurity system designed to automate defense against automated attacks.",
+      "why_it_matters": "The announcement highlights a shift toward automated, AI‑driven security solutions as cyber threats become more automated, suggesting future defenses may rely on similar agentic technologies."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers may need to adopt stricter validation methods beyond simple tolerance thresholds and consider using power‑of‑two INT8 quantization scales to ensure deterministic behavior across kernel implementations.",
+      "event_id": "evt_a6075ac6792b7e89",
+      "first_seen": "2026-09-02T04:00:00Z",
+      "headline": "Study Finds Tolerance-Based Conformance Misses Small Faults in INT8 LLM Kernels",
+      "last_updated": "2026-09-02T04:00:00Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Deterministic LLM Inference Across GPU Kernels: Power-of-Two INT8 Quantization Scales and the Limits of Tolerance-Based Conformance",
+          "url": "https://arxiv.org/abs/2609.00363"
+        }
+      ],
+      "what_happened": "Researchers evaluated tolerance‑based conformance suites for quantized GEMM kernels used in LLM inference. By injecting nine faults into an INT8 pipeline running the Qwen3‑1.7B model across 8,232 layer‑fault cells, they observed that each of five epilogue faults (scale precision, double rounding, multiplication order, output truncation, fused ordering) altered the output by at most one bfloat16 spacing.",
+      "why_it_matters": "The results show that tolerance checks may not detect certain implementation errors because the resulting numerical differences are extremely small, questioning the reliability of current conformance testing for deterministic LLM inference on GPUs."
+    }
+  ]
+}
