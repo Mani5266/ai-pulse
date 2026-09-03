@@ -1,0 +1,218 @@
+{
+  "covers_since": "2026-09-02T07:04:40.288414Z",
+  "day": "2026-09-03",
+  "generated_at": "2026-09-03T07:07:50.470857Z",
+  "stats": {
+    "articles": 530,
+    "duplicates_removed": 1,
+    "events": 119,
+    "events_shortlisted": 20,
+    "feeds_failed": 1,
+    "feeds_ok": 24,
+    "model_calls": 28,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 190.2
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.93,
+      "developer_impact": "Developers of LLM‑based multi‑agent applications can adopt the SCOPED-Hiring workflow to generate synthetic inputs, instrument agents to emit trajectory data, and analyze fairness at each step, requiring integration of logging and analysis components.",
+      "event_id": "evt_02d4f8f47ed9d027",
+      "first_seen": "2026-09-03T04:00:00Z",
+      "headline": "SCOPED-Hiring pipeline adds process-aware fairness diagnosis to LLM-based hiring multi-agent systems",
+      "last_updated": "2026-09-03T04:00:00Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Beyond Outcome Gaps: Process-Aware Fairness Diagnosis for LLM-based Multi-Agent Decision Systems",
+          "url": "https://arxiv.org/abs/2609.02092"
+        }
+      ],
+      "what_happened": "Researchers introduced SCOPED-Hiring, a pipeline that creates controlled resume variants, runs role‑based hiring committees of large language models, and records over 311,000 structured decision‑trajectory logs to diagnose fairness throughout the hiring process rather than only at the outcome stage.",
+      "why_it_matters": "By focusing on the decision trajectory, the approach can reveal bias sources that outcome‑only audits miss, improving transparency and trust for high‑stakes LLM‑driven hiring decisions."
+    },
+    {
+      "category": "security",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Backend and AI engineers may need to review and harden data pipelines, enforce encryption at rest and in transit, implement stricter access controls, and monitor for anomalous data exfiltration to prevent similar breaches.",
+      "event_id": "evt_563cfa9d420bb02c",
+      "first_seen": "2026-09-02T20:32:02Z",
+      "headline": "FBI probes real-time data breach exposing driver’s licenses after car rentals",
+      "last_updated": "2026-09-02T20:32:02Z",
+      "score": 5.918,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "I rented a car, and within hours, my driver's license was for sale",
+          "url": "https://arstechnica.com/security/2026/09/my-drivers-license-is-one-of-153-million-for-sale-on-a-new-dark-website/"
+        }
+      ],
+      "what_happened": "A data breach is unfolding in real time, with personal information—including driver’s licenses—appearing for sale shortly after individuals rent cars. The FBI is reported to be investigating the breach.",
+      "why_it_matters": "The exposure of driver’s licenses can lead to identity theft and fraud, highlighting vulnerabilities in car‑rental data handling and prompting law‑enforcement scrutiny of data security practices."
+    },
+    {
+      "category": "research",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "The paper is identified as arXiv:2609.01962v1."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "Qwen is an instruction-tuned language model with 4 billion parameters."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "The post‑training conversion of Qwen uses KOTMS rotation, E2M‑ATQ ternarization, and GPTQ‑style error compensation from TWLA."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "The experiment modifies only the model weights, keeping activations at 16‑bit precision."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "Ultra‑low‑bit language models can reduce storage and memory bandwidth."
+        }
+      ],
+      "confidence": 0.9,
+      "developer_impact": "Developers can adopt weight‑only ternarization techniques like those described to shrink model footprints for edge or low‑memory environments, though they must retain 16‑bit activation support and integrate the specific quantization pipelines (KOTMS, E2M‑ATQ, GPTQ‑style compensation).",
+      "event_id": "evt_a6075ac6792b7e89",
+      "first_seen": "2026-09-02T04:00:00Z",
+      "headline": "Post‑training ternarization reduces Qwen3‑4B model size to ~1.58‑bit weights",
+      "last_updated": "2026-09-03T04:00:00Z",
+      "score": 5.89,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Post-Training Ternarization of Qwen3-4B Capability, Effective Bit Budget, Storage Compression, and Deployment",
+          "url": "https://arxiv.org/abs/2609.01962"
+        }
+      ],
+      "what_happened": "Researchers applied an end‑to‑end post‑training conversion to the instruction‑tuned 4‑billion‑parameter Qwen model using KOTMS rotation, E2M‑ATQ ternarization, and GPTQ‑style error compensation. The process ternarizes the weights only, achieving an effective 1.58‑bit representation while keeping activations at 16‑bit precision.",
+      "why_it_matters": "The ultra‑low‑bit weight format cuts storage requirements and memory‑bandwidth demand, making large language models easier to deploy on devices with limited resources and potentially lowering inference costs."
+    },
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "google-deepmind",
+            "hacker-news",
+            "simon-willison"
+          ],
+          "text": "Google introduced Gemini 3.8 Flash and Gemini 3.8 Flash Cyber."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "Gemini 3.8 Flash was launched a few weeks after Gemini 3.7 Flash."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "Gemini 3.8 Flash has introductory pricing of $0.75 per million input tokens and $3.75 per million output tokens, the same as Gemini 3.7 Flash."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Gemini 3.8 Flash Cyber is only available to \"trusted defenders\"."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Gemini 3.8 Flash offers low, medium, and high thinking levels."
+        }
+      ],
+      "confidence": 0.92,
+      "developer_impact": "Developers can access Gemini 3.8 Flash via the updated llm‑gemini 0.34 client, choose different reasoning depth levels, and benefit from the same token pricing as the prior version. The Cyber variant is not generally available, so only select partners can use its extra capabilities. The async bug fix improves reliability of streaming responses.",
+      "event_id": "evt_355be2cf6d2d139c",
+      "first_seen": "2026-09-02T15:12:40Z",
+      "headline": "Google DeepMind launches Gemini 3.8 Flash and limited-access Flash Cyber",
+      "last_updated": "2026-09-02T20:11:40Z",
+      "score": 5.65,
+      "sources": [
+        {
+          "source_id": "google-deepmind",
+          "title": "Introducing Gemini 3.8 Flash and 3.8 Flash Cyber",
+          "url": "https://deepmind.google/blog/introducing-gemini-3-8-flash-and-38-flash-cyber/"
+        },
+        {
+          "source_id": "the-verge-ai",
+          "title": "Google says its new Gemini 3.8 Flash model ‘works harder’ but might cost more",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/988742/google-gemini-3-8-flash"
+        },
+        {
+          "source_id": "hacker-news",
+          "title": "Gemini 3.8 Flash and 3.8 Flash Cyber",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/3-8-flash-and-3-8-flash-cyber/"
+        },
+        {
+          "source_id": "simon-willison",
+          "title": "llm-gemini 0.34",
+          "url": "https://simonwillison.net/2026/Sep/2/llm-gemini/"
+        }
+      ],
+      "what_happened": "Google released the Gemini 3.8 Flash model a few weeks after Gemini 3.7 Flash, describing it as performing more reasoning steps and iteratively calling tools. The same introductory pricing as 3.7 Flash ($0.75 per million input tokens, $3.75 per million output tokens) is advertised. A variant called Gemini 3.8 Flash Cyber is also released but is only available to “trusted defenders.” The llm‑gemini 0.34 library added support for the new model with configurable low, medium, and high thinking levels and fixed an async‑response bug.",
+      "why_it_matters": "The model’s deeper reasoning and tool‑calling aim to improve performance on complex AI tasks, potentially reducing the need for external prompting tricks. Maintaining the same entry pricing lowers the barrier for experimentation, while the restricted Cyber version suggests a focus on security‑sensitive use cases. Library support makes integration easier for developers."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers may need to integrate LLM inference into their optimization pipelines, implement the predict‑then‑act workflow, and manage self‑evolving agents that update their world model over time. Existing libraries may require extensions to support this hybrid modeling and search strategy.",
+      "event_id": "evt_262232089201014b",
+      "first_seen": "2026-09-03T04:00:00Z",
+      "headline": "WMLLM introduces LLM-based world modeling for more sample-efficient black-box optimization",
+      "last_updated": "2026-09-03T04:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "WMLLM: Self-Evolving Optimization Agents via Predict-Then-Act World Modeling",
+          "url": "https://arxiv.org/abs/2609.01608"
+        }
+      ],
+      "what_happened": "The paper \"WMLLM: Self-Evolving Optimization Agents via Predict-Then-Act World Modeling\" (arXiv:2609.01608v1) proposes a new approach to black-box optimization. It uses large language models to build a predictive world model that suggests promising search directions before costly evaluations, employing a predict‑then‑act loop to improve sample efficiency in large, weakly structured, high‑dimensional spaces.",
+      "why_it_matters": "If the approach works as described, it could reduce the number of expensive function evaluations needed for optimization tasks, speeding up development cycles for problems such as hyperparameter tuning, architecture search, or engineering design where evaluations are costly or time‑consuming."
+    }
+  ]
+}
