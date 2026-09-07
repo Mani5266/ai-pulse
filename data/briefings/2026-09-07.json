@@ -1,0 +1,160 @@
+{
+  "covers_since": "2026-09-06T07:14:07.481196Z",
+  "day": "2026-09-07",
+  "generated_at": "2026-09-07T07:16:47.698279Z",
+  "stats": {
+    "articles": 518,
+    "duplicates_removed": 2,
+    "events": 87,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 160.2
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Provides a novel model design that backend and AI engineers could adopt or adapt for IP‑geolocation pipelines, potentially requiring transformer expertise and GPU resources; may be released as code or model for integration.",
+      "event_id": "evt_07e130f7120d2999",
+      "first_seen": "2026-09-07T04:00:00Z",
+      "headline": "Transformer-based model with LLM fusion introduced for city‑level IP geolocation",
+      "last_updated": "2026-09-07T04:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "IPGeoAI: Transformer-Based Geolocation with LLM Semantic Fusion",
+          "url": "https://arxiv.org/abs/2609.04559"
+        }
+      ],
+      "what_happened": "A new arXiv paper (IPGeoAI: Transformer‑Based Geolocation with LLM Semantic Fusion) proposes a transformer architecture that combines large‑language‑model semantic information to improve city‑level IP address location, especially for IPv6 and mobile networks, where traditional heuristics struggle.",
+      "why_it_matters": "More accurate city‑level IP geolocation can enhance services such as local content delivery, targeted advertising, and digital‑rights enforcement, and it addresses the growing complexity of modern network address allocation."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.93,
+      "developer_impact": "Developers can plug their agents into the Harbor Adapters to run evaluations on many benchmarks without custom environment code, saving integration time and providing a common dataset for analysis.",
+      "event_id": "evt_881b24d9bfd5bff7",
+      "first_seen": "2026-09-07T04:00:00Z",
+      "headline": "Harbor Adapters and Harbor-Index provide unified infrastructure for evaluating agents across 80+ benchmarks",
+      "last_updated": "2026-09-07T04:00:00Z",
+      "score": 5.89,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Harbor Adapters and Harbor-Index: Infrastructure and a Curated Meta-Dataset for Large-Scale Agentic Evaluation",
+          "url": "https://arxiv.org/abs/2609.04298"
+        }
+      ],
+      "what_happened": "The authors released Harbor Adapters, a unified evaluation infrastructure that includes benchmark adapters porting more than 80 agentic benchmarks, along with a curated meta-dataset called Harbor-Index. The adapters were validated through code review and parity experiments to ensure they can evaluate arbitrary agents.",
+      "why_it_matters": "By standardizing access to a large collection of benchmarks, the infrastructure reduces integration effort and enables large-scale, comparable agent evaluation, facilitating research progress and reproducibility."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "Implementers of quantized RNNs may need to explicitly manage how quantized states are written back between time steps, potentially adjusting kernels or using higher precision for state storage to preserve inference quality.",
+      "event_id": "evt_d6ea52306dc55c89",
+      "first_seen": "2026-09-07T04:00:00Z",
+      "headline": "New study reveals quantization can corrupt recurrent state memory via write-back rule",
+      "last_updated": "2026-09-07T04:00:00Z",
+      "score": 5.89,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "When Quantization Breaks Memory: Recurrent-State Write-Back in Low-Precision Temporal Inference",
+          "url": "https://arxiv.org/abs/2609.04490"
+        }
+      ],
+      "what_happened": "Researchers identified that the rule used to store quantized recurrent states—called recurrent-state write-back—affects subsequent computations. They introduced this concept and isolated its impact using a compact GRU encoder‑decoder applied to fluorescence lifetime imaging.",
+      "why_it_matters": "The finding shows that low‑precision quantization may degrade temporal inference accuracy in recurrent networks if the state write‑back behavior is not handled correctly, highlighting a hidden source of error in memory‑constrained AI models."
+    },
+    {
+      "category": "research",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "Mitra-v2 is a tabular foundation model."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "Mitra-v2 delivers state-of-the-art performance on real-world classification and regression problems."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "Mitra-v2 is trained only on synthetic data."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "Mitra-v2's pretraining distribution is much larger and more diverse than Mitra-v1's."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "Mitra-v2 is built on a small 2D Transformer backbone."
+        }
+      ],
+      "confidence": 0.9,
+      "developer_impact": "Provides a pretrained 2D-Transformer tabular model that can be fine-tuned on downstream tasks, potentially lowering training compute and data requirements for backend and AI engineers.",
+      "event_id": "evt_e189623dcf92020a",
+      "first_seen": "2026-09-02T04:00:00Z",
+      "headline": "Mitra-v2: synthetic-data trained tabular foundation model achieving state-of-the-art results",
+      "last_updated": "2026-09-07T04:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Mitra-v2 Technical Report",
+          "url": "https://arxiv.org/abs/2609.04540"
+        }
+      ],
+      "what_happened": "The authors released Mitra-v2, a tabular foundation model built on a small 2D Transformer backbone. It is trained exclusively on a large, diverse synthetic dataset, larger than that used for Mitra-v1, and achieves state-of-the-art performance on real-world classification and regression tasks such as credit-risk scoring, clinical prediction, equipment-failure detection, and house-price estimation.",
+      "why_it_matters": "A model that attains top performance without using real data suggests a path to reduce data-collection costs and privacy concerns for tabular AI, and may accelerate deployment of high-quality models across industries."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.72,
+      "developer_impact": "Developers may need to incorporate diversity‑enhancing techniques, risk‑aware evaluation, and system‑level testing when deploying more capable LLM agents, rather than focusing solely on improving single‑model performance.",
+      "event_id": "evt_19b344bb70a61825",
+      "first_seen": "2026-09-07T04:00:00Z",
+      "headline": "Study Finds More Capable LLM Agents May Heighten Systemic Risk in Financial Markets",
+      "last_updated": "2026-09-07T04:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Why Better Models Can Create Riskier Systems: Evidence from LLM Agents in Financial Markets",
+          "url": "https://arxiv.org/abs/2609.04373"
+        }
+      ],
+      "what_happened": "Researchers analyzed large language model (LLM) agents used in financial trading and found that increasing the individual capability of these models can actually worsen overall system outcomes. They propose that shared training data and architectures cause higher‑performing LLMs to act more similarly, leading to correlated actions that fail to diversify risk. The team introduced a general analytical framework to quantify this effect.",
+      "why_it_matters": "If multiple, more capable LLM agents make similar trading decisions, market dynamics could become less resilient, amplifying volatility or triggering cascades of failures. The finding challenges the assumption that better models automatically improve safety in high‑stakes domains such as finance, content moderation, or hiring, highlighting a new class of systemic risk."
+    }
+  ]
+}
