@@ -1,0 +1,150 @@
+{
+  "covers_since": "2026-09-08T07:16:49.736205Z",
+  "day": "2026-09-09",
+  "generated_at": "2026-09-09T07:19:31.944421Z",
+  "stats": {
+    "articles": 522,
+    "duplicates_removed": 5,
+    "events": 120,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 162.2
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers may need to integrate the reasoning‑aware profiling tool, adjust quantization per module, and validate performance on the listed benchmarks before deployment.",
+      "event_id": "evt_b16e0bc22bc5f9a0",
+      "first_seen": "2026-09-09T04:00:00Z",
+      "headline": "Reasoning-aware compression framework reduces energy use of large reasoning models",
+      "last_updated": "2026-09-09T04:00:00Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Reasoning-Aware Compression: Identifying and Protecting Vulnerable Reasoning Circuits for Energy-Efficient LLM Deployment",
+          "url": "https://arxiv.org/abs/2609.05512"
+        }
+      ],
+      "what_happened": "Researchers introduced a compression approach that evaluates quantization effects on reasoning performance across five benchmarks (GSM8K, FOLIO, MATH-500, ProofWriter, MuSiQue) and measures GPU energy. The method profiles each model module to identify vulnerable reasoning circuits and applies selective quantization instead of uniform quantization.",
+      "why_it_matters": "Targeted quantization can lower deployment energy costs of large reasoning models while preserving their problem‑solving abilities, addressing the high power consumption of current LLM deployments."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers of AI trading bots can use the findings to improve monitoring, safety checks, and infrastructure for scaling agents, and to benchmark their own systems against the reported performance and operational metrics.",
+      "event_id": "evt_deaba7abbaf6c640",
+      "first_seen": "2026-09-09T04:00:00Z",
+      "headline": "Study releases six-month production data on autonomous LLM trading agents across two fleets",
+      "last_updated": "2026-09-09T04:00:00Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "What LLM Trading Agents Actually Do in Production: A Six-Month, Population-Scale Record from Two Fleets",
+          "url": "https://arxiv.org/abs/2609.05663"
+        }
+      ],
+      "what_happened": "The paper presents a continuous, population‑scale measurement of autonomous language‑model trading agents in live production. It covers two systems with a shared design: DX Terminal Pro, which operated 3,505 user‑funded vaults trading real ETH in Base memecoin markets for 21 days (Feb‑Mar 2026), and the DXAP live‑alpha fleet, which had 500‑599 user‑created agents (91‑117 active concurrently) trading Hyperliquid perpetuals from June to August 2026. The record spans six months and documents real‑world trading activity.",
+      "why_it_matters": "The dataset provides the first large‑scale, longitudinal view of how LLM‑driven agents behave in live financial markets, revealing performance, risk patterns, and operational challenges. This evidence can inform risk management, regulatory scrutiny, and future research on AI‑powered trading systems."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.85,
+      "event_id": "evt_825546b9e9e150a7",
+      "first_seen": "2026-09-08T14:00:15Z",
+      "headline": "AlphaGenome Atlas maps effects of 9 billion single‑letter DNA variants",
+      "last_updated": "2026-09-08T14:00:15Z",
+      "score": 6.02,
+      "sources": [
+        {
+          "source_id": "google-deepmind",
+          "title": "AlphaGenome Atlas: A predictive map of every possible DNA letter change in the human genome",
+          "url": "https://deepmind.google/blog/alphagenome-atlas-a-predictive-map-of-every-possible-dna-letter-change-in-the-human-genome/"
+        }
+      ],
+      "what_happened": "AlphaGenome Atlas provides a predictive map of the molecular effects of 9 billion single‑letter DNA variants across the human genome.",
+      "why_it_matters": "The atlas offers a comprehensive reference of how any single‑base change may alter molecular function, potentially accelerating genetic research and variant interpretation."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.8,
+      "event_id": "evt_e429ee3a87608069",
+      "first_seen": "2026-09-09T03:10:08Z",
+      "headline": "OpenAI claims its agents solved a Millennium Prize Problem amid controversy",
+      "last_updated": "2026-09-09T03:10:08Z",
+      "score": 5.942,
+      "sources": [
+        {
+          "source_id": "mit-technology-review",
+          "title": "What OpenAI’s latest controversy tells us about the future of math",
+          "url": "https://www.technologyreview.com/2026/09/08/1143747/what-openais-latest-controversy-tells-us-about-the-future-of-math/"
+        }
+      ],
+      "what_happened": "OpenAI announced that its AI agents have produced a solution to one of the seven Millennium Prize Problems, a major unsolved mathematics challenge, but the claim has been met with accusations and controversy.",
+      "why_it_matters": "A solution would demonstrate AI's capacity for high‑level mathematical reasoning, potentially reshaping research and the credibility of AI systems; the controversy underscores concerns about verification, reproducibility, and trust in AI‑generated proofs."
+    },
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "An MIT researcher uses GPT-5.6 Sol with Codex to autonomously run quantum computing experiments."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "GPT-5.6 Sol helps run quantum computing experiments."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "GPT-5.6 Sol is used to analyze results of quantum computing experiments."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "GPT-5.6 Sol is used to calibrate qubits."
+        }
+      ],
+      "confidence": 0.7,
+      "developer_impact": "Developers can use GPT-5.6 Sol APIs together with Codex to script end‑to‑end quantum experiment workflows, lowering the need for custom control software.",
+      "event_id": "evt_e991f28971b78ffc",
+      "first_seen": "2026-08-27T18:36:08Z",
+      "headline": "GPT-5.6 Sol with Codex automates quantum experiment control",
+      "last_updated": "2026-09-08T17:00:00Z",
+      "score": 5.75,
+      "sources": [
+        {
+          "source_id": "openai",
+          "title": "How GPT-5.6 Sol helps run quantum computing experiments",
+          "url": "https://openai.com/index/codex-quantum-computing-experiments"
+        }
+      ],
+      "what_happened": "An MIT researcher demonstrated that GPT-5.6 Sol, combined with Codex, can autonomously run quantum computing experiments, analyze the results, and calibrate qubits.",
+      "why_it_matters": "Automation reduces manual setup and analysis time, potentially accelerating quantum hardware development and making experiment cycles faster."
+    }
+  ]
+}
