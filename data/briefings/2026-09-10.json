@@ -1,0 +1,144 @@
+{
+  "covers_since": "2026-09-09T07:16:49.736205Z",
+  "day": "2026-09-10",
+  "generated_at": "2026-09-10T07:15:50.657451Z",
+  "stats": {
+    "articles": 522,
+    "duplicates_removed": 1,
+    "events": 132,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 162.2
+  },
+  "stories": [
+    {
+      "category": "security",
+      "claims": [],
+      "confidence": 0.92,
+      "developer_impact": "Developers of WeChat and similar messaging platforms must urgently audit call‑handling code for remote code execution flaws and deploy patches. Security teams should incorporate AI‑assisted analysis into their threat‑modeling processes to detect similar zero‑click vectors early.",
+      "event_id": "evt_332f2200bcdcb827",
+      "first_seen": "2026-09-10T00:56:41Z",
+      "headline": "Demo of WeWorm zero‑click worm spreads via WeChat calls on iOS and Android",
+      "last_updated": "2026-09-10T00:56:41Z",
+      "score": 6.213,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "Quoting Calif Research",
+          "url": "https://simonwillison.net/2026/Sep/10/calif-research/"
+        }
+      ],
+      "what_happened": "Researchers released a demo called WeWorm that can infect devices through WeChat voice calls without any user interaction. The worm works on both iOS and Android; the victim does not need to answer the call, and even if they do, they hear nothing. The team used AI to discover the underlying bug and wrote a remote code execution exploit in about two days, then built the worm in an additional week.",
+      "why_it_matters": "A zero‑click exploit that works across major mobile platforms demonstrates a new attack surface for messaging apps, raising the risk of widespread, silent infections. It shows that AI can accelerate vulnerability discovery and exploit development, potentially increasing the speed at which dangerous malware can be created."
+    },
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "Qwen3.8-2.4T-A95B is a 2.4‑trillion‑parameter open‑weight model."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "Qwen3.8-2.4T-A95B can be deployed on Amazon SageMaker HyperPod using vLLM."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "The walkthrough covers cluster provisioning, NVFP4 quantization, and an OpenAI‑compatible endpoint with built-in reasoning, tool calling, and native MTP speculative decoding."
+        }
+      ],
+      "confidence": 0.96,
+      "developer_impact": "Developers can provision HyperPod clusters, apply NVFP4 quantization, and launch the model via vLLM without custom infrastructure code, enabling faster experimentation and production deployment of multi‑trillion‑parameter models on AWS.",
+      "event_id": "evt_8e2bea08b7f2937c",
+      "first_seen": "2026-08-26T23:52:58Z",
+      "headline": "AWS SageMaker HyperPod now supports deployment of 2.4‑trillion‑parameter Qwen3.8 model via vLLM",
+      "last_updated": "2026-09-09T22:26:29Z",
+      "score": 6.183,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Deploying Qwen3.8-2.4T-A95B on Amazon SageMaker HyperPod with vLLM",
+          "url": "https://aws.amazon.com/blogs/machine-learning/deploying-qwen3-8-2-4t-a95b-on-amazon-sagemaker-hyperpod-with-vllm/"
+        }
+      ],
+      "what_happened": "AWS released a walkthrough showing how to deploy the open‑weight Qwen3.8‑2.4T‑A95B model, a 2.4‑trillion‑parameter LLM, on SageMaker HyperPod using the vLLM inference engine. The guide covers provisioning the HyperPod cluster, applying NVFP4 quantization, and exposing an OpenAI‑compatible endpoint that includes built‑in reasoning, tool‑calling, and native MTP speculative decoding.",
+      "why_it_matters": "The integration lets developers run extremely large LLMs at scale on AWS with lower latency and cost due to quantization and speculative decoding, while providing a familiar OpenAI‑style API for existing tooling and applications."
+    },
+    {
+      "category": "benchmark",
+      "claims": [],
+      "confidence": 0.93,
+      "developer_impact": "Developers can integrate the Granite PatchTST-FM-r2 model into backend or AI pipelines and deploy it commercially under the permissive license.",
+      "event_id": "evt_46660cb2ea4362f6",
+      "first_seen": "2026-09-09T15:36:24Z",
+      "headline": "IBM releases Granite Time Series PatchTST-FM-r2 model with commercial-friendly license",
+      "last_updated": "2026-09-09T15:36:24Z",
+      "score": 5.978,
+      "sources": [
+        {
+          "source_id": "huggingface-blog",
+          "title": "IBM releases SOTA Granite Time Series PatchTST-FM-r2 model with commercial-friendly license",
+          "url": "https://huggingface.co/blog/ibm-research/ibm-releases-sota-granite-time-series"
+        }
+      ],
+      "what_happened": "IBM announced the release of the Granite Time Series PatchTST-FM-r2 model, described as state‑of‑the‑art for time‑series forecasting, and made it available under a commercial‑friendly license.",
+      "why_it_matters": "The model provides developers with a high‑performing time‑series solution that can be used in commercial products without restrictive licensing, potentially accelerating adoption in industry applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Implementing the approach will require coordinating multiple LLM‑driven agents and generating structural signatures for graph nodes, affecting pipeline design, data preprocessing, and possibly model orchestration code.",
+      "event_id": "evt_1d35d30edfff583a",
+      "first_seen": "2026-09-10T04:00:00Z",
+      "headline": "New multi-agent graph learning method uses structural signatures to vary reasoning across graph regions",
+      "last_updated": "2026-09-10T04:00:00Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Multi-Agent Agentic Graph Learning via Structural Signatures",
+          "url": "https://arxiv.org/abs/2609.09565"
+        }
+      ],
+      "what_happened": "The paper introduces a multi‑agent agentic graph learning (AGL) approach that incorporates structural signatures, addressing the limitation of prior single‑agent or role‑based multi‑agent systems that share a single reasoning policy across graph regions.",
+      "why_it_matters": "By allowing distinct reasoning policies per region, the method aims to improve performance on graph reasoning tasks where evidence must be sampled selectively, potentially advancing applications that rely on graph‑based inference."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.75,
+      "developer_impact": "Implementing CARRE requires integrating retrieval‑augmented generation, counterfactual scoring modules, and LLM APIs into existing churn pipelines; developers must handle catalog management, cost modeling, and prompt engineering for the reasoning step.",
+      "event_id": "evt_c18bd5ebc7d6833b",
+      "first_seen": "2026-09-10T04:00:00Z",
+      "headline": "CARRE framework introduces counterfactual action retrieval and LLM reasoning for explainable churn mitigation",
+      "last_updated": "2026-09-10T04:00:00Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "CARRE: Counterfactual Action Retrieval and Reason Evaluation for Explainable Churn Prescription",
+          "url": "https://arxiv.org/abs/2609.09766"
+        }
+      ],
+      "what_happened": "Researchers released CARRE, a three‑stage system that first retrieves candidate retention actions from a predefined catalog, then applies cost‑aware counterfactual scoring to rank them, and finally uses a large language model to generate reasoned explanations for each suggested action.",
+      "why_it_matters": "By coupling action recommendation with transparent reasoning, CARRE aims to move churn models beyond risk prediction toward actionable, explainable interventions, potentially improving retention strategies and stakeholder trust."
+    }
+  ]
+}
