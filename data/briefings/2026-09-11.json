@@ -1,0 +1,144 @@
+{
+  "covers_since": "2026-09-10T07:13:08.495593Z",
+  "day": "2026-09-11",
+  "generated_at": "2026-09-11T07:14:55.664023Z",
+  "stats": {
+    "articles": 522,
+    "duplicates_removed": 25,
+    "events": 101,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 161.0
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "Amazon SageMaker Inference now offers prefix-aware routing, which sends requests sharing the same prompt prefix to the same instance to keep the KV cache warm."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "In benchmarks on Llama 3.1 70B, prefix-aware routing reduced P50 time-to-first-token by up to 77%."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "In benchmarks on Llama 3.1 70B, prefix-aware routing raised KV cache hit rates from about 25% to over 80%."
+        }
+      ],
+      "confidence": 0.95,
+      "developer_impact": "Developers can enable prefix-aware routing on SageMaker inference endpoints to gain latency improvements without modifying model code, though they may need to design prompts to maximize shared prefixes.",
+      "event_id": "evt_ade714c19dafce35",
+      "first_seen": "2026-09-01T04:00:00Z",
+      "headline": "Amazon SageMaker Inference adds prefix-aware routing to cut LLM latency",
+      "last_updated": "2026-09-10T21:58:09Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Reduce LLM latency with prefix-aware routing on Amazon SageMaker Inference",
+          "url": "https://aws.amazon.com/blogs/machine-learning/reduce-llm-latency-with-prefix-aware-routing-on-amazon-sagemaker-inference/"
+        }
+      ],
+      "what_happened": "SageMaker Inference now supports a prefix-aware routing strategy that directs requests sharing the same prompt prefix to the same instance, keeping the KV cache warm. Benchmarks with Llama 3.1 70B showed up to a 77% reduction in P50 time-to-first-token and KV cache hit rates rising from ~25% to over 80%.",
+      "why_it_matters": "A warm KV cache reduces per‑token compute, lowering latency and cost for serving LLMs, especially when many prompts share prefixes. Higher cache hit rates improve throughput for real‑time AI applications."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can apply AEM to debug multi‑turn agents, isolate faulty turns, and prioritize fixes, improving iteration speed and model reliability. The metric provides a concrete tool for assessing correctness at each turn.",
+      "event_id": "evt_91b5c6ab21e16bac",
+      "first_seen": "2026-09-10T15:55:41Z",
+      "headline": "AWS introduces Agent Evaluation Metric for turn-level assessment of multi-turn conversation agents",
+      "last_updated": "2026-09-10T15:55:41Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Agent Evaluation Metric for multi-turn conversations",
+          "url": "https://aws.amazon.com/blogs/machine-learning/agent-evaluation-metric-for-multi-turn-conversations/"
+        }
+      ],
+      "what_happened": "AWS announced the Agent Evaluation Metric (AEM), a decomposable, turn‑level metric for evaluating multi‑turn conversational agents. The metric focuses on correctness, allowing identification of the specific turn that caused a failure and separating it from later turns that inherit the error.",
+      "why_it_matters": "AEM addresses a gap in single‑turn evaluation, where early mistakes can corrupt subsequent turns without being detected. By pinpointing the root‑cause turn, it enables more accurate measurement of agent quality and targeted improvements, leading to more reliable conversational systems."
+    },
+    {
+      "category": "open_source",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can enable model caching by configuring HyperPod deployments to use the caching option and ensuring sufficient NVMe storage on nodes; no changes to model code are required, but deployment settings must be adjusted.",
+      "event_id": "evt_914dba05ced926e8",
+      "first_seen": "2026-09-10T21:37:49Z",
+      "headline": "Amazon SageMaker HyperPod adds model caching to cut inference cold starts",
+      "last_updated": "2026-09-10T21:37:49Z",
+      "score": 5.745,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Reduce inference cold starts on Amazon SageMaker HyperPod with model caching",
+          "url": "https://aws.amazon.com/blogs/machine-learning/reduce-inference-cold-starts-on-amazon-sagemaker-hyperpod-with-model-caching/"
+        }
+      ],
+      "what_happened": "SageMaker HyperPod now supports model caching for inference. The feature pre‑loads model weights and container images onto each cluster node and stores them on local NVMe storage, allowing pods to read models locally instead of downloading over the network. This reduces cold‑start latency from tens of minutes to seconds.",
+      "why_it_matters": "Reducing cold‑start time improves the responsiveness of AI services, lowers latency for end‑users, and decreases resource waste during scaling, making large‑scale inference deployments more efficient and cost‑effective."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "The released dataset and the described LLM prompting framework give backend and AI engineers a ready‑to‑use benchmark for training and evaluating models on SI tasks, and a template for building rubric‑aligned evaluation pipelines in other language‑generation domains.",
+      "event_id": "evt_e848784e7448b9b9",
+      "first_seen": "2026-09-11T04:00:00Z",
+      "headline": "New corpus and LLM-based metrics for rubric-aligned segment-level evaluation of simultaneous interpreting",
+      "last_updated": "2026-09-11T04:00:00Z",
+      "score": 5.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Rubric-Aligned Disentangled Evaluation of Human Simultaneous Interpreting",
+          "url": "https://arxiv.org/abs/2609.11131"
+        }
+      ],
+      "what_happened": "The authors created a professionally annotated corpus of 1,101 human simultaneous interpreting (SI) segments, each scored for meaning transfer (LQ), delivery quality (EXP), and perceived latency (LAT). They then demonstrated that structured prompting of large language models (LLMs) combined with scalar supervision can produce automatic metrics that align with these rubric dimensions at the segment level.",
+      "why_it_matters": "Rubric-aligned, segment-level automatic evaluation provides a finer-grained, reproducible way to assess SI quality, potentially accelerating research on AI‑assisted interpreting and enabling more objective comparisons between systems. It also bridges the gap between human analytic rubrics and machine metrics."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Provides a new dataset and evaluation framework for developers building LLM agents that automate experiment replication, offering concrete metrics and tasks to guide model improvements.",
+      "event_id": "evt_2bb26ca5b829bac9",
+      "first_seen": "2026-09-11T04:00:00Z",
+      "headline": "NLPCC 2026 introduces AgentActionBench for process‑oriented experiment reproduction",
+      "last_updated": "2026-09-11T04:00:00Z",
+      "score": 5.09,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Overview of the NLPCC 2026 Shared Task 11: Agent-Based Experiment Reproduction from Scientific Papers",
+          "url": "https://arxiv.org/abs/2609.11117"
+        }
+      ],
+      "what_happened": "The NLPCC 2026 Shared Task 11 announced a new benchmark called AgentActionBench, designed to evaluate large‑language‑model agents on reproducing scientific experiments from papers. Unlike prior evaluations that focus on final code repositories and mainly machine‑learning tasks, this benchmark emphasizes the full experimental workflow.",
+      "why_it_matters": "By targeting the entire reproduction process, the benchmark aims to improve automated verification of scientific results across domains, addressing scalability issues in manual reproducibility and encouraging development of more capable LLM agents."
+    }
+  ]
+}
