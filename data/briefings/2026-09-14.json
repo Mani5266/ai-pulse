@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-09-13T07:48:21.681511Z",
+  "day": "2026-09-14",
+  "generated_at": "2026-09-14T07:50:25.373604Z",
+  "stats": {
+    "articles": 518,
+    "duplicates_removed": 1,
+    "events": 85,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 123.7
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers can use FINESSE to generate custom financial event streams and benchmark models without needing proprietary data, potentially integrating the simulator into training pipelines.",
+      "event_id": "evt_0288ccf77a04bc0b",
+      "first_seen": "2026-09-14T04:00:00Z",
+      "headline": "FINESSE simulator and dataset released for multimodal financial event sequence research",
+      "last_updated": "2026-09-14T04:00:00Z",
+      "score": 5.89,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "FINESSE: An Agent-Based Simulator and Benchmark Dataset for Multimodal Financial Event Sequences",
+          "url": "https://arxiv.org/abs/2609.11993"
+        }
+      ],
+      "what_happened": "The authors present FINESSE, an agent‑based simulation environment that generates synthetic financial event sequences across multiple modalities and includes a benchmark dataset, addressing the lack of open‑source, multimodal financial data.",
+      "why_it_matters": "By providing representative, structured, and dynamic financial data, FINESSE aims to broaden machine‑learning research in financial services, enabling evaluation of models on realistic, multimodal scenarios that were previously unavailable."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers can integrate AIM’s APIs to add cross-agent, cross-user memory with built-in privacy controls, requiring changes to how state is persisted and accessed in LLM-based services.",
+      "event_id": "evt_d47ce9e1ec3463df",
+      "first_seen": "2026-09-14T04:00:00Z",
+      "headline": "AIM framework enables privacy-aware shared memory for multi-agent, multi-user LLM systems",
+      "last_updated": "2026-09-14T04:00:00Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "AIM: A Privacy-Aware Interoperable Memory Framework for Multi-Agent Multi-User LLM Systems",
+          "url": "https://arxiv.org/abs/2609.12320"
+        }
+      ],
+      "what_happened": "Researchers released AIM (Agentic Interoperable Memory), a framework that lets large language model agents store and retrieve information across multiple users and sessions while enforcing privacy constraints, addressing limits of single-session LLMs and prior single-user memory systems.",
+      "why_it_matters": "By allowing public knowledge to be shared across users, AIM can improve response quality and personalization over time without exposing private data, potentially advancing collaborative AI applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers can incorporate GAUGE into their evaluation workflow to validate LLM‑judge based rankings before using them for model selection, potentially adjusting or replacing judge models when misalignment is detected.",
+      "event_id": "evt_eca1621c86adba37",
+      "first_seen": "2026-09-14T04:00:00Z",
+      "headline": "GAUGE protocol introduced to test reliability of LLM judges in offline agent evaluation",
+      "last_updated": "2026-09-14T04:00:00Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "GAUGE: When Not to Trust LLM-as-a-Judge in User-Simulated Evaluation of Task-Oriented Agents",
+          "url": "https://arxiv.org/abs/2609.12191"
+        }
+      ],
+      "what_happened": "The paper presents GAUGE, a reusable offline protocol that assesses whether rankings produced by an LLM-as-a-judge in persona‑driven user‑simulated evaluations align with a grounded, verifiable reward. GAUGE was applied to 25 task‑oriented LLM agents from six providers on the τ²‑bench and Simula benchmarks to measure this alignment.",
+      "why_it_matters": "By revealing mismatches between LLM‑judge scores and true task performance, GAUGE helps prevent the promotion of underperforming agents based on unreliable offline rankings, leading to more trustworthy evaluation pipelines for task‑oriented AI systems."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "The method provides a reusable pipeline that combines weak supervision with LLM‑based label refinement, which developers can adapt for other domain‑specific text mining tasks requiring dataset mention extraction.",
+      "event_id": "evt_3fc04fab25cfa747",
+      "first_seen": "2026-09-14T04:00:00Z",
+      "headline": "New weakly supervised framework uses LLMs to extract dataset mentions from forced displacement and FCV documents",
+      "last_updated": "2026-09-14T04:00:00Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Extracting Dataset Mentions in Forced Displacement and FCV Documents: A Weakly Supervised Framework with LLM-Based Label Refinement",
+          "url": "https://arxiv.org/abs/2609.12107"
+        }
+      ],
+      "what_happened": "Researchers introduced a weakly supervised extraction system that leverages large language models for label refinement to identify references to humanitarian datasets across research papers, project documents, and reports. The approach addresses the difficulty of locating dispersed dataset mentions in unstructured text.",
+      "why_it_matters": "Accurately locating dataset citations improves traceability of data use, helps identify gaps in data coverage, and supports better research, policy, and operational decisions in humanitarian contexts."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers may need to incorporate entity extraction and anchor normalization steps into their indexing pipelines and adjust retrieval APIs to work with the finer‑grained, entity‑based partitions introduced by EAR.",
+      "event_id": "evt_e3d31cddb6d22880",
+      "first_seen": "2026-09-14T04:00:00Z",
+      "headline": "EAR introduces entity-aware corpus partitioning for retrieval-augmented generation in MCQA",
+      "last_updated": "2026-09-14T04:00:00Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "EAR: Entity-Aware Partitioning Approach for Retrieval-Augmented Generation Development",
+          "url": "https://arxiv.org/abs/2609.12268"
+        }
+      ],
+      "what_happened": "The paper presents EAR, an Entity-Aware Partitioning method that replaces fixed-size text chunks with passages segmented around normalized surface entity anchors. This approach is designed for retrieval-augmented generation (RAG) applied to multiple‑choice question answering, aiming to return more directly relevant passages than traditional chunking.",
+      "why_it_matters": "By aligning retrieval units with entity boundaries, EAR seeks to reduce the implicit relevance gap of long, generic chunks, potentially improving answer accuracy and efficiency in knowledge‑intensive QA systems that rely on RAG."
+    }
+  ]
+}
