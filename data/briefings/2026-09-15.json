@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-09-14T07:48:21.681511Z",
+  "day": "2026-09-15",
+  "generated_at": "2026-09-15T07:35:57.706395Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 117,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 158.5
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers can consider using Bedrock AgentCore Code Interpreter as a transient compute environment for agentic tasks, but must design sandboxing and resource controls to support billion‑message scale workloads. The article offers practical tips for productionizing such setups.",
+      "event_id": "evt_d1c93a9a4173c0b2",
+      "first_seen": "2026-09-14T21:22:45Z",
+      "headline": "Abnormal AI uses Amazon Bedrock AgentCore Code Interpreter for billion-message real-time email threat detection",
+      "last_updated": "2026-09-14T21:22:45Z",
+      "score": 5.89,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Abnormal AI: Amazon Bedrock AgentCore for agentic email security at scale",
+          "url": "https://aws.amazon.com/blogs/machine-learning/abnormal-ai-amazon-bedrock-agentcore-for-agentic-email-security-at-scale/"
+        }
+      ],
+      "what_happened": "Abnormal AI deployed Amazon Bedrock AgentCore Code Interpreter as an ephemeral compute scratch pad for the agents that power its real‑time email threat detection system, handling detection at a scale of billions of messages. The article also describes the sandbox design choices and practical lessons learned when running Code Interpreter in production.",
+      "why_it_matters": "The implementation demonstrates that Bedrock AgentCore’s Code Interpreter can be used as a scalable, temporary compute layer for high‑throughput security workloads, showing a viable path for large‑scale, agentic AI services and providing guidance on safe sandboxing and production deployment."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can use PAI‑Bench to evaluate and improve their agents’ identity fidelity, requiring integration of the benchmark’s test suites and possibly redesigning update mechanisms to meet its criteria.",
+      "event_id": "evt_8dff944158cfc526",
+      "first_seen": "2026-09-15T04:00:00Z",
+      "headline": "New PAI-Bench benchmark evaluates persistent identity in deployed AI agents",
+      "last_updated": "2026-09-15T04:00:00Z",
+      "score": 5.59,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Identity Is More Than Recall: A Benchmark for Persistent Identity in Deployed AI Agents",
+          "url": "https://arxiv.org/abs/2609.13637"
+        }
+      ],
+      "what_happened": "Researchers introduced PAI-Bench, a provider‑neutral benchmark that tests AI agents on maintaining a versioned, update‑governed identity contract. The benchmark separates recall, composition, behavioral enactment, resistance, persistence, lineage, and role‑conditioned updates, and uses scoring oracles external to the target process. Two frozen campaigns covering sixteen synthetic tasks are provided.",
+      "why_it_matters": "The benchmark gives a systematic way to measure whether AI agents can keep consistent identity facts across updates, which is important for safety, reliability, and trust in deployed systems that interact over time."
+    },
+    {
+      "category": "policy",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can leverage Amazon Bedrock AgentCore to build similar multi‑agent AI workflows for API validation and compliance, using FDX standards and security frameworks like SOC 2 and PCI DSS as built‑in checks.",
+      "event_id": "evt_fce2716ef9e8c465",
+      "first_seen": "2026-09-14T15:58:57Z",
+      "headline": "Ninth Wave launches Compass AI onboarding assistant on Amazon Bedrock",
+      "last_updated": "2026-09-14T15:58:57Z",
+      "score": 5.15,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "How Ninth Wave built AI-powered open finance onboarding on Amazon Bedrock",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-ninth-wave-built-ai-powered-open-finance-onboarding-on-amazon-bedrock/"
+        }
+      ],
+      "what_happened": "Ninth Wave created Compass, a multi‑agent AI onboarding assistant built on Amazon Bedrock AgentCore. Compass validates bank APIs against the Financial Data Exchange (FDX) standards, scores their compliance, and automates open‑finance onboarding, reducing the process from weeks to minutes while meeting SOC 2 and PCI DSS requirements.",
+      "why_it_matters": "The speedup from weeks to minutes can accelerate banks' and fintechs' integration of open‑finance services, lowering time‑to‑market and operational costs. Automated compliance scoring helps ensure regulatory adherence, reducing risk for institutions adopting open finance APIs."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can now run Perplexity's AI agent on Windows machines with RTX GPUs, requiring appropriate driver and SDK support. It enables integration of local, privacy‑preserving AI workflows without sending data to external servers.",
+      "event_id": "evt_e52b0024cc5c06e8",
+      "first_seen": "2026-09-14T15:00:52Z",
+      "headline": "Perplexity launches Windows Portable Computer AI agent powered by NVIDIA RTX",
+      "last_updated": "2026-09-14T15:00:52Z",
+      "score": 5.147,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "Perplexity Portable Computer Is Now Available on Windows, Powered by NVIDIA RTX",
+          "url": "https://blogs.nvidia.com/blog/local-ai-perplexity-windows-pcs/"
+        }
+      ],
+      "what_happened": "Perplexity released the Portable Computer, a local version of its AI agent, for Windows. It runs on the device using NVIDIA RTX GPUs and local language models to plan and execute multistep tasks while keeping data on‑device.",
+      "why_it_matters": "Running the agent locally reduces reliance on cloud services, improves privacy for sensitive data, and leverages GPU acceleration to handle more complex workloads directly on a PC."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers may consider using LLM APIs to auto‑generate rule‑based models for similar tasks, requiring integration of LLM calls, rule extraction, and validation against standard benchmarks.",
+      "event_id": "evt_1cb051040f96fc49",
+      "first_seen": "2026-09-15T04:00:00Z",
+      "headline": "Study compares LLM‑generated rule‑based systems to traditional ML models for heart disease prediction",
+      "last_updated": "2026-09-15T04:00:00Z",
+      "score": 5.09,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Evaluating LLM-Generated Rules for Heart Disease Prediction",
+          "url": "https://arxiv.org/abs/2609.13192"
+        }
+      ],
+      "what_happened": "The paper evaluates traditional classifiers (Logistic Regression, K‑Nearest Neighbors, SVM, Naive Bayes, Decision Tree, Random Forest) and rule‑based systems automatically generated by GPT‑4o and Claude Sonnet 4.6 on the UCI Heart Disease dataset, reporting their predictive performance.",
+      "why_it_matters": "The results show whether large language models can produce effective, interpretable rule sets for a medical classification task, offering a potential alternative to black‑box models if performance is comparable."
+    }
+  ]
+}
