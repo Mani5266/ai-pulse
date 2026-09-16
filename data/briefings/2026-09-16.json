@@ -1,0 +1,170 @@
+{
+  "covers_since": "2026-09-15T07:33:19.225237Z",
+  "day": "2026-09-16",
+  "generated_at": "2026-09-16T07:34:54.574652Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 25,
+    "events": 95,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 159.1
+  },
+  "stories": [
+    {
+      "category": "developer_tools",
+      "claims": [],
+      "confidence": 0.97,
+      "developer_impact": "Developers can enable caching through the Converse API, configure TTL, isolate caches per tenant, and integrate with LangChain, requiring only minor code adjustments to achieve cost and latency benefits.",
+      "event_id": "evt_a0a76519ad261018",
+      "first_seen": "2026-09-15T16:18:19Z",
+      "headline": "Amazon Bedrock adds prompt caching to cut input token costs up to 90%",
+      "last_updated": "2026-09-15T16:18:19Z",
+      "score": 6.15,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Optimizing cost and latency with Amazon Bedrock prompt caching",
+          "url": "https://aws.amazon.com/blogs/machine-learning/optimizing-cost-and-latency-with-amazon-bedrock-prompt-caching/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock introduced a prompt caching feature that stores repeated prompt context for reuse across calls to foundation models via the Converse API. The feature can reduce input token usage by up to 90% and is illustrated in six scenarios: caching message content, system prompts, tool definitions, mixed TTL, tenant isolation, and LangChain integration.",
+      "why_it_matters": "Lower token consumption directly reduces inference cost and latency for workloads that repeatedly send the same context, making large‑model usage cheaper and faster, especially in multi‑tenant or tool‑driven applications."
+    },
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "google-deepmind",
+            "simon-willison"
+          ],
+          "text": "Google introduced Gemini 3.8 Live and Gemini 3.8 Live Extended Thinking."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Gemini 3.8 Live and Gemini 3.8 Live Extended Thinking are speech-to-speech models."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Gemini 3.8 Live and Gemini 3.8 Live Extended Thinking are similar in shape to OpenAI's GPT‑Live family."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "hacker-news"
+          ],
+          "text": "The Hacker News post about Gemini 3.8 Live has 383 points and 247 comments."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "There is a tool called Gemini Live audio for interacting with Gemini 3.8 Live models."
+        }
+      ],
+      "confidence": 0.88,
+      "developer_impact": "Developers can integrate the Gemini Live models via Google’s API to build interactive voice agents, use the provided web UI as a quick test harness, and leverage interruptible streaming output for more responsive user experiences.",
+      "event_id": "evt_6aae488b1bb65e59",
+      "first_seen": "2026-09-15T17:05:57Z",
+      "headline": "Google releases Gemini 3.8 Live and Live Extended Thinking speech-to-speech models",
+      "last_updated": "2026-09-15T22:47:07Z",
+      "score": 5.85,
+      "sources": [
+        {
+          "source_id": "google-deepmind",
+          "title": "Introducing Gemini 3.8 Live and 3.8 Live Extended Thinking",
+          "url": "https://deepmind.google/blog/introducing-gemini-3-8-live-and-3-8-live-extended-thinking/"
+        },
+        {
+          "source_id": "hacker-news",
+          "title": "Gemini 3.8 Live and 3.8 Live Extended Thinking",
+          "url": "https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-8-live-gemini-3-8-live-extended-thinking/"
+        },
+        {
+          "source_id": "simon-willison",
+          "title": "Gemini Live audio",
+          "url": "https://simonwillison.net/2026/Sep/15/gemini-live/"
+        }
+      ],
+      "what_happened": "Google announced Gemini 3.8 Live and Gemini 3.8 Live Extended Thinking, two new speech-to-speech models. They support real-time voice interaction, allow users to interrupt the model while it is speaking, and can be accessed via a web UI that lets you pick model and voice preset and add an optional system prompt.",
+      "why_it_matters": "The models bring real-time conversational AI to audio, enabling more natural voice assistants and reducing latency compared to turn-based systems. Their extended-thinking variant offers longer context handling, which can improve complex dialogue and multimodal applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can employ MIMIC to generate high‑quality, code‑driven training data, requiring integration of code execution environments into their data pipelines. Fine‑tuning workflows may shift toward leveraging these verifiable reasoning trajectories, potentially changing how prompts and evaluation are designed.",
+      "event_id": "evt_25cb6d47a727e9df",
+      "first_seen": "2026-09-16T04:00:00Z",
+      "headline": "MIMIC framework uses executable code to synthesize reasoning data for LLMs",
+      "last_updated": "2026-09-16T04:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "The Imitation Game: When LLMs Learn to Reason Like Programs via Code-Centric Reasoning Data Synthesis",
+          "url": "https://arxiv.org/abs/2609.16076"
+        }
+      ],
+      "what_happened": "The paper introduces MIMIC, a framework that generates reasoning data by converting algorithms into executable code trajectories. By treating code as a rigorous medium, MIMIC creates verifiable, step‑by‑step reasoning paths that LLMs can learn from, aiming to improve deterministic, fine‑grained reasoning that LLMs typically handle only via semantic approximation.",
+      "why_it_matters": "Using executable code provides a symbolic‑execution style grounding for LLM reasoning, reducing reliance on fuzzy language patterns and increasing reliability on tasks that require precise logical steps. This could raise performance on benchmarks demanding exact computation and make LLM outputs more trustworthy for critical applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers may need to adopt the proposed memory architecture or APIs that support continuous reconsolidation, altering how they design and integrate external memory modules for LLM agents.",
+      "event_id": "evt_f96756bd82d7a91e",
+      "first_seen": "2026-09-16T04:00:00Z",
+      "headline": "Retrieval-Driven Memory Reconsolidation Improves Long-Term LLM Agent Memory",
+      "last_updated": "2026-09-16T04:00:00Z",
+      "score": 5.69,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Retrieval-Driven Memory Reconsolidation for Long-Term LLM Agents",
+          "url": "https://arxiv.org/abs/2609.16053"
+        }
+      ],
+      "what_happened": "A new approach called Retrieval-Driven Memory Reconsolidation is introduced for large language model (LLM) agents. Unlike prior systems that only update memory when new information arrives and treat retrieval as a final step, this method continuously reorganizes stored memory using feedback from retrieval operations, enabling ongoing refinement of memory structures.",
+      "why_it_matters": "By leveraging retrieval feedback to reshape memory, LLM agents can maintain more relevant and accessible long‑term knowledge across extended interactions, potentially reducing forgetting and improving task performance over time."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.4,
+      "event_id": "evt_acfc7f548a899d3e",
+      "first_seen": "2026-09-15T20:00:35Z",
+      "headline": "Retrieve-for-Train algorithms aim to bypass inference bottlenecks in complex AI search",
+      "last_updated": "2026-09-15T20:00:35Z",
+      "score": 5.425,
+      "sources": [
+        {
+          "source_id": "google-research",
+          "title": "Bypassing inference bottlenecks: Accelerating complex AI search with Retrieve-for-Train",
+          "url": "https://research.google/blog/bypassing-inference-bottlenecks-accelerating-complex-ai-search-with-retrieve-for-train/"
+        }
+      ],
+      "what_happened": "Google Research introduced a set of algorithms and theoretical analysis called Retrieve-for-Train, intended to accelerate complex AI search by reducing inference bottlenecks.",
+      "why_it_matters": "If effective, the approach could speed up AI search tasks, lowering latency and computational cost for large models."
+    }
+  ]
+}
