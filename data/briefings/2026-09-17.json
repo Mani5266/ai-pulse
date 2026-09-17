@@ -1,0 +1,160 @@
+{
+  "covers_since": "2026-09-16T07:32:15.440442Z",
+  "day": "2026-09-17",
+  "generated_at": "2026-09-17T07:31:26.127739Z",
+  "stats": {
+    "articles": 521,
+    "duplicates_removed": 0,
+    "events": 122,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 161.2
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers receive ready‑to‑install, open‑source agent skills with example integrations, allowing them to add vetted HCLS reasoning capabilities to their pipelines without building them from scratch, and to benchmark performance using the provided prompt evaluation data.",
+      "event_id": "evt_c6ae3beb79b8ee8b",
+      "first_seen": "2026-09-16T19:00:00Z",
+      "headline": "AWS releases 38 open-source agent skills to improve healthcare AI reasoning",
+      "last_updated": "2026-09-16T19:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Improving HCLS AI reasoning with open-source agent skills",
+          "url": "https://aws.amazon.com/blogs/machine-learning/improving-hcls-ai-reasoning-with-open-source-agent-skills/"
+        }
+      ],
+      "what_happened": "AWS published a blog post detailing 38 open-source agent skills spanning 11 healthcare and life sciences (HCLS) domains. The post includes installation instructions, three worked use cases, and an evaluation on 410 prompts that achieved a 70-86% win rate, aiming to correct misapplication of HCLS decision frameworks by AI agents.",
+      "why_it_matters": "The skills aim to reduce errors where AI agents cite correct guidelines but apply them incorrectly, potentially increasing the reliability of AI reasoning in HCLS applications. By providing evaluated, domain‑specific tools, the effort could improve decision support accuracy and accelerate adoption of trustworthy AI in regulated health contexts."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.82,
+      "developer_impact": "The benchmark offers a concrete test suite for developers of AI agents, allowing them to measure performance on realistic ERP scenarios and adapt models to handle complex, stateful interactions.",
+      "event_id": "evt_f0ae685a2d734338",
+      "first_seen": "2026-09-17T04:00:00Z",
+      "headline": "ERPBench introduced as new evaluation paradigm for computer-use agents in ERP systems",
+      "last_updated": "2026-09-17T04:00:00Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "ERPBench: A State-Grounded Evaluation Paradigm for Computer-Use Agents in Enterprise Software",
+          "url": "https://arxiv.org/abs/2609.17885"
+        }
+      ],
+      "what_happened": "Researchers released ERPBench, a state‑grounded evaluation framework targeting computer‑use agents that interact with enterprise resource planning software. The benchmark addresses the limitations of existing evaluations that focus on general desktop and web tasks by incorporating the dense interfaces, coordinated multi‑step workflows, and error‑sensitive operations typical of ERP applications.",
+      "why_it_matters": "Providing a domain‑specific benchmark enables more accurate assessment of agents’ ability to handle real‑world enterprise tasks, potentially improving their reliability and safety when automating finance, procurement, inventory, and customer operations."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "The work demonstrates a practical workflow combining LLM‑based natural‑language feature extraction with traditional statistical models, offering a template for engineers building AI tools that integrate unstructured clinical text with structured prediction pipelines. It highlights considerations for data preprocessing, model interpretability, and deployment in healthcare environments.",
+      "event_id": "evt_127d99a33bbcc048",
+      "first_seen": "2026-09-17T04:00:00Z",
+      "headline": "LLM extracts features from respiratory therapy notes to improve extubation failure prediction",
+      "last_updated": "2026-09-17T04:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Enhancing Extubation Failure Prediction with LLM-Derived Features from Respiratory Therapy Clinical Notes",
+          "url": "https://arxiv.org/abs/2609.17532"
+        }
+      ],
+      "what_happened": "Researchers introduced a pipeline that uses a large language model to classify and extract features from free‑text respiratory therapy clinical notes, then feeds those features into a logistic regression model to predict extubation failure. The approach was evaluated on a patient cohort from University of Washington Medicine and was reported to identify clinically relevant predictors of failure.",
+      "why_it_matters": "Accurate early prediction of extubation failure can guide clinicians to intervene sooner, potentially reducing complications, ICU stay length, and mortality associated with premature ventilator removal. Improved prediction models also support more efficient resource allocation in critical care settings."
+    },
+    {
+      "category": "research",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "The paper titled \"The Inference Engineering Pareto Atlas: Which Optimizations Dominate the Cost, Quality, and Latency Frontier?\" was submitted to arXiv as 2609.17863v1."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "LLM inference optimizations report speedups that vary across models, GPUs, prompts, and quality metrics, making them difficult to compare or combine."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "The authors built a cost, quality, and latency Pareto atlas to identify the best configurations for different deployment constraints."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "The study measured 54 configurations of the Qwen2.5-7B-Instruct model using vLLM version 0.12 on L4, A100, and H100 GPUs."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "The authors used the measured configurations as anchors to calibrate a simulation."
+        }
+      ],
+      "confidence": 0.78,
+      "developer_impact": "Provides a data‑driven framework (and calibrated simulator) that backend and AI engineers can use to predict the impact of inference optimizations on cost, latency, and output quality, guiding hardware and software choices for LLM deployment.",
+      "event_id": "evt_e45a3548a7d56165",
+      "first_seen": "2026-09-15T04:00:00Z",
+      "headline": "Researchers map LLM inference trade‑offs with a Pareto atlas of cost, quality, and latency",
+      "last_updated": "2026-09-17T04:00:00Z",
+      "score": 5.54,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "The Inference Engineering Pareto Atlas: Which Optimizations Dominate the Cost, Quality, and Latency Frontier?",
+          "url": "https://arxiv.org/abs/2609.17863"
+        }
+      ],
+      "what_happened": "The authors measured 54 inference configurations of the Qwen2.5‑7B‑Instruct model using vLLM 0.12 on L4, A100, and H100 GPUs. From these measurements they built a Pareto atlas that identifies which optimizations dominate the cost‑quality‑latency frontier for different deployment constraints, and they use the measured points to calibrate a simulation for exploring untested configurations.",
+      "why_it_matters": "The atlas gives a systematic way to compare and combine diverse inference optimizations, which previously reported speedups on varying models, hardware, prompts, and quality metrics made difficult to evaluate. It helps engineers select configurations that meet specific cost, performance, or quality targets without exhaustive testing."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Backend and AI engineers may consider the Vera Rubin NVL72 for high‑throughput inference workloads, potentially requiring updates to deployment pipelines, driver stacks, and model serving frameworks to leverage its performance advantages.",
+      "event_id": "evt_c60864f37894392f",
+      "first_seen": "2026-09-16T15:00:48Z",
+      "headline": "NVIDIA's Vera Rubin NVL72 tops MLPerf Inference v6.1 benchmark",
+      "last_updated": "2026-09-16T15:00:48Z",
+      "score": 5.522,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "NVIDIA Vera Rubin NVL72 Delivers Leading Performance in MLPerf Inference v6.1 Debut",
+          "url": "https://blogs.nvidia.com/blog/vera-rubin-nvl72-mlperf-inference/"
+        }
+      ],
+      "what_happened": "The NVIDIA Vera Rubin NVL72 system achieved the leading performance score in the MLPerf Inference v6.1 benchmark debut, demonstrating superior throughput and efficiency compared to competing systems.",
+      "why_it_matters": "Higher inference performance translates to more tokens generated per unit time, increasing potential revenue for AI services. Efficient scaling means throughput grows proportionally with added hardware, reducing per‑request cost. Continuous software optimization extracts more value from existing infrastructure investments."
+    }
+  ]
+}
