@@ -1,0 +1,167 @@
+{
+  "covers_since": "2026-09-18T07:17:31.819843Z",
+  "day": "2026-09-19",
+  "generated_at": "2026-09-19T07:17:18.967718Z",
+  "stats": {
+    "articles": 447,
+    "duplicates_removed": 0,
+    "events": 47,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 157.8
+  },
+  "stories": [
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can enable the add‑on in their EKS clusters to gain latency improvements without modifying model serving code or client integrations, allowing easier optimization of GPU workloads.",
+      "event_id": "evt_69854448ea9a16b5",
+      "first_seen": "2026-09-18T13:08:34Z",
+      "headline": "Amazon SageMaker launches HyperPod Inference Gateway for GPU-aware routing on EKS",
+      "last_updated": "2026-09-18T13:08:34Z",
+      "score": 6.14,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Introducing Amazon SageMaker HyperPod Inference Gateway",
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-inference-gateway/"
+        }
+      ],
+      "what_happened": "Amazon introduced SageMaker HyperPod Inference Gateway, a Kubernetes‑native add‑on for Amazon EKS that routes inference requests based on real‑time GPU signals, directing each request to the most suitable pod. The gateway claims to reduce first‑token latency by up to 82% and requires no changes to existing model servers or client applications.",
+      "why_it_matters": "By automatically matching requests to the best‑performing GPU pod, the gateway can significantly speed up inference latency, improving responsiveness of AI services and reducing resource waste without code modifications, which can lower operational costs and simplify scaling."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.96,
+      "event_id": "evt_4c6167b67b89d08a",
+      "first_seen": "2026-09-18T17:33:50Z",
+      "headline": "Google launches 'CC' AI agent for household coordination",
+      "last_updated": "2026-09-18T17:33:50Z",
+      "score": 5.692,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Google’s new ‘CC’ is an AI agent that helps families run their households",
+          "url": "https://techcrunch.com/2026/09/18/googles-new-cc-is-an-ai-agent-that-helps-families-run-their-households/"
+        }
+      ],
+      "what_happened": "Google has refocused its CC AI agent on helping families manage household tasks. The agent can access shared emails, schedules, and task lists to automatically manage calendars, fill out forms, create shopping lists, and plan meals.",
+      "why_it_matters": "Automating routine household coordination could reduce manual planning effort for families and showcases a consumer‑focused application of AI agents, potentially shaping future personal productivity tools and AI integration in everyday life."
+    },
+    {
+      "category": "security",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "techcrunch-ai",
+            "the-verge-ai"
+          ],
+          "text": "Researchers used Anthropic’s Claude to hack into OpenAI."
+        },
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "techcrunch-ai",
+            "the-verge-ai"
+          ],
+          "text": "The researchers took over OpenAI employee accounts."
+        },
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "techcrunch-ai",
+            "the-verge-ai"
+          ],
+          "text": "The researchers accessed OpenAI’s internal code repository, known as the Monorepo on GitHub."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "The hack was completed in less than 72 hours."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "The Claude model used was Anthropic’s Claude Opus 4.8 and 5."
+        }
+      ],
+      "confidence": 0.92,
+      "developer_impact": "Developers building on or integrating LLM APIs must implement strict prompt‑injection defenses, monitor for abnormal model‑driven actions, and treat model output as untrusted code that could be leveraged in attacks.",
+      "event_id": "evt_efbb2c6cd5382896",
+      "first_seen": "2026-09-18T14:00:14Z",
+      "headline": "Security researchers used Anthropic's Claude to breach OpenAI employee accounts and code repository",
+      "last_updated": "2026-09-18T15:30:16Z",
+      "score": 5.667,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Researchers used Anthropic’s Claude to hack into OpenAI",
+          "url": "https://techcrunch.com/2026/09/18/researchers-used-anthropics-claude-to-hack-into-openai/"
+        },
+        {
+          "source_id": "the-verge-ai",
+          "title": "Security researchers used Claude to help them hack into OpenAI",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/997444/openai-hack-claude-heif-heist"
+        }
+      ],
+      "what_happened": "A team of three independent security researchers at Hacktron used Anthropic’s Claude Opus 4.8 and 5 to exploit vulnerabilities in OpenAI’s systems. Within 72 hours they gained control of employee accounts and accessed OpenAI’s internal GitHub monorepo, then reported the flaws to the companies.",
+      "why_it_matters": "The incident shows that large language models can be weaponized to automate credential‑stealing and code‑exfiltration, exposing AI‑company secrets and raising concerns about supply‑chain security for AI services."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can use the coding agents to generate endpoints, autoscaling policies, monitoring alarms, and teardown scripts with minimal code, streamlining the deployment workflow for Hugging Face models on SageMaker.",
+      "event_id": "evt_c87efd876aae4ae7",
+      "first_seen": "2026-09-18T15:25:23Z",
+      "headline": "AWS adds coding agents to deploy Hugging Face models on SageMaker",
+      "last_updated": "2026-09-18T15:25:23Z",
+      "score": 5.59,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Deploy Hugging Face models on Amazon SageMaker AI with coding agents",
+          "url": "https://aws.amazon.com/blogs/machine-learning/deploy-hugging-face-models-on-amazon-sagemaker-ai-with-coding-agents/"
+        }
+      ],
+      "what_happened": "AWS announced a feature that lets users point a coding agent at a Hugging Face model and automatically create a production‑ready SageMaker endpoint. The system uses six open‑source agent skills to select the correct serving container, configure autoscaling, set up Amazon CloudWatch alarms, and provide a verified teardown path.",
+      "why_it_matters": "The automation reduces manual configuration, speeds up getting models into production, and ensures built‑in monitoring and safe cleanup, which can lower operational overhead and improve reliability for AI services."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can replace ECS/Fargate deployments with Bedrock AgentCore, leveraging built‑in orchestration and vector retrieval features, which lowers the need for custom infrastructure code and may speed up deployment of multi‑model agents.",
+      "event_id": "evt_2ba3db2ddc592fd6",
+      "first_seen": "2026-09-18T15:38:53Z",
+      "headline": "AWS introduces Amazon Bedrock AgentCore runtime for migrating multi-model AI agents",
+      "last_updated": "2026-09-18T15:38:53Z",
+      "score": 5.39,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Migrating multi-model AI agents to Amazon Bedrock AgentCore runtime",
+          "url": "https://aws.amazon.com/blogs/machine-learning/migrating-multi-model-ai-agents-to-amazon-bedrock-agentcore-runtime/"
+        }
+      ],
+      "what_happened": "A multi‑model healthcare AI agent was moved from a self‑managed Amazon ECS setup with AWS Fargate to the Amazon Bedrock AgentCore runtime. The migration kept the agent's triple‑model orchestration and vector‑enhanced knowledge retrieval while cutting infrastructure management effort. The same framework‑agnostic pattern is said to work for healthcare, financial services, and manufacturing.",
+      "why_it_matters": "By shifting to Bedrock AgentCore, teams can reduce the operational burden of managing ECS/Fargate clusters, rely on a unified runtime for complex model orchestration, and potentially simplify scaling and maintenance across multiple industries."
+    }
+  ]
+}
