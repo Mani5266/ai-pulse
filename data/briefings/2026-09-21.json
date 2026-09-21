@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-09-20T07:51:52.585354Z",
+  "day": "2026-09-21",
+  "generated_at": "2026-09-21T07:54:27.763753Z",
+  "stats": {
+    "articles": 521,
+    "duplicates_removed": 1,
+    "events": 90,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 155.2
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Implementing HERMES requires pipelines that extract entities and relations from raw notes to construct a knowledge graph, and integration of contrast-aware graph reasoning modules, which may change data preprocessing and model architecture for AI engineers working on health-care systems.",
+      "event_id": "evt_171ccd7c3fad0b3d",
+      "first_seen": "2026-09-21T04:00:00Z",
+      "headline": "HERMES introduces a graph-based framework that predicts patient outcomes using only clinical notes",
+      "last_updated": "2026-09-21T04:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "HERMES: Contrast-Aware Knowledge Graph Reasoning from Clinical Notes for Patient Outcome Prediction",
+          "url": "https://arxiv.org/abs/2609.20825"
+        }
+      ],
+      "what_happened": "The authors present HERMES, a contrast-aware knowledge-graph reasoning system that builds a graph directly from unstructured clinical text, preserving relational and temporal information, and uses it for patient outcome prediction. It is positioned as an alternative to models that rely on structured EHR data or flatten notes into sequences.",
+      "why_it_matters": "By retaining the explicit structure in clinical narratives, HERMES aims to improve the accuracy and interpretability of outcome predictions, potentially enabling better clinical decision support without requiring structured coding of records."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers of AI agents may need to integrate LEGIT certification processes into their agents and adhere to its reputation and benchmarking standards to be listed in marketplaces.",
+      "event_id": "evt_2b8c082274107c0e",
+      "first_seen": "2026-09-21T04:00:00Z",
+      "headline": "New LEGIT protocol aims to credential AI agents in emerging marketplaces",
+      "last_updated": "2026-09-21T04:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "LEGIT: Credentialing Protocol for Trustworthy AI Agent Marketplaces",
+          "url": "https://arxiv.org/abs/2609.21325"
+        }
+      ],
+      "what_happened": "The paper introduces LEGIT, a credentialing protocol designed for AI agent marketplaces. It links certification, reputation, and marketplace mechanisms to address the difficulty buyers face in verifying and comparing agent performance across tasks, software, and budgets.",
+      "why_it_matters": "By providing a standardized way to certify and assess AI agents, LEGIT could increase trust and transparency in agentic marketplaces, making it easier for buyers to select reliable agents and potentially fostering broader adoption of such marketplaces."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "Provides a new AI‑agent framework and benchmark that developers can use as a reference or baseline when building or evaluating automated BI solutions, influencing future integrations with platforms like Power BI or Tableau.",
+      "event_id": "evt_89006430791c3986",
+      "first_seen": "2026-09-21T04:00:00Z",
+      "headline": "BI-Agent introduced to automate end-to-end business intelligence workflow",
+      "last_updated": "2026-09-21T04:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "BI-Agent and BI-Bench: Towards Automating End-to-End Business Intelligence",
+          "url": "https://arxiv.org/abs/2609.20886"
+        }
+      ],
+      "what_happened": "The paper presents BI-Agent, a system designed to automate the four core steps of traditional business intelligence pipelines—identifying relevant tables, performing data transformations, constructing join relationships, and answering business questions. Alongside the system, the authors release BI-Bench, a benchmark for evaluating such end-to-end BI automation approaches.",
+      "why_it_matters": "Automating these labor‑intensive steps can reduce the time and expertise required to generate insights from enterprise data, potentially accelerating decision‑making and lowering the barrier for non‑technical users to leverage BI tools."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.86,
+      "developer_impact": "Training pipelines may need to incorporate efficiency‑based reward signals or modified loss functions to encourage models to conserve computation and abstain when appropriate, potentially affecting model architecture choices and evaluation metrics.",
+      "event_id": "evt_048e05720c2dca35",
+      "first_seen": "2026-09-21T04:00:00Z",
+      "headline": "Rewarding Efficient Reasoning Improves Model Abstention on Underspecified Tasks",
+      "last_updated": "2026-09-21T04:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Rewarding Efficient Reasoning Improves Abstention on Underspecified Tasks in Reasoning Models",
+          "url": "https://arxiv.org/abs/2609.20846"
+        }
+      ],
+      "what_happened": "A new arXiv paper (arXiv:2609.20846v1) demonstrates that adding a reward for efficient reasoning to large reasoning models (LRMs) reduces their tendency to answer unanswerable questions. The authors compare LRM behavior to a human study, showing humans limit effort on unanswerable tasks while LRMs waste computation, and show that the efficiency reward improves abstention performance.",
+      "why_it_matters": "Better abstention means LRMs are less likely to produce confident but incorrect answers on ambiguous or underspecified inputs, increasing reliability in downstream applications that depend on trustworthy reasoning outputs."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "event_id": "evt_5e2a92bc8d98003f",
+      "first_seen": "2026-09-21T04:00:00Z",
+      "headline": "PlaceReasoner-Beta introduces reasoning-driven macro placement for VLSI design",
+      "last_updated": "2026-09-21T04:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "PlaceReasoner-Beta: Reasoning-Driven Macro Placement and Benchmarking",
+          "url": "https://arxiv.org/abs/2609.21263"
+        }
+      ],
+      "what_happened": "The authors present PlaceReasoner-Beta, a new system for automated macro placement that uses a reasoning-driven approach and includes benchmarking. It aims to move beyond traditional methods that rely on hand‑crafted proxy objectives like estimated wirelength and one‑shot numerical optimization, which limit the ability to incorporate visual layout context, design expertise, and downstream physical‑design feedback.",
+      "why_it_matters": "By allowing visual layout context, codified design expertise, and feedback from later design stages to be integrated into the placement process, PlaceReasoner‑Beta could produce higher‑quality macro placements and improve overall VLSI physical design outcomes compared with existing proxy‑objective‑driven methods."
+    }
+  ]
+}
