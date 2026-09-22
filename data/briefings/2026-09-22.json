@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-09-21T07:51:52.585354Z",
+  "day": "2026-09-22",
+  "generated_at": "2026-09-22T07:37:49.735984Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 25,
+    "events": 100,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 125.0
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers may need to incorporate PRQuant’s algorithm into their model quantization pipelines, potentially replacing existing low‑bit quantization tools to gain better accuracy‑performance trade‑offs without added runtime cost.",
+      "event_id": "evt_7271e53377de24d4",
+      "first_seen": "2026-09-22T04:00:00Z",
+      "headline": "PRQuant introduces permutation residual quantization to improve low-bit inference accuracy and reduce overhead",
+      "last_updated": "2026-09-22T04:00:00Z",
+      "score": 6.24,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "PRQuant: Permutation Residual Quantization for Low-Overhead Inference",
+          "url": "https://arxiv.org/abs/2609.22106"
+        }
+      ],
+      "what_happened": "The paper presents PRQuant, a new quantization method that tackles the outlier‑driven accuracy loss in low‑bit linear layers. Unlike prior smoothing, rotation, or residual techniques, PRQuant aims to avoid weight bottlenecks and eliminates the heavy execution cost of online approaches by using a permutation‑based residual scheme.",
+      "why_it_matters": "By improving accuracy while keeping inference overhead low, PRQuant could enable more efficient deployment of quantized models on resource‑constrained hardware, expanding the practical use of low‑precision AI inference."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers can integrate Grok 4.6 via Bedrock's existing APIs, choose reasoning effort levels per request, and leverage cross‑Region inference, enabling easier deployment of high‑capacity language models within their backend services.",
+      "event_id": "evt_1f462f4963220aae",
+      "first_seen": "2026-09-21T18:30:34Z",
+      "headline": "xAI releases Grok 4.6 on Amazon Bedrock with 500K-token context and new reasoning levels",
+      "last_updated": "2026-09-21T18:30:34Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "xAI’s Grok 4.6 is now available in Amazon Bedrock",
+          "url": "https://aws.amazon.com/blogs/machine-learning/xais-grok-4-6-is-now-available-in-amazon-bedrock/"
+        }
+      ],
+      "what_happened": "xAI's Grok 4.6 model is now offered through Amazon Bedrock. The model supports a 500,000‑token context window, four distinct reasoning effort levels, and is accessible via both the bedrock-mantle and bedrock-runtime endpoints. It includes a Converse API and cross‑Region inference capability.",
+      "why_it_matters": "The expanded context window and configurable reasoning allow developers to build longer‑running agents, more complex coding assistants, and broader knowledge‑work applications directly on AWS infrastructure, potentially reducing the need for external model hosting and improving performance for large‑scale tasks."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers would need to implement and maintain a ledger of commitments and integrate the salience‑boost factor into existing embedding retrieval pipelines, but query‑time code remains unchanged, enabling zero‑inference lookups.",
+      "event_id": "evt_7510ed85b0255a17",
+      "first_seen": "2026-09-22T04:00:00Z",
+      "headline": "Zero-Inference Prospective Term Introduced for Personal Memory Retrieval",
+      "last_updated": "2026-09-22T04:00:00Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Memory That Looks Forward: A Zero-Inference Prospective Term for Personal Memory Retrieval",
+          "url": "https://arxiv.org/abs/2609.22091"
+        }
+      ],
+      "what_happened": "Researchers propose a new retrieval mechanism for personal memory stores that operates prospectively and requires no inference at query time. Commitments are recorded in an explicit ledger as dated or trigger‑conditioned entries. When a ledger entry fires, linked memory items receive a multiplicative salience boost that is combined with standard embedding‑based retrieval scores.",
+      "why_it_matters": "By shifting computation to the time of commitment rather than query, the approach can deliver faster, lower‑latency retrieval and reduce runtime resource usage. The salience boost aligns retrieved items with user‑intended future actions, potentially improving relevance for tasks that depend on planned activities."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers must configure Bedrock AgentCore Code Interpreter to run in VPC mode, set up Route 53 Resolver DNS Firewall rules, and apply VPC endpoint policies to restrict outbound traffic. This adds security‑focused networking steps to deploying AI agents but enables safe execution of untrusted code across tenants.",
+      "event_id": "evt_4f34f6c24e9c2c73",
+      "first_seen": "2026-09-21T16:27:34Z",
+      "headline": "Benchling implements multi-tenant AI agent security using Amazon Bedrock AgentCore",
+      "last_updated": "2026-09-21T16:27:34Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "How Benchling secured multi-tenant AI agents with Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-benchling-secured-multi-tenant-ai-agents-with-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "Benchling built a defense-in-depth security architecture to run untrusted, AI agent‑generated scientific code for thousands of life‑sciences tenants. The solution uses Amazon Bedrock AgentCore Code Interpreter in VPC mode together with Amazon Route 53 Resolver DNS Firewall and VPC endpoint policies to block data exfiltration, including via DNS.",
+      "why_it_matters": "The architecture protects sensitive scientific data in a shared, multi‑tenant environment, allowing large‑scale AI code execution without risking data leakage. It demonstrates a practical approach to securing AI agents that generate code, which is critical for compliance and trust in life‑sciences applications."
+    },
+    {
+      "category": "security",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers integrating or relying on Muse must treat the assistant as compromised until a patch is released, avoid deploying it in production, and monitor Meta communications for remediation guidance.",
+      "event_id": "evt_790cf36b99eec5ab",
+      "first_seen": "2026-09-21T22:24:38Z",
+      "headline": "Zero-day vulnerability allows hijacking of Meta's Muse AI assistant",
+      "last_updated": "2026-09-21T22:24:38Z",
+      "score": 5.467,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "Muse, Meta's extraordinarily privileged AI assistant, has a serious 0-day",
+          "url": "https://arstechnica.com/security/2026/09/muse-metas-extraordinarily-privileged-ai-assistant-has-a-serious-0-day/"
+        }
+      ],
+      "what_happened": "A serious 0-day vulnerability has been identified in Meta's Muse AI assistant. The flaw can be exploited with a simple ClickFix attack, enabling a full hijack of the agent's functionality.",
+      "why_it_matters": "If exploited, attackers could gain privileged access to Muse, potentially manipulating user interactions, extracting data, or executing unauthorized actions, raising significant security and privacy concerns for Meta and its users."
+    }
+  ]
+}
