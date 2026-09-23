@@ -1,0 +1,128 @@
+{
+  "covers_since": "2026-09-22T07:38:10.543382Z",
+  "day": "2026-09-23",
+  "generated_at": "2026-09-23T07:40:53.359533Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 1,
+    "events": 127,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 162.8
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers of RAG pipelines must consider defenses against dynamic, retrieval‑aware poisoning, such as robust retrieval filtering, provenance verification, or adversarial detection mechanisms, to maintain trust in generated content.",
+      "event_id": "evt_2ff506485070f8ac",
+      "first_seen": "2026-09-23T04:00:00Z",
+      "headline": "New retrieval-aware poisoning attack (RAG-NAROK) targets RAG systems' dynamic retrieval pipelines",
+      "last_updated": "2026-09-23T04:00:00Z",
+      "score": 6.19,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "RAG-NAROK: Retrieval-Aware Knowledge Corpus Poisoning in RAG with Source-specific Refutation",
+          "url": "https://arxiv.org/abs/2609.25469"
+        }
+      ],
+      "what_happened": "The paper introduces RAG-NAROK, a retrieval‑aware knowledge‑corpus poisoning attack designed for Retrieval‑Augmented Generation (RAG) architectures. Unlike prior static attacks that inject pre‑computed adversarial documents, RAG‑NAROK generates malicious content dynamically with awareness of the retrieval process and can produce source‑specific refutations to manipulate LLM outputs.",
+      "why_it_matters": "By exploiting the dynamic retrieval component, RAG‑NAROK reveals a previously under‑explored class of vulnerabilities that can corrupt the external knowledge grounding of LLMs, potentially leading to misinformation or security breaches in systems that rely on RAG for factual accuracy."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers can adopt ChainDoRA in existing PEFT workflows, but will need libraries that support tensor‑train factorized layers; the method promises fine‑tuning large models with fewer resources.",
+      "event_id": "evt_704c705f381cc859",
+      "first_seen": "2026-09-23T04:00:00Z",
+      "headline": "ChainDoRA introduces tensor‑train factorized weight‑decomposed adaptation for efficient LLM fine‑tuning",
+      "last_updated": "2026-09-23T04:00:00Z",
+      "score": 6.14,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "ChainDoRA: Tensor-Train Factorized Weight-Decomposed Low-Rank Adaptation for Parameter-Efficient LLM Fine-Tuning",
+          "url": "https://arxiv.org/abs/2609.25058"
+        }
+      ],
+      "what_happened": "The paper proposes ChainDoRA, a new parameter‑efficient fine‑tuning (PEFT) method for large language models. It builds on LoRA’s low‑rank matrices and DoRA’s separation of weight magnitude and direction, adding a tensor‑train factorization to the weight‑decomposed representation to further reduce the number of trainable parameters required for downstream adaptation.",
+      "why_it_matters": "By lowering the count of trainable parameters, ChainDoRA can reduce memory and compute demands during fine‑tuning, enabling adaptation of large models on more limited hardware and potentially accelerating experimentation cycles."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers can target Qualcomm’s new chip to run large MoE models locally, requiring use of Qualcomm’s AI SDKs and potentially adjusting models for on‑device constraints.",
+      "event_id": "evt_811bcae574a076a7",
+      "first_seen": "2026-09-22T20:00:00Z",
+      "headline": "Qualcomm unveils two new smartphone chips, top model runs 30B MoE AI locally",
+      "last_updated": "2026-09-22T20:00:00Z",
+      "score": 5.893,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Qualcomm launches two new smartphone chips with emphasis on AI",
+          "url": "https://techcrunch.com/2026/09/22/qualcomm-launches-two-new-smartphone-chips-with-emphasis-on-ai/"
+        }
+      ],
+      "what_happened": "Qualcomm announced the launch of two new smartphone processors. The flagship chip is capable of executing a 30‑billion‑parameter mixture‑of‑experts (MoE) AI model directly on the device.",
+      "why_it_matters": "Running a 30B MoE model on‑device enables high‑performance AI tasks without relying on cloud services, reducing latency, bandwidth usage, and privacy concerns, and could broaden advanced AI features in mobile applications."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "OpenAI models can be accessed on Amazon Bedrock from Australia with global cross-Region inference."
+        }
+      ],
+      "confidence": 0.93,
+      "developer_impact": "Developers can integrate OpenAI models via Bedrock in Australian deployments and configure cross‑region inference endpoints without leaving the AWS ecosystem.",
+      "event_id": "evt_0600471a7eba1ecb",
+      "first_seen": "2026-09-02T21:22:05Z",
+      "headline": "Amazon Bedrock adds Australian access to OpenAI models with global cross‑region inference",
+      "last_updated": "2026-09-22T18:00:00Z",
+      "score": 5.675,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "OpenAI launches GPT-6 Sol and Luna, boasting lower cost and fewer mistakes",
+          "url": "https://techcrunch.com/2026/09/22/openai-launches-gpt-6-sol-and-luna/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock now supports accessing OpenAI models from the Australia region and enables inference to be performed across AWS regions.",
+      "why_it_matters": "The change makes OpenAI models available to users and applications hosted in Australia and allows inference workloads to run in other regions, potentially reducing latency and meeting data‑residency requirements."
+    },
+    {
+      "category": "policy",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Provides backend and AI engineers with ready‑to‑use, GPU‑optimized ROS modules, requiring compatible NVIDIA hardware. Developers can incorporate these packages into existing ROS pipelines to accelerate AI inference and sensor processing without building custom GPU code.",
+      "event_id": "evt_33fd00ceaa5855df",
+      "first_seen": "2026-09-22T12:00:41Z",
+      "headline": "NVIDIA releases Isaac ROS 5.0 with GPU-accelerated packages for advanced robotics",
+      "last_updated": "2026-09-22T12:00:41Z",
+      "score": 5.658,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "NVIDIA Isaac ROS 5.0 Advances Agentic, Open Source Robotics Development",
+          "url": "https://blogs.nvidia.com/blog/isaac-ros-5-0-agentic-open-source-robotics/"
+        }
+      ],
+      "what_happened": "NVIDIA announced Isaac ROS 5.0, a new collection of GPU‑accelerated software packages built on the open ROS framework. The release adds physical AI models and tools designed to help developers build and deploy robotics applications that can perceive, reason, and act in dynamic environments.",
+      "why_it_matters": "By integrating GPU acceleration into ROS, Isaac ROS 5.0 can boost the performance of perception and decision‑making workloads, enabling more complex and responsive robotic systems. This may shorten development cycles and expand the range of tasks robots can handle in real‑time settings."
+    }
+  ]
+}
