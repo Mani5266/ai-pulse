@@ -1,0 +1,152 @@
+{
+  "covers_since": "2026-09-23T07:38:10.543382Z",
+  "day": "2026-09-24",
+  "generated_at": "2026-09-24T07:32:51.218592Z",
+  "stats": {
+    "articles": 522,
+    "duplicates_removed": 25,
+    "events": 106,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 161.6
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers may need to integrate user‑embedding storage and self‑evaluation loops into their pipelines, shifting from prompt engineering toward model‑side personalization mechanisms.",
+      "event_id": "evt_42ef0943d405e536",
+      "first_seen": "2026-09-24T04:00:00Z",
+      "headline": "New COPE method enables continual LLM personalization with sparse user feedback",
+      "last_updated": "2026-09-24T04:00:00Z",
+      "score": 6.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "COPE: Continual Personalization of LLMs under Sparse User Feedback via User Embeddings and Self-Evaluation",
+          "url": "https://arxiv.org/abs/2609.26853"
+        }
+      ],
+      "what_happened": "Researchers introduced COPE, a framework that uses user embeddings and self‑evaluation to continually personalize large language models even when user feedback is sparse, addressing limitations of prompt‑based training‑free methods and static post‑training fine‑tuning.",
+      "why_it_matters": "It aims to reduce homogenized responses, improve alignment with diverse user preferences, and avoid consuming valuable context windows, potentially making LLMs more adaptable in real‑world applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Backend and AI engineers may need to incorporate COMED's routing‑collaboration logic into inference pipelines, potentially adding new orchestration components or APIs to manage selective peer involvement and result aggregation.",
+      "event_id": "evt_449a2bb4ef316043",
+      "first_seen": "2026-09-24T04:00:00Z",
+      "headline": "COMED introduced as middle ground between routing and dense collaboration for multi-LLM inference",
+      "last_updated": "2026-09-24T04:00:00Z",
+      "score": 6.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "COMED: The Missing Middle Between Routing and Collaboration in Multi-LLM Inference",
+          "url": "https://arxiv.org/abs/2609.26913"
+        }
+      ],
+      "what_happened": "The paper presents COMED, a new approach that sits between pure routing (selecting a single LLM) and dense collaboration (invoking all peers) for multi‑LLM inference. It observes that dense collaboration is non‑monotonic: additional peers can fix failures that no single model solves, but can also corrupt answers that were initially correct. COMED is designed to capture the benefits of collaboration while mitigating its downsides.",
+      "why_it_matters": "By providing a balanced inference strategy, COMED could improve the reliability and accuracy of systems that rely on multiple LLMs, reducing both missed answers and erroneous alterations. This may lead to more robust AI services, especially in contexts where no single model is universally reliable across queries."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers of legal AI will need to integrate graph‑based retrieval of normative connections and design prompts that enforce chain‑of‑thought structures, requiring changes to data pipelines, retrieval APIs, and prompting frameworks.",
+      "event_id": "evt_159c9f3751cfda61",
+      "first_seen": "2026-09-24T04:00:00Z",
+      "headline": "LEGO framework combines Expert GraphRAG with Chain-of-Thought to improve legal reasoning in LLMs",
+      "last_updated": "2026-09-24T04:00:00Z",
+      "score": 6.19,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "LEGO: Synergizing Expert GraphRAG and Expert Chain-of-Thought for Legal Reasoning",
+          "url": "https://arxiv.org/abs/2609.27009"
+        }
+      ],
+      "what_happened": "Researchers introduced LEGO, a new system that merges Expert GraphRAG retrieval with Expert Chain‑of‑Thought prompting to tackle two known limits of legal AI: (1) existing RAG/GraphRAG methods focus on lexical or semantic similarity and miss normative relationships between legal provisions, and (2) standard Chain‑of‑Thought can produce plausible but structurally unsound arguments. LEGO explicitly models normative links and guides reasoning steps to produce more legally coherent outputs.",
+      "why_it_matters": "By addressing normative relation modeling and structured reasoning, LEGO aims to make large language models more reliable for high‑risk legal tasks, potentially reducing hallucinations and increasing compliance with legal standards, which is critical for any deployment of AI in law."
+    },
+    {
+      "category": "other",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "Ringg’s AI agents resolve up to 65% of customer calls with OpenAI."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "Ringg uses GPT-5.6."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "Ringg powers multilingual agents across voice, chat, WhatsApp, and web."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "Ringg’s agents cost 90% less than GPT-4.1."
+        }
+      ],
+      "confidence": 0.7,
+      "developer_impact": "Backend and AI engineers could integrate Ringg’s multilingual agent platform or similar GPT‑5.6 APIs to automate voice and messaging channels, potentially lowering compute costs and simplifying multi‑channel support pipelines.",
+      "event_id": "evt_39b901174b543376",
+      "first_seen": "2026-09-21T15:50:15Z",
+      "headline": "Ringg uses GPT-5.6 to resolve up to 65% of customer calls at 90% lower cost than GPT‑4.1",
+      "last_updated": "2026-09-23T12:00:00Z",
+      "score": 5.9,
+      "sources": [
+        {
+          "source_id": "openai",
+          "title": "Ringg’s AI agents resolve up to 65% of customer calls with OpenAI",
+          "url": "https://openai.com/index/ringg"
+        }
+      ],
+      "what_happened": "Ringg deployed AI agents built on OpenAI’s GPT‑5.6 that can handle voice, chat, WhatsApp and web interactions. The agents reportedly resolve up to 65 % of customer calls and claim a 90 % cost reduction compared with using GPT‑4.1.",
+      "why_it_matters": "If accurate, the result shows a large portion of support calls can be automated with a newer model while dramatically cutting operating expenses, which could shift how contact‑center workloads are allocated."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can design robot systems that delegate inference to edge or cloud services, simplifying on-device software, reducing hardware requirements, and focusing on integration and latency management.",
+      "event_id": "evt_3d775ab27528f576",
+      "first_seen": "2026-09-23T16:01:36Z",
+      "headline": "Microsoft Research shows offloading robot AI inference improves performance",
+      "last_updated": "2026-09-23T16:01:36Z",
+      "score": 5.375,
+      "sources": [
+        {
+          "source_id": "microsoft-research",
+          "title": "Offloaded inference for real-world physical AI robotics",
+          "url": "https://www.microsoft.com/en-us/research/blog/offloaded-inference-for-real-world-physical-ai-robotics/"
+        }
+      ],
+      "what_happened": "Microsoft Research reported that moving AI inference processing away from the robot onto external hardware can increase task success rates, improve efficiency, and enable more advanced physical AI workloads.",
+      "why_it_matters": "Offloading inference reduces on-device compute demands, allowing robots to handle more complex tasks with less hardware, potentially lowering cost and expanding capabilities in real-world robotics applications."
+    }
+  ]
+}
