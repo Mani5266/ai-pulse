@@ -1,0 +1,98 @@
+{
+  "covers_since": "2026-09-24T07:31:50.334843Z",
+  "day": "2026-09-25",
+  "generated_at": "2026-09-25T07:34:28.364703Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 1,
+    "events": 121,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 1,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 158.0
+  },
+  "stories": [
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.6,
+      "event_id": "evt_9be68271b4f4619d",
+      "first_seen": "2026-09-24T11:15:44Z",
+      "headline": "New method discovered that breaks RSA faster than factoring",
+      "last_updated": "2026-09-24T11:15:44Z",
+      "score": 6.963,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "There's a new way to break RSA that's faster than anything we've seen before",
+          "url": "https://arstechnica.com/security/2026/09/theres-a-new-way-to-break-rsa-thats-faster-than-anything-weve-seen-before/"
+        }
+      ],
+      "what_happened": "Researchers have identified a technique that can break RSA encryption without relying on integer factorization, and it operates faster than any previously known attacks, according to the article.",
+      "why_it_matters": "A faster, non‑factorization attack on RSA could undermine the security of systems that depend on RSA, potentially requiring a shift to alternative cryptographic algorithms."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers of speech recognition pipelines can adopt the PTC-Bias workflow, adding a phoneme‑level temporal competition module during prefill and a post‑decoding correction step, potentially requiring changes to decoding logic and integration of the shortlist mechanism.",
+      "event_id": "evt_6fff2f1ea4fe6c4f",
+      "first_seen": "2026-09-25T04:00:00Z",
+      "headline": "PTC-Bias introduces phoneme-level temporal competition for efficient bias retrieval in Speech LLMs",
+      "last_updated": "2026-09-25T04:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "PTC-Bias: Phoneme-Level Temporal Competition for Bias Retrieval and Post-Decoding Correction in Speech LLMs",
+          "url": "https://arxiv.org/abs/2609.28727"
+        }
+      ],
+      "what_happened": "The paper proposes PTC-Bias, a two‑stage framework for contextual biasing in speech large language models. In the prefill stage, PTC Retrieval performs frame‑synchronous phoneme decoding and temporal competition among candidate pronunciations, yielding a compact shortlist of bias words and associated speech information. A subsequent post‑decoding correction stage refines the output using the shortlist.",
+      "why_it_matters": "By generating a concise bias‑word shortlist, the method makes it feasible to use large bias lists without prohibitive computational cost, improving recognition of rare or domain‑specific words in speech LLMs. This can enhance downstream applications that rely on accurate transcription of uncommon terminology."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Backend and AI engineers can integrate the Taskflow Agent into CI pipelines to run AI‑powered fuzzing without building their own tooling.",
+      "event_id": "evt_2690558920b683f4",
+      "first_seen": "2026-09-24T18:26:12Z",
+      "headline": "GitHub launches AI-powered fuzzing taskflow via Security Lab Taskflow Agent",
+      "last_updated": "2026-09-24T18:26:12Z",
+      "score": 5.688,
+      "sources": [
+        {
+          "source_id": "github-blog",
+          "title": "AI-powered fuzzing with the GitHub Security Lab Taskflow Agent",
+          "url": "https://github.blog/security/application-security/ai-powered-fuzzing-with-the-github-security-lab-taskflow-agent/"
+        }
+      ],
+      "what_happened": "GitHub published a blog post describing a new fuzzing taskflow built on the GitHub Security Lab Taskflow Agent AI framework.",
+      "why_it_matters": "The AI‑driven fuzzing taskflow aims to automate security testing, potentially finding bugs more efficiently than traditional methods."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers must provision a platform account with AgentCore Gateway, deploy MCP servers in each business account, and configure cross‑account IAM policies and fine‑grained permissions. The setup adds infrastructure and code to manage the MCP endpoints and integrate them with Bedrock agents, but it offers a standardized pattern for secure multi‑account AI data access.",
+      "event_id": "evt_cca310b8dce1d42c",
+      "first_seen": "2026-09-24T16:12:47Z",
+      "headline": "AWS launches multi-account AI agent framework using AgentCore Gateway and MCP",
+      "last_updated": "2026-09-24T16:12:47Z",
+      "score": 5.44,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Build a multi-account AI agent with AgentCore Gateway and MCP",
+          "url": "https://aws.amazon.com/blogs/machine-learning/build-a-multi-account-ai-agent-with-agentcore-gateway-and-mcp/"
+        }
+      ],
+      "what_happened": "AWS introduced a reference architecture that lets organizations run a single AI agent in a central platform account while each line‑of‑business account exposes its data through an MCP server. The central agent uses Amazon Bedrock AgentCore Gateway and the Multi‑Account Control Plane (MCP) to query data across accounts with secure cross‑account access and fine‑grained authorization.",
+      "why_it_matters": "The design lets companies keep data isolated per AWS account for security and compliance, yet provides a unified way for AI agents to retrieve information across those accounts. This reduces data silos, simplifies governance of AI‑driven queries, and enables broader AI use cases without compromising account boundaries."
+    }
+  ]
+}
