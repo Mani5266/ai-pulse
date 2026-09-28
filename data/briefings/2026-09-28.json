@@ -1,0 +1,99 @@
+{
+  "covers_since": "2026-09-27T08:32:36.061445Z",
+  "day": "2026-09-28",
+  "generated_at": "2026-09-28T08:35:17.873098Z",
+  "stats": {
+    "articles": 519,
+    "duplicates_removed": 0,
+    "events": 91,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 1,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 161.8
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers may need to integrate CARGO’s retrieval‑gated evaluation pipeline into their testing and monitoring workflows, replacing or augmenting existing reference‑based LLM judges for agentic AI components.",
+      "event_id": "evt_fba81a5c10bf732b",
+      "first_seen": "2026-09-28T04:00:00Z",
+      "headline": "CARGO framework introduced to address reference-instance divergence in evaluating agentic AI",
+      "last_updated": "2026-09-28T04:00:00Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "CARGO: Context-Aware Retrieval-Gated Evaluation of Agentic AI in Production",
+          "url": "https://arxiv.org/abs/2609.30471"
+        }
+      ],
+      "what_happened": "The paper presents CARGO (Context-Aware Retrieval-Gated Evaluation), a new evaluation approach for agentic AI systems that operate on dynamic entities such as support cases or accounts. It identifies a failure mode called reference-instance divergence (RID), where standard reference‑based LLM judges penalize correct procedural steps because identifiers, dates, or statuses differ from the reference. CARGO mitigates RID by retrieving context‑aware references and gating the evaluation accordingly.",
+      "why_it_matters": "By reducing false error or hallucination flags caused by RID, CARGO enables more accurate assessment of AI agents in production environments, leading to better monitoring, debugging, and trust in systems that manipulate changing real‑world data."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers building RAG pipelines may need to adopt the TRACE fine‑tuning procedure, which could involve new training steps, loss functions, or model architectures to handle debate‑style reasoning between external and internal knowledge sources.",
+      "event_id": "evt_22bb6ae2c6694384",
+      "first_seen": "2026-09-28T04:00:00Z",
+      "headline": "TRACE fine-tuning method improves robustness of retrieval‑augmented generation under conflicting context",
+      "last_updated": "2026-09-28T04:00:00Z",
+      "score": 6.14,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Parameters vs. Context: TRACE Fine-Tuning for Robust Retrieval-Augmented Generation",
+          "url": "https://arxiv.org/abs/2609.30337"
+        }
+      ],
+      "what_happened": "The paper introduces TRACE, a fine‑tuning approach for Retrieval‑Augmented Generation (RAG) that addresses cases where retrieved external knowledge conflicts with a model's internal parametric knowledge, which can cause unreliable answers. TRACE (Debate‑TRace and Answer…) is designed to help the model better negotiate such conflicts.",
+      "why_it_matters": "By reducing reliance on misleading retrieved context or incorrect internal knowledge, TRACE aims to make RAG outputs more reliable and factual, mitigating hallucinations and knowledge obsolescence in large language model applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "Developers building LLM‑based agents may adopt intuitive prompting to achieve finer‑grained control over simulated user behavior, requiring updates to prompt design pipelines and possibly new safeguards to prevent misuse.",
+      "event_id": "evt_0daf3a9abd408f2a",
+      "first_seen": "2026-09-28T04:00:00Z",
+      "headline": "Intuitive Prompting Boosts Fidelity of LLM Agents Simulating Individual Social Media Users",
+      "last_updated": "2026-09-28T04:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Thinking Less to Simulate Better: Intuitive Prompting Improves LLM Agents Simulating Individual Social Media Reactions, Including Unfamiliar Content",
+          "url": "https://arxiv.org/abs/2609.30563"
+        }
+      ],
+      "what_happened": "The paper introduces an \"intuitive prompting\" technique that improves large language model (LLM) agents' ability to simulate the reactions of specific social‑media users, even when the content is unfamiliar. The authors profiled eight Serbian participants through questionnaires and deep interviews and showed that agents using intuitive prompts more closely follow the assigned user profile than prior methods, which focused mainly on matching aggregate human behavior.",
+      "why_it_matters": "Higher‑fidelity user simulations let platforms test policy changes against realistic fake accounts, potentially revealing policy gaps before real users are affected. At the same time, more convincing synthetic profiles could be weaponized to sway public opinion, especially around elections, raising ethical and security concerns."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers can adopt the IS protocol to benchmark and track reliability of their voice agents across versions, informing testing and deployment decisions.",
+      "event_id": "evt_26496b0774676bbd",
+      "first_seen": "2026-09-28T04:00:00Z",
+      "headline": "Inquesto Score introduced as protocol to measure voice‑agent reliability",
+      "last_updated": "2026-09-28T04:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Inquesto Score: A reliability Protocol For Voice Agents",
+          "url": "https://arxiv.org/abs/2609.30514"
+        }
+      ],
+      "what_happened": "The paper presents Inquesto Score (IS), a protocol that quantifies voice‑agent reliability by calculating the percentage of calls in a fixed, versioned evaluation set that successfully achieve the caller’s goal without a functional failure or worse.",
+      "why_it_matters": "Reliable evaluation is needed because voice agents are used in workflows where failures can impact transactions and access; a reproducible, interpretable metric helps assess and improve agent performance."
+    }
+  ]
+}
