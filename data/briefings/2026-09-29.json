@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-09-28T08:32:36.061445Z",
+  "day": "2026-09-29",
+  "generated_at": "2026-09-29T08:19:04.382312Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 130,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 166.0
+  },
+  "stories": [
+    {
+      "category": "open_source",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can download and run the open‑source AI security agent on their own Android apps to detect similar issues, allowing integration into CI/CD pipelines for automated vulnerability scanning.",
+      "event_id": "evt_b4c2f06bca4278c0",
+      "first_seen": "2026-09-28T19:00:00Z",
+      "headline": "GitHub AI security agent discovers 24 Android vulnerabilities",
+      "last_updated": "2026-09-28T19:00:00Z",
+      "score": 6.192,
+      "sources": [
+        {
+          "source_id": "github-blog",
+          "title": "How we found 24 Android vulnerabilities using our open source AI security agent",
+          "url": "https://github.blog/security/how-we-found-24-android-vulnerabilities-using-our-open-source-ai-security-agent/"
+        }
+      ],
+      "what_happened": "GitHub researchers used their open‑source AI‑powered security agent to scan Android applications, identifying 24 distinct vulnerabilities. The blog details the targeted AI taskflows, describes the critical bugs uncovered, and provides instructions for running the same agent on other apps.",
+      "why_it_matters": "The findings demonstrate that AI‑driven tools can automate discovery of security flaws in mobile software, potentially improving Android app security and encouraging broader adoption of AI security agents for proactive testing."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers building CSI sensing pipelines may need to integrate LLM calls and few‑shot adaptation routines provided by CSI-Agent, altering model‑training workflows to include prompt engineering and lightweight target‑domain data collection.",
+      "event_id": "evt_1b03b5415061c07e",
+      "first_seen": "2026-09-29T04:00:00Z",
+      "headline": "CSI-Agent introduces LLM‑assisted few‑shot adaptation for cross‑domain Wi‑Fi CSI sensing",
+      "last_updated": "2026-09-29T04:00:00Z",
+      "score": 6.14,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "CSI-Agent: LLM-Assisted Few-Shot Adaptation for Cross-Domain Wi-Fi CSI Sensing",
+          "url": "https://arxiv.org/abs/2609.31990"
+        }
+      ],
+      "what_happened": "The paper proposes CSI-Agent, a system that uses a large language model (LLM) to assist few‑shot adaptation of Wi‑Fi channel state information (CSI) sensing models when deployed across different users or environments. The approach aims to overcome the brittleness of existing CSI‑based activity recognition models by generating adaptation guidance from limited target‑domain data rather than relying on a single offline adaptation method.",
+      "why_it_matters": "If successful, the method could make device‑free sensing applications—such as human activity recognition—more reliable when conditions change, reducing the need for extensive retraining and enabling broader deployment of CSI‑based services in varied settings."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "The new PolAgentBench provides a concrete suite for testing quantized Polish models, enabling engineers to benchmark tool‑use reliability. The study suggests that developers should not assume lower‑bit quantization is safe without testing for new failure modes, potentially requiring additional validation or mitigation steps when optimizing models for speed or memory.",
+      "event_id": "evt_b50a45e3b01b649b",
+      "first_seen": "2026-09-29T04:00:00Z",
+      "headline": "Study Finds Quantization Thresholds Hold Across Polish Agentic Models While Failure Modes Vary",
+      "last_updated": "2026-09-29T04:00:00Z",
+      "score": 6.14,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Quantization Thresholds Replicate, Failure Modes Do Not: A Three-Model Study of Agentic Tool Use in Polish from 8-bit to 2-bit",
+          "url": "https://arxiv.org/abs/2609.32042"
+        }
+      ],
+      "what_happened": "Researchers evaluated GGUF quantization effects on Polish-language agentic tool use by testing three models (Bielik-11B-v3.0, its pruned version, and distilled Bielik-Minitron-7B-v3.0) across 8‑bit to 2‑bit precisions. They introduced PolAgentBench, a deterministic benchmark with 67 main tasks (including 15 adversarial probes) and a 46‑task arithmetic isolation ladder. Results show that quantization thresholds are replicated across models, but new failure modes appear at lower bit widths.",
+      "why_it_matters": "The findings reveal that while coarse quantization can preserve certain performance thresholds, it also introduces distinct reliability issues, especially for tool‑using agents in non‑English languages. This highlights the need for careful evaluation when deploying low‑bit models in production, as unseen failure modes could affect downstream applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers gain a framework that leverages an LLM to manage and switch adaptation techniques for IMU models on‑the‑fly, potentially simplifying pipelines that previously required manual model selection or retraining for each new deployment scenario.",
+      "event_id": "evt_e5f4481e480a7cd4",
+      "first_seen": "2026-09-29T04:00:00Z",
+      "headline": "SenseAgent: LLM-driven adaptive IMU sensing across users, devices, and positions",
+      "last_updated": "2026-09-29T04:00:00Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "SenseAgent: An LLM Agent for Adaptive Cross-Domain IMU Sensing",
+          "url": "https://arxiv.org/abs/2609.32000"
+        }
+      ],
+      "what_happened": "The paper introduces SenseAgent, an LLM‑based agent that dynamically adapts inertial measurement unit (IMU) sensing models when they are applied to new users, devices, or body positions. Unlike prior static approaches that rely on pre‑training stronger representations, data augmentation, or a single chosen adaptation method before deployment, SenseAgent selects and configures adaptation strategies at runtime to handle cross‑domain shifts.",
+      "why_it_matters": "By addressing the reliability drop that occurs when an IMU model encounters a domain it was not trained on, SenseAgent can make mobile and wearable AI applications more robust in real‑world, heterogeneous settings. This reduces the need for extensive per‑device or per‑user data collection and improves the consistency of sensor‑driven features used downstream."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.3,
+      "event_id": "evt_09d1d26fa19dd694",
+      "first_seen": "2026-09-28T09:44:05Z",
+      "headline": "Holo4 introduced to power generalist computer-use agents",
+      "last_updated": "2026-09-28T09:44:05Z",
+      "score": 5.748,
+      "sources": [
+        {
+          "source_id": "huggingface-blog",
+          "title": "Holo4: powering generalist computer-use agents",
+          "url": "https://huggingface.co/blog/Hcompany/holo4"
+        }
+      ],
+      "what_happened": "A new system named Holo4 was announced, described as powering generalist computer-use agents.",
+      "why_it_matters": "If Holo4 can effectively power such agents, it could broaden the range of tasks AI can perform on computers."
+    }
+  ]
+}
