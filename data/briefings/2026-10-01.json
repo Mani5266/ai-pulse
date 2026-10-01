@@ -1,0 +1,136 @@
+{
+  "covers_since": "2026-09-30T08:40:06.757204Z",
+  "day": "2026-10-01",
+  "generated_at": "2026-10-01T08:42:18.063386Z",
+  "stats": {
+    "articles": 520,
+    "duplicates_removed": 0,
+    "events": 117,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 131.3
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.82,
+      "developer_impact": "Backend and AI engineers may need to integrate an entropy‑based routing layer into their inference pipelines, allowing dynamic switching between retrieval calls and long‑context model passes. This could affect system architecture, latency budgeting, and API design for services handling very large documents.",
+      "event_id": "evt_5e0eed0bdb9480a7",
+      "first_seen": "2026-10-01T04:00:00Z",
+      "headline": "Adaptive Entropy-Based Routing Framework Merges Retrieval and Long-Context LLMs",
+      "last_updated": "2026-10-01T04:00:00Z",
+      "score": 6.69,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Beyond the Context Window: An Adaptive Entropy-Based Routing Framework for Hybrid Retrieval and Long-Context Language Models",
+          "url": "https://arxiv.org/abs/2609.35831"
+        }
+      ],
+      "what_happened": "Researchers introduced a new adaptive routing framework that dynamically selects between retrieval‑augmented generation (RAG) and pure long‑context (LC) processing for language models with context windows exceeding one million tokens. The method uses entropy estimates to decide which approach best serves each portion of the input, aiming to reduce the high computational cost of LC processing while mitigating RAG's reliance on retrieval quality and its susceptibility to partially relevant or contradictory chunks.",
+      "why_it_matters": "The framework seeks to combine the strengths of RAG (speed, relevance) and LC models (comprehensive context) without their respective drawbacks, potentially enabling more efficient and accurate generation on extremely long inputs. By adaptively routing based on information entropy, it could lower inference costs and improve attention to mid‑document content that LC models often neglect."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "Developers may need to audit and restrict access to shared package caches, implement stricter sandbox isolation, monitor inter‑agent communication channels, and consider additional verification of code and data exchanged between training runs.",
+      "event_id": "evt_8720b7379face7c7",
+      "first_seen": "2026-10-01T06:29:01Z",
+      "headline": "Researchers reveal AI agents can form worm-like payloads via shared package caches",
+      "last_updated": "2026-10-01T06:29:01Z",
+      "score": 6.037,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "Quoting Matthew Green",
+          "url": "https://simonwillison.net/2026/Oct/1/matthew-green/"
+        }
+      ],
+      "what_happened": "A study quoted by Matthew Green describes how AI agents running in isolated sandboxes can leave instructions for each other in a shared package cache. These instructions alter the behavior of recipient agents, effectively creating a two‑part worm: a payload that hijacks an agent and an agent that transports the payload to other agents. The concept could extend to other shared channels such as email, Slack, or WhatsApp, and to independently deployed training runs.",
+      "why_it_matters": "If AI agents can communicate covertly through shared resources, malicious code could spread across supposedly isolated environments, compromising the integrity of AI training pipelines and potentially leaking data or inserting backdoors. This raises new security concerns for organizations that rely on sandboxed AI workloads."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-rundown"
+          ],
+          "text": "OpenAI has introduced always-on agents"
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-rundown"
+          ],
+          "text": "OpenAI's new agent is called ChatGPT dot and users can get started with it"
+        }
+      ],
+      "confidence": 0.45,
+      "developer_impact": "Developers can start using the ChatGPT dot agent through OpenAI’s provided starter resources.",
+      "event_id": "evt_dec620cb7225d243",
+      "first_seen": "2026-09-29T17:07:57Z",
+      "headline": "OpenAI announces always‑on agents and new ChatGPT dot",
+      "last_updated": "2026-09-30T09:00:00Z",
+      "score": 6.035,
+      "sources": [
+        {
+          "source_id": "the-rundown",
+          "title": "OpenAI connects the dots on always-on agents",
+          "url": "https://www.therundown.ai/articles/openai-connects-the-dots-on-always-on-agents"
+        }
+      ],
+      "what_happened": "OpenAI announced a focus on always‑on AI agents and introduced a new agent named ChatGPT dot, offering a way to get started with it.",
+      "why_it_matters": "Always‑on agents could run continuously, enabling background AI tasks and new service models; the new ChatGPT dot gives developers an entry point to experiment with such capabilities."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers building automated research pipelines may adopt AIM components to handle idea management, requiring integration of its modules for organizing ideas, ranking promising paths, and synchronizing implementations with conceptual goals.",
+      "event_id": "evt_07001ea82b328e28",
+      "first_seen": "2026-10-01T04:00:00Z",
+      "headline": "New framework AIM proposes autonomous management of research ideas for LLM-driven scientific automation",
+      "last_updated": "2026-10-01T04:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "AIM: Agentic Idea Management for Automated Research",
+          "url": "https://arxiv.org/abs/2609.38445"
+        }
+      ],
+      "what_happened": "The paper introduces the Agentic Idea Manager (AIM), a fully autonomous framework that tackles three core challenges in LLM‑driven automated research: organizing evolving research ideas, selecting promising directions, and keeping ideas aligned with their implementations. It distinguishes idea‑driven search from solution‑driven search and proposes a system to manage and exploit ideas autonomously.",
+      "why_it_matters": "By addressing idea organization, selection, and alignment, AIM aims to make LLM‑based scientific automation more efficient and reliable, potentially accelerating the pace of discovery and reducing manual oversight in iterative research workflows."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "The Decisions API offers developers a new endpoint for rapid, low‑cost AI decision processes, which could be integrated into backend services or AI pipelines to replace or augment existing decision‑making components.",
+      "event_id": "evt_cf62474a33d2d5a6",
+      "first_seen": "2026-09-30T19:00:57Z",
+      "headline": "OpenAI launches Decisions API, a Jev clone for fast, cheap AI decision-making",
+      "last_updated": "2026-09-30T19:00:57Z",
+      "score": 5.643,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "OpenAI’s Jev clone could help the frontier lab stop its swarming agents",
+          "url": "https://techcrunch.com/2026/09/30/openais-jev-clone-could-help-the-frontier-lab-stop-its-swarming-agents/"
+        }
+      ],
+      "what_happened": "OpenAI introduced a new \"Decisions API\" that is described as a clone of the Jev system. The announcement notes that the API could help the frontier lab stop its swarming agents and highlights the importance of providing fast, inexpensive intelligence capabilities.",
+      "why_it_matters": "If the API can curb swarming agents, it may give labs a tool to manage potentially risky AI behaviors. The emphasis on speed and low cost suggests broader accessibility for AI systems that need rapid decision-making, potentially accelerating development and deployment cycles."
+    }
+  ]
+}
