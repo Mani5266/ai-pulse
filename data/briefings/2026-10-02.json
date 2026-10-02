@@ -1,0 +1,133 @@
+{
+  "covers_since": "2026-10-01T08:40:06.757204Z",
+  "day": "2026-10-02",
+  "generated_at": "2026-10-02T08:20:39.844856Z",
+  "stats": {
+    "articles": 522,
+    "duplicates_removed": 0,
+    "events": 120,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 27,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 159.7
+  },
+  "stories": [
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Backend and AI engineers can adopt Olmo-core 3 to run large‑scale MoE training using existing infrastructure, benefiting from its open design and scalability.",
+      "event_id": "evt_f928531f96372519",
+      "first_seen": "2026-10-01T15:01:43Z",
+      "headline": "Olmo-core 3 released as open, scalable training infrastructure for large MoE models",
+      "last_updated": "2026-10-01T15:01:43Z",
+      "score": 6.298,
+      "sources": [
+        {
+          "source_id": "huggingface-blog",
+          "title": "Introducing Olmo-core 3: Open, scalable training infrastructure for large MoEs",
+          "url": "https://huggingface.co/blog/allenai/olmocore3"
+        }
+      ],
+      "what_happened": "Hugging Face announced Olmo-core 3, an open-source platform designed to train large mixture-of-experts (MoE) models at scale.",
+      "why_it_matters": "Providing an open, scalable training stack can lower barriers for researchers and engineers to build and experiment with large MoE architectures, potentially accelerating AI development."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "OpenAI models can be accessed on Amazon Bedrock from Australia with global cross-Region inference."
+        }
+      ],
+      "confidence": 0.9,
+      "developer_impact": "Developers can use Bedrock endpoints in the Australia region to call OpenAI models and configure cross‑Region inference, without needing external proxies.",
+      "event_id": "evt_0600471a7eba1ecb",
+      "first_seen": "2026-09-02T21:22:05Z",
+      "headline": "Amazon Bedrock adds Australian access to OpenAI models with cross-Region inference",
+      "last_updated": "2026-10-01T23:44:13Z",
+      "score": 5.675,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "How NVIDIA GPUs Help Accelerate OpenAI’s GPT-6 Astra Ultrafast",
+          "url": "https://blogs.nvidia.com/blog/gpus-openai-gpt-6-astra-ultrafast/"
+        },
+        {
+          "source_id": "the-verge-ai",
+          "title": "OpenAI’s new agent is a shot at Meta — but can it compete with free?",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1003399/meta-openai-ai-agents-muse-dots-battle"
+        }
+      ],
+      "what_happened": "Amazon Bedrock now lets users in Australia access OpenAI models and run inference across AWS regions.",
+      "why_it_matters": "The change makes OpenAI models available to Australian workloads and enables inference to be performed in other AWS regions, potentially reducing latency and meeting data‑residency needs."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can use Photon’s platform and new funding to build AI agents for iMessage, SMS/RCS, email and similar channels, offering a new distribution method that bypasses traditional app stores and may require learning new agent‑creation tools.",
+      "event_id": "evt_0beaa0880b730687",
+      "first_seen": "2026-10-01T14:00:00Z",
+      "headline": "Photon raises $4.5M to build AI agents for messaging platforms, aiming to replace mobile apps",
+      "last_updated": "2026-10-01T14:00:00Z",
+      "score": 5.542,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Photon held a funeral for mobile apps. Now it has $4.5M to help replace them with agents.",
+          "url": "https://techcrunch.com/2026/10/01/photon-held-a-funeral-for-mobile-apps-now-it-has-4-5m-to-help-replace-them-with-agents/"
+        }
+      ],
+      "what_happened": "Photon announced a \"funeral for mobile apps\" and secured $4.5 million in funding to help developers create AI agents that operate over iMessage, SMS/RCS, email and other messaging channels, positioning agents as alternatives to traditional mobile applications.",
+      "why_it_matters": "If agents gain traction, users may prefer interacting through messaging platforms rather than downloading separate apps, potentially reshaping how software is distributed, discovered, and monetized, and reducing reliance on app stores."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Highlights the need for correct data‑preprocessing order (apply SMOTE only on training data) and for evaluating models with trustworthiness criteria beyond accuracy/F1.",
+      "event_id": "evt_2b6bb81c8606cdfd",
+      "first_seen": "2026-10-02T04:00:00Z",
+      "headline": "Audit finds pre‑split SMOTE inflates Telco churn benchmark F1 by 13 points",
+      "last_updated": "2026-10-02T04:00:00Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "The Hidden Costs of 99% Accuracy: A Trustworthiness Audit of the Telco Customer Churn Benchmark",
+          "url": "https://arxiv.org/abs/2610.00118"
+        }
+      ],
+      "what_happened": "Researchers audited the IBM Telco Customer Churn benchmark (7,043 records) and identified four trustworthiness failures. They showed that applying SMOTE before the train‑test split artificially raises the churn‑class F1 score by 13.1 percentage points across ten classifiers and fifteen random seeds (Wilcoxon p≈0.95).",
+      "why_it_matters": "The inflated metrics give a false sense of model reliability, misleading practitioners who rely on reported >95% accuracy and may deploy models that perform poorly in real settings."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "Developers of embodied or interactive AI systems may need to integrate GAVA's arbitration module, which requires implementing observation‑bounded evidence collection, legal probing mechanisms, and expected‑loss calculations. This adds a structured correction‑handling layer that could replace ad‑hoc heuristics and affect the agent's control flow and API for user feedback.",
+      "event_id": "evt_90199fd2e76ca822",
+      "first_seen": "2026-10-02T04:00:00Z",
+      "headline": "New GAVA framework lets embodied agents arbitrate user corrections via evidence and loss minimization",
+      "last_updated": "2026-10-02T04:00:00Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Knowing When to Yield: Grounded Arbitration of User Corrections in Text-Based Embodied Agents",
+          "url": "https://arxiv.org/abs/2610.00282"
+        }
+      ],
+      "what_happened": "The paper introduces GAVA (Grounded Arbitration of User Corrections), a decision interface for text‑based embodied agents that chooses among accepting, rejecting, inspecting the environment, or asking the user when a correction may be wrong. GAVA uses observation‑bounded evidence, legal probes, and a one‑step expected‑loss rule. Experiments in the ALFWorld text‑only benchmark use 162 checkpoints with 972 true/false intervention pairs to evaluate the approach.",
+      "why_it_matters": "Handling potentially incorrect human feedback is critical for safe and reliable agent behavior. By formalizing arbitration and providing a principled loss‑based decision rule, GAVA can reduce erroneous actions, improve robustness, and enable agents to request clarification only when needed, which is important for real‑world deployments where user input may be noisy or mistaken."
+    }
+  ]
+}
