@@ -1,0 +1,148 @@
+{
+  "covers_since": "2026-10-02T08:18:00.208761Z",
+  "day": "2026-10-03",
+  "generated_at": "2026-10-03T07:56:18.941975Z",
+  "stats": {
+    "articles": 448,
+    "duplicates_removed": 0,
+    "events": 38,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 124.1
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "ars-technica",
+            "the-verge-ai",
+            "techcrunch-ai"
+          ],
+          "text": "Apple is adding new limits and tightening macOS Full Disk Access controls to address risks from AI agents."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "ars-technica"
+          ],
+          "text": "Meta says the FDA is not sufficient for Muse reading messages."
+        }
+      ],
+      "confidence": 0.9,
+      "developer_impact": "Developers will need to adapt to stricter Full Disk Access requirements, possibly updating entitlement requests, handling new user consent flows, and ensuring their apps can function with reduced or more granular file access.",
+      "event_id": "evt_5432f5b94c34f514",
+      "first_seen": "2026-10-02T18:11:27Z",
+      "headline": "Apple adds tighter macOS Full Disk Access controls to limit AI agent abuse",
+      "last_updated": "2026-10-02T23:03:16Z",
+      "score": 5.742,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "Apple changes full-disk access permissions to curb abuse from AI agents",
+          "url": "https://arstechnica.com/security/2026/10/apple-changes-full-disk-access-permissions-to-curb-abuse-from-ai-agents/"
+        },
+        {
+          "source_id": "the-verge-ai",
+          "title": "Apple will limit Mac disk access as AI agents ‘substantially’ increase risk",
+          "url": "https://www.theverge.com/tech/1004295/apple-limit-mac-disk-access-ai-agents"
+        },
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Apple says it’s tightening macOS ‘Full Disk Access’ controls due to new risks from AI agents",
+          "url": "https://techcrunch.com/2026/10/02/apple-says-its-tightening-macos-full-disk-access-controls-due-to-new-risks-from-ai-agents/"
+        }
+      ],
+      "what_happened": "Apple announced it will roll out new limits on the macOS Full Disk Access permission, tightening how apps can obtain broad access to user files, messages, mail and browsing history. The change is presented as a response to the growing risk that increasingly capable AI agents could misuse such access.",
+      "why_it_matters": "Broad disk access lets software read a user’s private data; with AI agents that can act autonomously, the potential for privacy breaches and data mining increases. Limiting this permission aims to protect user privacy and reduce the attack surface for malicious AI‑driven behavior."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 1.0,
+      "developer_impact": "Developers can use SageMaker to run MTRL fine‑tuning pipelines for their own LLM‑based search agents, gaining performance and cost benefits without building custom RL infrastructure.",
+      "event_id": "evt_813f4b8521bddb77",
+      "first_seen": "2026-10-02T15:44:20Z",
+      "headline": "Amazon SageMaker enables multi‑turn RL fine‑tuning of LLM‑powered search agents",
+      "last_updated": "2026-10-02T15:44:20Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Fine-tune a search agent with multi-turn RL on Amazon SageMaker AI",
+          "url": "https://aws.amazon.com/blogs/machine-learning/fine-tune-a-search-agent-with-multi-turn-rl-on-amazon-sagemaker-ai/"
+        }
+      ],
+      "what_happened": "AWS released a guide showing how to fine‑tune a small search agent with multi‑turn reinforcement learning (MTRL) on Amazon SageMaker AI. The fine‑tuning teaches the agent the user’s tools and environment, delivering frontier‑model quality with lower latency and cost. Measured gains include improved retrieval quality and reliability.",
+      "why_it_matters": "The approach lets organizations deploy more responsive and cheaper search assistants that retain high accuracy, potentially reducing reliance on large, expensive models for retrieval tasks. Better reliability also lowers the risk of failed queries in production systems."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can build and scale local AI applications on a single DGX Spark node with 64 GB memory, enabling larger models and higher‑throughput inference without cloud resources.",
+      "event_id": "evt_010abefa0fafcbd4",
+      "first_seen": "2026-10-02T13:00:39Z",
+      "headline": "NVIDIA launches DGX Spark with 64 GB unified memory for local AI workloads",
+      "last_updated": "2026-10-02T13:00:39Z",
+      "score": 5.598,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "NVIDIA DGX Spark 64GB Gives Developers More Ways to Build and Scale Local AI",
+          "url": "https://blogs.nvidia.com/blog/local-ai-dgx-spark-64gb-sync/"
+        }
+      ],
+      "what_happened": "NVIDIA announced that its DGX Spark system will be released this month with a configuration offering 64 GB of unified memory, supplied through partners such as Acer.",
+      "why_it_matters": "The larger memory capacity lets developers run more capable open‑source AI models locally, supporting the trend of AI agents moving from experiments to everyday development and reducing reliance on remote compute."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers can integrate Dots into their applications via OpenAI’s APIs to build custom agents that automate tasks such as scheduling, data retrieval, or even ordering services, requiring familiarity with the new platform’s interface and pricing.",
+      "event_id": "evt_55c119b740b463df",
+      "first_seen": "2026-10-02T18:00:00Z",
+      "headline": "OpenAI launches Dots agent platform for enterprise tasks, including ordering food",
+      "last_updated": "2026-10-02T18:00:00Z",
+      "score": 5.442,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "OpenAI’s Dot agent is enterprise software that can also order your dinner",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1004096/openai-chatgpt-dots-hands-on-agent"
+        }
+      ],
+      "what_happened": "OpenAI announced a new enterprise‑focused agent platform called Dots. The software lets users invoke AI agents to perform work‑related actions and, as demonstrated, can even place a dinner order for the user.",
+      "why_it_matters": "The release shows OpenAI extending its AI tools into broader workflow automation, blurring the line between professional and personal assistance and potentially increasing AI adoption in business processes."
+    },
+    {
+      "category": "open_source",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can download the Muse code, modify it, and deploy it on supported hardware platforms to create bespoke AI assistants without building the model from scratch.",
+      "event_id": "evt_a4992c43b31c550a",
+      "first_seen": "2026-10-02T21:08:37Z",
+      "headline": "Meta open sources Muse AI agent code for custom hardware gadgets",
+      "last_updated": "2026-10-02T21:08:37Z",
+      "score": 5.397,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Meta open sources code to let you make Muse AI gadgets",
+          "url": "https://www.theverge.com/tech/1004330/meta-muse-ai-gadgets-home-link"
+        }
+      ],
+      "what_happened": "Meta released open‑source code for its Muse AI agent, allowing developers to build their own Muse‑powered devices such as color E‑ink reminder displays or HDMI‑stick screens.",
+      "why_it_matters": "Open‑sourcing the agent lets developers integrate Meta’s conversational AI into a variety of hardware, potentially expanding its ecosystem and enabling custom use‑cases beyond Meta’s own products."
+    }
+  ]
+}
