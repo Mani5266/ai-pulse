@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-10-04T08:46:54.874234Z",
+  "day": "2026-10-05",
+  "generated_at": "2026-10-05T08:49:06.882645Z",
+  "stats": {
+    "articles": 520,
+    "duplicates_removed": 0,
+    "events": 86,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 132.0
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers may substitute cheap, single‑pass classifiers for expensive LLM calls in agent pipelines, potentially simplifying integration and reducing runtime expenses.",
+      "event_id": "evt_4d611d68a5a28f31",
+      "first_seen": "2026-10-05T04:00:00Z",
+      "headline": "Paired evaluation of fast System-1 decision models for LLM agent harnesses",
+      "last_updated": "2026-10-05T04:00:00Z",
+      "score": 6.24,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Fast Models, Slow Evidence: A Paired and Self-Audited Evaluation of System-1 Decision Models for LLM Agent Harnesses",
+          "url": "https://arxiv.org/abs/2610.02267"
+        }
+      ],
+      "what_happened": "Researchers evaluated two System-1 decision models—an open‑weight model named Laya and a hosted model named Jev—across 11 decision points used by LLM agents, such as model selection, tool choice, relevance filtering, and injection detection. The models produce class probabilities in a single forward pass, aiming to replace multiple LLM calls.",
+      "why_it_matters": "If System-1 models can reliably handle these micro‑decisions, LLM agents could achieve lower computational cost and reduced latency, improving scalability and responsiveness of AI‑driven backend services."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "Engineers will need to integrate separate Critic (and other gating) components into their agent pipelines, allowing finer‑grained control and testing of action proposals, but also adding architectural complexity.",
+      "event_id": "evt_25f0cb851e6be810",
+      "first_seen": "2026-10-05T04:00:00Z",
+      "headline": "DeReAct introduces modular gating policies to improve reliability of ReAct-based AI agents",
+      "last_updated": "2026-10-05T04:00:00Z",
+      "score": 5.89,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "DeReAct: Decomposed Reasoning and Acting for Reliable AI Agents",
+          "url": "https://arxiv.org/abs/2610.02351"
+        }
+      ],
+      "what_happened": "The paper presents DeReAct, a new agent architecture that separates reasoning, action proposal, and task‑completion control by adding two external gating policies, including a Critic that validates proposed actions, addressing error propagation in single‑policy ReAct agents.",
+      "why_it_matters": "Separating validation from the main LLM policy can prevent unsupported completion claims and reduce cascading errors, making AI agents more reliable when interacting with environments."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers may need to implement a two-level architecture: an outer meta-reasoner that manages context and allocation, and inner modules that execute specific investigations, influencing design of AI pipelines and research automation tools.",
+      "event_id": "evt_0cf18f180d63c3e4",
+      "first_seen": "2026-10-05T04:00:00Z",
+      "headline": "New hierarchical MIRA architecture enables meta-reasoning for long-horizon research agents",
+      "last_updated": "2026-10-05T04:00:00Z",
+      "score": 5.59,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Learning What to Investigate Next: Meta-Reasoning for Long-Horizon Research Agents",
+          "url": "https://arxiv.org/abs/2610.02525"
+        }
+      ],
+      "what_happened": "The paper introduces Meta-reasoning for Iterative Research Agents (MIRA), a hierarchical system that separates research allocation from execution. An outer-loop meta-reasoner curates context and decides both how to investigate and what to investigate next as evidence accumulates, addressing the sparsity of decision signals and delayed consequences in long execution traces.",
+      "why_it_matters": "By structuring research agents with a dedicated meta-reasoning layer, MIRA aims to improve the efficiency and effectiveness of long-horizon AI research, potentially leading to faster discovery and more reliable autonomous investigation processes."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers may gain a new framework or library for generating model explanations that leverages multi‑agent coordination and reward signals, potentially simplifying integration of explanation capabilities into AI pipelines.",
+      "event_id": "evt_25179040a1b70341",
+      "first_seen": "2026-10-05T04:00:00Z",
+      "headline": "MEA introduces a reward-driven multi‑agent system for more faithful model explanations",
+      "last_updated": "2026-10-05T04:00:00Z",
+      "score": 5.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "MEA: A Reward-Driven Multi-Agent System for Faithful Model Explanations",
+          "url": "https://arxiv.org/abs/2610.02480"
+        }
+      ],
+      "what_happened": "The paper titled “MEA: A Reward‑Driven Multi‑Agent System for Faithful Model Explanations” proposes a new system (MEA) that uses a reward‑driven multi‑agent architecture to generate post‑hoc explanations of machine‑learning models, aiming to reduce the expertise required to interpret high‑dimensional outputs and to synthesize evidence across tools.",
+      "why_it_matters": "If successful, MEA could make model explanations more accessible and reliable in high‑stakes domains, helping practitioners trust and act on AI predictions without deep expertise in existing explanation methods."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Provides a novel architectural pattern—multiple cooperating agents with shared emergent memory—that backend and AI engineers can explore when building forecasting systems, requiring implementation of agent coordination and memory mechanisms.",
+      "event_id": "evt_e0db1ebe22ac4731",
+      "first_seen": "2026-10-05T04:00:00Z",
+      "headline": "MACTS-EM introduces multi-agent collaborative framework for time series forecasting",
+      "last_updated": "2026-10-05T04:00:00Z",
+      "score": 5.24,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "MACTS-EM: Multi-Agent Collaborative Time Series Forecasting with Emergent Memory",
+          "url": "https://arxiv.org/abs/2610.02255"
+        }
+      ],
+      "what_happened": "The arXiv paper MACTS-EM presents a new framework called Multi-Agent Collaborative Time Series Forecasting with Emergent Memory. It uses specialised agents that cooperate and share an emergent memory component to address challenges such as regime shifts, cross‑domain knowledge transfer, and multimodal data integration, aiming for superior forecasting performance.",
+      "why_it_matters": "By targeting known weaknesses of existing forecasting methods, the approach could raise prediction accuracy in a variety of domains that rely on time‑series data, potentially reducing errors in critical applications like finance, climate modelling, or operations planning."
+    }
+  ]
+}
