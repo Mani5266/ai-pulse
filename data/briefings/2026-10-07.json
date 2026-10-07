@@ -1,0 +1,166 @@
+{
+  "covers_since": "2026-10-06T08:49:58.858276Z",
+  "day": "2026-10-07",
+  "generated_at": "2026-10-07T08:31:07.833487Z",
+  "stats": {
+    "articles": 518,
+    "duplicates_removed": 28,
+    "events": 107,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 162.3
+  },
+  "stories": [
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "mistral",
+            "simon-willison"
+          ],
+          "text": "Mistral Large 4 has been introduced."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The preview of Mistral Large 4 has one trillion parameters."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The preview of Mistral Large 4 has 49 billion active parameters."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Mistral Large 4 was trained on a cluster of 3,800 NVIDIA Grace Blackwell GPUs."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The model only supports two reasoning levels, \"none\" and \"high\", via the Mistral API."
+        }
+      ],
+      "confidence": 0.85,
+      "developer_impact": "Developers can start calling Mistral Large 4 via the API today, choosing between “none” and “high” reasoning modes. The promised open‑weights release later this month will allow self‑hosting or fine‑tuning once available.",
+      "event_id": "evt_6f131bbed5e7925d",
+      "first_seen": "2026-10-06T12:00:27Z",
+      "headline": "Mistral releases preview of 1‑trillion‑parameter Large 4 model via API",
+      "last_updated": "2026-10-06T20:18:19Z",
+      "score": 6.75,
+      "sources": [
+        {
+          "source_id": "mistral",
+          "title": "Introducing Mistral Large 4",
+          "url": "https://mistral.ai/news/mistral-large-4/"
+        },
+        {
+          "source_id": "simon-willison",
+          "title": "Introducing Mistral Large 4: Le chonk",
+          "url": "https://simonwillison.net/2026/Oct/6/le-chonk/"
+        }
+      ],
+      "what_happened": "Mistral announced a preview of its new model, Mistral Large 4. The model has a total of 1 trillion parameters, of which 49 billion are active, and was trained on a private cluster of 3,800 NVIDIA Grace Blackwell GPUs. The preview is accessible through Mistral's API and the model currently offers two reasoning modes – “none” and “high”. Mistral says the open‑weights version will be released at the end of the month.",
+      "why_it_matters": "The preview lets developers experiment with a very large language model before the open‑weights release, potentially accelerating research and product integration. Offering only two reasoning levels simplifies API usage while hinting at more advanced capabilities in the upcoming full release."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 1.0,
+      "developer_impact": "Upgrade to llm-mistral 0.16 to access Mistral Large 4 and other reasoning models; existing code may need a version bump but no major API changes are indicated.",
+      "event_id": "evt_30aa7c1f2d06f131",
+      "first_seen": "2026-10-06T21:32:34Z",
+      "headline": "llm-mistral 0.16 adds support for reasoning models including Mistral Large 4",
+      "last_updated": "2026-10-06T21:32:34Z",
+      "score": 5.888,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "llm-mistral 0.16",
+          "url": "https://simonwillison.net/2026/Oct/6/llm-mistral/"
+        }
+      ],
+      "what_happened": "The llm-mistral library was updated to version 0.16, introducing support for reasoning‑oriented language models such as the newly released Mistral Large 4.",
+      "why_it_matters": "Developers can now integrate Mistral Large 4 and similar reasoning models through llm-mistral, enabling more advanced inference and decision‑making capabilities in AI services."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers using ES for LLM fine‑tuning will need to integrate the new reweighting and replay mechanisms into their training pipelines, which may involve changes to reward aggregation and data sampling logic.",
+      "event_id": "evt_c94618fdcb7ec312",
+      "first_seen": "2026-10-07T04:00:00Z",
+      "headline": "DART-ES introduces difficulty-aware reweighting and targeted replay for ES-based LLM fine‑tuning",
+      "last_updated": "2026-10-07T04:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "DART-ES: Difficulty-Aware Reweighting and Targeted Replay for Fine-Tuning LLMs with Evolution Strategies",
+          "url": "https://arxiv.org/abs/2610.06993"
+        }
+      ],
+      "what_happened": "The paper proposes DART-ES, a method that adds Difficulty-Aware Reweighting and Targeted Replay to Evolution Strategies (ES) used for full‑parameter fine‑tuning of large language models. These techniques replace the standard ES practice of uniformly averaging rewards across problems, allowing the algorithm to account for how the learning value of each problem varies with model capability.",
+      "why_it_matters": "By capturing problem difficulty and selectively replaying informative examples, DART-ES aims to make ES‑based fine‑tuning more sample‑efficient and effective, potentially yielding better model performance without increasing memory or compute beyond the forward‑only nature of ES."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Web developers may need to update their anti‑bot systems to recognize compliant AI agents or implement the new standard to allow legitimate AI traffic.",
+      "event_id": "evt_55a44998a2a04755",
+      "first_seen": "2026-10-06T19:56:50Z",
+      "headline": "New standard proposed to let AI agents bypass website anti-bot defenses",
+      "last_updated": "2026-10-06T19:56:50Z",
+      "score": 5.442,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "The next hurdle for AI agents: getting websites to let them in",
+          "url": "https://techcrunch.com/2026/10/06/the-next-hurdle-for-ai-agents-getting-websites-to-let-them-in/"
+        }
+      ],
+      "what_happened": "A new technical standard has been introduced to address deliberate blocks and anti‑bot defenses that prevent personal AI agents from accessing websites for tasks like shopping, flight booking, and reservations.",
+      "why_it_matters": "If adopted, the standard could enable AI agents to perform automated transactions on sites, improving user convenience but also raising security and policy considerations for web operators."
+    },
+    {
+      "category": "developer_tools",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers can sign up for the public beta and begin integrating the Decisions API into their backend or AI workflows.",
+      "event_id": "evt_f6e419d4eb703602",
+      "first_seen": "2026-10-06T20:57:25Z",
+      "headline": "OpenAI launches Decisions API in public beta",
+      "last_updated": "2026-10-06T20:57:25Z",
+      "score": 5.393,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Decisions API is in public beta",
+          "url": "https://developers.openai.com/api/docs/guides/decisions"
+        }
+      ],
+      "what_happened": "OpenAI announced that its Decisions API has entered public beta, making the service openly accessible to developers.",
+      "why_it_matters": "The beta release lets developers experiment with the new API, potentially adding decision‑making functionality to their applications."
+    }
+  ]
+}
