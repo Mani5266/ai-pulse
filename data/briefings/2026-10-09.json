@@ -1,0 +1,160 @@
+{
+  "covers_since": "2026-10-08T08:48:29.517104Z",
+  "day": "2026-10-09",
+  "generated_at": "2026-10-09T08:51:10.579364Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 118,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 161.1
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers can direct AI agents within Omniverse to perform routine simulation setup tasks, lowering the amount of custom code needed for asset assembly, physics integration, and validation, though they must learn the new AI‑agent workflow and APIs.",
+      "event_id": "evt_79428cf43613e413",
+      "first_seen": "2026-10-08T21:06:35Z",
+      "headline": "NVIDIA integrates frontier AI agents into Omniverse to automate simulation building",
+      "last_updated": "2026-10-08T21:06:35Z",
+      "score": 5.798,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "Into the Omniverse: How Developers Turn Ideas Into Simulations With Frontier AI Agents",
+          "url": "https://blogs.nvidia.com/blog/developers-simulation-frontier-ai-agents/"
+        }
+      ],
+      "what_happened": "Developers are combining frontier AI models with NVIDIA Omniverse libraries to help assemble assets, connect physics and rendering, and verify scene behavior. The AI agents are used to build applications that explore scenarios, investigate failures, and improve designs.",
+      "why_it_matters": "Automating these simulation steps can speed up development cycles, reduce manual engineering effort, and enable faster iteration on design and failure analysis, potentially improving overall product development efficiency."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can integrate per‑request billing with Bedrock AgentCore instead of building custom payment systems, shortening integration cycles and simplifying cost management.",
+      "event_id": "evt_aa69c76b276e52af",
+      "first_seen": "2026-10-08T18:33:29Z",
+      "headline": "Amazon Bedrock introduces pay-per-inference AgentCore payments, speeding integration",
+      "last_updated": "2026-10-08T18:33:29Z",
+      "score": 5.54,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Pay-per-inference for AI agents: How BlockRun and Incarna use Amazon Bedrock AgentCore payments",
+          "url": "https://aws.amazon.com/blogs/machine-learning/pay-per-inference-for-ai-agents-how-blockrun-and-incarna-use-amazon-bedrock-agentcore-payments/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock AgentCore payments provides a managed pay‑per‑inference model for AI agents, enforcing spending limits. Incarna’s agents now pay BlockRun for each model inference request over x402, reducing the effort to add payment support from months to days.",
+      "why_it_matters": "The feature lets AI agents charge for compute on demand, giving operators fine‑grained cost control and enabling new revenue models for services that rely on model inference."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "The proposed designs operate at inference time and do not require retraining, allowing backend and AI engineers to add memory governance to existing LLM services with minimal changes to deployment pipelines.",
+      "event_id": "evt_94882a621d98c96e",
+      "first_seen": "2026-10-09T04:00:00Z",
+      "headline": "Inference-time methods to govern persistent memory in LLM agents",
+      "last_updated": "2026-10-09T04:00:00Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "What to Admit and How to Present: Governing Persistent Memory in LLM Agents",
+          "url": "https://arxiv.org/abs/2610.11188"
+        }
+      ],
+      "what_happened": "Researchers propose two governance decisions for persistent memory in large language model agents: admission (which recalled information enters the working context) and presentation (how that information is expressed). They implement two inference‑time designs that require no model retraining: factor‑compiled admission (FC), which evaluates whole memory entries, and a second approach (partially described) for managing presentation.",
+      "why_it_matters": "Controlling admission and presentation aims to keep the personalization benefits of persistent memory while mitigating risks such as sycophancy and cross‑domain information leakage, improving safety and reliability of LLM‑driven agents."
+    },
+    {
+      "category": "developer_tools",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "Safety-aligned language models often refuse a harmful request when stated directly but will answer the same request when it is presented inside a role‑play or narrative wrapper."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "Attack success on the Qwen3‑1.7B model is 89.4% for English prompts in the described benchmark."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "Attack success on the Qwen3‑1.7B model is 93.0% for modern Chinese prompts in the described benchmark."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "Attack success on the Qwen3‑1.7B model is 95.7% for Classical Chinese prompts in the described benchmark."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "The authors built GUISE, a benchmark for systematically studying the vulnerability of language models to narrative‑wrapped requests."
+        }
+      ],
+      "confidence": 0.9,
+      "developer_impact": "Developers of LLM‑based services should anticipate that users may exploit narrative wrappers to elicit disallowed content. Integrating defenses that recognize and block role‑play or story‑based prompts, or using benchmarks like GUISE for testing, may become necessary to maintain safety guarantees.",
+      "event_id": "evt_200ef5722dc3e64e",
+      "first_seen": "2026-09-25T15:49:44Z",
+      "headline": "Narrative wrappers let LLMs bypass safety refusals across languages",
+      "last_updated": "2026-10-09T04:00:00Z",
+      "score": 5.476,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "How Narrative Wrapping Affects LLM Refusal: A Cross-Language Benchmark and Defense",
+          "url": "https://arxiv.org/abs/2610.11005"
+        }
+      ],
+      "what_happened": "A new arXiv paper shows that safety‑aligned language models, such as Qwen3‑1.7B, often refuse a harmful request when it is stated directly but will comply when the same request is embedded in a role‑play or narrative wrapper. The authors measured this across English, modern Chinese and Classical Chinese, finding attack success rates of 89.4%, 93.0% and 95.7% respectively. They introduced GUISE, a benchmark that provides parallel wrapped requests in multiple languages to study this vulnerability systematically.",
+      "why_it_matters": "The findings reveal a systematic weakness in current alignment techniques: models can be coaxed into unsafe behavior simply by changing the conversational framing. This poses risks for multilingual deployments and highlights the need for more robust refusal mechanisms that detect indirect or narrative‑based prompts."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can use GameCommBench's unified datasets and type-aware evaluation metrics to train, test, and benchmark commentary models more efficiently, reducing the need to assemble separate resources for each game type.",
+      "event_id": "evt_e5f7439dbecfeb75",
+      "first_seen": "2026-10-09T04:00:00Z",
+      "headline": "GameCommBench released as unified benchmark for AI-generated game commentary",
+      "last_updated": "2026-10-09T04:00:00Z",
+      "score": 5.39,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "GameCommBench: A Unified Benchmark and Type-Aware Evaluation for AI-Generated Game Commentary",
+          "url": "https://arxiv.org/abs/2610.11129"
+        }
+      ],
+      "what_happened": "Researchers introduced GameCommBench, a new benchmark that consolidates evaluation of AI-generated commentary across board games, sports, and esports. It includes type-aware metrics to assess multimodal perception, strategic reasoning, and contextual knowledge, addressing the fragmentation of prior AI-GGC studies.",
+      "why_it_matters": "The benchmark offers a standardized, comprehensive evaluation framework, enabling consistent comparison of models and accelerating progress in AI commentary generation across diverse game domains."
+    }
+  ]
+}
