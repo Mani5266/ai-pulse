@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-10-09T08:48:29.517104Z",
+  "day": "2026-10-10",
+  "generated_at": "2026-10-10T08:23:06.728655Z",
+  "stats": {
+    "articles": 472,
+    "duplicates_removed": 25,
+    "events": 36,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 154.2
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can now choose from a wider range of models directly in Bedrock, leverage faster serverless agents with built-in evaluation to iterate more quickly, and use the automated knowledge-base syncing to connect enterprise data without custom integration code.",
+      "event_id": "evt_f269df2714354eb9",
+      "first_seen": "2026-10-09T15:38:39Z",
+      "headline": "Amazon adds new model options, faster serverless agents, and automated KB sync in Bedrock September 2026 update",
+      "last_updated": "2026-10-09T15:38:39Z",
+      "score": 5.39,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "ICYMI: What landed for AI builders in September 2026",
+          "url": "https://aws.amazon.com/blogs/machine-learning/icymi-what-landed-for-ai-builders-in-september-2026/"
+        }
+      ],
+      "what_happened": "In September 2026 Amazon released updates to its Bedrock platform, including an expanded selection of foundation models, performance improvements for serverless agents with built-in evaluation capabilities, and a feature that automatically synchronizes knowledge bases using native enterprise connectors.",
+      "why_it_matters": "These changes give AI developers more model flexibility, reduce latency and simplify testing of serverless agents, and streamline integration of enterprise data sources, potentially accelerating development cycles and lowering operational overhead."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers may gain access to a model that processes non‑text data more efficiently, potentially reducing infrastructure expenses and enabling new real‑time applications, though no specific integration details are provided in the source.",
+      "event_id": "evt_dd7d78b72787c1ea",
+      "first_seen": "2026-10-09T21:41:29Z",
+      "headline": "Non-text AI model Jev valued at $7.5B weeks after launch, touted as faster and token-efficient",
+      "last_updated": "2026-10-09T21:41:29Z",
+      "score": 5.343,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "The maker of non-text AI model Jev valued at $7.5B just weeks after launch",
+          "url": "https://techcrunch.com/2026/10/09/the-maker-of-non-text-ai-model-jev-valued-at-7-5b-just-weeks-after-launch/"
+        }
+      ],
+      "what_happened": "The company behind Jev, a non‑text artificial intelligence model, was valued at $7.5 billion only weeks after the model’s launch. The maker, TypeSafe, claims Jev runs significantly faster than traditional large language models and consumes far fewer tokens for comparable tasks.",
+      "why_it_matters": "If Jev truly delivers higher speed and lower token usage, it could lower compute costs, reduce latency, and make non‑text AI services more scalable for enterprises. Faster, cheaper inference may accelerate adoption of AI in domains where text‑only models are less suitable."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.2,
+      "event_id": "evt_e05551817b225bef",
+      "first_seen": "2026-10-09T15:20:29Z",
+      "headline": "Hugging Face announces scheduling for GPU clusters",
+      "last_updated": "2026-10-09T15:20:29Z",
+      "score": 5.072,
+      "sources": [
+        {
+          "source_id": "huggingface-blog",
+          "title": "Impactful scheduling for GPU clusters",
+          "url": "https://huggingface.co/blog/allenai/impactful-scheduling"
+        }
+      ],
+      "what_happened": "A Hugging Face blog post titled \"Impactful scheduling for GPU clusters\" was published, indicating a new development related to GPU cluster scheduling.",
+      "why_it_matters": "The document does not provide details on the significance or expected impact of the scheduling approach."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can expect official Cloudflare support for self‑hosted Workers via workerd built on celld, which may change deployment workflows. They should also plan for reduced Cloudflare maintenance of the Deno runtime after the next year, possibly requiring migration to other runtimes or reliance on community support.",
+      "event_id": "evt_7e720aeda47f0a42",
+      "first_seen": "2026-10-09T22:48:37Z",
+      "headline": "Cloudflare acquires Deno to integrate celld and support self‑hosted Workers runtime",
+      "last_updated": "2026-10-09T22:48:37Z",
+      "score": 4.837,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "Deno is joining Cloudflare",
+          "url": "https://simonwillison.net/2026/Oct/9/deno-is-joining-cloudflare/"
+        }
+      ],
+      "what_happened": "Cloudflare announced it is acquiring Deno outright. The Deno team had released celld, an open‑source implementation of Cloudflare Workers' Durable Objects pattern, in August. Cloudflare plans to build on celld to make the workerd self‑hosting model a first‑class supported way to build and run applications using the Workers programming model. The acquisition note also says Deno itself will not be maintained by Cloudflare beyond the next year.",
+      "why_it_matters": "The deal ties Deno's celld implementation directly into Cloudflare's infrastructure, potentially simplifying self‑hosted Workers deployments and expanding the tooling available to developers. However, the announced end of Cloudflare‑maintained support for the Deno runtime after a year could affect projects that rely on Deno’s own platform, prompting migration or alternative solutions."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers may consider building AI tools with simple messaging interfaces and limited launch strategies, as Instinct’s buzz indicates user appetite for straightforward, low‑friction experiences.",
+      "event_id": "evt_c19545a145e5d65d",
+      "first_seen": "2026-10-09T14:00:00Z",
+      "headline": "Startup releases invite-only AI agent Instinct, quickly becomes AI buzz favorite",
+      "last_updated": "2026-10-09T14:00:00Z",
+      "score": 4.492,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Instinct was the buzziest AI agent around — can it survive Muse?",
+          "url": "https://www.theverge.com/tech/1008254/instinct-agent-ai-hands-on-muse-dots"
+        }
+      ],
+      "what_happened": "In August, a startup launched its AI agent called Instinct using an invite‑only rollout, minimal marketing and only a basic website. Despite this low‑key approach, Instinct rapidly attracted attention and praise for its simple text‑message‑style interface and capabilities, becoming one of the most discussed AI agents.",
+      "why_it_matters": "The strong response shows that a minimalist, text‑based AI interface can generate significant interest without heavy promotion, suggesting developers can focus on usability and niche rollouts to capture market attention."
+    }
+  ]
+}
