@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-10-11T08:58:40.960982Z",
+  "day": "2026-10-12",
+  "generated_at": "2026-10-12T09:01:08.046300Z",
+  "stats": {
+    "articles": 501,
+    "duplicates_removed": 0,
+    "events": 90,
+    "events_shortlisted": 20,
+    "feeds_failed": 3,
+    "feeds_ok": 22,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 147.1
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.94,
+      "developer_impact": "Developers of LLM‑driven applications may need to integrate VEPA’s formal policy engine, add runtime checks that log decisions, and design their agents to query evolving policies before acting on sensitive resources.",
+      "event_id": "evt_a458a7a32accc471",
+      "first_seen": "2026-10-12T04:00:00Z",
+      "headline": "New arXiv paper proposes VEPA framework for adaptable, verifiable guardrails on LLM agents",
+      "last_updated": "2026-10-12T04:00:00Z",
+      "score": 6.69,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "VEPA: Verified Evolving Formal Policy for Lifelong LLM Agent Guardrails",
+          "url": "https://arxiv.org/abs/2610.12813"
+        }
+      ],
+      "what_happened": "The paper \"VEPA: Verified Evolving Formal Policy for Lifelong LLM Agent Guardrails\" introduces a framework called VEPA that provides runtime guardrails for large language model agents. VEPA aims to make allow/deny decisions inspectable, reproducible, and deterministic before agents execute potentially irreversible actions, and it is designed to evolve as safety and security requirements change after deployment.",
+      "why_it_matters": "LLM agents increasingly interact with sensitive data and mutable system states, creating safety and security risks. A verifiable, evolving guardrail system can prevent harmful or unauthorized actions, improving trustworthiness and reducing the chance of irreversible damage in real‑world deployments."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Engineers building self‑distillation pipelines may need to add the proposed regularization term to their loss functions and adjust training scripts to maintain representation geometry, potentially increasing implementation complexity but improving model robustness.",
+      "event_id": "evt_d2dabc55598a631b",
+      "first_seen": "2026-10-12T04:00:00Z",
+      "headline": "Researchers propose representation geometry regularization to curb capability loss in LLM self‑distillation",
+      "last_updated": "2026-10-12T04:00:00Z",
+      "score": 6.19,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Mitigating Capability Degradation in LLM Self-Improvement via Representation Geometry Regularization",
+          "url": "https://arxiv.org/abs/2610.12855"
+        }
+      ],
+      "what_happened": "The paper identifies that On-Policy Self‑Distillation (OPSD), a self‑improvement method where an LLM serves as both teacher and student, can progressively degrade capabilities that were previously correct. To address this, the authors introduce Representation Geometry Regularization, a technique aimed at preserving earlier abilities while the model continues to self‑train.",
+      "why_it_matters": "Capability degradation undermines the reliability of self‑improving language models, limiting their practical deployment. Mitigating this loss makes OPSD a more stable approach for continual model enhancement, which is important for systems that rely on ongoing LLM improvement without manual re‑training."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can integrate MADS into their data pipelines to generate custom adversarial dialogue datasets for training and evaluating task‑oriented conversational models, potentially reducing the need for costly manual data collection.",
+      "event_id": "evt_bdf19a77b367bdc2",
+      "first_seen": "2026-10-12T04:00:00Z",
+      "headline": "MADS pipeline creates synthetic adversarial dialogues to train robust task-oriented agents",
+      "last_updated": "2026-10-12T04:00:00Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "MADS: Multi-Agent Dialog Simulation for Robust Conversational Agents",
+          "url": "https://arxiv.org/abs/2610.12757"
+        }
+      ],
+      "what_happened": "The paper introduces MADS (Multi-Agent Dialog Simulation), a synthetic data generation pipeline that produces structured, diverse dialogue trajectories, including non‑cooperative and adversarial user behaviors, to address the scarcity of such examples in existing function‑calling benchmarks.",
+      "why_it_matters": "By providing richer, adversarial conversation data, MADS enables the training of conversational agents that are less fragile in realistic settings, improving their ability to handle non‑cooperative users and enhancing overall system reliability."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "event_id": "evt_e95d576c8d03209f",
+      "first_seen": "2026-10-12T04:00:00Z",
+      "headline": "SynAct introduces active expert feedback selection for LLM agents",
+      "last_updated": "2026-10-12T04:00:00Z",
+      "score": 5.69,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "SynAct: Synergistic Active Feedback Learning for LLM Agents",
+          "url": "https://arxiv.org/abs/2610.12651"
+        }
+      ],
+      "what_happened": "The paper presents SynAct, a learning framework that lets large language model (LLM) agents identify when they encounter knowledge gaps—errors that cannot be fixed by retrying—and request targeted expert feedback. It distinguishes these gaps from recoverable slips and focuses feedback on points where it can change the outcome, addressing the scarcity of expert attention.",
+      "why_it_matters": "By efficiently allocating limited expert input to the most impactful failures, SynAct aims to improve the reliability of LLM agents in multi-step workflows, potentially reducing costly retries and enhancing overall task success rates."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers of coding agents will need to integrate with the SWE-Duel framework to generate and solve on-the-fly tasks, shifting testing from static benchmarks to interactive, self-scaling evaluations.",
+      "event_id": "evt_23d65be69b099d33",
+      "first_seen": "2026-10-12T04:00:00Z",
+      "headline": "SWE-Duel introduces a self-scaling arena for evaluating coding agents",
+      "last_updated": "2026-10-12T04:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "SWE-Duel: Towards a Self-Scaling Arena for Coding Agents",
+          "url": "https://arxiv.org/abs/2610.12569"
+        }
+      ],
+      "what_happened": "The authors propose SWE-Duel, an evaluation arena where two coding agents generate tasks and oracles at evaluation time, eliminating pre-existing benchmark content and allowing difficulty to adapt to the agents' capabilities.",
+      "why_it_matters": "By preventing task leakage into training data and enabling dynamic difficulty, SWE-Duel aims to provide a more reliable measure of coding-agent progress as models improve."
+    }
+  ]
+}
