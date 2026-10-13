@@ -1,0 +1,128 @@
+{
+  "covers_since": "2026-10-12T09:13:43.916685Z",
+  "day": "2026-10-13",
+  "generated_at": "2026-10-13T09:16:35.662405Z",
+  "stats": {
+    "articles": 448,
+    "duplicates_removed": 0,
+    "events": 28,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 29,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 171.8
+  },
+  "stories": [
+    {
+      "category": "infrastructure",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "OpenAI models can be accessed on Amazon Bedrock from Australia with global cross-Region inference"
+        }
+      ],
+      "confidence": 0.9,
+      "developer_impact": "Developers can call OpenAI models via Bedrock endpoints in Australia, reducing latency and simplifying multi‑region deployment; no code changes required beyond selecting the new region.",
+      "event_id": "evt_0600471a7eba1ecb",
+      "first_seen": "2026-09-02T21:22:05Z",
+      "headline": "Amazon Bedrock adds Australian access to OpenAI models with cross‑region inference",
+      "last_updated": "2026-10-12T17:52:22Z",
+      "score": 5.93,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Accessing OpenAI GPT models on Amazon Bedrock with global cross-Region inference in Thailand, Malaysia, Singapore, Indonesia, and Taiwan",
+          "url": "https://aws.amazon.com/blogs/machine-learning/accessing-openai-gpt-models-on-amazon-bedrock-with-global-cross-region-inference-in-thailand-malaysia-singapore-indonesia-and-taiwan/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock now supports accessing OpenAI models from the Australia region and enables global cross‑Region inference for those models.",
+      "why_it_matters": "Australian developers can run OpenAI workloads with lower latency and data residency compliance, while still leveraging inference resources in other AWS regions when needed."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers using Microsoft’s cloud AI services may need to target the Maia 300 hardware for inference, which could change deployment configurations and performance expectations within Azure.",
+      "event_id": "evt_78ecc2d527ba0027",
+      "first_seen": "2026-10-12T13:00:00Z",
+      "headline": "Microsoft launches third‑generation Maia 300 AI inference chip, reducing reliance on Nvidia GPUs",
+      "last_updated": "2026-10-12T13:00:00Z",
+      "score": 5.693,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Microsoft’s new AI chip makes it less reliant on Nvidia’s GPUs",
+          "url": "https://www.theverge.com/news/1009465/microsoft-maia-300-chip-improvements-rollout"
+        }
+      ],
+      "what_happened": "Microsoft announced its third‑generation in‑house AI chip, Maia 300, as the primary inference system for its products and services. The chip is designed to lower cost and improve efficiency of AI workloads in the cloud and to better support advanced reasoning models and agentic tasks, decreasing dependence on Nvidia GPUs.",
+      "why_it_matters": "By providing its own inference hardware, Microsoft can control performance and pricing of AI services, potentially lowering costs for customers and reducing reliance on external GPU suppliers, which may affect the AI hardware market dynamics."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers may need to integrate NVIDIA's agentic computing platforms and APIs into their systems to support these new workloads, requiring familiarity with NVIDIA's hardware, software stack and any associated development tools.",
+      "event_id": "evt_a2a8ddf1867ef936",
+      "first_seen": "2026-10-13T05:00:31Z",
+      "headline": "France deploys agentic computing at scale using NVIDIA technology",
+      "last_updated": "2026-10-13T05:00:31Z",
+      "score": 5.647,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "From Earth to Orbit, France’s Ecosystem Delivers Agentic Computing at Scale With NVIDIA",
+          "url": "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/"
+        }
+      ],
+      "what_happened": "Companies in France are now applying agentic computing across sectors such as space, finance, public services and scientific research, moving from earlier ambition to concrete deployments. The rollout is tied to commitments announced at the AI Action Summit in February 2025 and the Choose France Summits in 2025 and 2026, which secured major compute resources from NVIDIA.",
+      "why_it_matters": "The widespread adoption shows a national shift toward advanced AI workloads that can act autonomously, potentially accelerating innovation and productivity in critical industries. It also signals strong government‑industry collaboration and sizable compute investment, setting a benchmark for other regions."
+    },
+    {
+      "category": "benchmark",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers may need more compute resources to run the larger model, but could gain access to higher‑quality code generation and other complex AI functions if Meta offers an API or integration.",
+      "event_id": "evt_1e2db47d258dd52e",
+      "first_seen": "2026-10-12T17:56:56Z",
+      "headline": "Meta launches Muse Wonder, a larger, higher‑performing frontier AI model",
+      "last_updated": "2026-10-12T17:56:56Z",
+      "score": 5.422,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Meta releases its first frontier model, Muse Wonder",
+          "url": "https://techcrunch.com/2026/10/12/meta-releases-its-first-frontier-model-muse-wonder/"
+        }
+      ],
+      "what_happened": "Meta announced the release of Muse Wonder, its first frontier model. Compared with the earlier Muse Spark, Wonder is larger, achieves higher benchmark scores, and delivers better results on complex tasks such as coding.",
+      "why_it_matters": "The improved capability and coding performance suggest Muse Wonder could handle more demanding AI workloads and provide stronger assistance for software development, potentially influencing model selection and infrastructure planning."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Backend and AI engineers can use the Ray LLM containers on EKS to run multi‑node inference without building the inference stack from scratch, configuring prefill and decode nodes via standard deployment tools and accessing the model through a familiar OpenAI‑style API.",
+      "event_id": "evt_b241a2d905cc81c1",
+      "first_seen": "2026-10-12T15:50:14Z",
+      "headline": "AWS adds Ray LLM containers for multi-node inference on Amazon EKS",
+      "last_updated": "2026-10-12T15:50:14Z",
+      "score": 5.365,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Run multi-node inference workloads using Ray LLM Deep Learning Containers",
+          "url": "https://aws.amazon.com/blogs/machine-learning/run-multi-node-inference-workloads-using-ray-llm-deep-learning-containers/"
+        }
+      ],
+      "what_happened": "AWS released pre‑built Ray LLM Deep Learning Containers that let users deploy a single large language model across two GPU nodes in Amazon EKS. The deployment separates prefill and decode nodes behind one OpenAI‑compatible endpoint, and the container includes the full inference stack so users only need to configure the deployment, not assemble the stack themselves.",
+      "why_it_matters": "The offering simplifies scaling LLM inference across multiple GPUs, potentially lowering latency and increasing throughput for services that need high‑performance text generation. By exposing an OpenAI‑compatible endpoint, it eases integration with existing client code and reduces engineering effort to set up multi‑node inference pipelines."
+    }
+  ]
+}
