@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-10-13T09:13:43.916685Z",
+  "day": "2026-10-14",
+  "generated_at": "2026-10-14T07:26:11.855686Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 2,
+    "events": 128,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 128.0
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.65,
+      "developer_impact": "Developers will need to integrate NVIDIA’s accelerated computing platforms, AI models, and digital‑twin frameworks into city‑level applications, working with local software and infrastructure partners to build and maintain these agents.",
+      "event_id": "evt_51408f953358d0aa",
+      "first_seen": "2026-10-14T06:00:28Z",
+      "headline": "European cities adopt NVIDIA AI agents and digital twins for urban operations",
+      "last_updated": "2026-10-14T06:00:28Z",
+      "score": 6.498,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "European Cities Deploy NVIDIA-Powered AI Agents to Run Smarter Urban Operations",
+          "url": "https://blogs.nvidia.com/blog/european-cities-agents-urban-operations/"
+        }
+      ],
+      "what_happened": "Cities across the EMEA region are deploying physical AI agents and digital twins built on NVIDIA accelerated computing to assist municipal teams with daily decisions such as road‑repair scheduling and energy‑use optimization.",
+      "why_it_matters": "The deployment aims to make urban services more data‑driven and efficient, potentially lowering operational costs, improving resource allocation, and enhancing resident experience by automating routine decision‑making tasks."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.97,
+      "developer_impact": "Developers can access Grok 4.7 via Bedrock to create long‑horizon agents, adjust reasoning effort per call, and track token usage in production, enabling more efficient and cost‑controlled AI workflows.",
+      "event_id": "evt_7f176d6cec1f7ea9",
+      "first_seen": "2026-10-13T15:52:20Z",
+      "headline": "Grok 4.7 released on Amazon Bedrock for building long‑horizon tool‑calling agents",
+      "last_updated": "2026-10-13T15:52:20Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Build long-horizon agents with Grok 4.7 on Amazon Bedrock",
+          "url": "https://aws.amazon.com/blogs/machine-learning/build-long-horizon-agents-with-grok-4-7-on-amazon-bedrock/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock now offers Grok 4.7. The post demonstrates a tool‑calling agent built on Grok 4.7 and evaluates it on three reasoning tasks across four effort levels, reporting correctness and token cost per completed task. It also shows how to tune the correctness‑cost trade‑off per request and monitor those metrics in production.",
+      "why_it_matters": "The release gives developers a higher‑capability LLM that can handle longer, multi‑step reasoning and tool use while allowing fine‑grained control of performance versus cost. This can reduce token spend and improve reliability of AI services that require complex decision making."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.3,
+      "developer_impact": "Developers can integrate the LFM2.5-24B-A2B model into on‑device services, enabling local inference without relying on cloud APIs, though they must manage the model's size and resource requirements.",
+      "event_id": "evt_53911f98c21c784f",
+      "first_seen": "2026-10-13T17:05:48Z",
+      "headline": "Hugging Face releases LFM2.5-24B-A2B model for on‑device private agents",
+      "last_updated": "2026-10-13T17:05:48Z",
+      "score": 5.748,
+      "sources": [
+        {
+          "source_id": "huggingface-blog",
+          "title": "Run fast, private agents on-device with LFM2.5-24B-A2B",
+          "url": "https://huggingface.co/blog/LiquidAI/lfm25-24b-a2b"
+        }
+      ],
+      "what_happened": "The Hugging Face blog announces the LFM2.5-24B-A2B model, positioned for running fast, private AI agents directly on devices.",
+      "why_it_matters": "Running agents on‑device can reduce latency and keep user data local, addressing speed and privacy concerns for edge AI applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Implementing VH-GPO requires adding a teacher model checkpoint and a handoff step in the training loop, which may affect pipeline complexity and compute cost but offers a way to obtain gradients when standard advantage estimates vanish.",
+      "event_id": "evt_c691db4ad7325b32",
+      "first_seen": "2026-10-14T04:00:00Z",
+      "headline": "VH-GPO introduces verified handoff to improve group-relative RL for LLM agents",
+      "last_updated": "2026-10-14T04:00:00Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "VH-GPO: Verified Handoff for LLM Agent Reinforcement Learning",
+          "url": "https://arxiv.org/abs/2610.14000"
+        }
+      ],
+      "what_happened": "The paper proposes VH-GPO, a method that uses a frozen teacher model to recover from student-visited states in group-relative reinforcement learning for large language model agents. By having the teacher complete the task after the student, the approach prevents relative advantage collapse when all trajectories receive the same reward, providing a usable learning signal.",
+      "why_it_matters": "Preventing advantage collapse enables more effective training of LLM agents with group-relative RL, potentially improving performance on tasks where failures are common and allowing better utilization of teacher knowledge."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers will need to target the RTX Spark stack to exploit its unified memory and AI compute, likely using NVIDIA’s RTX APIs and toolkits to optimize games, creative software, and AI services.",
+      "event_id": "evt_a4bbae21d3b4c957",
+      "first_seen": "2026-10-13T12:00:49Z",
+      "headline": "NVIDIA launches RTX Spark PC platform with up to 128 GB unified memory and 1 PFLOP AI compute",
+      "last_updated": "2026-10-13T12:00:49Z",
+      "score": 5.622,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "All Systems Go: Global PC App Ecosystem Ready for NVIDIA RTX Spark",
+          "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-software-updates/"
+        }
+      ],
+      "what_happened": "NVIDIA announced RTX Spark, a new PC architecture that combines gaming, creative, and AI workloads on a single chip, offering up to 128 GB of unified memory and 1 petaflop of AI compute. The company says the global PC application ecosystem is ready for the platform.",
+      "why_it_matters": "The hardware promises to consolidate multiple high‑performance workloads onto one system, potentially reducing the need for separate machines and enabling richer AI‑enhanced applications on consumer PCs."
+    }
+  ]
+}
