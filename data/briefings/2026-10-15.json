@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-10-14T07:24:03.862300Z",
+  "day": "2026-10-15",
+  "generated_at": "2026-10-15T07:17:15.582302Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 25,
+    "events": 102,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 132.1
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can leverage Bedrock AgentCore APIs to create IDP pipelines without writing custom extraction logic, focusing instead on integration and higher‑level workflow orchestration.",
+      "event_id": "evt_de08f1cfdedd109d",
+      "first_seen": "2026-10-14T16:24:07Z",
+      "headline": "Amazon Bedrock AgentCore adds self‑improving document processing capabilities",
+      "last_updated": "2026-10-14T16:24:07Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Build self-improving document processing using Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/build-self-improving-document-processing-using-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock AgentCore now supports building an agentic intelligent document processing (IDP) system that can classify, extract, validate, and learn from business documents. The system operates with minimal human intervention and can automatically adapt to new document formats without requiring manual template configuration.",
+      "why_it_matters": "The automation reduces the need for hand‑crafted parsers and ongoing template maintenance, speeding up onboarding of new document types and lowering operational overhead for enterprises that process large volumes of varied business documents."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can use Amazon Bedrock to build similar autonomous agents, integrate AI models for security analysis, and connect to CNAPP data sources to automate remediation workflows.",
+      "event_id": "evt_e33f5124da4a4628",
+      "first_seen": "2026-10-14T13:53:33Z",
+      "headline": "Tamnoon launches Tami, an Amazon Bedrock‑based AI agent that automates cloud security remediation",
+      "last_updated": "2026-10-14T13:53:33Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "How Tamnoon built AI-powered cloud security remediation with Amazon Bedrock",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-tamnoon-built-ai-powered-cloud-security-remediation-with-amazon-bedrock/"
+        }
+      ],
+      "what_happened": "Tamnoon created Tami, an agentic cloud remediation orchestrator built on Amazon Bedrock. Tami autonomously investigates security findings from CNAPP and other cloud‑native sources and safely applies remediation actions. In the reported deployment it reduced critical cloud exposure by more than 90 % within 90 days with zero production incidents.",
+      "why_it_matters": "Automating detection and fixing of cloud security issues can dramatically cut exposure time and operational overhead, improving overall security posture while freeing engineers from manual triage. The results show AI‑driven remediation can be both fast and reliable at scale."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers can experiment with the code layers beta and use the new agent-definition features to build integrations or AI‑driven workflows on Figma.",
+      "event_id": "evt_c583a0918e79df9d",
+      "first_seen": "2026-10-15T04:30:00Z",
+      "headline": "Figma adds agent definition features and opens beta for code layers",
+      "last_updated": "2026-10-15T04:30:00Z",
+      "score": 5.742,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Figma announces new features to define how agents work on its platform",
+          "url": "https://techcrunch.com/2026/10/14/figma-announces-new-features-to-define-how-agents-work-on-its-platform/"
+        }
+      ],
+      "what_happened": "Figma announced new features that let users define how agents operate on its platform and launched its code layers feature in open beta.",
+      "why_it_matters": "The additions broaden Figma’s platform functionality, giving developers tools to incorporate AI agents and embed code directly within designs."
+    },
+    {
+      "category": "security",
+      "claims": [],
+      "confidence": 0.9,
+      "event_id": "evt_004cd593adabcd24",
+      "first_seen": "2026-10-14T12:00:00Z",
+      "headline": "SentinelOne reduces malware analysis time from weeks to hours using OpenAI Daybreak",
+      "last_updated": "2026-10-14T12:00:00Z",
+      "score": 5.625,
+      "sources": [
+        {
+          "source_id": "openai",
+          "title": "SentinelOne cuts malware analysis from weeks to hours",
+          "url": "https://openai.com/index/sentinelone"
+        }
+      ],
+      "what_happened": "SentinelOne reports that, with OpenAI Daybreak, it has shortened malware analysis from several weeks to a few hours, creating capacity to investigate more threats.",
+      "why_it_matters": "The faster turnaround enables quicker threat response and allows the company to handle a larger volume of malware samples, potentially improving overall security effectiveness."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "The work suggests backend and AI engineers should evaluate LLM‑based diagnostic pipelines on realistic, sensor‑rich scenarios rather than only benchmark tests, influencing model selection, data integration, and evaluation strategies for PHM applications.",
+      "event_id": "evt_65ff98126643b4de",
+      "first_seen": "2026-10-15T04:00:00Z",
+      "headline": "Study evaluates LLM agents for fault detection in simulated industrial appliances",
+      "last_updated": "2026-10-15T04:00:00Z",
+      "score": 5.59,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Can LLM Agents Efficiently Identify Appliance Faults? Insights From Diagnosing a Simulated Appliance",
+          "url": "https://arxiv.org/abs/2610.19291"
+        }
+      ],
+      "what_happened": "Researchers presented an arXiv paper investigating whether large language model (LLM) agents can efficiently identify faults in a simulated appliance, extending prior work that largely used exam‑style benchmarks. The study provides empirical insights from diagnosing the simulated device within an Industry 4.0 context.",
+      "why_it_matters": "If LLM agents can reliably detect appliance faults, they could augment prognostics and health management (PHM) systems, offering more automated, language‑driven diagnostics and potentially reducing downtime in industrial settings."
+    }
+  ]
+}
