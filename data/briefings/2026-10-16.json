@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-10-15T07:15:03.464470Z",
+  "day": "2026-10-16",
+  "generated_at": "2026-10-16T07:00:37.666143Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 128,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 145.6
+  },
+  "stories": [
+    {
+      "category": "developer_tools",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers can now experiment with Muse Spark directly on Mac Studio machines using the MLX framework, avoiding cloud APIs. They may need to adapt pipelines to the MLX API and ensure their code runs efficiently on Apple silicon GPUs.",
+      "event_id": "evt_8845c0eef99a97d4",
+      "first_seen": "2026-10-15T18:15:36Z",
+      "headline": "Meta and Apple enable Muse Spark AI model to run on Mac Studio with M5 Ultra",
+      "last_updated": "2026-10-15T18:15:36Z",
+      "score": 6.253,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Meta and Apple team up to make Muse AI models run better on Macs",
+          "url": "https://www.theverge.com/news/1012293/meta-apple-muse-spark-open-ai-model-mlx"
+        }
+      ],
+      "what_happened": "Meta announced its Muse Spark open-weight AI model, describing it as the most capable U.S. open-weight model to date. In partnership with Apple, Meta said Muse Spark is the first model of its class that can run on a desktop using two Apple M5 Ultra Mac Studios and the latest MLX framework.",
+      "why_it_matters": "Running a large open-weight model locally on high‑end Mac hardware could reduce dependence on cloud compute, lower latency, and improve data privacy for users and developers. It also showcases Apple silicon’s capability for heavy AI workloads, potentially influencing future hardware and software choices."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "Developers can incorporate information‑gain reward training and separate generative model specifications to build LLMs that better handle sequential experimental design, potentially requiring new training pipelines and reward‑shaping mechanisms.",
+      "event_id": "evt_381c08cf57748156",
+      "first_seen": "2026-10-16T04:00:00Z",
+      "headline": "Researchers train LLMs to perform amortized sequential Bayesian experimental design",
+      "last_updated": "2026-10-16T04:00:00Z",
+      "score": 6.04,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Amortizing Sequential Experimental Design in Reasoning LLMs",
+          "url": "https://arxiv.org/abs/2610.20832"
+        }
+      ],
+      "what_happened": "A new method is introduced that amortizes sequential Bayesian experimental design (BED) into large language models (LLMs). The approach trains the LLM's reasoning to select actions using information‑gain rewards, while keeping the experimental generative model separate from the LLM itself.",
+      "why_it_matters": "By enabling LLMs to adaptively gather information in experimental design tasks, the technique could improve the models' efficiency and effectiveness in scientific reasoning and data‑driven decision making, reducing the need for costly step‑by‑step inference during deployment."
+    },
+    {
+      "category": "security",
+      "claims": [],
+      "confidence": 0.9,
+      "event_id": "evt_44ca59220e0462e6",
+      "first_seen": "2026-10-15T20:32:41Z",
+      "headline": "Targeted ads used 0-click exploits to install mercenary malware, first confirmed case",
+      "last_updated": "2026-10-15T20:32:41Z",
+      "score": 6.018,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "Targeted ads delivered 0-click exploits to install mercenary malware",
+          "url": "https://arstechnica.com/security/2026/10/targeted-ads-delivered-0-click-exploits-to-install-mercenary-malware/"
+        }
+      ],
+      "what_happened": "A targeted advertising campaign delivered zero‑click exploits that silently installed mercenary spyware/malware on victims' devices. The report describes this as the first confirmed instance of mercenary spyware being delivered via ad content.",
+      "why_it_matters": "The finding shows that ad networks can be weaponized to spread stealthy, high‑privilege malware without user interaction, raising security risks for users, advertisers, and platforms that serve ads. It highlights a new attack vector that could enable large‑scale, covert infections."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers gain access to an open‑source 120B model for research or product integration and to two smaller, memory‑efficient edge models that can be run on local hardware, requiring adjustments to model selection, quantization, and deployment pipelines to exploit the claimed efficiency gains.",
+      "event_id": "evt_369f65bd0511e1b4",
+      "first_seen": "2026-10-15T15:00:24Z",
+      "headline": "NVIDIA launches open Nemotron 3.5 Super VL 120B model and two edge Bolt variants",
+      "last_updated": "2026-10-15T15:00:24Z",
+      "score": 5.768,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "Open From Data Center to Desktop: NVIDIA Expands Nemotron Family With Highest Efficiency Super VL and Bolt Models",
+          "url": "https://blogs.nvidia.com/blog/nemotron-3-5-super-vl/"
+        }
+      ],
+      "what_happened": "NVIDIA announced three new Nemotron 3.5 models: the Super VL, an open 120‑billion‑parameter model marketed as the fastest and most accurate for always‑on agents, and two edge‑focused Bolt models – the 74‑billion‑parameter Bolt 74B‑A9B with 24 GB memory, and the 4‑GB Bolt E4B designed for local agentic workloads.",
+      "why_it_matters": "The open Super VL provides a large, high‑performance foundation model that developers can fine‑tune or deploy without licensing constraints, while the smaller Bolt variants aim to deliver a balance of intelligence and speed per GB for on‑device or edge inference, potentially expanding the range of applications that can run locally with lower latency and cost."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers of engineering agents will need to implement the RAC specification to communicate actions and receive feedback, allowing their agents to work across different harnesses without redesigning constraint handling code.",
+      "event_id": "evt_0e0776f86cfc7f19",
+      "first_seen": "2026-10-16T04:00:00Z",
+      "headline": "RAC contract defines a harness‑agnostic action/feedback layer for constraint‑driven engineering agents",
+      "last_updated": "2026-10-16T04:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "RAC: A Relational Agent Contract for Constraint-Governed Engineering Tasks",
+          "url": "https://arxiv.org/abs/2610.20935"
+        }
+      ],
+      "what_happened": "The paper introduces RAC, a relational agent contract that standardizes the action and feedback interface for engineering agents that must satisfy exact, coupled constraints. RAC is described as harness‑agnostic and authoritative, aiming to replace ad‑hoc mechanisms that cause failures when agents derive precise geometry or timing from semantic decisions.",
+      "why_it_matters": "By providing a uniform contract, RAC can reduce integration errors and improve reliability of agents operating in constraint‑governed engineering tasks, potentially accelerating development cycles and lowering the need for custom constraint handling logic."
+    }
+  ]
+}
