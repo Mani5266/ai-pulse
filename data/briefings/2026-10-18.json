@@ -1,0 +1,159 @@
+{
+  "covers_since": "2026-10-17T07:08:51.802251Z",
+  "day": "2026-10-18",
+  "generated_at": "2026-10-18T07:10:21.532830Z",
+  "stats": {
+    "articles": 448,
+    "duplicates_removed": 0,
+    "events": 14,
+    "events_shortlisted": 14,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 20,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 89.7
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers building AI agents will need to handle access restrictions, respect site policies, and possibly redesign workflows to cope with blocked or limited data sources.",
+      "event_id": "evt_b82a05a9485858a7",
+      "first_seen": "2026-10-17T13:00:00Z",
+      "headline": "Websites begin blocking AI agents from accessing their content",
+      "last_updated": "2026-10-17T13:00:00Z",
+      "score": 5.242,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Websites are closing their doors to AI agents",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1013195/ai-agents-blocked-web"
+        }
+      ],
+      "what_happened": "Recent reports indicate that a number of websites are actively restricting access by autonomous AI agents, effectively \"closing their doors\" to these bots that companies like OpenAI, Meta, Google, and Instinct promote for tasks such as booking reservations or shopping online.",
+      "why_it_matters": "The blocks limit the ability of AI agents to scour the internet on users' behalf, potentially reducing the usefulness of services that rely on unrestricted web access and raising challenges for the broader deployment of autonomous agents."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers can run NVIDIA AI frameworks and tools directly on a Windows laptop, test models locally, and leverage the large unified memory for bigger workloads, potentially reducing cloud costs and latency.",
+      "event_id": "evt_b4411b0822cf9012",
+      "first_seen": "2026-10-17T21:00:13Z",
+      "headline": "NVIDIA launches RTX Spark laptops with Blackwell RTX GPUs and up to 128 GB unified memory",
+      "last_updated": "2026-10-17T21:00:13Z",
+      "score": 5.107,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "RTX Spark Ignites Global Celebration as New Windows PCs Arrive",
+          "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-windows-laptops-celebration/"
+        }
+      ],
+      "what_happened": "NVIDIA announced that RTX Spark laptops are now available from ASUS, Dell, HP, Lenovo, Microsoft and MSI. The devices run Windows, include Blackwell RTX graphics, support up to 128 GB of unified memory, and ship with the full NVIDIA AI platform. Prices start at $2,399.",
+      "why_it_matters": "The machines bring high‑performance GPU compute and a complete AI software stack to a portable, premium Windows form factor, enabling local AI inference, content‑creation workloads and gaming without relying on cloud resources."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.8,
+      "event_id": "evt_84771527145527a5",
+      "first_seen": "2026-10-17T14:01:01Z",
+      "headline": "Solar electricity generation exceeds nuclear globally for first time",
+      "last_updated": "2026-10-17T14:01:01Z",
+      "score": 3.852,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Solar surpasses nuclear power globally for first time",
+          "url": "https://www.pv-magazine.com/2026/09/29/solar-surpasses-nuclear-power-globally-for-first-time/"
+        }
+      ],
+      "what_happened": "For the first time, total global solar power generation has surpassed total nuclear power generation, as reported in the article.",
+      "why_it_matters": "The shift marks a milestone in the global energy mix, showing that renewable solar energy is now contributing more than nuclear sources worldwide."
+    },
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "web-edit 0.1a2 is a tiny web app for browsing and editing files in a folder."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The app was primarily built for editing files on different machines via Tailscale."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "web-edit 0.1a2 includes a \"copy to clipboard\" option for both text and image data."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The author was running pelican prompts on a laptop from their phone using DeepSeek 4.1 Flash 1017."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The author wanted an easy way to copy the resulting logs into a Gist."
+        }
+      ],
+      "confidence": 0.95,
+      "developer_impact": "Developers using web‑edit now have a built‑in way to copy text or images directly from the web interface, eliminating the need for external copy‑paste tools when moving data to services like Gist.",
+      "event_id": "evt_993bc19082d2d062",
+      "first_seen": "2026-10-12T15:54:36Z",
+      "headline": "web-edit 0.1a2 adds clipboard copy for text and images",
+      "last_updated": "2026-10-17T13:16:49Z",
+      "score": 3.6,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "web-edit 0.1a2",
+          "url": "https://simonwillison.net/2026/Oct/17/web-edit/"
+        }
+      ],
+      "what_happened": "The tiny web‑app web‑edit (version 0.1a2) released a new feature: a \"copy to clipboard\" option that works for both text and image data. The app is designed for browsing and editing files in a folder across machines via Tailscale, and the new feature was added to simplify moving generated logs into a Gist.",
+      "why_it_matters": "The clipboard capability streamlines the workflow for users who run remote prompts (e.g., pelican prompts) on a laptop from a phone and need to transfer output quickly. It reduces manual steps when sharing logs or other data, making remote file editing via Tailscale more efficient."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers may need to redesign licensing infrastructure, ensure long‑term compatibility, and allocate resources for maintaining games after support periods end.",
+      "event_id": "evt_09f8d2f7005e1293",
+      "first_seen": "2026-10-18T00:14:22Z",
+      "headline": "New York bill would require game ownership and post-support functionality",
+      "last_updated": "2026-10-18T00:14:22Z",
+      "score": 3.553,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "NY announces game ownership bill requiring ownership rather than licensing",
+          "url": "https://www.tomshardware.com/video-games/new-york-rep-announces-game-ownership-bill-that-would-require-consumer-ownership-rather-than-sale-of-licenses-would-also-require-publishers-to-keep-the-game-functional-after-support-ends"
+        }
+      ],
+      "what_happened": "A New York state representative introduced legislation that would change video game transactions from license‑based sales to true ownership, and would obligate publishers to keep games functional after official support ends.",
+      "why_it_matters": "If enacted, the law could reshape digital game distribution by forcing companies to maintain servers and compatibility longer, affecting revenue models, consumer rights, and the economics of game publishing."
+    }
+  ]
+}
