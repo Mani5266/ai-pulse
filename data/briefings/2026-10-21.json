@@ -1,0 +1,128 @@
+{
+  "covers_since": "2026-10-20T07:23:52.455625Z",
+  "day": "2026-10-21",
+  "generated_at": "2026-10-21T07:26:32.778025Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 52,
+    "events": 88,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 27,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 160.3
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers building LLM agents can integrate SPEM to manage skill libraries more efficiently, potentially reducing API token usage and execution time. Adoption would involve using SPEM’s APIs or libraries to define skill graphs and invoke skills selectively, though implementation details are not provided in the abstract.",
+      "event_id": "evt_a7caf59272b369ac",
+      "first_seen": "2026-10-21T04:00:00Z",
+      "headline": "SPEM framework introduces structure-aware procedural memory for efficient skill use in LLM agents",
+      "last_updated": "2026-10-21T04:00:00Z",
+      "score": 6.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "SPEM: Structure-Aware Procedural Memory for Efficient Skill Use in LLM Agents",
+          "url": "https://arxiv.org/abs/2610.26995"
+        }
+      ],
+      "what_happened": "The arXiv paper titled “SPEM: Structure-Aware Procedural Memory for Efficient Skill Use in LLM Agents” (arXiv:2610.26995v1) proposes a lightweight framework called SPEM. SPEM models skill dependencies, execution order, state transitions, and data‑flow constraints, allowing LLM‑based agents to load and invoke only the necessary parts of a large skill library instead of loading all skills as flat text entries, thereby reducing token and runtime overhead.",
+      "why_it_matters": "By accounting for procedural structure, SPEM aims to make large skill libraries scalable for LLM agents, lowering inference cost and latency while improving the correctness of skill sequencing and state handling. This could enable more complex, multi‑step agent behaviors without prohibitive resource consumption."
+    },
+    {
+      "category": "security",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers should monitor PHP releases, test and apply the upcoming emergency patches quickly, and review their PHP configurations for potential exposure.",
+      "event_id": "evt_837182b6a8aaa4ee",
+      "first_seen": "2026-10-21T02:12:18Z",
+      "headline": "PHP to release two emergency patches amid unconfirmed PHP2Shell remote code execution report",
+      "last_updated": "2026-10-21T02:12:18Z",
+      "score": 6.367,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "PHP warns it plans to release 2 emergency patches imminently",
+          "url": "https://arstechnica.com/security/2026/10/php-maintainers-tell-web-devs-to-prepare-themselves-for-critical-security-patches/"
+        }
+      ],
+      "what_happened": "PHP announced plans to issue two emergency patches imminently. An unconfirmed report describes a PHP2Shell exploit that could allow remote code execution on vulnerable PHP sites.",
+      "why_it_matters": "If the exploit is real, attackers could take control of PHP‑powered applications, risking data breaches and service disruption. Prompt patches are needed to protect sites."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.93,
+      "developer_impact": "Developers may need to monitor certificate revocation lists, update trust stores, and re‑issue or replace affected certificates to maintain secure connections.",
+      "event_id": "evt_5ec1c71b36275b2a",
+      "first_seen": "2026-10-20T19:47:35Z",
+      "headline": "Eight compromised TLS intermediate certificates discovered, enabling credential forgery",
+      "last_updated": "2026-10-20T19:47:35Z",
+      "score": 6.062,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "The Internet goes on high alert after discovery of 8 compromised TLS certs",
+          "url": "https://arstechnica.com/security/2026/10/the-internet-goes-on-high-alert-after-discovery-of-8-compromised-tls-certs/"
+        }
+      ],
+      "what_happened": "Security researchers identified eight compromised TLS intermediate certificates. These intermediates can be used by an attacker to mint valid web credentials for any Internet server, effectively allowing the creation of fraudulent TLS certificates.",
+      "why_it_matters": "The compromised intermediates break the trust model of TLS, potentially enabling man‑in‑the‑middle attacks and impersonation of any website. This threatens the security of web communications and could affect a wide range of online services."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "OpenAI models can be accessed on Amazon Bedrock from Australia with global cross-Region inference."
+        }
+      ],
+      "confidence": 0.8,
+      "developer_impact": "Developers can call OpenAI models via Bedrock endpoints in Australia and configure cross‑Region inference, requiring only standard Bedrock API integration; no new SDKs are announced.",
+      "event_id": "evt_0600471a7eba1ecb",
+      "first_seen": "2026-09-02T21:22:05Z",
+      "headline": "AWS Bedrock adds Australian access to OpenAI models with cross‑region inference",
+      "last_updated": "2026-10-20T16:42:53Z",
+      "score": 5.925,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Access OpenAI GPT models on Amazon Bedrock from Canada with cross-Region inference",
+          "url": "https://aws.amazon.com/blogs/machine-learning/access-openai-gpt-models-on-amazon-bedrock-from-canada-with-cross-region-inference/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock now lets customers in the Australia region invoke OpenAI models and supports global cross‑Region inference for those models.",
+      "why_it_matters": "The change reduces latency for Australian users, improves data residency compliance, and expands the geographic availability of OpenAI services through AWS infrastructure."
+    },
+    {
+      "category": "benchmark",
+      "claims": [],
+      "confidence": 0.4,
+      "developer_impact": "Developers may consider adopting learned‑memory techniques as a cost‑effective alternative to frontier models for similar customer‑service applications.",
+      "event_id": "evt_536f23cd94f13984",
+      "first_seen": "2026-10-20T15:19:48Z",
+      "headline": "ALTK-Evolve leads τ²-bench on customer service tasks using learned memory, no frontier model",
+      "last_updated": "2026-10-20T15:19:48Z",
+      "score": 5.828,
+      "sources": [
+        {
+          "source_id": "huggingface-blog",
+          "title": "ALTK-Evolve: How learned memory tops the τ²-bench leaderboard on customer service tasks without a frontier model",
+          "url": "https://huggingface.co/blog/ibm-research/altk-evolve-bc"
+        }
+      ],
+      "what_happened": "The ALTK-Evolve system achieved the top score on the τ²‑bench leaderboard for customer‑service tasks, using a learned‑memory architecture instead of a large frontier model.",
+      "why_it_matters": "It shows that state‑of‑the‑art benchmark performance can be attained without the most advanced, resource‑heavy models, indicating a potentially more efficient path for high‑accuracy solutions."
+    }
+  ]
+}
