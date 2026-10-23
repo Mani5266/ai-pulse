@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-10-22T07:24:20.663022Z",
+  "day": "2026-10-23",
+  "generated_at": "2026-10-23T07:25:03.441553Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 139,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 158.2
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Provides a dataset and evaluation framework that developers can use to assess and improve tool‑using capabilities of their models, guiding fine‑tuning and prompting strategies for procedural compliance.",
+      "event_id": "evt_4841ec6bc1c79ed8",
+      "first_seen": "2026-10-23T04:00:00Z",
+      "headline": "TauIndianBankBench introduces a procedure‑aware benchmark for tool‑using banking chat agents",
+      "last_updated": "2026-10-23T04:00:00Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "TauIndianBankBench: Procedure-Aware, Action-Oriented Evaluation of Tool-Using Conversational Agents",
+          "url": "https://arxiv.org/abs/2610.30161"
+        }
+      ],
+      "what_happened": "The paper presents TauIndianBankBench, a new evaluation suite that tests conversational agents on their ability to follow bank‑specific procedural rules and perform tool‑based actions, such as obtaining a closure quote before closing a deposit, in the context of Indian banks' FAQ and chatbot services.",
+      "why_it_matters": "By measuring compliance with required procedural steps, the benchmark helps ensure that language‑model assistants can safely and correctly execute banking tasks, reducing the risk of errors or rule violations in real‑world deployments."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.65,
+      "developer_impact": "Developers may need to incorporate the new quantization algorithm into their training pipelines to obtain mixed‑precision SNN models, potentially adjusting existing toolchains to support spike‑aware gradient calculations.",
+      "event_id": "evt_1811d82a9e3f88c3",
+      "first_seen": "2026-10-23T04:00:00Z",
+      "headline": "Spike-aware gradient-based mixed-precision quantization method for spiking neural networks",
+      "last_updated": "2026-10-23T04:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Spike-Aware Gradient-Based Mixed-Precision Quantization of Spiking Neural Networks for Vision Applications",
+          "url": "https://arxiv.org/abs/2610.30339"
+        }
+      ],
+      "what_happened": "The paper introduces a spike-aware, gradient‑based mixed‑precision quantization technique for spiking neural networks (SNNs) targeting vision tasks. It addresses the previously unexplored challenge of preserving SNN accuracy under low‑precision constraints and proposes an alternative to memory‑intensive Hessian‑based methods such as HAWQ‑V2.",
+      "why_it_matters": "By enabling accurate low‑precision SNNs, the method could reduce memory and compute requirements for energy‑efficient, event‑driven vision applications, facilitating deployment on resource‑constrained hardware."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Backend and AI engineers can use IFC‑MCQ to automatically produce evaluation datasets from existing IFC models, simplifying testing pipelines for LLM agents in the AEC domain.",
+      "event_id": "evt_a4c8641bafa7b1cc",
+      "first_seen": "2026-10-23T04:00:00Z",
+      "headline": "New IFC-MCQ method auto‑generates multiple‑choice benchmarks for LLM evaluation on building data",
+      "last_updated": "2026-10-23T04:00:00Z",
+      "score": 5.59,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "IFC-MCQ: Automatically Generating Multiple-Choice Benchmarks for Evaluating LLM Agents on IFC Data Retrieval",
+          "url": "https://arxiv.org/abs/2610.30533"
+        }
+      ],
+      "what_happened": "Researchers introduced IFC‑MCQ, a technique that creates multiple‑choice questions directly from Industry Foundation Classes (IFC) files, providing exact‑option benchmarks for testing large language model agents that retrieve IFC data.",
+      "why_it_matters": "The approach lets developers evaluate LLM‑based IFC queries at scale without costly human or LLM‑based answer review, improving benchmark reliability and accelerating development of AI tools for architecture, engineering, and construction data."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Backend and AI engineers can call a SageMaker endpoint that returns incremental audio chunks, integrate SSE or binary streaming into their services, and adjust pipelines to handle partial TTS output instead of a single audio file.",
+      "event_id": "evt_f6cf73b1fedb638e",
+      "first_seen": "2026-10-22T17:45:58Z",
+      "headline": "Amazon SageMaker adds streaming low‑latency TTS with Kokoro‑82M model",
+      "last_updated": "2026-10-22T17:45:58Z",
+      "score": 5.39,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Stream low-latency speech from AI agents using Kokoro TTS on Amazon SageMaker AI",
+          "url": "https://aws.amazon.com/blogs/machine-learning/stream-low-latency-speech-from-ai-agents-using-kokoro-tts-on-amazon-sagemaker-ai/"
+        }
+      ],
+      "what_happened": "AWS released a guide showing how to stream speech from an AI agent sentence‑by‑sentence using the Kokoro‑82M text‑to‑speech model hosted on SageMaker, sending the audio to a browser via Server‑Sent Events or a unified binary transport instead of waiting for the full response.",
+      "why_it_matters": "Streaming each sentence reduces the latency that voice agents normally introduce by waiting for the complete response, giving users a more responsive conversational experience and enabling real‑time voice interactions."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.9,
+      "event_id": "evt_0d4362161a9935c3",
+      "first_seen": "2026-10-22T21:51:25Z",
+      "headline": "Canva launches Canva Craft AI image model that plans designs before generation",
+      "last_updated": "2026-10-22T21:51:25Z",
+      "score": 5.143,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Canva’s first AI image model plans designs before generating them",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1017151/canva-craft-in-house-ai-model"
+        }
+      ],
+      "what_happened": "Canva introduced its first AI image generation model, called Canva Craft. The model uses a two‑stage architecture that first plans a design and then generates the image, which Canva says provides greater precision, consistency and control. It is positioned as a direct competitor to image models from OpenAI, Microsoft and Google.",
+      "why_it_matters": "The planning step gives users more control over AI‑generated visuals, which could improve design workflows and make AI image tools more reliable for professional use. By entering the market with a differentiated approach, Canva may shift competition among major AI image providers."
+    }
+  ]
+}
