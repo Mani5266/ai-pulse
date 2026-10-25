@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-10-24T07:29:35.638975Z",
+  "day": "2026-10-25",
+  "generated_at": "2026-10-25T07:31:38.553586Z",
+  "stats": {
+    "articles": 448,
+    "duplicates_removed": 0,
+    "events": 16,
+    "events_shortlisted": 16,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 21,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 122.9
+  },
+  "stories": [
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.35,
+      "developer_impact": "Developers using HTTP client or server libraries should review their dependencies for exposure to HTTP2Shell, consider applying patches or mitigations, and monitor for related security advisories.",
+      "event_id": "evt_f42ef99f97a40122",
+      "first_seen": "2026-10-24T08:06:39Z",
+      "headline": "Node2Shell upgraded to HTTP2Shell, expanding impact to many HTTP libraries",
+      "last_updated": "2026-10-24T08:06:39Z",
+      "score": 4.902,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Node2Shell evolves to HTTP2Shell, blast radius affects many HTTP libs and apps",
+          "url": "https://www.aikido.dev/blog/python-packages-vulnerable-node2shell-brotli-cve-2026-111497"
+        }
+      ],
+      "what_happened": "The Node2Shell tool has been evolved into a new version called HTTP2Shell. This change increases its blast radius, meaning it now potentially affects a larger number of HTTP libraries and applications.",
+      "why_it_matters": "The broader blast radius means more software that relies on HTTP libraries could be exposed to the capabilities of HTTP2Shell, raising security and stability concerns for a wide range of services."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can integrate high‑quality, human‑like voice synthesis directly on MacBook M4 Max machines without needing external APIs, simplifying infrastructure, cutting operational costs, and allowing tighter control over data and performance.",
+      "event_id": "evt_ed1379dde355db6b",
+      "first_seen": "2026-10-24T16:00:00Z",
+      "headline": "Block releases voice model that runs locally on MacBook M4 Max",
+      "last_updated": "2026-10-24T16:00:00Z",
+      "score": 4.513,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Block’s new voice model sounds eerily human",
+          "url": "https://techcrunch.com/2026/10/24/blocks-new-voice-model-sounds-eerily-human/"
+        }
+      ],
+      "what_happened": "Block announced a new voice model that produces human‑like speech and is capable of running locally on a MacBook equipped with the M4 Max processor.",
+      "why_it_matters": "Local execution eliminates reliance on cloud services, reducing latency, preserving user privacy, and enabling offline or on‑device voice applications, which can broaden deployment scenarios for AI‑driven speech interfaces."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "No direct code changes are required, but the approach suggests a future demand for tools that can detect AI‑enhanced media and for pipelines that preserve natural imperfections.",
+      "event_id": "evt_88204e2303b2e1c0",
+      "first_seen": "2026-10-24T21:29:12Z",
+      "headline": "BBC's Blue Planet III includes imperfect footage to signal authenticity amid AI concerns",
+      "last_updated": "2026-10-24T21:29:12Z",
+      "score": 4.013,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Blue Planet III is keeping the rough edges in the age of AI",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1018205/blue-planet-iii-authentic-organic-ai"
+        }
+      ],
+      "what_happened": "The new season of BBC's nature series Blue Planet III deliberately retains less‑perfect, rough‑edge shots rather than polishing every frame. The producers say this is to demonstrate that the footage is real and not AI‑generated, countering the tendency of AI‑enhanced video to look overly smooth.",
+      "why_it_matters": "It highlights growing industry awareness of AI‑generated visual content and the need for authenticity cues. Viewers and broadcasters may become more skeptical of overly polished footage, prompting changes in production standards and verification processes."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers may consider evaluating or integrating these listed agents, or building similar text‑message‑based AI services, to enhance user interaction within messaging apps.",
+      "event_id": "evt_f75803cafe6ee4fc",
+      "first_seen": "2026-10-24T14:00:00Z",
+      "headline": "TechCrunch AI publishes list of AI agents for text messaging",
+      "last_updated": "2026-10-24T14:00:00Z",
+      "score": 3.792,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Here are the top AI agents that can live in your text messages",
+          "url": "https://techcrunch.com/2026/10/24/all-the-ai-agents-that-can-live-in-your-text-messages/"
+        }
+      ],
+      "what_happened": "The article presents a curated list of notable AI agents that can operate within text message platforms, covering general assistants as well as agents tailored for families, travel, and work.",
+      "why_it_matters": "It shows a growing trend of embedding AI assistants directly into messaging, indicating potential new use‑cases for messaging APIs and prompting interest in integrating conversational AI into existing communication workflows."
+    },
+    {
+      "category": "developer_tools",
+      "claims": [],
+      "confidence": 1.0,
+      "developer_impact": "Developers must clone, push, and manage Roku repositories on GitLab instead of GitHub, and adapt to GitLab’s access controls and CI/CD features.",
+      "event_id": "evt_c852cf262baca51d",
+      "first_seen": "2026-10-24T16:06:26Z",
+      "headline": "Roku moves its developer repositories from GitHub to GitLab",
+      "last_updated": "2026-10-24T16:06:26Z",
+      "score": 3.542,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Roku developer repositories moved from GitHub to GitLab",
+          "url": "https://blog.roku.com/developer/gitlab-move"
+        }
+      ],
+      "what_happened": "Roku has migrated its developer code repositories, previously hosted on GitHub, to the GitLab platform.",
+      "why_it_matters": "The change shifts where developers obtain Roku SDK code and related resources, requiring them to use a different hosting service and its associated workflows."
+    }
+  ]
+}
