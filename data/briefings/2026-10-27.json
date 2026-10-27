@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-10-26T07:39:43.837003Z",
+  "day": "2026-10-27",
+  "generated_at": "2026-10-27T07:40:15.154254Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 53,
+    "events": 59,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 162.0
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers can adopt the lightweight classifier and predicate‑based extraction pipeline to implement cheaper, faster memory modules for LLM‑driven systems, potentially reducing inference budgets and simplifying memory management code.",
+      "event_id": "evt_1bc03067c0b488a1",
+      "first_seen": "2026-10-27T04:00:00Z",
+      "headline": "SLICE-Mem introduces salience-gated lightweight memory for LLM agents",
+      "last_updated": "2026-10-27T04:00:00Z",
+      "score": 6.34,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "SLICE-Mem: Salience-Gated Lightweight Information Curation for Efficient LLM Agent Memory",
+          "url": "https://arxiv.org/abs/2610.33015"
+        }
+      ],
+      "what_happened": "The paper presents SLICE-Mem, a new memory framework for large language model (LLM) agents. It uses a salience‑guided admission mechanism to decide which user turns to retain and a predicate‑centered information extraction process. A compact classifier identifies valuable turns, reducing the need for repeated full LLM inference for memory admission, extraction, and organization.",
+      "why_it_matters": "By curating only salient information and extracting it efficiently, SLICE‑Mem lowers the computational cost and latency associated with maintaining long‑term, personalized, and temporally coherent interactions in LLM agents, enabling more scalable and responsive applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "MARCA demonstrates a multi‑agent pipeline that integrates external retrieval services with rule‑based scoring, offering a template for building similar retrieval‑augmented decision systems in other domains.",
+      "event_id": "evt_5c6a155408a94369",
+      "first_seen": "2026-10-27T04:00:00Z",
+      "headline": "Multi-Agent Retrieval-Augmented System (MARCA) for Causality Assessment of Pharmacovigilance Reports",
+      "last_updated": "2026-10-27T04:00:00Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Multi-Agent Retrieval-Augmented Causality Assessment (MARCA) of Individual Case Safety Reports in Pharmacovigilance",
+          "url": "https://arxiv.org/abs/2610.33279"
+        }
+      ],
+      "what_happened": "Researchers introduced MARCA, a four‑agent framework that augments Naranjo‑based causality assessment of individual case safety reports with scientific literature retrieval and drug‑label analysis. The system’s scores were compared to human expert assessments and to scores generated without retrieval augmentation.",
+      "why_it_matters": "The approach aims to handle the growing volume of safety reports by automating part of the expert review, potentially improving consistency and reducing manual workload in pharmacovigilance."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "OpenAI may expose new APIs or tooling for integrating the shepherd workflow, but the document does not detail specific changes for backend or AI engineers.",
+      "event_id": "evt_23d59e9a5bcc0609",
+      "first_seen": "2026-10-26T23:34:58Z",
+      "headline": "OpenAI reports three major discoveries in math, CS, physics and introduces academic 'shepherd' collaboration model",
+      "last_updated": "2026-10-26T23:34:58Z",
+      "score": 5.893,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "OpenAI announces three big science discoveries and a new way to work with academics",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1019143/openai-eth-kaseya-science-math-physics"
+        }
+      ],
+      "what_happened": "OpenAI announced three new scientific findings—one each in mathematics, computer science and physics—and said it will work with external academic experts, called “shepherds,” who will guide the AI‑generated research results. This follows a prior release of hundreds of manuscript‑style outputs claiming solutions to longstanding math problems.",
+      "why_it_matters": "The announcements show AI systems can contribute to frontier research and that OpenAI is formalizing a partnership framework to improve credibility and oversight of AI‑driven discoveries, potentially accelerating scientific progress and influencing how research institutions engage with AI tools."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers of medical AI can integrate the deterministic sentence extractor and 3D grounding model into their pipelines to automatically cross‑check LLM‑generated report content against CT volumes, requiring implementation of the grounding model and handling of evidence masks.",
+      "event_id": "evt_6d54c075dc94cc2f",
+      "first_seen": "2026-10-27T04:00:00Z",
+      "headline": "EviGround-CT introduces sentence-to-volume grounding to verify LLM-generated chest CT reports",
+      "last_updated": "2026-10-27T04:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "EviGround-CT: Sentence-to-Volume Grounding for Verifying LLM-Generated Chest CT Reports",
+          "url": "https://arxiv.org/abs/2610.33038"
+        }
+      ],
+      "what_happened": "The paper presents EviGround-CT, a system that verifies positive findings in chest CT reports generated by large language models. It first uses a deterministic extractor to locate sentences describing positive findings, then applies a 3D grounding model that predicts an evidence mask for each sentence, preserving anatomical location, laterality, and descriptive modifiers.",
+      "why_it_matters": "By linking report sentences to actual image evidence, EviGround-CT can detect hallucinated or unsupported findings in AI‑generated radiology reports, improving safety and trustworthiness of automated reporting workflows."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.45,
+      "developer_impact": "Developers may gain a persistent AI helper that can be invoked at any time during coding tasks, possibly streamlining debugging, code generation, and other routine work. No specific integration details are provided, so impact depends on how the assistant is accessed.",
+      "event_id": "evt_c6bba90d60fe3883",
+      "first_seen": "2026-10-27T02:00:00Z",
+      "headline": "OpenAI launches \"dots\" – an always‑on personal coding assistant",
+      "last_updated": "2026-10-27T02:00:00Z",
+      "score": 5.793,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "How OpenAI turned its coding tools into dots, an always-on personal assistant",
+          "url": "https://techcrunch.com/2026/10/26/how-openai-turned-its-coding-tools-into-dots-an-always-on-personal-assistant/"
+        }
+      ],
+      "what_happened": "OpenAI repurposed its existing coding tools into a new product called \"dots,\" described as an always‑on personal assistant for developers. The effort is led by OpenAI executive Alexander Embiricos, who is responsible for the dots initiative.",
+      "why_it_matters": "An always‑on assistant could give developers continuous AI support while coding, potentially changing how backend and AI engineers work by reducing the need to manually invoke tools. The executive’s reluctance to meet other AI agents suggests a focus on a single, integrated assistant rather than a network of competing agents."
+    }
+  ]
+}
