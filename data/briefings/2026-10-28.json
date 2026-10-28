@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-10-27T08:11:25.325957Z",
+  "day": "2026-10-28",
+  "generated_at": "2026-10-28T08:14:03.435600Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 1,
+    "events": 120,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 158.1
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers building RAG pipelines may need to incorporate ontology management and agentic control modules, potentially using new libraries or APIs provided by the OA‑RAG framework, and adjust prompting strategies to leverage structured knowledge graphs.",
+      "event_id": "evt_10a0df171a06e25d",
+      "first_seen": "2026-10-28T04:00:00Z",
+      "headline": "OA-RAG introduces ontology-based agentic retrieval-augmented generation to reduce LLM hallucinations",
+      "last_updated": "2026-10-28T04:00:00Z",
+      "score": 6.14,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "OA-RAG: Ontology-based Agentic RAG for Faithful LLM Reasoning",
+          "url": "https://arxiv.org/abs/2610.36335"
+        }
+      ],
+      "what_happened": "The paper OA-RAG proposes a new Retrieval‑Augmented Generation (RAG) approach that integrates an ontology‑driven agentic component. By explicitly modeling logical relationships between retrieved facts, the system aims to produce answers that are more faithful to established knowledge, addressing the hallucination problem common in large language models.",
+      "why_it_matters": "More faithful LLM outputs are critical in high‑risk domains such as biomedicine and healthcare, where incorrect or ungrounded answers can have serious consequences. An ontology‑aware RAG pipeline could improve trustworthiness and regulatory compliance of AI‑driven decision support tools."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Provides a ready‑made dataset for training and evaluating transcript‑canonicalization models, enabling developers to benchmark their approaches and compare against a multilingual baseline.",
+      "event_id": "evt_4c4715dd3cccfc76",
+      "first_seen": "2026-10-28T04:00:00Z",
+      "headline": "ETC-Bench introduced as first multilingual benchmark for evaluation-side transcript canonicalization",
+      "last_updated": "2026-10-28T04:00:00Z",
+      "score": 5.39,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "ETC-Bench: A Multilingual Benchmark for Evaluation-Side Transcript Canonicalization",
+          "url": "https://arxiv.org/abs/2610.36527"
+        }
+      ],
+      "what_happened": "The authors define evaluation-side transcript canonicalization (ETC) as mapping multiple surface transcript forms to a single canonical form when differences are not determined by the speech signal. They release ETC-Bench, which they claim is the first and most comprehensive multilingual benchmark for this task, covering 181 phenomena across languages.",
+      "why_it_matters": "A standardized, multilingual benchmark gives researchers a common reference for measuring how well systems can normalize transcripts that vary for non‑acoustic reasons. This can improve the consistency of downstream NLP and speech‑AI pipelines that rely on accurate text representations."
+    },
+    {
+      "category": "product",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can integrate Genie 4 via Google’s APIs to generate realistic environments, update scenes on‑the‑fly with text prompts, and add AI‑generated audio, leveraging the Gemini 3.8 Flash model for faster inference.",
+      "event_id": "evt_773b088116f54808",
+      "first_seen": "2026-10-27T16:00:00Z",
+      "headline": "Google unveils Genie 4 AI world model with real-time prompts, realistic worlds, and audio generation",
+      "last_updated": "2026-10-27T16:00:00Z",
+      "score": 5.353,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Google’s next Genie AI model generates more realistic experiences",
+          "url": "https://www.theverge.com/tech/1019076/google-genie-4-ai-model"
+        }
+      ],
+      "what_happened": "Google announced the Genie 4 world model, an AI system for generating interactive experiences. The model adds four updates: it creates more realistic virtual worlds, allows users to modify an experience in real time using natural‑language prompts, can generate audio content, and runs on the Gemini 3.8 Flash architecture.",
+      "why_it_matters": "The enhancements enable developers to build richer, more immersive AI‑driven experiences with less manual content creation, supporting dynamic updates and audio without separate tools, potentially expanding use cases in gaming, simulation, and virtual assistants."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Provides a larger, refactored dataset for evaluating LLM proof generation tools, prompting backend and AI engineers to test and possibly adapt their models for proof robustness when codebases evolve.",
+      "event_id": "evt_71cf58516c356f01",
+      "first_seen": "2026-10-28T04:00:00Z",
+      "headline": "New RefactorProof benchmark tests stability of LLM-generated Lean proofs after code refactoring",
+      "last_updated": "2026-10-28T04:00:00Z",
+      "score": 5.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "How Stable Are LLM-Generated Proofs Under Program Refactoring? A Stress Test for Verifiable Code Generation",
+          "url": "https://arxiv.org/abs/2610.36328"
+        }
+      ],
+      "what_happened": "Researchers introduced RefactorProof, a stress‑test framework that creates 458 Lean‑certified program variants from 185 VERINA benchmark tasks while keeping the specification and original proof unchanged, to examine whether LLM‑generated proofs remain valid after behavior‑preserving refactorings.",
+      "why_it_matters": "The work reveals whether proofs produced by large language models are robust to typical code refactoring, a key factor for trusting automated, verifiable code generation in production systems. Instability would limit practical adoption, while stability would increase confidence in LLM‑assisted development pipelines."
+    },
+    {
+      "category": "developer_tools",
+      "claims": [],
+      "confidence": 0.8,
+      "event_id": "evt_e97319d8730a2e80",
+      "first_seen": "2026-10-27T17:35:00Z",
+      "headline": "Google Research unveils Sleep framework for continual learning in LLMs",
+      "last_updated": "2026-10-27T17:35:00Z",
+      "score": 5.06,
+      "sources": [
+        {
+          "source_id": "google-research",
+          "title": "The sleep framework: A new way for LLMs to retain knowledge in continual learning",
+          "url": "https://research.google/blog/the-sleep-framework-a-new-way-for-llms-to-retain-knowledge-in-continual-learning/"
+        }
+      ],
+      "what_happened": "Google Research introduced the Sleep framework, a new method that enables large language models to retain knowledge while undergoing continual learning.",
+      "why_it_matters": "The approach aims to reduce forgetting in LLMs during ongoing training, potentially improving long‑term performance and decreasing the need for frequent full retraining."
+    }
+  ]
+}
