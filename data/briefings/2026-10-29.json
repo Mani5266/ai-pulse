@@ -1,0 +1,169 @@
+{
+  "covers_since": "2026-10-28T08:18:20.673980Z",
+  "day": "2026-10-29",
+  "generated_at": "2026-10-29T08:21:14.765159Z",
+  "stats": {
+    "articles": 473,
+    "duplicates_removed": 25,
+    "events": 48,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 28,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 174.1
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Backend and AI engineers may see higher volumes of PRs to review and may need to adopt or integrate AI‑assisted coding tools to keep pace; CI/CD systems may require scaling to handle the increased commit rate.",
+      "event_id": "evt_5e9e44475572a259",
+      "first_seen": "2026-10-28T16:45:23Z",
+      "headline": "GitHub reports merged pull requests triple to 220M/month and commits exceed 7.3B/month in 2026",
+      "last_updated": "2026-10-28T16:45:23Z",
+      "score": 6.588,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "GitHub Octoverse 2026",
+          "url": "https://simonwillison.net/2026/Oct/28/github-octoverse-2026/"
+        }
+      ],
+      "what_happened": "GitHub’s 2026 Octoverse report shows merged pull requests rose three‑fold to 220 million per month and total commits more than tripled to 7.38 billion per month, with most of the growth occurring in the second half of the year. The report attributes the surge to the impact of “agentic engineering.”",
+      "why_it_matters": "The surge reflects a rapid scaling of code contribution activity, suggesting that AI‑assisted development tools are dramatically increasing developer output. For organizations, this could pressure code review processes, CI pipelines, and repository management."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can use the open‑source blueprint to configure the control plane, set up inference and tool gateways, and integrate the CI/CD pipeline for agent validation, requiring familiarity with Bedrock AgentCore APIs and the provided governance controls.",
+      "event_id": "evt_a15f6ab37c7893ad",
+      "first_seen": "2026-10-28T18:28:26Z",
+      "headline": "AWS releases reference blueprint for building a governed multi‑account Agentic AI platform on Bedrock AgentCore",
+      "last_updated": "2026-10-28T18:28:26Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Building an Agentic AI Platform on Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/building-an-agentic-ai-platform-on-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "AWS published a guide that walks through the architecture and an open‑source reference blueprint for standing up a governed, multi‑account Agentic AI platform on Amazon Bedrock AgentCore. The blueprint covers the operating model, control plane, per‑Workstream cells, separate inference and tool gateways, and a CI/CD evaluation pipeline that gates each agent before production.",
+      "why_it_matters": "The blueprint gives enterprises a concrete, repeatable way to deploy agentic AI with built‑in governance, isolation across accounts, and automated testing before release, reducing operational risk and speeding adoption of advanced AI agents."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "OpenAI models can be accessed on Amazon Bedrock from Australia with global cross-Region inference"
+        }
+      ],
+      "confidence": 0.7,
+      "developer_impact": "Backend and AI engineers can integrate OpenAI models via Bedrock in the Australia region and specify inference regions, requiring updates to SDK configuration and possible cost considerations.",
+      "event_id": "evt_0600471a7eba1ecb",
+      "first_seen": "2026-09-02T21:22:05Z",
+      "headline": "Amazon Bedrock adds Australian access to OpenAI models with global cross‑region inference",
+      "last_updated": "2026-10-28T10:00:00Z",
+      "score": 5.767,
+      "sources": [
+        {
+          "source_id": "the-rundown",
+          "title": "Google’s AI worlds can now talk back",
+          "url": "https://www.therundown.ai/articles/google-ai-worlds-can-now-talk-back"
+        }
+      ],
+      "what_happened": "Amazon Bedrock now supports accessing OpenAI models from Australia and allows inference to be performed across AWS regions worldwide.",
+      "why_it_matters": "Australian developers can use OpenAI models locally while still leveraging inference resources in other regions, which can reduce latency, meet data residency requirements, and broaden model availability."
+    },
+    {
+      "category": "research",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "hacker-news"
+          ],
+          "text": "Qwenputer is a functioning, deterministic RISC-V CPU inside Qwen3.5."
+        }
+      ],
+      "confidence": 0.6,
+      "event_id": "evt_e38e6ce4316c7aae",
+      "first_seen": "2026-10-26T04:00:00Z",
+      "headline": "Qwen3.5 integrates a deterministic RISC‑V CPU called Qwenputer",
+      "last_updated": "2026-10-29T00:25:45Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Qwenputer: A functioning, deterministic RISC-V CPU inside Qwen3.5",
+          "url": "https://divagr.com/blog/qwenputer"
+        }
+      ],
+      "what_happened": "The Qwen3.5 model now includes a functioning, deterministic RISC‑V CPU implementation named Qwenputer, as reported on Hacker News.",
+      "why_it_matters": "It shows that a large language model can host a deterministic CPU simulation, indicating potential for reproducible hardware‑related tasks within the model."
+    },
+    {
+      "category": "research",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "The Ray Train Deep Learning Container ships the full CUDA‑through‑EFA stack."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "Using the Ray Train container, you do not need to build a custom image."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "A reproducible sample fine‑tunes the Qwen2.5‑1.5B model with PyTorch FSDP across eight GPUs."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "The eight GPUs are distributed across two EFA‑enabled g6.12xlarge instances on Amazon EKS."
+        }
+      ],
+      "confidence": 0.95,
+      "developer_impact": "Developers can directly pull the Ray Train DLC and run distributed PyTorch FSDP jobs on EKS with EFA without creating custom Docker images, streamlining the pipeline for scaling models across multiple GPU instances.",
+      "event_id": "evt_a2ad1e8fe785e24b",
+      "first_seen": "2026-10-28T04:00:00Z",
+      "headline": "AWS releases Ray Train containers with CUDA‑EFA stack for distributed training on EKS",
+      "last_updated": "2026-10-28T18:19:54Z",
+      "score": 5.465,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Distributed training with Ray Train DLCs and EFA on EKS",
+          "url": "https://aws.amazon.com/blogs/machine-learning/distributed-training-with-ray-train-dlcs-and-efa-on-eks/"
+        }
+      ],
+      "what_happened": "AWS published a Ray Train Deep Learning Container (DLC) that includes the full CUDA‑through‑EFA stack, eliminating the need to build a custom image. The post demonstrates a reproducible workflow that fine‑tunes the Qwen2.5‑1.5B model using PyTorch Fully‑Sharded Data Parallel (FSDP) across eight GPUs on two EFA‑enabled g6.12xlarge instances running on Amazon EKS, using the container exactly as released.",
+      "why_it_matters": "The pre‑built container simplifies large‑scale GPU training on AWS by removing image‑building steps and leveraging high‑throughput EFA networking, which can reduce setup time and improve training performance for AI workloads. This makes distributed training more accessible and cost‑effective for teams deploying on EKS."
+    }
+  ]
+}
