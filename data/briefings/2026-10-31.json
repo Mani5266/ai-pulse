@@ -1,0 +1,152 @@
+{
+  "covers_since": "2026-10-30T08:25:58.576699Z",
+  "day": "2026-10-31",
+  "generated_at": "2026-10-31T08:18:40.946329Z",
+  "stats": {
+    "articles": 473,
+    "duplicates_removed": 25,
+    "events": 45,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 162.0
+  },
+  "stories": [
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "You can configure allowed ports and use the session URL to serve a Vite (or similar) site directly from a Bedrock AgentCore session, enabling live preview without separate hosting.",
+      "event_id": "evt_24c1285ad5edaaad",
+      "first_seen": "2026-10-30T21:40:03Z",
+      "headline": "Amazon Bedrock AgentCore adds session endpoints for live web app preview",
+      "last_updated": "2026-10-30T21:40:03Z",
+      "score": 5.39,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Preview web apps live as your coding agent builds them with Amazon Bedrock AgentCore runtime",
+          "url": "https://aws.amazon.com/blogs/machine-learning/preview-web-apps-live-as-your-coding-agent-builds-them-with-amazon-bedrock-agentcore-runtime/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock introduced AgentCore Session endpoints that give each runtime session an authenticated URL. The URL forwards any HTTP method, path, and WebSocket connection to ports you allow. In a demo, a coding agent keeps a Vite website running in its session, and the live site updates in the browser as the agent edits files.",
+      "why_it_matters": "Developers get immediate visual feedback while an AI coding agent builds or modifies a web app, shortening the edit‑test cycle and simplifying integration of AI‑driven code generation with live previews."
+    },
+    {
+      "category": "research",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Drew Breunig embedded a working NES 6502 CPU emulator into the weights of the Qwen3.5-4B model."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The NES emulator can run NES ROMs such as Super Mario Bros, albeit very slowly, inside Qwen."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The NES emulator project was inspired by the qwenputer project created by Divyansh Agrawal."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Drew Breunig disclosed the Opus 5.5 prompts used to build the emulator in a comment on Hacker News."
+        }
+      ],
+      "confidence": 0.85,
+      "developer_impact": "Backend and AI engineers can experiment with encoding custom logic or emulators into LLMs via prompt engineering, potentially creating self‑contained inference pipelines. The open‑source repo provides code and prompts for replication, but practical use is limited by performance.",
+      "event_id": "evt_e38e6ce4316c7aae",
+      "first_seen": "2026-10-26T04:00:00Z",
+      "headline": "NES 6502 CPU emulator embedded in Qwen3.5-4B model weights",
+      "last_updated": "2026-10-30T21:59:22Z",
+      "score": 5.23,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "dbreunig/nesformer",
+          "url": "https://simonwillison.net/2026/Oct/30/nesformer/"
+        }
+      ],
+      "what_happened": "Drew Breunig released dbreunig/nesformer, a project that encodes a functional Nintendo Entertainment System 6502 CPU emulator directly into the parameters of the Qwen3.5‑4B language model. The emulator can run NES ROMs such as Super Mario Bros inside the model, though at very slow speed. The work builds on the earlier qwenputer project and uses the Opus 5.5 prompt set.",
+      "why_it_matters": "Embedding a hardware emulator in an LLM shows that non‑textual computation can be represented within model weights, opening research avenues for integrating domain‑specific simulators, reducing external runtime dependencies, and exploring new forms of model‑driven execution."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can begin testing and integrating Apple Intelligence capabilities using the iOS 27.3 beta that becomes available on November 4.",
+      "event_id": "evt_35348fba4514d3e3",
+      "first_seen": "2026-10-30T22:32:53Z",
+      "headline": "Apple launches Apple Intelligence in China with iOS 27.3 beta",
+      "last_updated": "2026-10-30T22:32:53Z",
+      "score": 5.092,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Apple Intelligence is finally coming to China with iOS 27.3",
+          "url": "https://www.theverge.com/tech/1023974/apple-intelligence-china-ios-27-3"
+        }
+      ],
+      "what_happened": "Apple announced on its Chinese newsroom site that Apple Intelligence will be introduced in China starting with the iOS 27.3 beta, scheduled for release on November 4, followed by a full iOS 27.3 rollout in December.",
+      "why_it_matters": "The rollout brings Apple’s AI-powered features to Chinese iPhone users, expanding the reach of its on‑device intelligence and potentially influencing user experience and local app ecosystems."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can use Amazon Bedrock's APIs to create similar multi‑agent workflows, leveraging pre‑built models and orchestration features to automate complex business processes without building AI infrastructure from scratch.",
+      "event_id": "evt_7dcc9758baf5cb29",
+      "first_seen": "2026-10-30T17:32:20Z",
+      "headline": "Worldwide Express cuts freight billing exceptions 75% using Amazon Bedrock multi-agent automation",
+      "last_updated": "2026-10-30T17:32:20Z",
+      "score": 4.39,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "How Worldwide Express automated freight exceptions with Amazon Bedrock",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-worldwide-express-automated-freight-exceptions-with-amazon-bedrock/"
+        }
+      ],
+      "what_happened": "Worldwide Express built a multi‑agent solution on Amazon Bedrock to automate its less‑than‑truckload freight billing‑exception process. Six months after launch the system reduced active exceptions by 75%, shortened the time‑to‑cash by four weeks, and generated about $10 million in free cash flow.",
+      "why_it_matters": "The automation replaces manual exception handling, accelerating cash collection and freeing capital, which demonstrates the business value of generative‑AI‑driven workflow automation and validates Amazon Bedrock for enterprise process improvement."
+    },
+    {
+      "category": "developer_tools",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers using the Anthropic Cursor extension should verify they have the latest version, review any changes made during the breach window, and consider revoking and rotating credentials associated with the extension.",
+      "event_id": "evt_eaad933c9eb95379",
+      "first_seen": "2026-10-30T21:09:54Z",
+      "headline": "Anthropic Cursor VS Code extension compromised for ~12 hours",
+      "last_updated": "2026-10-30T21:09:54Z",
+      "score": 4.353,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "Anthropic VS code extension on Cursor backdoored for nearly 12 hours",
+          "url": "https://arstechnica.com/security/2026/10/anthropic-vs-code-extension-on-cursor-backdoored-for-nearly-12-hours/"
+        }
+      ],
+      "what_happened": "A backdoor was present in Anthropic's VS Code extension on the Cursor platform for nearly 12 hours, allowing attackers to access Anthropic's verified Cursor account. The method of initial access is unknown.",
+      "why_it_matters": "The breach exposes code editing tools to potential malicious code injection and undermines trust in third‑party extensions, highlighting security risks for developers relying on such integrations."
+    }
+  ]
+}
