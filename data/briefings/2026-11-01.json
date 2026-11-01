@@ -1,0 +1,164 @@
+{
+  "covers_since": "2026-10-31T08:59:28.245921Z",
+  "day": "2026-11-01",
+  "generated_at": "2026-11-01T09:01:00.162473Z",
+  "stats": {
+    "articles": 446,
+    "duplicates_removed": 0,
+    "events": 13,
+    "events_shortlisted": 13,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 19,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 91.9
+  },
+  "stories": [
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.7,
+      "event_id": "evt_5545fe355a55d4d0",
+      "first_seen": "2026-10-31T19:16:30Z",
+      "headline": "Linux IPv4 TCP stack vulnerability (CVE-2026-98432) assigned CVSS 9.8",
+      "last_updated": "2026-10-31T19:16:30Z",
+      "score": 5.753,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "TCP Use-After-Free: CVE-2026-98432 / CVSS 9.8",
+          "url": "https://atlasum.net/blog/cve-2026-98432-linux-ipv4-tcp-uaf"
+        }
+      ],
+      "what_happened": "A use‑after‑free bug in the Linux IPv4 TCP implementation was disclosed and assigned CVE‑2026‑98432 with a CVSS v3.1 base score of 9.8, indicating a critical security issue.",
+      "why_it_matters": "The high CVSS score signals that the flaw could be exploited to cause remote code execution or denial‑of‑service, potentially impacting any system running the vulnerable kernel version."
+    },
+    {
+      "category": "other",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Parameter Labs discovered an exploit against ChatGPT's implementation of the artifacts pattern."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "OpenAI previously referred to the artifacts pattern as \"Canvas\"."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The latest revision of the artifacts pattern is called \"HTML previews\"."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "In ChatGPT, interactive custom HTML apps are displayed inside a sandboxed iframe."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "Keeping the HTML in these iframes tightly sandboxed prevents untrusted code from interacting with OpenAI APIs and accessing private data."
+        }
+      ],
+      "confidence": 0.78,
+      "developer_impact": "Developers using ChatGPT's HTML preview or similar artifact features must treat the sandbox as potentially vulnerable, audit any embedded HTML, and monitor OpenAI updates for patches. They may need to adjust integration patterns to avoid exposing APIs to untrusted content.",
+      "event_id": "evt_7f4c0eb3099edf71",
+      "first_seen": "2026-10-31T10:30:11Z",
+      "headline": "Parameter Labs discovers exploit in ChatGPT HTML preview sandbox that enables account takeover",
+      "last_updated": "2026-10-31T23:15:22Z",
+      "score": 5.507,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Do the math: How we took over ChatGPT accounts",
+          "url": "https://www.parameter.ai/labs/we-found-a-gap-at-openai"
+        },
+        {
+          "source_id": "simon-willison",
+          "title": "How We Took Over ChatGPT Accounts",
+          "url": "https://simonwillison.net/2026/Oct/31/how-we-took-over-chatgpt-accounts/"
+        }
+      ],
+      "what_happened": "Parameter Labs reported a complex attack chain against OpenAI's ChatGPT \"artifacts\" feature (formerly Canvas, now HTML previews). The feature renders interactive custom HTML apps inside a sandboxed iframe. The researchers found that the sandbox could be bypassed, allowing malicious HTML to interact with OpenAI APIs and gain access to user credentials, effectively taking over ChatGPT accounts.",
+      "why_it_matters": "The exploit shows that untrusted HTML can escape its sandbox, exposing private user data and allowing unauthorized actions on ChatGPT accounts. This poses a security risk for OpenAI and its users, requiring immediate mitigation to protect account integrity and maintain trust in the platform's isolation mechanisms."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers may explore building similar multi‑model pipelines for code generation or other tasks, requiring orchestration of several model instances but offering better results than a single model. Existing tooling for model serving and parallel inference may need to be adapted to manage such ensembles.",
+      "event_id": "evt_6725a773cbcfd0fd",
+      "first_seen": "2026-10-31T22:46:12Z",
+      "headline": "Memdoor's five Qwen3.8-27B models outperform Fable 5 on LiveCodeBench Hard",
+      "last_updated": "2026-10-31T22:46:12Z",
+      "score": 4.752,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Memdoor: A team of 5 Qwen3.8-27B models beats Fable 5 on LiveCodeBench Hard",
+          "url": "https://github.com/guregodevo/memdoor/tree/main/examples/workflows/team-solve"
+        }
+      ],
+      "what_happened": "The Memdoor project assembled a team of five Qwen3.8-27B language models and used them together to solve coding tasks. In the LiveCodeBench Hard benchmark, this ensemble achieved higher scores than the single Fable 5 model, according to a Hacker News post.",
+      "why_it_matters": "The result demonstrates that a coordinated ensemble of moderately sized models can surpass a larger, single model on a demanding code‑generation benchmark. This suggests new ways to achieve high performance without relying on a single massive model, potentially lowering compute costs and improving reliability through redundancy."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can launch Datasette Agent with a simple command (e.g., uvx --with datasette-agent datasette content.db --internal internal.db) without adding a model configuration flag, lowering the barrier to use.",
+      "event_id": "evt_9fc5ee213b01bfec",
+      "first_seen": "2026-10-31T22:10:01Z",
+      "headline": "datasette-llm 0.1a9 adds automatic default LLM model detection",
+      "last_updated": "2026-10-31T22:10:01Z",
+      "score": 3.537,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "datasette-llm 0.1a9",
+          "url": "https://simonwillison.net/2026/Oct/31/datasette-llm/"
+        }
+      ],
+      "what_happened": "The datasette-llm plugin was updated to version 0.1a9. The update makes the plugin automatically pick up the default model used by the LLM, so Datasette Agent can be started without explicitly configuring a model via the plugins.datasette-agent.de… setting.",
+      "why_it_matters": "Removing the need to manually set a default model simplifies setup and reduces configuration errors, speeding up deployment of Datasette Agent for LLM‑backed queries."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.4,
+      "developer_impact": "Developers can no longer fine‑tune or train larger models through Anthropic services and must seek alternative solutions or adjust their workflows.",
+      "event_id": "evt_3c488a5d9e8fc9b7",
+      "first_seen": "2026-10-31T19:39:19Z",
+      "headline": "Anthropic blocks user access to any training of larger models",
+      "last_updated": "2026-10-31T19:39:19Z",
+      "score": 3.402,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Anthropic blocks users for anything touching training larger models",
+          "url": "https://twitter.com/jiahaoshao1/status/2116475922190922088"
+        }
+      ],
+      "what_happened": "Anthropic has implemented a policy that blocks users from performing any actions that involve training larger models.",
+      "why_it_matters": "The restriction limits the ability to experiment with or develop larger AI models using Anthropic's platform, potentially slowing research and product development that rely on such capabilities."
+    }
+  ]
+}
