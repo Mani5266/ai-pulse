@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-01T09:13:17.329817Z",
+  "day": "2026-11-02",
+  "generated_at": "2026-11-02T09:15:22.801610Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 86,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 125.5
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers of LLM‑based agents can use TraceSpec to train or fine‑tune draft models with trajectory‑level signals, and may adopt the TraceSpec‑Traj corpus for benchmarking or improving speculative decoding pipelines.",
+      "event_id": "evt_192c2ef3c0473227",
+      "first_seen": "2026-11-02T05:00:00Z",
+      "headline": "TraceSpec framework links trajectory evaluation to adaptive draft training for LLM agents",
+      "last_updated": "2026-11-02T05:00:00Z",
+      "score": 6.04,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "TraceSpec: Understanding and Improving Speculative Decoding for LLM Agents",
+          "url": "https://arxiv.org/abs/2610.41177"
+        }
+      ],
+      "what_happened": "The paper introduces TraceSpec, a framework that ties evaluation of LLM agent execution trajectories to adaptive training of draft models used in speculative decoding. It merges dynamic execution with fixed‑prefix replay and releases a new dataset called TraceSpec‑Traj containing many agent trajectories.",
+      "why_it_matters": "By providing finer‑grained feedback on where draft supervision is needed, TraceSpec aims to improve the efficiency and reliability of speculative decoding, potentially reducing the number of full model calls required for LLM agents to complete tasks."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.68,
+      "developer_impact": "Developers may need to adjust RL pipelines to synchronize weights more tightly or align inference sampling with the current policy, potentially adding synchronization steps or implementing the proposed correction logic.",
+      "event_id": "evt_1549edabf6f2bea6",
+      "first_seen": "2026-11-02T05:00:00Z",
+      "headline": "Study identifies training-inference mismatch in LLM reinforcement learning and proposes correction",
+      "last_updated": "2026-11-02T05:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "On the Origin and Evolution of Training-Inference Mismatch in LLM Reinforcement Learning",
+          "url": "https://arxiv.org/abs/2610.40945"
+        }
+      ],
+      "what_happened": "Researchers observed that on‑policy reinforcement learning for large language models suffers a mismatch because inference engines sample responses separately from the trainer that computes gradients. The mismatch originates from engine numerics and stale weights in asynchronous sampling. The paper describes this issue and outlines a correction method.",
+      "why_it_matters": "Off‑policy training data can degrade RL fine‑tuning effectiveness, leading to suboptimal model behavior and slower convergence. Correcting the mismatch can improve training efficiency and final model performance."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers will need to describe each tool’s capabilities in PDDL format and integrate the CGAP planner into their LLM‑agent pipelines, changing how tool catalogs are maintained and how agents generate action sequences.",
+      "event_id": "evt_36ffed99634dd2dd",
+      "first_seen": "2026-11-02T05:00:00Z",
+      "headline": "CGAP introduces deterministic capability-based planning for LLM agents",
+      "last_updated": "2026-11-02T05:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Capability-Grounded Agentic Planning",
+          "url": "https://arxiv.org/abs/2610.41040"
+        }
+      ],
+      "what_happened": "The paper presents Capability-Grounded Agentic Planning (CGAP), a method where large language model (LLM) agents reason about the capabilities required by a natural‑language request and match them to available tools. CGAP compiles the tool catalog into a deterministic PDDL (Planning Domain Definition Language) model, replacing the usual trial‑and‑error selection of tool calls with a structured, executable plan.",
+      "why_it_matters": "By grounding tool selection in a formal planning model, CGAP aims to guarantee that generated sequences of tool calls are executable, reducing failures and inefficiencies inherent in ad‑hoc LLM planning. This could improve reliability and predictability of LLM‑driven automation pipelines."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.68,
+      "developer_impact": "Developers building long-horizon LLM agents may adopt KEEPER's auxiliary objectives or its analysis framework to design training regimes that control memory updates and mitigate error accumulation, possibly requiring changes to model training pipelines and evaluation metrics.",
+      "event_id": "evt_82ec853666f8de30",
+      "first_seen": "2026-11-02T05:00:00Z",
+      "headline": "KEEPER introduces auxiliary objectives to improve long-horizon LLM memory consistency",
+      "last_updated": "2026-11-02T05:00:00Z",
+      "score": 5.79,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "KEEPER: Learning Control-Sufficient Textual Memory for Long-Horizon LLM Agents",
+          "url": "https://arxiv.org/abs/2610.41482"
+        }
+      ],
+      "what_happened": "The paper titled \"KEEPER: Learning Control-Sufficient Textual Memory for Long-Horizon LLM Agents\" defines a problem called self-consistency bias, where incorrect claims persist in a recursive textual memory. It proposes the KEEPER framework, which evaluates four auxiliary training objectives positioned along information-content and update-sensitivity dimensions within a shared recursive interface, to study how different supervision targets affect memory reliability.",
+      "why_it_matters": "Reducing self-consistency bias can prevent early errors from propagating through an LLM's memory, potentially improving the accuracy and robustness of agents that rely on long-horizon textual reasoning. More reliable memory may lead to better task performance in applications requiring extended context handling."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Backend and AI engineers could integrate CIRCE into their inference pipelines to pre‑screen tasks, automatically route easy tasks to standard LLMs and flag harder ones for alternative processing, requiring implementation of constraint extraction and the CIRCE estimator model.",
+      "event_id": "evt_1273c4ddef8dc14a",
+      "first_seen": "2026-11-02T05:00:00Z",
+      "headline": "CIRCE paper proposes using constraint structure to predict LLM task difficulty",
+      "last_updated": "2026-11-02T05:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "CIRCE Divines LLM Task Complexity from Constraint Structure",
+          "url": "https://arxiv.org/abs/2610.41089"
+        }
+      ],
+      "what_happened": "The arXiv paper titled \"CIRCE Divines LLM Task Complexity from Constraint Structure\" introduces a method that estimates whether a problem is too complex for a large language model before the model attempts it. Unlike prior estimators that rely on problem text, LLM‑annotated difficulty labels, or post‑attempt signals, CIRCE explicitly leverages the constraint structure of the task to predict difficulty.",
+      "why_it_matters": "By predicting task complexity upfront, CIRCE can guide model routing decisions, allocate appropriate test‑time compute, and signal when additional tools or specialized agents are needed, potentially improving overall system efficiency and reducing wasted computation on tasks beyond an LLM's capability."
+    }
+  ]
+}
