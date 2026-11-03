@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-02T09:19:28.511146Z",
+  "day": "2026-11-03",
+  "generated_at": "2026-11-03T09:21:37.769910Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 1,
+    "events": 121,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 129.3
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "Developers may need to adopt the MXCode quantization pipeline and integrate its codebooks into existing inference stacks to exploit FP4‑native performance, requiring updates to model preparation and deployment tooling.",
+      "event_id": "evt_f7c83376959c8478",
+      "first_seen": "2026-11-03T05:00:00Z",
+      "headline": "MXCode framework enables ~2-bit weight compression for FP4-native LLM inference",
+      "last_updated": "2026-11-03T05:00:00Z",
+      "score": 6.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "MXCode: Vector Quantization for MX-Native Inference at Scale",
+          "url": "https://arxiv.org/abs/2611.00403"
+        }
+      ],
+      "what_happened": "The paper introduces MXCode, a framework that combines ultra‑low‑bit vector quantization (approximately 2‑bit weight storage) with MicroXcaling (MX)‑native FP4 computation, addressing incompatibilities between traditional VQ codebooks and native FP4 hardware.",
+      "why_it_matters": "By reducing weight size to around 2 bits while staying compatible with FP4 hardware, MXCode can lower memory capacity and bandwidth demands during large‑language‑model inference, potentially allowing faster, cheaper, or larger‑scale deployments on MX‑compatible accelerators."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers deploying large models will need to incorporate a weight‑decomposition step (quantized + low‑rank + sparse) into their quantization pipelines, which may require new tooling or libraries to generate and store the three components for inference.",
+      "event_id": "evt_a23ed6a46036f3e0",
+      "first_seen": "2026-11-03T05:00:00Z",
+      "headline": "New PTQ method decomposes weights into quantized, low-rank, and sparse parts to reduce error",
+      "last_updated": "2026-11-03T05:00:00Z",
+      "score": 6.19,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Quantization of Large Models with Weight Outliers and Sparsity",
+          "url": "https://arxiv.org/abs/2611.00286"
+        }
+      ],
+      "what_happened": "The paper proposes a post‑training quantization technique that splits a model's trained weight matrix into three components—a quantized matrix, a low‑rank matrix, and a sparse matrix that captures outlier weights—aiming to lower the quantization error that typically degrades performance when reducing weight precision.",
+      "why_it_matters": "By isolating outlier and sparse information, the approach promises more accurate low‑bit inference while keeping the memory savings of PTQ, potentially enabling larger models to run efficiently on limited hardware without sacrificing accuracy."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Developers may need to integrate satellite foundation embedding pipelines and handle massive observation datasets, requiring scalable data processing and possibly new libraries for embedding extraction and large‑scale modeling.",
+      "event_id": "evt_6ca44218a2f8cf09",
+      "first_seen": "2026-11-03T05:00:00Z",
+      "headline": "OCELOT introduces planetary‑scale species distribution modeling using satellite foundation embeddings",
+      "last_updated": "2026-11-03T05:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "OCELOT: Planetary-Scale Species Distribution Modeling with Satellite Foundation Embeddings",
+          "url": "https://arxiv.org/abs/2611.00284"
+        }
+      ],
+      "what_happened": "The paper announces OCELOT, a new framework that leverages billions of global species occurrence records and satellite foundation embeddings to build species distribution models at planetary scale. It addresses the bias of existing models, which use only a small subset of records and are not evaluated on extrapolating to remote, unvisited regions. OCELOT scales relational modeling to cover these under‑sampled areas.",
+      "why_it_matters": "By improving distribution predictions for remote regions, OCELOT can serve as a geographic prior for downstream tasks such as classifying camera‑trap images and acoustic recordings, potentially enhancing biodiversity monitoring where field data are scarce."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can build similar assistants by integrating Nova Multimodal Embeddings, Bedrock AgentCore, and the Strands Agents SDK into their workflows, enabling rapid evidence assembly for engineering tasks.",
+      "event_id": "evt_046f31786bb677e6",
+      "first_seen": "2026-11-02T17:01:16Z",
+      "headline": "Amazon introduces multi‑agent engineering assistant using Nova embeddings and Bedrock AgentCore",
+      "last_updated": "2026-11-02T17:01:16Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Agentic engineering intelligence with Amazon Nova Multimodal Embeddings and Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/agentic-engineering-intelligence-with-amazon-nova-multimodal-embeddings-and-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "Amazon demonstrated a multi‑agent engineering assistant that leverages Amazon Nova Multimodal Embeddings, Amazon Bedrock AgentCore, and the Strands Agents SDK to assemble substitution evidence for aerospace components, reducing evaluation time from days to minutes while keeping the engineer as the final decision‑maker.",
+      "why_it_matters": "The speedup shortens aerospace component substitution cycles, potentially lowering design costs and accelerating product development, while preserving human oversight for critical engineering decisions."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers handling video or audio pipelines may need to consider privacy‑preserving measures such as audio filtering, masking, or removing background aircraft sounds to prevent inadvertent location leakage.",
+      "event_id": "evt_46933a36d2603a0b",
+      "first_seen": "2026-11-03T05:32:25Z",
+      "headline": "Researchers show plane audio in videos can reveal exact location via Doppler and ADS‑B data",
+      "last_updated": "2026-11-03T05:32:25Z",
+      "score": 5.308,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "I discovered a sound that leaks your exact location (and it's everywhere) - YouTube",
+          "url": "https://simonwillison.net/2026/Nov/3/a-sound-that-leaks-your-exact-location/"
+        }
+      ],
+      "what_happened": "Colsto demonstrated that imperceptible background noise of aircraft captured in video soundtracks can be analyzed for Doppler frequency shifts. By matching these shifts to publicly available ADS‑B flight data, the exact geographic location of the video source can be inferred.",
+      "why_it_matters": "The technique proves that ordinary audio recordings can unintentionally expose precise location information, raising privacy concerns for content creators and viewers. It shows that location can be derived without visual cues, potentially enabling covert tracking."
+    }
+  ]
+}
