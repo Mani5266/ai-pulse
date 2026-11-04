@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-03T09:19:28.511146Z",
+  "day": "2026-11-04",
+  "generated_at": "2026-11-04T08:56:39.577799Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 1,
+    "events": 123,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 157.3
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.3,
+      "developer_impact": "The announcement suggests new APIs or services for cheminformatics, which could let backend and AI engineers integrate compound search and macrocycle design into their systems, though details are not provided.",
+      "event_id": "evt_23c4f130369cb972",
+      "first_seen": "2026-11-03T17:01:49Z",
+      "headline": "Google launches Antigravity tool for agentic cheminformatics",
+      "last_updated": "2026-11-03T17:01:49Z",
+      "score": 5.8,
+      "sources": [
+        {
+          "source_id": "google-deepmind",
+          "title": "Agentic cheminformatics with Google Antigravity",
+          "url": "https://deepmind.google/blog/agentic-cheminformatics-with-google-antigravity/"
+        }
+      ],
+      "what_happened": "Google announced a new capability called Antigravity that, together with its Cheminformatics Skills, is intended to accelerate drug‑discovery workflows by searching compounds and proposing novel rigidified macrocycles.",
+      "why_it_matters": "If effective, the tool could speed the identification of candidate molecules, reducing time and cost in pharmaceutical research and enabling AI‑driven chemistry pipelines."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.75,
+      "developer_impact": "Developers must weigh interface stability against compute budget when choosing automation tools. RPA may remain preferable for stable portals, whereas LLM‑driven agents could reduce maintenance overhead for frequently changing interfaces, but require provisioning for increased processing power.",
+      "event_id": "evt_54fefb3acf156dde",
+      "first_seen": "2026-11-04T05:00:00Z",
+      "headline": "Study compares RPA and LLM‑based agents for healthcare data retrieval",
+      "last_updated": "2026-11-04T05:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Performance, Scalability and Maintenance: An Experimental Study of RPA vs. Autonomous Agents in the Healthcare Domain",
+          "url": "https://arxiv.org/abs/2611.03853"
+        }
+      ],
+      "what_happened": "Researchers conducted an experimental comparison of two automation approaches for extracting data from fragmented healthcare information systems. They built a deterministic Robotic Process Automation (RPA) solution using Playwright and an autonomous agent (APA) that leverages large language models. The study measured performance, scalability, and maintenance effort of each approach.",
+      "why_it_matters": "The results highlight a trade‑off: RPA offers predictable execution but breaks when user interfaces change, while LLM‑based agents adapt to UI variations at the cost of higher computational resources. Understanding this balance informs automation strategy in healthcare, where system heterogeneity and reliability are critical."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers may gain a new framework or API for integrating procedural memory into LLM agents, changing how they design agents for enterprise tasks and potentially reducing the need for extensive pre‑programmed rule sets.",
+      "event_id": "evt_658ea49966e89c91",
+      "first_seen": "2026-11-04T05:00:00Z",
+      "headline": "WASP-Mem introduces procedural memory for LLM agents to handle complex enterprise workflows",
+      "last_updated": "2026-11-04T05:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "WASP-Mem: Let Agent Organize Procedural Memory. Human Spend Effort on Diagnosis",
+          "url": "https://arxiv.org/abs/2611.04003"
+        }
+      ],
+      "what_happened": "The paper WASP-Mem proposes a method for large language model agents to organize procedural memory, allowing them to capture proprietary policies, undocumented behaviors, and state‑dependent recovery paths that emerge during execution. Unlike static harnesses, this approach consolidates repeated successes and diagnosed failures into reusable actions without additional training.",
+      "why_it_matters": "By enabling agents to learn and reuse procedural knowledge on the fly, the technique could automate more complex enterprise procedures, reduce manual encoding of policies, and improve reliability of AI‑driven automation in dynamic environments."
+    },
+    {
+      "category": "open_source",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Backend and AI engineers can experiment with a large‑scale model on personal hardware, reducing reliance on external APIs and enabling direct weight analysis for custom tuning or security reviews.",
+      "event_id": "evt_b5cba0d011349b3b",
+      "first_seen": "2026-11-03T17:40:00Z",
+      "headline": "Qwen 3.8 27B model runs on a laptop and can interpret its weights",
+      "last_updated": "2026-11-03T17:40:00Z",
+      "score": 5.537,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Qwen 3.8 27B on my laptop can interpret model weights, too",
+          "url": "https://simonwillison.net/2026/Nov/3/qwen-can-interpret-model-weights/"
+        }
+      ],
+      "what_happened": "A user reports that the Qwen 3.8 27B large language model can be executed on a laptop and is capable of interpreting its own model weights, as described in a Hacker News post.",
+      "why_it_matters": "Running a 27‑billion‑parameter model locally shows that high‑capacity LLMs are becoming feasible without cloud resources, and the ability to inspect weights on‑device can aid debugging, research, and privacy‑focused development."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers must define the semantic layer in Postgres, configure GRANT and row‑level security rules, and integrate Strands Agents via Bedrock AgentCore APIs to query the layer.",
+      "event_id": "evt_feb2718171ef6951",
+      "first_seen": "2026-11-03T16:41:13Z",
+      "headline": "EDB Postgres AI and Amazon Bedrock AgentCore enable a governed semantic layer for agentic AI",
+      "last_updated": "2026-11-03T16:41:13Z",
+      "score": 5.39,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Build a semantic layer for agentic AI with EDB Postgres AI and Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/build-a-semantic-layer-for-agentic-ai-with-edb-postgres-ai-and-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "EDB Postgres AI now supports a semantic layer that can be queried by Strands Agents running on Amazon Bedrock AgentCore. Business meanings, join paths, and access controls are stored in Postgres, with GRANT statements and row‑level security governing each agent’s read permissions.",
+      "why_it_matters": "Embedding governance and business context directly in the database lets agentic AI retrieve and combine data safely, reducing the need for external data‑wrangling and helping ensure compliance with access policies."
+    }
+  ]
+}
