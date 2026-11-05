@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-04T09:17:14.672022Z",
+  "day": "2026-11-05",
+  "generated_at": "2026-11-05T09:19:51.798320Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 26,
+    "events": 100,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 157.1
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers of autonomous agents may need to integrate ACCA’s evidence‑collection and context‑evaluation mechanisms into their pipelines, potentially adding modules that generate and verify assurance claims before granting or retaining permissions.",
+      "event_id": "evt_82ddf8032505d140",
+      "first_seen": "2026-11-05T05:00:00Z",
+      "headline": "New ACCA framework enables continuous authorization for evolving autonomous AI agents",
+      "last_updated": "2026-11-05T05:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Assurance-Conditioned Continuous Authorization for Autonomous AI Agents",
+          "url": "https://arxiv.org/abs/2611.05632"
+        }
+      ],
+      "what_happened": "The paper introduces Assurance-Conditioned Continuous Authorization (ACCA), a tool‑agnostic approach that maintains operational authority for autonomous software agents as they use tools, delegate tasks, or modify their models and execution environments. ACCA separates evidence validity from contextual applicability and derives assurance claims to decide whether current authorizations remain justified.",
+      "why_it_matters": "By continuously reassessing assurance, ACCA aims to prevent unauthorized or unsafe actions by agents that change behavior at runtime, improving security and compliance for systems that rely on autonomous AI components. This reduces the risk of privilege escalation or misuse when agents adapt or integrate new capabilities."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can use Amazon Bedrock AgentCore to create autonomous agents like AiDaH, requiring integration with Bedrock APIs and design of scenario‑specific workflows. The case highlights the need to adopt agentic AI patterns and manage large‑scale operational contexts.",
+      "event_id": "evt_59b285913cc2d8dc",
+      "first_seen": "2026-10-23T16:21:36Z",
+      "headline": "U Mobile deploys AiDaH agentic AI platform on Amazon Bedrock, cutting trouble tickets up to 84.5%",
+      "last_updated": "2026-11-04T16:23:33Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "How U Mobile built agentic telco operations with Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-u-mobile-built-agentic-telco-operations-with-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "U Mobile, Malaysia's newest 5G provider, built AiDaH, an agentic AI operations platform using Amazon Bedrock AgentCore. The system moves beyond assistance to autonomous actions across telco operations. Nine months after launch it handles more than 150 operational scenarios in six divisions and has reduced trouble tickets by as much as 84.5%.",
+      "why_it_matters": "The results show that autonomous AI agents can significantly streamline telecom operations, delivering large efficiency gains and faster issue resolution. The success validates Amazon Bedrock AgentCore as a practical foundation for large‑scale, agentic AI deployments and may encourage other operators to adopt similar technology."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers of shopping assistants can use CARTBench’s dataset and rubric to benchmark their models, identify weaknesses in handling ambiguous, time‑sensitive queries, and guide model fine‑tuning.",
+      "event_id": "evt_3161d120c26a870c",
+      "first_seen": "2026-11-05T05:00:00Z",
+      "headline": "CARTBench introduced as benchmark for evaluating LLM shopping assistants on complex, timeline-based requests",
+      "last_updated": "2026-11-05T05:00:00Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "CARTBench: Rubric-Based Evaluation of Shopping Advice for Complex and Ambiguous Requests with Timelines",
+          "url": "https://arxiv.org/abs/2611.05862"
+        }
+      ],
+      "what_happened": "Researchers released CARTBench, a rubric‑based benchmark that curates 1,603 product records and timestamped multi‑turn dialogues drawn from real commercial shopping needs across 17 retail domains, to evaluate large language model shopping assistants on complex and ambiguous requests with timelines.",
+      "why_it_matters": "The benchmark tackles two major obstacles—lack of evaluation data and inconsistent criteria—by providing a standardized, real‑world test set, enabling more reliable comparison and improvement of LLM‑driven shopping advice systems."
+    },
+    {
+      "category": "open_source",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can adopt the open‑source code and apply the four‑layer pattern when building agents with Strands SDK or Bedrock AgentCore, requiring adjustments to architecture design, prompt engineering, tool integration, and verification logic.",
+      "event_id": "evt_20366c4b5aede877",
+      "first_seen": "2026-11-04T16:30:40Z",
+      "headline": "Deep Insight releases four‑layer context engineering framework for production AI agents",
+      "last_updated": "2026-11-04T16:30:40Z",
+      "score": 5.195,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Four layers of context engineering for production AI agents: How Deep Insight applies them in working code",
+          "url": "https://aws.amazon.com/blogs/machine-learning/four-layers-of-context-engineering-for-production-ai-agents-how-deep-insight-applies-them-in-working-code/"
+        }
+      ],
+      "what_happened": "Deep Insight published a four‑layer context engineering framework—covering architecture, prompts, file‑based tools, and verification agents—to address context‑management bottlenecks in production AI agents. The framework is delivered as working open‑source code built on the Strands Agents SDK and Amazon Bedrock AgentCore.",
+      "why_it_matters": "By structuring context handling into distinct layers, the framework aims to reduce the primary scalability and reliability obstacle in multi‑agent AI systems, potentially enabling more robust and maintainable production deployments."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Engineers may need to integrate AGORA’s IRT‑based aggregation into evaluation pipelines, requiring new code or libraries to estimate judge reliability and replace simple averaging or Dawid‑Skene approaches.",
+      "event_id": "evt_a0ba445070c2b1fe",
+      "first_seen": "2026-11-05T05:00:00Z",
+      "headline": "AGORA introduces reliability-aware aggregation of LLM judges using item-response theory",
+      "last_updated": "2026-11-05T05:00:00Z",
+      "score": 5.09,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "AGORA: Reliability-Aware Aggregation of LLM Judges via Item-Response Theory",
+          "url": "https://arxiv.org/abs/2611.05556"
+        }
+      ],
+      "what_happened": "The paper presents AGORA, a method that applies item‑response theory to combine multiple LLM judges, accounting for differing reliability among judges. It notes that current per‑item mean weighting treats weak and strong judges alike and that confusion‑table models like Dawid‑Skene must estimate per‑judge error tables, especially when validation sets contain only a few hundred items.",
+      "why_it_matters": "By weighting judges according to estimated reliability, AGORA aims to reduce bias and improve the accuracy of automated LLM evaluations, making large‑scale model assessment more trustworthy despite limited human‑labeled data."
+    }
+  ]
+}
