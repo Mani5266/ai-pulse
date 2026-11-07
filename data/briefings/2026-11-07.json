@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-11-06T09:10:57.110133Z",
+  "day": "2026-11-07",
+  "generated_at": "2026-11-07T08:39:02.976191Z",
+  "stats": {
+    "articles": 447,
+    "duplicates_removed": 0,
+    "events": 40,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 125.9
+  },
+  "stories": [
+    {
+      "category": "developer_tools",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers must add the new API fields to their endpoint definitions to specify the desired MIG partition. This change allows them to deploy multiple models on one GPU or to right‑size a model to a fraction of a GPU, potentially lowering inference costs and simplifying resource planning.",
+      "event_id": "evt_819549b983fd9118",
+      "first_seen": "2026-11-06T18:01:00Z",
+      "headline": "SageMaker Inference adds support for NVIDIA Multi‑Instance GPU partitioning",
+      "last_updated": "2026-11-06T18:01:00Z",
+      "score": 5.45,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "SageMaker Inference now supports Multi-Instance GPU to maximize GPU utilization for model endpoints",
+          "url": "https://aws.amazon.com/blogs/machine-learning/sagemaker-inference-now-supports-multi-instance-gpu-to-maximize-gpu-utilization-for-model-endpoints/"
+        }
+      ],
+      "what_happened": "Amazon SageMaker Inference now supports GPU partitioning via NVIDIA Multi‑Instance GPU (MIG). The feature lets a single GPU be divided into hardware‑isolated partitions, each capable of hosting a separate model or a right‑sized fraction of the accelerator. Two optional API fields let users place one model per partition, and the post includes measurements comparing this setup to using an entire older GPU.",
+      "why_it_matters": "MIG enables higher GPU utilization by allowing multiple inference models to share a single GPU or by allocating only the needed portion of a newer GPU. This can reduce hardware costs, improve latency for concurrent workloads, and make it easier to match compute resources to model size."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.93,
+      "developer_impact": "Developers can leverage Amazon Bedrock AgentCore to build tiered multi‑agent workflows with episodic memory for continuous learning, reducing the need for custom orchestration code. The pattern shows how to structure autonomous security pipelines and extend them to related risk‑assessment tasks.",
+      "event_id": "evt_39d0fa8ab15570a1",
+      "first_seen": "2026-11-06T16:55:05Z",
+      "headline": "Greenlight Financial Deploys Autonomous SOC Using Amazon Bedrock AgentCore",
+      "last_updated": "2026-11-06T16:55:05Z",
+      "score": 5.34,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "How Greenlight Financial built an autonomous SOC solution on Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-greenlight-financial-built-an-autonomous-soc-solution-on-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "Greenlight Financial created \"Luna,\" a tiered multi‑agent system built on Amazon Bedrock AgentCore that resolves more than 90% of up to 4,000 monthly security and risk cases without human intervention. The solution uses an architecture with episodic memory to enable continuous learning and is being extended from security‑operations‑center (SOC) tasks to broader financial risk triage.",
+      "why_it_matters": "Automating the majority of security and risk cases cuts manual effort, speeds response times, and lowers operational costs. Demonstrating that a multi‑agent system can handle high‑volume SOC work validates autonomous AI for critical infrastructure and opens the path for similar automation in other risk‑heavy domains."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "The post provides practical guidance on applying Copilot for tasks beyond writing code, potentially changing how developers structure their workflow, incorporate AI suggestions, and allocate time for judgment‑heavy activities.",
+      "event_id": "evt_92b8001eea640de4",
+      "first_seen": "2026-11-06T22:15:59Z",
+      "headline": "GitHub blog outlines using Copilot for planning, coding, review, and production issue investigation",
+      "last_updated": "2026-11-06T22:15:59Z",
+      "score": 5.337,
+      "sources": [
+        {
+          "source_id": "github-blog",
+          "title": "Beyond code generation: A developer’s guide to agentic engineering",
+          "url": "https://github.blog/ai-and-ml/github-copilot/beyond-code-generation-a-developers-guide-to-agentic-engineering/"
+        }
+      ],
+      "what_happened": "GitHub published a blog post titled “Beyond code generation: A developer’s guide to agentic engineering” that explains how developers can use GitHub Copilot not only to generate code faster but also to assist in planning work, reviewing changes, and investigating production issues, while emphasizing that human judgment remains required for many decisions.",
+      "why_it_matters": "The guide signals a shift toward integrating AI assistance throughout the software development lifecycle, encouraging engineers to adopt AI‑driven workflows for routine tasks while recognizing the limits of automation, which may affect how teams allocate human effort and manage code quality."
+    },
+    {
+      "category": "open_source",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Backend and AI engineers can adopt the Aerial and Sionna libraries to run large‑scale wireless simulations, train AI models on synthetic data, and interface with real hardware for over‑the‑air testing, potentially streamlining prototype development and enabling contributions to the open‑source ecosystem.",
+      "event_id": "evt_0676c12db8f0f583",
+      "first_seen": "2026-11-06T16:00:35Z",
+      "headline": "NVIDIA open sources Aerial wireless software to aid 6G research",
+      "last_updated": "2026-11-06T16:00:35Z",
+      "score": 5.202,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "How NVIDIA Open Source Tools Are Helping Researchers Build Next-Generation 6G Networks",
+          "url": "https://blogs.nvidia.com/blog/telco-open-source-tools-research-6g-networks/"
+        }
+      ],
+      "what_happened": "NVIDIA released its Aerial wireless software as open source, joining the Sionna library and other open‑source tools aimed at accelerating next‑generation 6G network development. The combined suite gives researchers a shared foundation for testing ideas, comparing results and building on each other's work, linking simulation and AI training with real over‑the‑air wireless experiments.",
+      "why_it_matters": "A common, open platform reduces duplication, improves reproducibility, and speeds up experimentation across academia and industry. By connecting simulation, AI model training, and real‑world testing, the tools can shorten the research cycle for 6G technologies and foster collaborative advances."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.9,
+      "event_id": "evt_2af345503cb4dc3a",
+      "first_seen": "2026-11-07T01:40:28Z",
+      "headline": "Google acquires Crusoe's troubled Wyoming AI data center project",
+      "last_updated": "2026-11-07T01:40:28Z",
+      "score": 4.567,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Crusoe sells troubled Wyoming data center project to Google",
+          "url": "https://techcrunch.com/2026/11/06/crusoe-sells-troubled-wyoming-data-center-project-to-google/"
+        }
+      ],
+      "what_happened": "Crusoe sold its Wyoming data center project, which faced difficulties, to Google.",
+      "why_it_matters": "The transaction underscores the challenges of building large-scale AI data centers, indicating potential supply or operational hurdles for AI workloads."
+    }
+  ]
+}
