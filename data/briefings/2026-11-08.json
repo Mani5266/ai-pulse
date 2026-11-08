@@ -1,0 +1,117 @@
+{
+  "covers_since": "2026-11-07T08:49:56.715643Z",
+  "day": "2026-11-08",
+  "generated_at": "2026-11-08T08:51:57.272834Z",
+  "stats": {
+    "articles": 448,
+    "duplicates_removed": 0,
+    "events": 17,
+    "events_shortlisted": 17,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 23,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 120.6
+  },
+  "stories": [
+    {
+      "category": "safety",
+      "claims": [],
+      "confidence": 0.95,
+      "event_id": "evt_73468542508eb8df",
+      "first_seen": "2026-11-07T12:30:00Z",
+      "headline": "Anthropic's AI models improve twice as fast, METR report finds",
+      "last_updated": "2026-11-07T12:30:00Z",
+      "score": 5.232,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "Why a new report on Anthropic automating AI development is alarming researchers",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1029126/anthropic-metr-report-accelerating-ai-development"
+        }
+      ],
+      "what_happened": "Anthropic is using AI to automate the creation of newer, more powerful AI models. A report by AI safety group METR, based on an 11‑week investigation, says the company's models are improving roughly twice as quickly as they were a year ago, with no sign of slowing.",
+      "why_it_matters": "The accelerated improvement rate raises safety and oversight concerns among researchers, as faster AI development could outpace existing governance and risk mitigation frameworks."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers using Claude Code should audit affected repositories, rotate compromised secrets, and reconsider using the \"Don't Ask Again\" feature or any AI code generation that may embed secrets automatically.",
+      "event_id": "evt_10bdc73097cfd238",
+      "first_seen": "2026-11-07T20:45:32Z",
+      "headline": "Claude Code's \"Don't Ask Again\" feature leaks passwords in 1,122 public GitHub files",
+      "last_updated": "2026-11-07T20:45:32Z",
+      "score": 4.152,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Claude Code's \"Don't Ask Again\" exposes passwords in 1,122 public GitHub files",
+          "url": "https://apiiro.com/blog/coding-agents-leaking-secrets-github-dont-ask-again"
+        }
+      ],
+      "what_happened": "The Claude Code AI coding assistant's \"Don't Ask Again\" option caused passwords to be written to 1,122 publicly accessible GitHub repositories, exposing the credentials.",
+      "why_it_matters": "Exposed passwords can be harvested by attackers, leading to unauthorized access to services, data breaches, and potential downstream compromise of systems that rely on those credentials."
+    },
+    {
+      "category": "product",
+      "claims": [],
+      "confidence": 0.3,
+      "developer_impact": "Developers may consider replacing Electron with native Windows UI frameworks or lighter alternatives to improve startup time and memory footprint on Windows 11.",
+      "event_id": "evt_68130d364577f3f7",
+      "first_seen": "2026-11-07T11:11:15Z",
+      "headline": "Discord's Windows 11 app drops startup screen and cuts RAM usage, sparking criticism of Electron",
+      "last_updated": "2026-11-07T11:11:15Z",
+      "score": 4.042,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Every Windows 11 app should kill Electron, and Discord just showed why",
+          "url": "https://www.windowslatest.com/2026/11/06/every-windows-11-app-should-kill-electron-and-discord-just-showed-why-no-starting-screen-and-70-less-ram-even-with-two-accounts-signed-in/"
+        }
+      ],
+      "what_happened": "A recent Windows 11 build of Discord removed its initial loading screen and reportedly uses about 70% less RAM even when two accounts are signed in, which the article cites as evidence that Electron‑based apps are inefficient on Windows 11.",
+      "why_it_matters": "The performance regression highlights potential resource waste in Electron apps on Windows 11, suggesting that users may experience slower launches and higher memory consumption, and prompting a reevaluation of the technology stack for desktop apps."
+    },
+    {
+      "category": "security",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "The honeypot is a single Python file with no external dependencies, so backend or AI engineers can quickly deploy it to monitor for unauthorized access to similar devices or adapt its code for other SCADA‑like services.",
+      "event_id": "evt_55aa1dc18cbb251b",
+      "first_seen": "2026-11-07T17:27:30Z",
+      "headline": "Coldframe honeypot mimics supermarket refrigeration controllers",
+      "last_updated": "2026-11-07T17:27:30Z",
+      "score": 3.958,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Show HN: Coldframe, a honeypot that poses as a supermarket fridge controller",
+          "url": "https://github.com/hedgerow-dev/coldframe"
+        }
+      ],
+      "what_happened": "A developer released Coldframe, a Python‑only honeypot that emulates the Danfoss AK‑SM 800A and Dixell XWEB supermarket refrigeration controller interfaces. The single‑file tool is designed to appear as a real device on Shodan, following recent attacks on industrial fridge installations.",
+      "why_it_matters": "By presenting a convincing fake controller, Coldframe can attract and log malicious probing of industrial control systems, giving researchers visibility into attack techniques targeting refrigeration equipment and helping improve defenses."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.2,
+      "event_id": "evt_149c124f7b07d2a1",
+      "first_seen": "2026-11-08T03:11:48Z",
+      "headline": "Article titled \"Goodbye Claude, Hello Pi\" posted on Hacker News",
+      "last_updated": "2026-11-08T03:11:48Z",
+      "score": 3.902,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Goodbye Claude, Hello Pi",
+          "url": "https://caleb.software/posts/claude-to-pi.html"
+        }
+      ],
+      "what_happened": "A post titled \"Goodbye Claude, Hello Pi\" appeared on Hacker News, suggesting a discussion about moving from the Claude AI model to a new model called Pi.",
+      "why_it_matters": "If the discussion reflects a shift in preferred AI models, it could affect developers choosing APIs or platforms, but the document provides no concrete details about the change."
+    }
+  ]
+}
