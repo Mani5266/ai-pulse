@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-08T09:33:09.821228Z",
+  "day": "2026-11-09",
+  "generated_at": "2026-11-09T09:35:53.675599Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 98,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 27,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 163.9
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Implementing DUET may require modifying inference code to apply sparsity in historical attention and current-block processing, potentially changing model serving pipelines.",
+      "event_id": "evt_2002ac7723e953db",
+      "first_seen": "2026-11-09T05:00:00Z",
+      "headline": "DUET introduces dual-sparse inference to cut cost of block diffusion language model generation",
+      "last_updated": "2026-11-09T05:00:00Z",
+      "score": 6.04,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "DUET: Dual-Sparse Inference for Block Diffusion Language Models",
+          "url": "https://arxiv.org/abs/2611.09239"
+        }
+      ],
+      "what_happened": "The paper presents DUET, a dual-sparse inference technique for block diffusion language models that reduces the repeated attention over the growing historical prefix and avoids processing the entire current generation block at every denoising step.",
+      "why_it_matters": "By lowering the computational overhead of iterative denoising, DUET can make parallel token generation faster and cheaper, improving scalability of diffusion-based language models."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers may need to integrate agents capable of issuing and handling shell commands for corpus search, reducing the need to train and maintain separate multilingual retriever models.",
+      "event_id": "evt_8ed01078601b2847",
+      "first_seen": "2026-11-09T05:00:00Z",
+      "headline": "MARS introduces retriever-free multilingual search agents that query raw corpora via shell commands",
+      "last_updated": "2026-11-09T05:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "MARS: Training Multilingual Search Agents for Retriever-Free Evidence Acquisition",
+          "url": "https://arxiv.org/abs/2611.09090"
+        }
+      ],
+      "what_happened": "The paper \"MARS: Training Multilingual Search Agents for Retriever-Free Evidence Acquisition\" proposes a new paradigm for multilingual retrieval-augmented generation. Instead of using learned retrievers and similarity ranking, the model directly interacts with raw multilingual corpora by generating executable shell commands, shifting the bottleneck to multilingual search action generation.",
+      "why_it_matters": "By removing the dependence on learned retrievers, the approach aims to avoid cross‑lingual retrieval errors and reduce indexing overhead, potentially making multilingual evidence acquisition more robust and efficient."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can follow the provided Dynamo recipes to deploy the listed models with multi‑GPU support, avoiding custom implementation of model partitioning and request routing, thereby speeding up integration into backend systems.",
+      "event_id": "evt_eb25380cc5e40adb",
+      "first_seen": "2026-11-09T05:00:00Z",
+      "headline": "NVIDIA releases Dynamo-optimized deployment recipes for Korean open AI models",
+      "last_updated": "2026-11-09T05:00:00Z",
+      "score": 5.672,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "NVIDIA Dynamo Recipes Bring Korea’s Leading Open Models to Production",
+          "url": "https://blogs.nvidia.com/blog/nvidia-dynamo-korea-open-models/"
+        }
+      ],
+      "what_happened": "NVIDIA announced Dynamo-optimized deployment recipes for four Korean open models—A.X K2 (SK Telecom), K-EXAONE 2.0 (LG AI Research), Solar Open 2 (Upstage) and Motif-3 (Motif Technologies). The recipes target models that exceed a single GPU's memory, providing guidance for splitting models across multiple GPUs and coordinating request routing.",
+      "why_it_matters": "The recipes simplify production deployment of large open models, reducing the engineering effort needed to scale them across multiple GPUs. This can accelerate AI service rollout in Korea and make high‑capacity models more accessible to developers and enterprises."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.73,
+      "developer_impact": "The paper provides a new algorithmic framework for multimodal fusion and prompt adaptation that developers can incorporate into AI pipelines, potentially requiring changes to data preprocessing, model integration, and inference logic to compute divergence scores and adjust LLM prompts dynamically.",
+      "event_id": "evt_a57aacc0bac858e6",
+      "first_seen": "2026-11-09T05:00:00Z",
+      "headline": "Divergence-guided fusion method improves multimodal emotion recognition in conversations",
+      "last_updated": "2026-11-09T05:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Mind the Divergence: Divergence-Guided Reliability-Aware Fusion and Adaptive LLM Prompting for Conversational Emotion Recognition",
+          "url": "https://arxiv.org/abs/2611.08860"
+        }
+      ],
+      "what_happened": "Researchers introduced a reliability‑aware fusion technique that uses inter‑modal predictive divergence to weight textual, acoustic, and visual cues, and an adaptive large‑language‑model prompting strategy for conversational emotion recognition (MERC). The approach explicitly adapts processing based on the degree of disagreement among modalities, aiming to handle semantic incongruity, concealed emotions, noise, and ambiguity.",
+      "why_it_matters": "By accounting for modality disagreement, the method can produce more accurate and robust emotion labels for each utterance, which is critical for applications such as dialogue systems, sentiment analysis, and human‑computer interaction that rely on nuanced emotional understanding."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Backend and AI engineers may gain access to NVIDIA OpenShell runtime and NemoClaw blueprints for building secure AI agents, and could leverage NVLink Fusion connections with Korean NPU/XPU hardware. The collaboration also signals new tooling, libraries, and potential cloud‑edge integration options for developers in the region.",
+      "event_id": "evt_77625322d4684167",
+      "first_seen": "2026-11-09T05:00:04Z",
+      "headline": "NVIDIA expands partnership with South Korea to boost secure agentic AI and hardware integration",
+      "last_updated": "2026-11-09T05:00:39Z",
+      "score": 5.547,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "Korea’s AI Ecosystem Advances and Secures Agentic AI With NVIDIA",
+          "url": "https://blogs.nvidia.com/blog/korea-secure-agentic-ai/"
+        }
+      ],
+      "what_happened": "NVIDIA announced an expanded collaboration with South Korea's Ministry of Science and ICT and Korean industry players. Hyundai Motor Group is evaluating NVIDIA's NemoClaw blueprints and OpenShell runtime, while AIM Intelligence is integrating its Starfort platform with OpenShell to enable secure AI agents for enterprise workflows. The partnership now covers AI semiconductors, data‑center infrastructure, talent development, startups, models, agents and security, and opens the path for Korean NPU/XPU firms to join NVIDIA's NVLink Fusion ecosystem.",
+      "why_it_matters": "The joint effort aims to strengthen South Korea's sovereign AI capabilities by combining advanced hardware, secure agent frameworks, and a talent pipeline. Secure, open‑model AI agents could improve productivity in enterprises, and broader hardware integration may accelerate AI workloads on Korean chips, reducing reliance on foreign infrastructure."
+    }
+  ]
+}
