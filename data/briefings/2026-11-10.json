@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-09T09:33:57.450010Z",
+  "day": "2026-11-10",
+  "generated_at": "2026-11-10T09:36:42.939412Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 130,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 165.5
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers may need to integrate META‑IR components into their model serving or training pipelines, adding a layer that performs meta‑introspective evaluation and adapts refusal policies on‑the‑fly, which could require changes to alignment workflows and additional compute overhead.",
+      "event_id": "evt_868cd9841af624b4",
+      "first_seen": "2026-11-10T05:00:00Z",
+      "headline": "META-IR introduces adaptive introspective reasoning to improve LLM safety against jailbreak attacks",
+      "last_updated": "2026-11-10T05:00:00Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "META-IR: Meta-Introspective Reasoning for Adaptive Safety Alignment in LLM",
+          "url": "https://arxiv.org/abs/2611.10089"
+        }
+      ],
+      "what_happened": "The paper presents META-IR, a meta‑introspective reasoning framework that enables large language models to adapt their safety alignment in real time. Unlike static alignment pipelines and fixed self‑evaluation policies such as STAIR, META‑IR can rapidly adjust to evolving manipulation strategies and adversarial distribution shifts, aiming to reduce jailbreak and harmful‑content vulnerabilities.",
+      "why_it_matters": "By providing dynamic, context‑aware safety checks, META‑IR could make LLM deployments more robust against novel attack vectors, lowering the risk of harmful outputs and improving trustworthiness of AI systems in production environments."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can leverage Amazon Bedrock AgentCore sandboxes to execute Python safely, connect AI agents to live industrial data streams, and build agentic systems that produce verifiable results, requiring familiarity with sandboxed execution and data integration patterns.",
+      "event_id": "evt_7d1e00daeb767a07",
+      "first_seen": "2026-11-09T18:55:43Z",
+      "headline": "CrossnoKaye uses Amazon Bedrock AgentCore to deliver verifiable physical AI for heavy industry",
+      "last_updated": "2026-11-09T18:55:43Z",
+      "score": 6.09,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "How CrossnoKaye grounds physical AI with Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-crossnokaye-grounds-physical-ai-with-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "CrossnoKaye integrated Amazon Bedrock AgentCore into its ATLAS platform and AURA agentic system. The integration grounds AI reasoning in live plant data and runs Python code in isolated AgentCore sandboxes, producing checkable, math‑backed answers for plant engineers instead of unverified model guesses.",
+      "why_it_matters": "By providing verifiable, data‑grounded AI outputs, the solution increases trust and safety for heavy‑industry operations, allowing engineers to rely on mathematically justified answers rather than opaque model predictions, potentially improving decision‑making and reducing risk."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "The updated llm‑anthropic 0.31 package lets developers install and invoke the new models via the CLI (e.g., `llm -m claude-fable-5.2`). Existing code using llm‑anthropic can switch to the newer versions with minimal changes.",
+      "event_id": "evt_9a8fde6cfa9ab68c",
+      "first_seen": "2026-11-09T23:58:46Z",
+      "headline": "Anthropic adds Fable 5.2 and Mythos 5.2 models to llm‑anthropic 0.31",
+      "last_updated": "2026-11-09T23:58:46Z",
+      "score": 6.087,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "llm-anthropic 0.31",
+          "url": "https://simonwillison.net/2026/Nov/9/llm-anthropic/"
+        }
+      ],
+      "what_happened": "Anthropic released two new language‑model versions, Fable 5.2 and Mythos 5.2. The llm‑anthropic 0.31 package was updated to include them, and the release notes note that Fable 5.2 currently ranks first on the Artificial Analysis leaderboard. Anthropic claims the models solve two open problems in black‑hole physics.",
+      "why_it_matters": "The new models give developers access to higher‑performing, possibly more capable LLMs, and the top ranking suggests strong benchmark results. If the black‑hole claim holds, it indicates progress on scientific reasoning tasks, which could improve model usefulness for research‑oriented prompts."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.62,
+      "developer_impact": "Backend and AI engineers may need to redesign KV‑cache management, incorporating additional context‑preservation or planning mechanisms beyond token relevance to support very long sessions, potentially affecting memory budgeting and inference pipeline design.",
+      "event_id": "evt_2404a84292dfc861",
+      "first_seen": "2026-11-10T05:00:00Z",
+      "headline": "KV cache eviction strategies insufficient for long-horizon LLM agents, per PACE study",
+      "last_updated": "2026-11-10T05:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "PACE: Keeping the Right Tokens in the KV Cache Is Not Enough for Long-Horizon LLM Agents",
+          "url": "https://arxiv.org/abs/2611.10240"
+        }
+      ],
+      "what_happened": "The paper \"PACE: Keeping the Right Tokens in the KV Cache Is Not Enough for Long-Horizon LLM Agents\" shows that existing eviction methods, which aim to retain tokens a later step will need, do not guarantee good performance when agents process sessions of up to millions of tokens. In experiments with 100,000‑token coding sessions on the Qwen3‑8B model using a 2,048‑token KV cache budget, a planner‑guided policy that keeps certain tokens still fails to meet the task demands, indicating that simply keeping the \"right\" tokens is not enough.",
+      "why_it_matters": "If serving systems for LLM agents rely only on token‑relevance eviction, they may suffer degraded accuracy or failure on long‑horizon tasks despite staying within GPU memory limits. This reveals a gap in current inference infrastructure that could limit the scalability of complex, multi‑step AI applications."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can integrate PISA/PISA‑E into inference pipelines to automatically route prompts to the optimal model or ensemble based on real‑time cost and quality criteria, potentially lowering cloud compute bills and simplifying model management.",
+      "event_id": "evt_0809cdc4ea32e509",
+      "first_seen": "2026-11-10T05:00:00Z",
+      "headline": "PISA routing system enables prompt-adaptive, cost-aware model selection and ensembles for LLM inference",
+      "last_updated": "2026-11-10T05:00:00Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Ensemble Routing for Prompt-Adaptive Cost-Aware LLM Inference",
+          "url": "https://arxiv.org/abs/2611.10193"
+        }
+      ],
+      "what_happened": "The paper introduces PISA, a prompt‑adaptive, cost‑aware router that selects a single LLM for each request, and PISA‑E, an extension that dynamically composes ensembles of models. Unlike traditional routing that fixes one model per prompt or uses static ensembles, PISA evaluates each prompt’s characteristics and a cost budget to choose the most appropriate model or ensemble, aiming to balance response quality with inference cost.",
+      "why_it_matters": "By adapting model choice to each request’s difficulty and cost constraints, the approach can reduce overall inference expenses while preserving or improving output quality. This enables services that rely on LLMs to scale more efficiently and offer consistent performance across diverse workloads."
+    }
+  ]
+}
