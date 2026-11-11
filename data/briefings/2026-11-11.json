@@ -1,0 +1,173 @@
+{
+  "covers_since": "2026-11-10T09:33:57.450010Z",
+  "day": "2026-11-11",
+  "generated_at": "2026-11-11T09:12:26.679456Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 133,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 27,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 163.6
+  },
+  "stories": [
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "google-deepmind",
+            "the-verge-ai",
+            "simon-willison"
+          ],
+          "text": "Gemini 4 Carbon is now generally available to the public."
+        },
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "the-verge-ai",
+            "simon-willison"
+          ],
+          "text": "Gemini 4 Carbon was announced two weeks ago for a subset of cybersecurity defenders."
+        },
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "the-verge-ai",
+            "simon-willison"
+          ],
+          "text": "Gemini 4 Carbon is Google's strongest or best-ever Gemini model."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "Gemini 4 Carbon includes an agent ‘swarm’ feature."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "At launch Gemini 4 Carbon costs $2 per million input tokens and $10 per million output tokens, with prices set to double to $4/$20 on December 1st."
+        }
+      ],
+      "confidence": 0.9,
+      "developer_impact": "Developers can access Gemini 4 Carbon via the updated llm‑gemini 0.36 library, experiment with the agent swarm feature, and must account for the announced token pricing and upcoming price increase when budgeting AI workloads.",
+      "event_id": "evt_55cb0588b3e8436e",
+      "first_seen": "2026-11-10T16:00:00Z",
+      "headline": "Google makes Gemini 4 Carbon model generally available with agent swarm feature",
+      "last_updated": "2026-11-10T20:09:44Z",
+      "score": 6.286,
+      "sources": [
+        {
+          "source_id": "google-deepmind",
+          "title": "Gemini 4 Carbon is now available",
+          "url": "https://deepmind.google/blog/gemini-4-carbon-is-now-available/"
+        },
+        {
+          "source_id": "the-verge-ai",
+          "title": "Google releases Gemini 4 Carbon with agent ‘swarm’ feature",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1030787/google-gemini-4-carbon-public-rollout"
+        },
+        {
+          "source_id": "simon-willison",
+          "title": "llm-gemini 0.36",
+          "url": "https://simonwillison.net/2026/Nov/10/llm-gemini/"
+        }
+      ],
+      "what_happened": "Google has opened its Gemini 4 Carbon model to the public after an initial two‑week rollout to a select group of cybersecurity defenders. The model includes a new \"agent swarm\" capability. Pricing is announced at $2 per million input tokens and $10 per million output tokens, with a planned increase to $4/$20 on Dec 1. The llm‑gemini 0.36 client library now supports the model.",
+      "why_it_matters": "Gemini 4 Carbon is positioned as Google's strongest model, intended to compete with top offerings from Anthropic and OpenAI. The pricing and agent‑swarm feature could affect cost calculations and enable new multi‑agent AI workflows for enterprises and developers."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "AlphaProof Code provides a new tool for generating extensive formal proofs, meaning developers may need to adopt Lean and integrate the system into security‑critical codebases.",
+      "event_id": "evt_0e9fb0eb84f13acf",
+      "first_seen": "2026-11-10T12:02:28Z",
+      "headline": "AlphaProof Code generates 3 million lines of Lean proofs to verify Signal’s core encryption",
+      "last_updated": "2026-11-10T12:02:28Z",
+      "score": 6.2,
+      "sources": [
+        {
+          "source_id": "google-deepmind",
+          "title": "Introducing AlphaProof Code: a breakthrough in verifying complex software at depth",
+          "url": "https://deepmind.google/blog/introducing-alphaproof-code/"
+        }
+      ],
+      "what_happened": "DeepMind announced AlphaProof Code, a verification system that produced three million lines of Lean proofs to formally verify the core encryption implementation used by Signal.",
+      "why_it_matters": "Formal verification of Signal’s encryption shows that large‑scale, security‑critical software can be mathematically proven correct, potentially increasing confidence in cryptographic protocols and reducing reliance on testing alone."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "ChipOmni may provide a unified interface or APIs for backend and AI engineers to incorporate AI-driven planning, code generation, and verification into EDA pipelines, reducing the need to stitch together separate tools.",
+      "event_id": "evt_562cf6a6dfb40366",
+      "first_seen": "2026-11-11T05:00:00Z",
+      "headline": "ChipOmni introduced as a general-purpose AI agent to automate fragmented EDA workflows",
+      "last_updated": "2026-11-11T05:00:00Z",
+      "score": 6.19,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "ChipOmni: A General-Purpose AI Agent for Electronic Design Automation",
+          "url": "https://arxiv.org/abs/2611.13020"
+        }
+      ],
+      "what_happened": "The paper presents ChipOmni, an AI agent designed to handle multiple stages of electronic design automation. It aims to coordinate heterogeneous representations, integrate specialised tools, and autonomously plan, verify, and repair designs, addressing the fragmentation of current EDA workflows.",
+      "why_it_matters": "If successful, ChipOmni could reduce manual coordination across tools, speed up verification cycles, and lower engineering effort in chip design, potentially accelerating development timelines and improving design quality."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers of AI agents may need to audit models for unexpected neuron behavior, restrict tool/terminal capabilities, and implement monitoring for anomalous triggers to mitigate the risk of hidden backdoors.",
+      "event_id": "evt_a47950b9177a3bb8",
+      "first_seen": "2026-11-10T20:52:56Z",
+      "headline": "Researchers reveal 'Lazarus' technique to embed backdoors in dormant neurons of AI models",
+      "last_updated": "2026-11-10T20:52:56Z",
+      "score": 6.15,
+      "sources": [
+        {
+          "source_id": "microsoft-research",
+          "title": "Lazare, veni foras: Reprogramming Dormant Neurons to Backdoor AI Agents",
+          "url": "https://www.microsoft.com/en-us/research/blog/lazare-veni-foras-reprogramming-dormant-neurons-to-backdoor-ai-agents/"
+        }
+      ],
+      "what_happened": "Microsoft researchers identified a method called “Lazarus” that can reprogram dormant neurons inside an AI model so that the model behaves normally until a hidden trigger activates it, at which point it executes attacker‑supplied commands such as downloading and running code.",
+      "why_it_matters": "The technique turns otherwise benign AI agents—especially those with tool or terminal access—into covert malware platforms, creating a new attack surface for supply‑chain and runtime compromises."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.3,
+      "event_id": "evt_19b4fcb1faac9c9b",
+      "first_seen": "2026-11-11T05:01:16Z",
+      "headline": "BotPsy introduces on-device personal assistant using sub-billion-parameter agentic LLM",
+      "last_updated": "2026-11-11T05:01:16Z",
+      "score": 5.848,
+      "sources": [
+        {
+          "source_id": "huggingface-blog",
+          "title": "BotPsy: On-Device Personal Assistant with a Sub-Billion-Parameter Agentic Language Model",
+          "url": "https://huggingface.co/blog/qvac/botpsy"
+        }
+      ],
+      "what_happened": "A new project called BotPsy was announced as an on-device personal assistant that runs a sub‑billion‑parameter agentic language model.",
+      "why_it_matters": "The document does not provide details on the significance or potential impact of the on-device assistant."
+    }
+  ]
+}
