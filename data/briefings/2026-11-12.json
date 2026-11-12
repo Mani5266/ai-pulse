@@ -1,0 +1,165 @@
+{
+  "covers_since": "2026-11-11T09:37:04.817081Z",
+  "day": "2026-11-12",
+  "generated_at": "2026-11-12T09:39:47.809533Z",
+  "stats": {
+    "articles": 448,
+    "duplicates_removed": 2,
+    "events": 50,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 27,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 163.0
+  },
+  "stories": [
+    {
+      "category": "developer_tools",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "google-ai"
+          ],
+          "text": "The Gemini Decisions API is powered by a model called Gemini Decision."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "google-ai"
+          ],
+          "text": "The Gemini Decisions API provides fast, calibrated multimodal decisions."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The Gemini Decisions API supports three types of questions: yes/no, choice, and rubric-scoring."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The Gemini Decisions API is priced at 10 cents per million input tokens, with output free."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "The Gemini Decisions API reuses the term \"Noul\" for a yes/no question."
+        }
+      ],
+      "confidence": 0.9,
+      "developer_impact": "Developers can integrate the Gemini Decisions API into backend or AI pipelines to obtain calibrated decisions from multimodal inputs, using the same question formats as other decision models and paying only for input tokens.",
+      "event_id": "evt_02bfed5e7aa817ea",
+      "first_seen": "2026-11-11T18:00:00Z",
+      "headline": "Google launches Gemini Decisions API for fast multimodal decision tasks",
+      "last_updated": "2026-11-11T22:03:25Z",
+      "score": 5.51,
+      "sources": [
+        {
+          "source_id": "google-ai",
+          "title": "Gemini Decisions API: Fast, calibrated multimodal decisions",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-decisions-api/"
+        },
+        {
+          "source_id": "simon-willison",
+          "title": "Gemini Decisions API",
+          "url": "https://simonwillison.net/2026/Nov/11/gemini-decisions-api/"
+        }
+      ],
+      "what_happened": "Google introduced the Gemini Decisions API, powered by the Gemini Decision model. The API offers fast, calibrated multimodal decisions and supports three question types—yes/no, choice, and rubric‑scoring—mirroring the functionality of existing decision models like Jev and OpenAI’s offering. It reuses Jev’s term “Noul” for yes/no queries and is priced at $0.10 per million input tokens, with output tokens free.",
+      "why_it_matters": "The service adds a new, competitively priced option for developers needing structured decision outputs, expanding the ecosystem of decision‑model APIs and potentially lowering costs for multimodal decision workloads compared to text‑only alternatives."
+    },
+    {
+      "category": "benchmark",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers can feed traces from their existing AI frameworks into UAEF, use the standardized metrics for benchmarking, and integrate the stored results into CI/CD pipelines to monitor agent performance over time.",
+      "event_id": "evt_df992b7cd2c69467",
+      "first_seen": "2026-11-11T15:50:55Z",
+      "headline": "Universal Agent Evaluation Framework enables framework-agnostic AI agent scoring",
+      "last_updated": "2026-11-11T15:50:55Z",
+      "score": 5.17,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "UAEF: A framework-agnostic system for closed-loop evaluation of AI agents",
+          "url": "https://aws.amazon.com/blogs/machine-learning/uaef-a-framework-agnostic-system-for-closed-loop-evaluation-of-ai-agents/"
+        }
+      ],
+      "what_happened": "The Universal Agent Evaluation Framework (UAEF) was introduced as a framework-agnostic system that converts AI-agent execution traces from any framework into a single canonical format, applies 36 built-in metrics across seven dimensions, and stores the results to allow teams to compare agent versions and detect regressions.",
+      "why_it_matters": "By providing a unified evaluation pipeline, UAEF lets teams assess and compare agents regardless of the underlying framework, helping ensure consistent performance tracking and early regression detection across development cycles."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers must work with Amazon Bedrock APIs to integrate models, and use the harness layer for orchestration, policy enforcement, and audit logging, influencing how AI pipelines are built and monitored.",
+      "event_id": "evt_8556616005ab5618",
+      "first_seen": "2026-11-11T20:45:45Z",
+      "headline": "DXC Technology builds DCX OASIS, a governed multi‑model AI substrate on Amazon Bedrock",
+      "last_updated": "2026-11-11T20:45:45Z",
+      "score": 5.14,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "How DXC Technology built a multi-model AI substrate on Amazon Bedrock",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-dxc-technology-built-a-multi-model-ai-substrate-on-amazon-bedrock/"
+        }
+      ],
+      "what_happened": "DXC Technology created DCX OASIS, a Human+AI operating model that runs on Amazon Bedrock. The system separates a resilient multi‑model substrate from a trusted harness that orchestrates, governs, and audits AI agents at scale for its managed‑IT services.",
+      "why_it_matters": "The architecture lets regulated enterprises deploy AI agents across 70 countries while maintaining governance, auditability, and resilience, addressing compliance and operational risk in large‑scale AI deployments."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers using PyTorch DDP on SageMaker HyperPod must incorporate the three checks into their training loops to benefit from detection and automatic node replacement, but otherwise no API changes are required.",
+      "event_id": "evt_24bc76c8a5ccec32",
+      "first_seen": "2026-11-11T23:30:03Z",
+      "headline": "AWS adds detection and auto-recovery for silent GPU data corruption on SageMaker HyperPod",
+      "last_updated": "2026-11-11T23:30:03Z",
+      "score": 4.865,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Detecting and recovering from silent data corruption on Amazon SageMaker HyperPod",
+          "url": "https://aws.amazon.com/blogs/machine-learning/detecting-and-recovering-from-silent-data-corruption-on-amazon-sagemaker-hyperpod/"
+        }
+      ],
+      "what_happened": "AWS introduced three runtime checks in a PyTorch Distributed Data Parallel (DDP) loop on Amazon SageMaker HyperPod that detect silent GPU data corruption, identify the faulty node, and trigger automatic replacement of that node for recovery.",
+      "why_it_matters": "Silent data corruption can silently poison distributed training results, leading to incorrect models. Detecting and automatically recovering from such faults improves training reliability, reduces debugging effort, and prevents wasted compute resources."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can invoke the Web Search API directly from their code using standard AWS SDKs or CLI, without setting up additional resources, enabling quick integration of web search into AI agents and data pipelines.",
+      "event_id": "evt_37a8e4c6f0598154",
+      "first_seen": "2026-11-11T23:13:16Z",
+      "headline": "Amazon Bedrock AgentCore adds Web Search API for direct web queries",
+      "last_updated": "2026-11-11T23:13:16Z",
+      "score": 4.74,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Introducing the Web Search API on Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-the-web-search-api-on-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "Amazon announced a Web Search API on Bedrock AgentCore that lets code perform web searches with a single signed API call, requiring no gateway or provisioned resources. The API is callable via AWS SDKs or the AWS CLI and can be used in applications, agent loops, and data pipelines.",
+      "why_it_matters": "The API simplifies adding up‑to‑date web information to AI agents and backend workflows, removing the need to manage separate search services or infrastructure and speeding up data enrichment and retrieval tasks."
+    }
+  ]
+}
