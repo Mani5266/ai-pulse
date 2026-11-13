@@ -1,0 +1,176 @@
+{
+  "covers_since": "2026-11-12T09:37:04.817081Z",
+  "day": "2026-11-13",
+  "generated_at": "2026-11-13T09:24:44.736667Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 1,
+    "events": 131,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 27,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 162.8
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.62,
+      "developer_impact": "Developers may need to integrate UniPipe’s unified serving‑and‑training pipeline, handle deadline‑aware scheduling, and adapt models for continuous fine‑tuning under latency constraints, potentially using new APIs or runtime components provided by UniPipe.",
+      "event_id": "evt_c10310cdcfd4a8e4",
+      "first_seen": "2026-11-13T05:00:00Z",
+      "headline": "UniPipe introduces unified inference serving and online fine‑tuning for deadline‑constrained DNN surrogates",
+      "last_updated": "2026-11-13T05:00:00Z",
+      "score": 6.34,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "UniPipe: Unified Inference Serving and Fine-Tuning for Deadline-Constrained DNN Surrogate Workflows",
+          "url": "https://arxiv.org/abs/2611.14748"
+        }
+      ],
+      "what_happened": "The paper presents UniPipe, a system that combines real‑time inference serving with on‑the‑fly fine‑tuning of deep neural network (DNN) surrogates used in high‑rate scientific workflows, such as ptychographic imaging at next‑generation X‑ray light sources. The approach aims to keep surrogate accuracy as input distributions drift while meeting strict latency deadlines, offering 100‑1000× higher throughput than traditional iterative solvers.",
+      "why_it_matters": "Maintaining surrogate accuracy without interrupting real‑time processing enables more reliable, faster experimental steering in scientific settings where data streams are massive and time‑critical. This could improve the efficiency and outcome of experiments that rely on rapid feedback loops."
+    },
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "google-ai",
+            "the-verge-ai"
+          ],
+          "text": "Gemini 4 Hydrogen is now available in Google Search."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "google-deepmind"
+          ],
+          "text": "Gemini 4 Hydrogen is a new model introduced by DeepMind."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "techcrunch-ai"
+          ],
+          "text": "Gemini 4 Hydrogen powers Google's AI Mode."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "Gemini 4 Hydrogen can provide more helpful answers to complex questions, including multi‑part, typo‑laden, or highly specific requests."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "Gemini 4 Hydrogen is available starting today in the Gemini app and all tiers of Google services."
+        }
+      ],
+      "confidence": 0.85,
+      "developer_impact": "Developers who rely on Google Search or the Gemini app can expect more reliable handling of complex queries and may need to update integrations to take advantage of the new model, potentially via updated Google AI APIs.",
+      "event_id": "evt_5b69826eead48a96",
+      "first_seen": "2026-11-12T18:00:00Z",
+      "headline": "Google adds Gemini 4 Hydrogen model to Search, improving complex query answers",
+      "last_updated": "2026-11-12T22:55:19Z",
+      "score": 6.27,
+      "sources": [
+        {
+          "source_id": "google-deepmind",
+          "title": "Introducing Gemini 4 Hydrogen",
+          "url": "https://deepmind.google/blog/introducing-gemini-4-hydrogen/"
+        },
+        {
+          "source_id": "google-ai",
+          "title": "Google Search gets a major upgrade with Gemini 4 Hydrogen",
+          "url": "https://blog.google/products-and-platforms/products/search/gemini-4-hydrogen-search-upgrade/"
+        },
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Google’s latest Search upgrade promises better answers to your most complicated questions",
+          "url": "https://techcrunch.com/2026/11/12/googles-latest-search-upgrade-promises-better-answers-to-your-most-complicated-questions/"
+        },
+        {
+          "source_id": "the-verge-ai",
+          "title": "Google’s new Gemini model is better at understanding complicated questions",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1032505/google-search-ai-mode-gemini-4-hydrogen"
+        }
+      ],
+      "what_happened": "Google released the Gemini 4 Hydrogen large‑language model and integrated it into Google Search’s AI Mode, the Gemini app and all user tiers. The model is described as better at understanding multi‑part questions, typo‑laden queries and highly specific requests, surfacing relevant links and providing richer visual responses.",
+      "why_it_matters": "The upgrade should deliver more accurate and detailed answers for users, raising the baseline for search‑based AI assistance. For businesses and developers, higher‑quality search results can reduce the need for custom LLM pipelines for complex queries and shift user expectations toward richer, multimodal answers."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Implementing FIBER may require integrating Fast-DetectGPT and other detector APIs into a pipeline and applying Bayesian recalibration logic, potentially adding complexity but offering higher detection reliability for services that need to flag AI‑generated text.",
+      "event_id": "evt_405dc9f5cf29c191",
+      "first_seen": "2026-11-13T05:00:00Z",
+      "headline": "FIBER introduces Bayesian fusion of Fast-DetectGPT scores with auxiliary detector evidence for LLM text detection",
+      "last_updated": "2026-11-13T05:00:00Z",
+      "score": 6.19,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "FIBER: Bayesian Fusion of Fast-DetectGPT and IRT-Informed Detector Evidence for LLM-Generated Text Detection",
+          "url": "https://arxiv.org/abs/2611.15058"
+        }
+      ],
+      "what_happened": "Researchers released FIBER, a method that combines continuous Fast-DetectGPT scores with outputs from other detectors using IRT-informed Bayesian evidence recalibration. The approach aims to improve detection of LLM‑generated text across domain and generator shifts, addressing poor generalization of supervised detectors and limitations of zero‑shot methods that rely on single statistical signals.",
+      "why_it_matters": "By fusing multiple detection signals in a Bayesian framework, FIBER seeks more robust identification of AI‑generated content, which is critical for content moderation, plagiarism detection, and maintaining trust in automated systems when models evolve or are applied to new domains."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Shows how to construct a knowledge base and deploy an agentic AI on Bedrock AgentCore, offering a reference architecture for developers building similar automated support systems.",
+      "event_id": "evt_0ca05117dff37c92",
+      "first_seen": "2026-11-12T21:47:07Z",
+      "headline": "Natera launches SWARM, an agentic AI system on Amazon Bedrock AgentCore for lab operations",
+      "last_updated": "2026-11-12T21:47:07Z",
+      "score": 6.04,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "How Natera designed an agentic AI system for lab ops with Amazon Bedrock AgentCore",
+          "url": "https://aws.amazon.com/blogs/machine-learning/how-natera-designed-an-agentic-ai-system-for-lab-ops-with-amazon-bedrock-agentcore/"
+        }
+      ],
+      "what_happened": "Natera built SWARM, an agentic AI system using Amazon Bedrock AgentCore that captures institutional lab‑operations knowledge, deploys it at scale, and reports a 130× faster first‑response time and 96.2% automated coverage of support tickets.",
+      "why_it_matters": "The system dramatically speeds up lab‑ops support and automates most ticket handling, potentially reducing human workload and improving response consistency in laboratory environments."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers of coding agents may add early‑termination checks or monitoring to stop agents once a correct patch is found, potentially lowering runtime and cost.",
+      "event_id": "evt_9e5328de36564d89",
+      "first_seen": "2026-11-13T05:00:00Z",
+      "headline": "Coding agents often solve tasks early but continue running, showing significant termination lag",
+      "last_updated": "2026-11-13T05:00:00Z",
+      "score": 5.49,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Termination Lag: Coding Agents Solve Early but Stop Late",
+          "url": "https://arxiv.org/abs/2611.14960"
+        }
+      ],
+      "what_happened": "Researchers introduced the concept of \"termination lag,\" the gap between a coding agent's first correct patch and when it stops execution. They measured this across five models, two agent frameworks, and three SWE-bench datasets, recording every distinct repository patch. Their analysis found that 38‑82% of successful runs produced a correct solution on the initial patch but kept running afterward.",
+      "why_it_matters": "The finding reveals that many coding agents waste compute by continuing after solving a problem, suggesting opportunities to improve efficiency and reduce resource consumption by implementing early‑stop mechanisms."
+    }
+  ]
+}
