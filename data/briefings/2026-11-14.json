@@ -1,0 +1,173 @@
+{
+  "covers_since": "2026-11-13T09:22:01.959857Z",
+  "day": "2026-11-14",
+  "generated_at": "2026-11-14T08:53:08.610090Z",
+  "stats": {
+    "articles": 448,
+    "duplicates_removed": 1,
+    "events": 41,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 27,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 168.6
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "techcrunch-ai"
+          ],
+          "text": "ChatGPT has a new Wallet that lets AI agents shop and check out on users' behalf."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "techcrunch-ai"
+          ],
+          "text": "The ChatGPT Wallet rollout is limited to U.S. Pro subscribers."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "ChatGPT Wallet enables OpenAI’s Dots agents to make purchases for users."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "ChatGPT Wallet is rolling out starting today for ChatGPT Pro subscribers in the US who are at least 18 years old."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "the-verge-ai"
+          ],
+          "text": "The wallet requires a US billing address and an eligible US‑issued American Express, Chase, Mastercard, or Visa card."
+        }
+      ],
+      "confidence": 0.96,
+      "event_id": "evt_bbcb79fadd39dd32",
+      "first_seen": "2026-11-13T16:00:12Z",
+      "headline": "OpenAI launches ChatGPT Wallet for US Pro users, enabling AI agents to make purchases",
+      "last_updated": "2026-11-13T20:45:10Z",
+      "score": 5.643,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "ChatGPT’s new Wallet lets AI agents shop and check out for you",
+          "url": "https://techcrunch.com/2026/11/13/chatgpts-new-wallet-lets-ai-agents-shop-and-check-out-for-you/"
+        },
+        {
+          "source_id": "the-verge-ai",
+          "title": "ChatGPT Wallet lets OpenAI’s Dots agents make purchases for you",
+          "url": "https://www.theverge.com/ai-artificial-intelligence/1033425/openai-chatgpt-wallet"
+        }
+      ],
+      "what_happened": "OpenAI introduced a ChatGPT Wallet that lets its Dots AI agents shop and check out on a user’s behalf. The feature is rolling out today to ChatGPT Pro subscribers in the United States who are at least 18 years old, have a US billing address, and use an eligible US‑issued American Express, Chase, Mastercard or Visa card.",
+      "why_it_matters": "The wallet gives AI agents the ability to complete transactions directly, opening new use‑cases for automated purchasing and potentially new revenue streams. It also raises security, privacy and compliance considerations as AI mediates payment data and user purchases."
+    },
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "ChatGPT Wallet is a secure way for agents in ChatGPT Work, Codex, and dots to complete purchases with user approval and existing card protections."
+        }
+      ],
+      "confidence": 0.95,
+      "developer_impact": "Developers can now integrate ChatGPT Wallet into their agents to handle purchases without building separate payment infrastructure, but must implement the required user‑approval flow.",
+      "event_id": "evt_991ad48e8559b2fe",
+      "first_seen": "2026-11-10T10:00:00Z",
+      "headline": "OpenAI launches ChatGPT Wallet for secure agent purchases",
+      "last_updated": "2026-11-13T15:00:00Z",
+      "score": 5.5,
+      "sources": [
+        {
+          "source_id": "openai",
+          "title": "Introducing ChatGPT Wallet",
+          "url": "https://openai.com/index/introducing-chatgpt-wallet"
+        }
+      ],
+      "what_happened": "OpenAI announced ChatGPT Wallet, a secure feature that enables agents in ChatGPT Work, Codex, and related tools to complete purchases after obtaining user approval, leveraging existing card protection mechanisms.",
+      "why_it_matters": "The wallet provides a built‑in, secure payment method, reducing friction for transactions initiated by AI agents and ensuring user consent and card security, which can streamline monetization and user trust."
+    },
+    {
+      "category": "security",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers should monitor for Microsoft patches, apply updates promptly, and consider mitigating controls such as limiting local account privileges.",
+      "event_id": "evt_728d91208d49dea5",
+      "first_seen": "2026-11-13T16:26:32Z",
+      "headline": "Windows 'SignDrop' 0‑day lets local users gain System privileges",
+      "last_updated": "2026-11-13T16:26:32Z",
+      "score": 5.467,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "Windows 0-day dropped by disgruntled researcher hands hackers System rights",
+          "url": "https://arstechnica.com/security/2026/11/windows-0-day-dropped-by-disgruntled-researcher-hands-hackers-system-rights/"
+        }
+      ],
+      "what_happened": "A Windows privilege‑escalation vulnerability named SignDrop was released by a disgruntled researcher. The exploit enables any local user to obtain full System rights on affected machines.",
+      "why_it_matters": "Full System access lets attackers execute arbitrary code, install malware, and control compromised Windows systems, raising the risk of widespread attacks until a patch is issued."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Backend and AI engineers can reuse existing preprocessing pipelines, integrate no‑code models into automated SageMaker Pipelines, and schedule frequent batch inference without custom code, shortening deployment cycles.",
+      "event_id": "evt_4536e10993f7030a",
+      "first_seen": "2026-11-13T23:22:09Z",
+      "headline": "GS Caltex speeds MLOps with SageMaker Canvas and Pipelines",
+      "last_updated": "2026-11-13T23:22:09Z",
+      "score": 5.165,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Production MLOps at GS Caltex with Amazon SageMaker Canvas, part 1",
+          "url": "https://aws.amazon.com/blogs/machine-learning/production-mlops-at-gs-caltex-with-amazon-sagemaker-canvas-part-1/"
+        }
+      ],
+      "what_happened": "GS Caltex linked Amazon SageMaker Canvas to SageMaker Pipelines, allowing process engineers' no‑code models to run in production. The integration lets ML engineers reuse validated preprocessing flows and models, cutting deployment time from roughly a week to a few hours and enabling batch inference every 30 minutes.",
+      "why_it_matters": "The faster deployment and automated batch inference reduce time‑to‑value for ML solutions, lower operational overhead, and demonstrate that no‑code tools can be production‑ready when combined with pipeline automation."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers can launch OpenFold3 via SageMaker JumpStart, use async endpoints, configure multi‑GPU jobs, supply their own MSAs, and benefit from automatic scaling to zero, reducing operational overhead.",
+      "event_id": "evt_b47584a6c89b5823",
+      "first_seen": "2026-11-13T21:53:40Z",
+      "headline": "OpenFold3-preview available on SageMaker JumpStart for biomolecular structure prediction",
+      "last_updated": "2026-11-13T21:53:40Z",
+      "score": 5.115,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "OpenFold3 on Amazon SageMaker JumpStart: Predict biomolecular structures",
+          "url": "https://aws.amazon.com/blogs/machine-learning/openfold3-on-amazon-sagemaker-jumpstart-predict-biomolecular-structures/"
+        }
+      ],
+      "what_happened": "Amazon SageMaker JumpStart now offers OpenFold3-preview, enabling users to run asynchronous inference and multi‑GPU parallelism to predict 3D structures of proteins, DNA, RNA and ligand complexes within their own AWS accounts. The service supports bringing custom multiple sequence alignments for improved accuracy and privacy, and can scale resources to zero when idle to lower costs.",
+      "why_it_matters": "Provides a ready‑to‑use, scalable AI model for structural biology, letting engineers integrate high‑accuracy biomolecular structure predictions into pipelines without managing infrastructure, while offering cost‑effective compute scaling and data privacy."
+    }
+  ]
+}
