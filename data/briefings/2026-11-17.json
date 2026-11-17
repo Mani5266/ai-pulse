@@ -1,0 +1,159 @@
+{
+  "covers_since": "2026-11-16T10:28:30.172239Z",
+  "day": "2026-11-17",
+  "generated_at": "2026-11-17T10:31:21.387874Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 137,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 27,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 171.2
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.93,
+      "developer_impact": "Use the new AgenticRetrieveStream API with Managed Knowledge Base to enable per‑user memory and document access controls, eliminating separate persistence layers for conversational state.",
+      "event_id": "evt_b09ddd384e886e5e",
+      "first_seen": "2026-11-09T20:13:18Z",
+      "headline": "Amazon Bedrock adds memory-aware agents via Agentic Retrieve and Managed Knowledge Base",
+      "last_updated": "2026-11-16T22:43:30Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Build memory-aware AI agents with Agentic Retrieve on Amazon Bedrock Managed Knowledge Base",
+          "url": "https://aws.amazon.com/blogs/machine-learning/build-memory-aware-ai-agents-with-agentic-retrieve-on-amazon-bedrock-managed-knowledge-base/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock Managed Knowledge Base and Bedrock AgentCore memory now store conversation history, extract facts, and provide long‑term memory in a single AgenticRetrieveStream call. The update enables building multi‑user assistants where each user sees only authorized documents and each user's memory remains private.",
+      "why_it_matters": "Developers can create assistants that retain context across sessions without building custom storage, improving response relevance while keeping each user's data isolated for privacy and compliance. This simplifies architecture for long‑term, personalized AI interactions."
+    },
+    {
+      "category": "security",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Backend and AI engineers may need to audit dependencies for AI components, strengthen threat modeling for AI‑enabled attacks, and implement tighter monitoring and response controls around network access and AI tool usage.",
+      "event_id": "evt_474a91e84ee7b824",
+      "first_seen": "2026-11-16T17:36:43Z",
+      "headline": "FBI reports Artex AI open-source tool used to breach networks in under three hours",
+      "last_updated": "2026-11-16T17:36:43Z",
+      "score": 6.217,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "FBI says Artex AI open source hacking tool used to breach networks in ‘under three hours’",
+          "url": "https://techcrunch.com/2026/11/16/fbi-says-artex-ai-open-source-hacking-tool-used-to-breach-networks-in-under-three-hours/"
+        }
+      ],
+      "what_happened": "The FBI says the open-source hacking tool Artex AI was employed in cyberattacks that breached the networks of a U.S. IT giant and the South Korean financial industry, achieving access in less than three hours.",
+      "why_it_matters": "The incident demonstrates that publicly available AI-driven hacking tools can be weaponized quickly, raising the risk of rapid, large‑scale breaches against critical infrastructure and financial systems, and prompting heightened security scrutiny of AI tools and open‑source code."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers get a ready‑to‑assemble four‑node DGX Spark cluster plus a step‑by‑step HPC SDK install guide, enabling local testing and development of distributed AI and HPC applications.",
+      "event_id": "evt_9634b5e75ef12012",
+      "first_seen": "2026-11-16T23:00:05Z",
+      "headline": "NVIDIA launches DGX Spark HPC Developer Kit, a four-node desktop supercomputing cluster",
+      "last_updated": "2026-11-16T23:00:05Z",
+      "score": 5.998,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "NVIDIA DGX Spark Developer Kit Turns a Desk Into a Supercomputing Lab",
+          "url": "https://blogs.nvidia.com/blog/dgx-spark-hpc-developer-kit-sc26/"
+        }
+      ],
+      "what_happened": "At SC26, NVIDIA announced the DGX Spark HPC Developer Kit, a four‑node cluster of DGX Spark systems linked in a ring topology for researchers, academics and developers. The kit includes an installation playbook for the NVIDIA HPC SDK.",
+      "why_it_matters": "The kit brings a full‑scale HPC environment to a desk, lowering the barrier for developers to experiment with large‑scale AI and scientific workloads without needing a dedicated data‑center, potentially accelerating prototyping and education in high‑performance computing."
+    },
+    {
+      "category": "research",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "The paper titled \"Quantize, Qualify, Rerank: A Recipe for Compressing LLMs Without Losing Quality\" is listed on arXiv with identifier 2611.18587v1."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "Compressing large language models reduces serving cost."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "In the WMT26 Model Compression constrained track, the authors compressed the model google/gemma-3-12b-it, which is 24.4 GB in bf16 format, for three translation directions using a single H100 GPU."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "Paired bootstrap analysis revealed metric disagreement when the model was quantized to 4 bits."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-lg"
+          ],
+          "text": "The authors used MetricX24-XXL as the primary evaluation metric and CometKiwi-XXL as a cross‑check, guided by the WMT24 human meta‑evaluation."
+        }
+      ],
+      "confidence": 0.85,
+      "developer_impact": "Provides a concrete workflow (quantize, evaluate with multiple metrics, rerank based on human‑aligned scores) that backend and AI engineers can adopt to safely compress large models for production, potentially reducing hardware requirements and inference latency.",
+      "event_id": "evt_963bbe19ff67ab44",
+      "first_seen": "2026-11-16T05:00:00Z",
+      "headline": "New method compresses Gemma-3-12B model to 4-bit while preserving translation quality",
+      "last_updated": "2026-11-17T05:00:00Z",
+      "score": 5.79,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Quantize, Qualify, Rerank: A Recipe for Compressing LLMs Without Losing Quality",
+          "url": "https://arxiv.org/abs/2611.18587"
+        }
+      ],
+      "what_happened": "Researchers presented a three‑step recipe—Quantize, Qualify, Rerank—to compress the 12‑billion‑parameter Gemma‑3‑IT model (24.4 GB bf16) for three WMT26 translation directions on a single H100 GPU. They applied 4‑bit quantization, performed paired bootstrap analysis that revealed disagreement between automatic metrics, and then used the WMT24 human meta‑evaluation to select MetricX24‑XXL as the primary metric and CometKiwi‑XXL as a cross‑check, guiding the final compression choices.",
+      "why_it_matters": "The approach demonstrates that aggressive quantization can cut serving costs without sacrificing translation quality when multiple metrics and human judgments are combined, highlighting the limits of single‑metric evaluation for LLM compression and offering a reproducible workflow for future model size reductions."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "event_id": "evt_7f222ffac50d47c9",
+      "first_seen": "2026-11-17T05:00:00Z",
+      "headline": "Check token introduced for real-time self-verification in LLM reasoning",
+      "last_updated": "2026-11-17T05:00:00Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Check Token: Real-Time Self-Verification and Precise Truncation in LLM Reasoning",
+          "url": "https://arxiv.org/abs/2611.18564"
+        }
+      ],
+      "what_happened": "The paper proposes a 'check token' mechanism that enables large language models to verify their reasoning steps during generation and to truncate reasoning precisely, addressing error propagation that existing post‑generation verification methods cannot prevent.",
+      "why_it_matters": "Real‑time verification could reduce cascading errors in LLM outputs, improving reliability of generated reasoning and potentially lowering the need for costly post‑hoc checks."
+    }
+  ]
+}
