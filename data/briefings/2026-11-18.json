@@ -1,0 +1,166 @@
+{
+  "covers_since": "2026-11-17T10:28:30.172239Z",
+  "day": "2026-11-18",
+  "generated_at": "2026-11-18T10:01:08.098539Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 140,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 165.4
+  },
+  "stories": [
+    {
+      "category": "open_source",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can expect continued support for open‑source AI frameworks on Nvidia platforms and may later see tighter integration with Hugging Face libraries and services, though no immediate API changes are announced.",
+      "event_id": "evt_7c1076c2aa096bde",
+      "first_seen": "2026-11-17T23:04:35Z",
+      "headline": "Nvidia confirms open-source AI strategy and Hugging Face acquisition plans after CEO Jensen Huang departs",
+      "last_updated": "2026-11-17T23:04:35Z",
+      "score": 6.648,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Nvidia says its open source AI strategy remains intact after Jensen Huang’s exit",
+          "url": "https://techcrunch.com/2026/11/17/nvidia-says-its-open-source-ai-strategy-remains-intact-after-jensen-huangs-exit/"
+        }
+      ],
+      "what_happened": "Interim CEO of Nvidia publicly reaffirmed that the company's open‑source AI strategy remains unchanged following the sudden exit of founder and CEO Jensen Huang. The leadership also reiterated its intention to acquire Hugging Face, despite the leadership transition.",
+      "why_it_matters": "Maintaining the open‑source strategy signals continuity for partners and developers relying on Nvidia's AI tooling. The prospective Hugging Face acquisition could deepen integration between Nvidia hardware/software and Hugging Face's model hub, potentially shaping the AI ecosystem and competitive dynamics."
+    },
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "verified",
+          "supported_by": [
+            "openai",
+            "simon-willison"
+          ],
+          "text": "OpenAI is introducing GPT-6.2 Astra and GPT-6.2 Sol."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "GPT-6.2 Astra and Sol are available in the API as gpt-6.2-astra and gpt-6.2-sol."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "GPT-6.2 Astra costs $8 per MTok input and $40 per MTok output."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "GPT-6.2 Astra's price is 80% of the price of GPT-6 Astra."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "simon-willison"
+          ],
+          "text": "GPT-6 Astra and Claude Fable 5 were both priced at $10 per MTok input and $50 per MTok output."
+        }
+      ],
+      "confidence": 0.92,
+      "developer_impact": "Developers must reference the new model names (gpt-6.2-astra, gpt-6.2-sol) in API calls and can expect lower per‑token costs, especially for Astra. The LLM 0.38 release adds support for these models, enabling immediate integration into existing pipelines.",
+      "event_id": "evt_8f6af8c44a4a1bfb",
+      "first_seen": "2026-11-17T17:45:00Z",
+      "headline": "OpenAI launches GPT-6.2 Astra and Sol models with improved performance and lower pricing",
+      "last_updated": "2026-11-17T22:38:52Z",
+      "score": 6.2,
+      "sources": [
+        {
+          "source_id": "openai",
+          "title": "Introducing GPT-6.2 Astra and Sol",
+          "url": "https://openai.com/index/introducing-gpt-6-2-astra-sol"
+        },
+        {
+          "source_id": "simon-willison",
+          "title": "GPT‑6.2 Astra and GPT‑6.2 Sol",
+          "url": "https://simonwillison.net/2026/Nov/17/gpt62-astra-and-sol/"
+        }
+      ],
+      "what_happened": "OpenAI announced two new GPT-6.2 variants: Astra, positioned as a frontier model for the hardest projects, and Sol, described as an efficient, versatile model for everyday work. Both are available via the API under the identifiers gpt-6.2-astra and gpt-6.2-sol. The models claim better professional outputs, coding assistance, computer‑use capabilities, and higher efficiency at reduced cost. Pricing for Astra is $8 per MTok input and $40 per MTok output, about 80% of the previous GPT‑6 Astra price; Sol is implied to have similar cost reductions.",
+      "why_it_matters": "The new models give developers access to higher‑quality outputs for demanding tasks while offering a cheaper, efficient option for routine workloads, potentially lowering inference expenses and speeding up development cycles for AI‑augmented backend services."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers will be able to use NVIDIA’s agent‑based experiment automation software and target the newly announced Nemotron, Rubin GPU, and Vera CPU platforms for building and deploying high‑performance AI and scientific applications.",
+      "event_id": "evt_011b27afc6a841bf",
+      "first_seen": "2026-11-17T14:00:10Z",
+      "headline": "NVIDIA unveils AI agent tools, Nemotron for Science, Rubin GPU and expanded Vera CPU at SC26",
+      "last_updated": "2026-11-17T14:00:10Z",
+      "score": 6.147,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "Ian Buck Kicks Off NVIDIA’s Week at SC26 as Science Enters the Age of Agents",
+          "url": "https://blogs.nvidia.com/blog/ian-buck-sc26/"
+        }
+      ],
+      "what_happened": "At SC26, NVIDIA’s Ian Buck announced new software for AI agents that can plan experiments, run code and verify results on researchers' own systems, plus the Nemotron for Science processor, the Rubin high‑performance computing GPU, and an expanded Vera CPU platform.",
+      "why_it_matters": "The tools aim to automate scientific AI workflows, reducing manual setup and validation time, while the new hardware targets faster, more efficient HPC and AI processing, potentially accelerating research outcomes."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Backend and AI engineers can adopt the two‑stage design—embedding‑based candidate generation followed by selective LLM calls—to build more cost‑effective classification pipelines for large label spaces.",
+      "event_id": "evt_3a3051a1e38ae41a",
+      "first_seen": "2026-11-18T05:00:00Z",
+      "headline": "New pipeline reduces LLM calls for ICD-10 code prediction using transformer embeddings and candidate generation",
+      "last_updated": "2026-11-18T05:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Call-Efficient ICD-10 Code Prediction via Supervised Candidate Generation and Selective LLM Invocation",
+          "url": "https://arxiv.org/abs/2611.21891"
+        }
+      ],
+      "what_happened": "The authors propose a call‑efficient ICD‑10 coding system that first generates candidate codes with a supervised tree‑based model using transformer embeddings, then invokes a large language model only for selected candidates, addressing short noisy diagnosis text, hierarchical label space, and class imbalance.",
+      "why_it_matters": "By limiting expensive LLM invocations, the approach can lower computational cost and latency while maintaining accuracy in automated medical coding, a task critical for billing and health record management."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can incorporate MathEye into pipelines that generate Lean code, allowing automatic repair of proof scripts without hand‑editing, which streamlines integration of LLMs into formal verification workflows.",
+      "event_id": "evt_d72e5cb87b5d5467",
+      "first_seen": "2026-11-18T05:00:00Z",
+      "headline": "MathEye framework refines LLM-generated Lean proofs into fully verified scripts",
+      "last_updated": "2026-11-18T05:00:00Z",
+      "score": 5.89,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "From Sorry to QED: Refining LLM Math Proofs via Angelic Execution",
+          "url": "https://arxiv.org/abs/2611.22103"
+        }
+      ],
+      "what_happened": "Large language models can now produce Lean proof scripts that capture high‑level mathematical arguments, but the scripts often fail on complex theorems due to missing side conditions or misapplied lemmas. The paper introduces MathEye, a framework that takes these imperfect LLM‑generated scripts and, using angelic execution, automatically fills gaps and corrects errors to produce fully verified Lean proofs.",
+      "why_it_matters": "By turning flaky LLM‑generated proofs into correct, machine‑checked proofs, MathEye makes AI‑assisted theorem proving more reliable and scalable, reducing manual debugging and expanding the range of theorems that can be tackled with language‑model assistance."
+    }
+  ]
+}
