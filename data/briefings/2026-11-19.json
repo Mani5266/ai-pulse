@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-18T10:06:07.872651Z",
+  "day": "2026-11-19",
+  "generated_at": "2026-11-19T10:08:46.287176Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 1,
+    "events": 138,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 158.4
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can integrate the QDA agent into their deployment pipelines to generate quantization settings automatically, avoiding manual tuning and potentially achieving better accuracy‑efficiency balances without deep quantization expertise.",
+      "event_id": "evt_0e580c33761cad53",
+      "first_seen": "2026-11-19T05:00:00Z",
+      "headline": "LLM agent automates post‑training quantization recipe design via closed‑loop refinement",
+      "last_updated": "2026-11-19T05:00:00Z",
+      "score": 6.29,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "QDA: Closed-Loop LLM Quantization Design with Agents",
+          "url": "https://arxiv.org/abs/2611.23388"
+        }
+      ],
+      "what_happened": "The paper introduces QDA, a closed‑loop system where an LLM‑based agent iteratively proposes, builds, and evaluates post‑training quantization configurations for large language models. By running multiple refinement rounds, the agent automatically tailors quantization recipes to each model and precision, reducing the need for manual expert redesign.",
+      "why_it_matters": "Automating quantization recipe creation cuts engineering time and can produce more optimal low‑cost serving configurations, improving performance‑cost trade‑offs for deploying LLMs at scale. This could accelerate model deployment and lower operational expenses."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can add an ARISE memory component to existing agents to enable iterative self‑evaluation and automatic knowledge updates, reducing the need for manual model or workflow revisions. Integration may require implementing the self‑evaluation loop and memory storage but does not demand changes to underlying model weights.",
+      "event_id": "evt_2fb42fa5fa3e9829",
+      "first_seen": "2026-11-19T05:00:00Z",
+      "headline": "ARISE introduces self-evolving memory for enterprise LLM agents without model retraining",
+      "last_updated": "2026-11-19T05:00:00Z",
+      "score": 6.19,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "ARISE: Practical Self-Evolving Memory for Accurate and Cost-Efficient Enterprise Agents",
+          "url": "https://arxiv.org/abs/2611.23588"
+        }
+      ],
+      "what_happened": "The paper proposes ARISE (Agent Refinement through Iterative Self-Evaluation), a memory architecture that lets enterprise LLM agents evolve their knowledge from observed failures. The memory updates autonomously using the agent model itself or a teacher model, without changing model weights, tools, or workflow logic.",
+      "why_it_matters": "By allowing agents to adapt to changing environments, workflows, and evolving foundation models without costly retraining, ARISE aims to improve both accuracy and cost efficiency for enterprise deployments that require rapid updates and reliable performance."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Developers can adopt the described pipeline—fine‑tuning RoBERTa with LoRA, indexing review embeddings with FAISS, and invoking an LLM for final reasoning—to build or enhance deceptive‑review detection services.",
+      "event_id": "evt_e83fe1ac127cdc76",
+      "first_seen": "2026-11-19T05:00:00Z",
+      "headline": "Hybrid RAG system combines RoBERTa‑LoRA, FAISS retrieval, and LLM reasoning to detect deceptive reviews",
+      "last_updated": "2026-11-19T05:00:00Z",
+      "score": 6.14,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "A Hybrid RAG Framework for Deceptive Review Detection: Integrating RoBERTa-LoRA, FAISS-Based Retrieval, and LLM Reasoning",
+          "url": "https://arxiv.org/abs/2611.24049"
+        }
+      ],
+      "what_happened": "The authors present a Retrieval‑Augmented Generation framework that uses a LoRA‑adapted RoBERTa classifier, FAISS semantic vector search, and a large language model to reason about and label spam or deceptive online reviews. The system was evaluated on both balanced and heavily imbalanced real‑world review datasets.",
+      "why_it_matters": "Accurate automated detection of fake reviews can reduce misinformation and fraud on platforms that rely on user‑generated opinions, improving trust and decision‑making for consumers and businesses."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.97,
+      "developer_impact": "Developers using Exa’s neural‑search platform can expect faster embedding generation and reduced compute spend; leveraging the gains may require using AWS Neuron SDKs and integrating the custom NKI kernels into their pipelines.",
+      "event_id": "evt_e0342a634eb3ce38",
+      "first_seen": "2026-11-18T23:58:22Z",
+      "headline": "Exa boosts embedding throughput 50% on AWS Neuron AI chips",
+      "last_updated": "2026-11-18T23:58:22Z",
+      "score": 5.715,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Exa boosts embedding throughput by 50% to index billions of documents on AWS AI chips",
+          "url": "https://aws.amazon.com/blogs/machine-learning/exa-boosts-embedding-throughput-by-50-to-index-billions-of-documents-on-aws-ai-chips/"
+        }
+      ],
+      "what_happened": "Exa optimized its neural‑search embedding inference for AWS Neuron hardware (Inferentia2 and Trainium2) by adding custom NKI kernels, achieving roughly a 47% improvement in performance and cost per million documents, which translates to a 50% increase in overall embedding throughput for indexing billions of web documents.",
+      "why_it_matters": "Higher throughput and lower cost let Exa index tens of billions of documents more efficiently, improving the economics of large‑scale vector search and enabling faster, cheaper neural‑search services for customers."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can use these PCs to prototype, fine‑tune, and deploy AI models locally, leveraging NVIDIA's software stack and GPU acceleration. Workflows may shift to include on‑premise model training and inference, reducing cloud dependency.",
+      "event_id": "evt_5f4a2610d601bfa7",
+      "first_seen": "2026-11-18T14:00:31Z",
+      "headline": "NVIDIA RTX Spark compact desktops from ASUS, Dell, MSI now available with up to 128 GB unified memory",
+      "last_updated": "2026-11-18T14:00:31Z",
+      "score": 5.658,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "NVIDIA RTX Spark Compact Desktops Out Now",
+          "url": "https://blogs.nvidia.com/blog/rtx-spark-desktop-local-ai-available-now/"
+        }
+      ],
+      "what_happened": "NVIDIA announced that RTX Spark compact desktop systems built by ASUS, Dell and MSI are now on sale. The machines run Windows, include up to 128 GB of unified memory and ship with NVIDIA's AI software stack, enabling local AI agents, image and video generation, and model fine‑tuning on the device.",
+      "why_it_matters": "The devices bring high‑performance, RTX‑accelerated AI capabilities to a local PC form factor, allowing developers to run larger models and creative workloads without relying on cloud resources, potentially lowering latency and cost for inference and fine‑tuning tasks."
+    }
+  ]
+}
