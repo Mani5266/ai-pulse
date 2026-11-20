@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-19T10:06:07.872651Z",
+  "day": "2026-11-20",
+  "generated_at": "2026-11-20T09:55:59.817174Z",
+  "stats": {
+    "articles": 543,
+    "duplicates_removed": 0,
+    "events": 136,
+    "events_shortlisted": 20,
+    "feeds_failed": 1,
+    "feeds_ok": 24,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 123.6
+  },
+  "stories": [
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers using OpenSSL must upgrade to the patched version that includes the fix for EVP_EncodeBlock, verify that their build pipelines pull the updated library, and consider auditing any custom code that calls this function for potential exploitation.",
+      "event_id": "evt_97dffa3b72860b1f",
+      "first_seen": "2026-11-20T02:01:09Z",
+      "headline": "OpenSSL fixes critical buffer overflow in EVP_EncodeBlock (CVE-2026-121481)",
+      "last_updated": "2026-11-20T02:01:09Z",
+      "score": 6.453,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "OpenSSL: Buffer overflow in EVP_EncodeBlock() (CVE-2026-121481, CVSS 9.8)",
+          "url": "https://github.com/openssl/openssl/pull/33652"
+        }
+      ],
+      "what_happened": "A buffer overflow vulnerability was identified in OpenSSL's EVP_EncodeBlock() function and assigned CVE-2026-121481 with a CVSS score of 9.8. The issue has been disclosed on Hacker News and a corresponding pull request was opened in the OpenSSL repository to address it.",
+      "why_it_matters": "The high severity rating indicates the flaw could be exploited for remote code execution or denial‑of‑service attacks in any software that relies on OpenSSL for encoding operations, posing a significant security risk to servers and services worldwide."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Backend and AI engineers may need to incorporate LLM‑driven model generation pipelines and evaluate them against deployment‑style benchmarks like NextUnit-Bench, potentially changing model development workflows.",
+      "event_id": "evt_2b317a62d713570d",
+      "first_seen": "2026-11-20T05:00:00Z",
+      "headline": "LLM coding agents evaluated on deployment-style PHM benchmark NextUnit-Bench",
+      "last_updated": "2026-11-20T05:00:00Z",
+      "score": 6.34,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Moving Generality from Model to Modeler: LLM Agents for PHM on a Deployment-Style Benchmark",
+          "url": "https://arxiv.org/abs/2611.25252"
+        }
+      ],
+      "what_happened": "Researchers introduced a benchmark called NextUnit-Bench for prognostics and health management (PHM) that includes 24 public datasets split into 58 folds with held‑out units or operating conditions. They used large‑language‑model (LLM) coding agents to automatically generate a model for each new PHM task, testing the idea that generality can reside in the model‑building agent rather than the model itself.",
+      "why_it_matters": "If LLM agents can reliably create task‑specific PHM models, it reduces the need for hand‑crafted, general‑purpose models and could speed up deployment on unseen equipment, improving reliability and maintenance scheduling in industry. The benchmark provides a realistic test of this approach."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.4,
+      "developer_impact": "Developers can incorporate the new Tool Retrieval feature into their applications via the Gemini API.",
+      "event_id": "evt_056cf0b58a3dbace",
+      "first_seen": "2026-11-19T18:00:00Z",
+      "headline": "Google Gemini API adds Tool Retrieval feature",
+      "last_updated": "2026-11-19T18:00:00Z",
+      "score": 6.15,
+      "sources": [
+        {
+          "source_id": "google-ai",
+          "title": "Introducing Tool Retrieval in the Gemini API",
+          "url": "https://blog.google/innovation-and-ai/technology/developers-tools/gemini-api-tool-retrieval/"
+        }
+      ],
+      "what_happened": "Google announced that its Gemini API now includes a new Tool Retrieval capability.",
+      "why_it_matters": "The addition expands the API's functionality, giving developers access to tool‑retrieval capabilities directly through Gemini."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Backend and AI engineers can use AI‑driven agents inside Omniverse to script asset placement, physics setup, and testing, lowering custom code requirements and allowing focus on higher‑level application logic.",
+      "event_id": "evt_79428cf43613e413",
+      "first_seen": "2026-11-19T17:00:35Z",
+      "headline": "NVIDIA Omniverse integrates frontier AI agents to automate simulation creation",
+      "last_updated": "2026-11-19T17:00:35Z",
+      "score": 5.598,
+      "sources": [
+        {
+          "source_id": "nvidia",
+          "title": "Into the Omniverse: How Developers Turn Ideas Into Simulations With Frontier AI Agents",
+          "url": "https://blogs.nvidia.com/blog/developers-simulation-frontier-ai-agents/"
+        }
+      ],
+      "what_happened": "Developers are combining frontier AI models with NVIDIA Omniverse libraries to automate the process of turning a simulation idea into a working application, including asset assembly, physics and rendering integration, and scene validation.",
+      "why_it_matters": "Automation cuts manual engineering effort, speeds up scenario exploration, failure analysis, and design iteration, helping teams reach insights faster and reduce time‑to‑market for simulation‑driven projects."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "Implementing AMA requires orchestrating many AI coding agents, managing their execution environments, and aggregating results, which may affect backend pipelines, resource scheduling, and tooling for reproducible AI workflows. Engineers may need to integrate such agent orchestration platforms and handle large‑scale experiment tracking.",
+      "event_id": "evt_18b6ec3bfe3653cd",
+      "first_seen": "2026-11-20T05:00:00Z",
+      "headline": "Agentic Multiverse Analysis framework deploys 150 autonomous AI agents to expose sensitivity of empirical conclusions",
+      "last_updated": "2026-11-20T05:00:00Z",
+      "score": 5.44,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "When AI Analysts Disagree: Agentic Multiverse Analysis and the Robustness of Empirical Research",
+          "url": "https://arxiv.org/abs/2611.25198"
+        }
+      ],
+      "what_happened": "The paper introduces an Agentic Multiverse Analysis (AMA) framework that makes the impact of dozens of analytical choices (“forks”) visible at scale. In a pilot study the authors deployed 150 autonomous AI coding agents to run variations of a single observational dataset and a set of research questions, demonstrating how the framework can systematically explore how conclusions change with different methodological decisions.",
+      "why_it_matters": "By automating large‑scale multiverse analyses, AMA reveals how robust—or fragile—empirical findings are to hidden analytical decisions, addressing a key reproducibility concern in data‑driven research. This transparency can improve confidence in results and guide more informed methodological choices."
+    }
+  ]
+}
