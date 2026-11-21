@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-11-20T09:53:56.202705Z",
+  "day": "2026-11-21",
+  "generated_at": "2026-11-21T09:33:07.727040Z",
+  "stats": {
+    "articles": 473,
+    "duplicates_removed": 26,
+    "events": 33,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 29,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 159.3
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.93,
+      "developer_impact": "Developers can enable the KV caching skill in their coding agents to automatically set up and manage the cache via ElastiCache, gaining cost and latency benefits without redesigning model inference pipelines.",
+      "event_id": "evt_f6e744ab21c05ceb",
+      "first_seen": "2026-11-21T00:14:26Z",
+      "headline": "AWS adds distributed KV caching skill to Agent Toolkit, reducing self‑hosted LLM cost and latency",
+      "last_updated": "2026-11-21T00:14:26Z",
+      "score": 6.39,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Cut self-hosted LLM cost and latency with the distributed KV caching agent skill",
+          "url": "https://aws.amazon.com/blogs/machine-learning/cut-self-hosted-llm-cost-and-latency-with-the-distributed-kv-caching-agent-skill/"
+        }
+      ],
+      "what_happened": "AWS announced a new distributed key‑value (KV) caching skill for its Agent Toolkit. The skill uses Amazon ElastiCache to cache LLM context across GPU instances, cutting inference cost by up to 40% and reducing time‑to‑first‑token by up to 80% for self‑hosted models.",
+      "why_it_matters": "By reusing previously computed context, developers can lower compute expenses and improve response speed, making large‑scale LLM deployments more economical and responsive, especially in workloads with repeated prompts or multi‑turn interactions."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.95,
+      "developer_impact": "Developers can replace multiple regional endpoints with a single Global Inference Gateway URL, rely on automatic routing and fail‑over, and must configure SigV4/IAM authentication and PrivateLink for secure access. No other code changes are required.",
+      "event_id": "evt_d5bec1fa3b07f617",
+      "first_seen": "2026-11-20T22:35:24Z",
+      "headline": "Amazon SageMaker HyperPod adds Global Inference Gateway for cross‑region endpoint routing",
+      "last_updated": "2026-11-20T22:35:24Z",
+      "score": 5.29,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Introducing Amazon SageMaker HyperPod Global Inference Gateway: One endpoint across Regions and clusters",
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-amazon-sagemaker-hyperpod-global-inference-gateway-one-endpoint-across-regions-and-clusters/"
+        }
+      ],
+      "what_happened": "SageMaker HyperPod now includes a Global Inference Gateway, a single managed endpoint that routes inference requests across HyperPod clusters within a region or across regions. The gateway automatically selects the best cluster, provides automatic fail‑over, and authenticates each request with SigV4 and IAM over AWS PrivateLink.",
+      "why_it_matters": "The feature lets backend services use one endpoint for large‑scale inference, simplifying architecture, reducing latency from regional routing, and improving resilience through automatic fail‑over while maintaining AWS‑native security. This can lower operational overhead for AI deployments."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers can call the Textract Insights API to specify extraction fields in plain language and obtain structured, scored, and grounded data directly, eliminating model‑training pipelines and simplifying integration of document understanding into backend services.",
+      "event_id": "evt_6728ab5448c93c9a",
+      "first_seen": "2026-11-20T20:22:00Z",
+      "headline": "Amazon Textract Insights GA: Generative AI extracts structured data from documents without training",
+      "last_updated": "2026-11-20T20:22:00Z",
+      "score": 5.29,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Announcing Amazon Textract Insights: Verifiable generative AI for documents",
+          "url": "https://aws.amazon.com/blogs/machine-learning/announcing-amazon-textract-insights-verifiable-generative-ai-for-documents/"
+        }
+      ],
+      "what_happened": "Amazon announced the general availability of Textract Insights, a new generative AI feature of Amazon Textract. Users can describe the fields they need in natural language, submit a document or mixed packet, and receive structured results that include a confidence score and page‑level grounding for each extracted value, without requiring any model training.",
+      "why_it_matters": "The service provides verifiable AI output for document processing, reducing the need to build and train custom extraction models. Confidence scores and grounding improve auditability and reliability, making it easier to integrate document data into downstream systems with trust in the results."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.7,
+      "event_id": "evt_84a578f05a50fce6",
+      "first_seen": "2026-11-20T23:30:30Z",
+      "headline": "Google adds business‑calling feature to Duplex within Gemini AI",
+      "last_updated": "2026-11-20T23:30:30Z",
+      "score": 5.07,
+      "sources": [
+        {
+          "source_id": "google-research",
+          "title": "How Google Duplex evolved to also call businesses for you in Gemini",
+          "url": "https://research.google/blog/how-google-duplex-evolved-to-also-call-businesses-for-you-in-gemini/"
+        }
+      ],
+      "what_happened": "Google Duplex has been extended to place calls to businesses as part of the Gemini generative AI system.",
+      "why_it_matters": "The integration lets users automate phone interactions through Gemini, potentially streamlining tasks that require calling businesses."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers may need to audit model outputs for leakage, implement stricter data handling, and consider using canary detection or other safeguards to protect prompt confidentiality.",
+      "event_id": "evt_f22d46a83ecd25c4",
+      "first_seen": "2026-11-20T20:59:08Z",
+      "headline": "Researcher inserts 2 million canary tokens into AI models, exposing prompt data leakage",
+      "last_updated": "2026-11-20T20:59:08Z",
+      "score": 5.062,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "Researcher plants 2m canaries into the AI supply chain. A privacy disaster surfaced.",
+          "url": "https://arstechnica.com/security/2026/11/a-leaky-ai-supply-chain-is-exposing-secret-user-data-at-an-alarming-rate/"
+        }
+      ],
+      "what_happened": "A researcher added two million unique canary strings into the AI supply chain and ran prompts containing these trackable secrets. The test showed the secrets were not kept private, indicating a privacy breach in the models.",
+      "why_it_matters": "The result demonstrates that AI systems can unintentionally expose sensitive prompt data, raising privacy and security concerns for users and organizations that rely on these models."
+    }
+  ]
+}
