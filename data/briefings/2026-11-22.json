@@ -1,0 +1,150 @@
+{
+  "covers_since": "2026-11-21T09:36:33.242341Z",
+  "day": "2026-11-22",
+  "generated_at": "2026-11-22T09:38:31.200429Z",
+  "stats": {
+    "articles": 448,
+    "duplicates_removed": 0,
+    "events": 15,
+    "events_shortlisted": 15,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 21,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 118.0
+  },
+  "stories": [
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers can adopt Muru as a drop‑in server for ASGI/WSGI apps, potentially gaining performance and Rust‑level stability; they may need to learn its configuration and any AI‑assisted features for optimal use.",
+      "event_id": "evt_aaa55aaf59895092",
+      "first_seen": "2026-11-21T23:56:28Z",
+      "headline": "Muru: New AI‑assisted Rust server for ASGI and WSGI Python apps",
+      "last_updated": "2026-11-21T23:56:28Z",
+      "score": 5.537,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "Muru",
+          "url": "https://simonwillison.net/2026/Nov/21/muru/"
+        }
+      ],
+      "what_happened": "Graham Dumpleton (Muru) introduced Muru, an AI‑assisted server written in Rust that is intended to run Python ASGI and WSGI applications in both development and production environments.",
+      "why_it_matters": "Muru offers a Rust‑based alternative to existing Python web servers, aiming for higher performance and better tooling, which could improve efficiency and reliability of Python web services at scale."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.4,
+      "event_id": "evt_5c6d12478082daa5",
+      "first_seen": "2026-11-21T14:36:45Z",
+      "headline": "Lean community posts verification attempt of Riemann Hypothesis on Hacker News",
+      "last_updated": "2026-11-21T14:36:45Z",
+      "score": 4.103,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Lean verification of the Riemann Hypothesis",
+          "url": "https://leanprover-community.github.io/blog/posts/riemann-hypothesis/"
+        }
+      ],
+      "what_happened": "A blog post titled \"Lean verification of the Riemann Hypothesis\" was published on the Lean prover community site and received significant attention on Hacker News, accumulating 1,015 points and 834 comments.",
+      "why_it_matters": "The high engagement suggests strong interest in applying formal proof assistants like Lean to major open mathematical problems, highlighting a potential shift toward machine‑checked mathematics."
+    },
+    {
+      "category": "model_release",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "Meta ads is now available in AWS Quick."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "AWS Quick now includes a Meta ads AI connector."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "Meta advertisers can use natural language in AWS Quick to create, manage, and analyze campaigns while staying connected to the Meta ad management network."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "aws-machine-learning"
+          ],
+          "text": "Users can combine Meta ad data with first- and third‑party sources in AWS Quick to build dashboards, documents, slide decks, and automated workflows."
+        }
+      ],
+      "confidence": 0.96,
+      "developer_impact": "Developers can integrate the Meta ads connector into AWS Quick workflows, programmatically access campaign data, merge it with other datasets, and automate dashboard or document generation without building custom API integrations.",
+      "event_id": "evt_caa9073cefb43725",
+      "first_seen": "2026-11-09T19:00:00Z",
+      "headline": "AWS Quick adds Meta ads AI connector for natural-language campaign management",
+      "last_updated": "2026-11-22T01:59:13Z",
+      "score": 3.65,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Meta ads is now available in AWS Quick",
+          "url": "https://aws.amazon.com/blogs/machine-learning/meta-ads-is-now-available-in-aws-quick/"
+        }
+      ],
+      "what_happened": "AWS Quick now includes a Meta ads AI connector that lets Meta advertisers use natural language to create, manage, and analyze ad campaigns while staying linked to the Meta ad management network. The connector also enables combining Meta ad data with first- and third‑party sources to build dashboards, documents, slide decks, and automated workflows.",
+      "why_it_matters": "The feature lets advertisers operate Meta campaigns directly from AWS Quick, reducing the need for separate tools and simplifying data integration across sources. This can speed up reporting, improve insight generation, and support automated marketing processes within the AWS ecosystem."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.85,
+      "event_id": "evt_f2e0e504895b9fb3",
+      "first_seen": "2026-11-21T16:00:00Z",
+      "headline": "Actor licenses AI version of his face to microdrama startup, sparking Hollywood debate",
+      "last_updated": "2026-11-21T16:00:00Z",
+      "score": 3.562,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Is selling an AI version of your face to this microdrama startup the future of Hollywood?",
+          "url": "https://techcrunch.com/2026/11/21/is-selling-an-ai-version-of-your-face-to-this-microdrama-startup-the-future-of-hollywood/"
+        }
+      ],
+      "what_happened": "An actor has granted a microdrama startup the rights to use an AI-generated version of his face, a practice already popular in China.",
+      "why_it_matters": "Experts warn that if such licensing becomes common in Hollywood, it could raise long‑term concerns about identity, consent, and the future of performance in the film industry."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers gain a curated reference of existing messaging AI agents, which can inform integration decisions or inspire the creation of similar agents for their own platforms.",
+      "event_id": "evt_f52216bdae320c52",
+      "first_seen": "2026-11-21T17:00:00Z",
+      "headline": "TechCrunch AI publishes list of top AI agents for text messaging",
+      "last_updated": "2026-11-21T17:00:00Z",
+      "score": 3.393,
+      "sources": [
+        {
+          "source_id": "techcrunch-ai",
+          "title": "Here are the top AI agents that can live in your text messages",
+          "url": "https://techcrunch.com/2026/11/21/all-the-ai-agents-that-can-live-in-your-text-messages/"
+        }
+      ],
+      "what_happened": "TechCrunch AI compiled and released a list highlighting notable AI agents that can operate within text messaging platforms, including general assistants and specialized agents for families, travel, and work.",
+      "why_it_matters": "The list showcases the expanding ecosystem of conversational AI that can be embedded directly in messaging apps, indicating growing interest and potential use cases for AI-driven communication in everyday contexts."
+    }
+  ]
+}
