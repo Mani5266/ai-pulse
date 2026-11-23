@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-22T10:34:22.046874Z",
+  "day": "2026-11-23",
+  "generated_at": "2026-11-23T10:37:09.198934Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 92,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 167.2
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.75,
+      "developer_impact": "Developers may need to integrate ChatAtom's multi‑agent APIs or pipelines into existing backend systems to leverage LLM‑driven generation of simulation scripts and automated result visualization, potentially reshaping workflow orchestration for scientific computing.",
+      "event_id": "evt_461a81e08dcc750a",
+      "first_seen": "2026-11-23T05:00:00Z",
+      "headline": "ChatAtom introduces a multi‑agent LLM system to automate molecular dynamics simulation setup and visualization",
+      "last_updated": "2026-11-23T05:00:00Z",
+      "score": 6.34,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "ChatAtom: A Multi-Agent LLM System for Molecular Dynamics Simulation and Visualization",
+          "url": "https://arxiv.org/abs/2611.26782"
+        }
+      ],
+      "what_happened": "The paper announces ChatAtom, a multi‑agent large language model system designed to streamline molecular dynamics (MD) studies. It translates user intents into reliable MD input scripts, orchestrates execution of simulations, and generates visualizations, consolidating steps that traditionally required separate expert‑driven tools.",
+      "why_it_matters": "By automating the design, execution, and analysis of MD simulations, ChatAtom can lower the expertise barrier, accelerate materials‑design workflows, and enable faster iteration on structural and mechanical property predictions."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers building federated learning pipelines may need to adopt the LEAN library instead of naïve adapter averaging, requiring changes to model update aggregation logic and handling of asynchronous client participation.",
+      "event_id": "evt_f33aa1721d852325",
+      "first_seen": "2026-11-23T05:00:00Z",
+      "headline": "LEAN introduces library-based adaptation to improve asynchronous federated fine‑tuning of LoRA adapters",
+      "last_updated": "2026-11-23T05:00:00Z",
+      "score": 6.19,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "LEAN: Library-Based Adaptation for Asynchronous, Federated Fine-Tuning",
+          "url": "https://arxiv.org/abs/2611.26805"
+        }
+      ],
+      "what_happened": "The paper presents LEAN, a method that replaces simple averaging of locally trained low‑rank adapters in federated fine‑tuning with a library‑based approach designed for cross‑device settings where participants have heterogeneous data and join or leave asynchronously. The authors argue that averaging is unstable because adapters are not identifiable up to permutation and can be uninformative when data differ.",
+      "why_it_matters": "By addressing instability and uninformative updates, LEAN could make federated fine‑tuning of large foundation models more reliable and scalable, especially in environments with many devices and non‑synchronous participation."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.78,
+      "developer_impact": "Backend and AI engineers must design edge‑deployed inference components, implement real‑time policy enforcement modules, and orchestrate selective cloud calls for complex judgments. This may require new deployment pipelines, latency‑aware routing, and secure data handling at the edge.",
+      "event_id": "evt_a3e0bef82b0da509",
+      "first_seen": "2026-11-23T05:00:00Z",
+      "headline": "Multi‑Tier Edge Triage architecture proposed to cut latency while enforcing safety policies for clinical AI agents",
+      "last_updated": "2026-11-23T05:00:00Z",
+      "score": 6.09,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "Multi-Tier Edge Triage: Optimizing Latency for Safe Clinical Agents",
+          "url": "https://arxiv.org/abs/2611.26914"
+        }
+      ],
+      "what_happened": "The paper introduces a Multi‑Tier Edge Triage system that places parts of generative AI agent processing at the network edge to enforce safety and compliance (HIPAA PHI protection, scope‑of‑practice limits, patient‑appropriate reading level, brand integrity) while meeting interactive latency requirements. It reduces reliance on synchronous outbound calls to cloud LLM judges, which add latency, by handling policy checks locally before optional cloud verification.",
+      "why_it_matters": "Clinical workflows demand strict privacy, regulatory compliance, and real‑time responsiveness. Lower latency improves usability and safety, while edge‑based policy enforcement reduces PHI exposure and helps meet HIPAA and other regulations, potentially enabling broader deployment of AI assistants in healthcare settings."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers targeting mobile AI can adopt MixFold’s grouping strategy to deploy larger LLMs using 2‑bit and 3‑bit weights, but must adapt model export pipelines and possibly use specific NPU APIs to align weight formats with tile datatype requirements.",
+      "event_id": "evt_14a959238623f243",
+      "first_seen": "2026-11-23T05:00:00Z",
+      "headline": "MixFold enables sub-4-bit mixed-precision LLM inference on mobile NPUs via output-channel grouping",
+      "last_updated": "2026-11-23T05:00:00Z",
+      "score": 6.04,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "MixFold: Sub-4-Bit Mixed-Precision LLM Inference via Output-Channel Grouping on Mobile NPUs",
+          "url": "https://arxiv.org/abs/2611.26976"
+        }
+      ],
+      "what_happened": "The paper introduces MixFold, a technique that groups output channels to allow mixed‑precision inference (3‑bit and symmetric 2‑bit) on mobile neural‑processing units (NPUs). It addresses the fact that sub‑4‑bit quantization can reduce memory but often does not speed up decoding because NPU matrix units only support a few native integer types and converting unsupported weight formats incurs overhead. By ensuring each matrix‑unit tile uses a single datatype through output‑channel grouping, MixFold preserves the speed benefits of lower‑bit weights.",
+      "why_it_matters": "If successful, the approach lets mobile devices run larger language models with lower latency and power consumption, expanding on‑device AI capabilities without relying on cloud inference. It also demonstrates a path to overcome hardware constraints that previously limited the practical gains of extreme quantization."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Developers will need to build pipelines that ingest and align H&E and mIF image modalities, train multimodal encoders together with large language models, and design interfaces that expose model reasoning for interpretability.",
+      "event_id": "evt_ba63b85712814233",
+      "first_seen": "2026-11-23T05:00:00Z",
+      "headline": "New multimodal LLM approach integrates H&E and mIF data for interpretable tumor immune analysis",
+      "last_updated": "2026-11-23T05:00:00Z",
+      "score": 5.99,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Beyond Final Answers: Interpretable Tumor Immune Microenvironment Reasoning from H&E and mIF",
+          "url": "https://arxiv.org/abs/2611.26794"
+        }
+      ],
+      "what_happened": "Researchers propose a multimodal large language model that combines hematoxylin‑eosin (H&E) histology images with multiplex immunofluorescence (mIF) cell‑phenotype data to automate tumor immune microenvironment (TIME) readouts such as CD8+ T‑cell density and Ki67 index, addressing the prior limitation of pathology MLLMs that only process H&E images.",
+      "why_it_matters": "Automating and explaining TIME measurements could accelerate pathology workflows, improve consistency of immune profiling, and support research and clinical decisions in oncology by providing interpretable AI outputs rather than black‑box predictions."
+    }
+  ]
+}
