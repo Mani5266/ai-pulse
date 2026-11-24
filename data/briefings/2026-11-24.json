@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-23T12:17:38.326847Z",
+  "day": "2026-11-24",
+  "generated_at": "2026-11-24T12:19:48.167451Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 0,
+    "events": 120,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 129.9
+  },
+  "stories": [
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers may need to integrate the AutoPILOT harness into their pipelines, replacing or augmenting existing harnesses like VISTA. This could involve new APIs for feeding visual input, handling memory, and issuing rapid action commands, affecting backend architecture and latency considerations.",
+      "event_id": "evt_4a7944a6b20a53a7",
+      "first_seen": "2026-11-24T05:00:00Z",
+      "headline": "AutoPILOT harness enables real-time gameplay for multimodal AI agents",
+      "last_updated": "2026-11-24T05:00:00Z",
+      "score": 6.39,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "AutoPILOT: A Visual Agent Harness for Real-Time Gameplay",
+          "url": "https://arxiv.org/abs/2611.28202"
+        }
+      ],
+      "what_happened": "The paper introduces AutoPILOT, a visual‑agent harness designed to let multimodal foundation models play video games that run continuously. It addresses a gap where existing models perform well only when the game pauses for them. Unlike prior harnesses such as VISTA, which limit each model call to a single action, AutoPILOT manages what the model sees, remembers, and translates outputs into actions more frequently, supporting real‑time interaction.",
+      "why_it_matters": "By allowing AI agents to act continuously rather than only when the game waits, AutoPILOT expands the applicability of multimodal models to real‑time interactive environments, potentially improving AI performance in games, simulations, and other time‑critical tasks."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Developers can now use GLM-5.4 for coding‑related AI tasks; the deeper, parameter‑efficient design may yield better results than similarly sized models, potentially reducing the need for larger models.",
+      "event_id": "evt_105d2dd6f5d647be",
+      "first_seen": "2026-11-23T23:40:49Z",
+      "headline": "Z.ai releases GLM-5.4, a loop‑transformer model for coding",
+      "last_updated": "2026-11-23T23:40:49Z",
+      "score": 5.888,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "GLM-5.4: Toward Generalized Coding with Our First Loop Transformer",
+          "url": "https://simonwillison.net/2026/Nov/23/glm-54/"
+        }
+      ],
+      "what_happened": "Chinese AI lab Z.ai announced the availability of GLM-5.4, its first model built with a loop transformer architecture. In this design a group of weight‑shared layers iterates multiple times per forward pass, refining hidden states and creating a deeper network without adding parameters.",
+      "why_it_matters": "The loop architecture allows a larger effective depth while keeping model size constant, which can improve performance on coding tasks without higher computational cost. This could advance code generation and assistance tools."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.6,
+      "developer_impact": "Backend and AI engineers can improve the security of AI‑generated code by incorporating concise, OWASP‑aligned security requirements into prompts, potentially reducing the need for extensive post‑generation security reviews.",
+      "event_id": "evt_5fa7069343d0cd91",
+      "first_seen": "2026-11-24T05:00:00Z",
+      "headline": "Study Finds Security-Focused Prompts Improve Safety of AI-Generated Web Apps",
+      "last_updated": "2026-11-24T05:00:00Z",
+      "score": 5.84,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "The Effect of Security-Focused Prompts on Reported Findings: A Controlled Experiment on 400 AI-Generated Web Applications",
+          "url": "https://arxiv.org/abs/2611.28408"
+        }
+      ],
+      "what_happened": "Researchers conducted a controlled experiment with 400 AI‑generated web applications. Using 100 frozen specifications, each was realized four times by two agentic coding tools (including Claude Code). A fixed block of OWASP‑aligned security requirements was appended to the prompt for half the runs to test whether the prompts altered the tools' defaults for authentication, session handling, input validation, and dependency management, and to observe any side effects.",
+      "why_it_matters": "The results indicate that prompt engineering can directly influence the security posture of code produced by AI coding assistants, suggesting a practical lever for reducing common vulnerabilities in automatically generated applications. This highlights the need for security‑aware prompting as part of AI‑assisted development pipelines."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers may see emerging methods that combine AI agent teams with formal verification for quantum algorithm design, suggesting new toolchains or workflows, though no specific developer tools were announced.",
+      "event_id": "evt_895b540db6a8889e",
+      "first_seen": "2026-11-23T16:59:40Z",
+      "headline": "DeepMind uses AI agents and formal verification to accelerate quantum algorithms for fusion and chemistry",
+      "last_updated": "2026-11-23T16:59:40Z",
+      "score": 5.8,
+      "sources": [
+        {
+          "source_id": "google-deepmind",
+          "title": "Finding faster quantum algorithms with agents and formal verification",
+          "url": "https://deepmind.google/blog/finding-faster-quantum-algorithms-with-agents-and-formal-verification/"
+        }
+      ],
+      "what_happened": "DeepMind is applying teams of AI agents together with formal verification techniques to create faster quantum algorithms aimed at nuclear fusion research and chemical simulations.",
+      "why_it_matters": "Improved quantum algorithms could enhance the ability to simulate complex fusion processes and chemical reactions, potentially speeding scientific breakthroughs and practical applications in energy and materials science."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers can use the new API to programmatically enroll in Anthropic’s safeguards and data‑control features, simplifying integration of Claude Fable models with enforced data handling policies.",
+      "event_id": "evt_b24333cc89f9425e",
+      "first_seen": "2026-11-24T05:01:14Z",
+      "headline": "Amazon Bedrock launches Trusted Access API with Anthropic data safeguards in public preview",
+      "last_updated": "2026-11-24T05:01:14Z",
+      "score": 5.74,
+      "sources": [
+        {
+          "source_id": "aws-machine-learning",
+          "title": "Introducing the Amazon Bedrock Trusted Access API with Anthropic’s Enterprise Frontier Safeguards and Enterprise Data Controls",
+          "url": "https://aws.amazon.com/blogs/machine-learning/introducing-the-amazon-bedrock-trusted-access-api-with-anthropics-enterprise-frontier-safeguards-and-enterprise-data-controls/"
+        }
+      ],
+      "what_happened": "Amazon Bedrock announced a Trusted Access API that lets users discover, request, and enroll in model provider programs. In public preview it includes Anthropic’s Enterprise Frontier Safeguards and Enterprise Data Controls, which give users control over data when using Claude Fable models.",
+      "why_it_matters": "The API centralizes access to model‑provider programs and adds data‑privacy controls, helping enterprises manage compliance and risk when integrating large language models into their backend systems."
+    }
+  ]
+}
