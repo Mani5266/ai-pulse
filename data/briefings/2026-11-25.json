@@ -1,0 +1,164 @@
+{
+  "covers_since": "2026-11-24T12:17:38.326847Z",
+  "day": "2026-11-25",
+  "generated_at": "2026-11-25T11:06:26.420490Z",
+  "stats": {
+    "articles": 523,
+    "duplicates_removed": 1,
+    "events": 111,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 26,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 140.9
+  },
+  "stories": [
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.8,
+      "developer_impact": "Backend and AI engineers may need to incorporate AI‑assisted security testing into their pipelines, monitor for AI‑generated exploit patterns, and consider using frameworks like Cairn for defensive scanning. Awareness of AI‑driven attack vectors could influence code hardening and threat modeling practices.",
+      "event_id": "evt_44bd775b8ffe162a",
+      "first_seen": "2026-11-24T12:30:05Z",
+      "headline": "Hackers used AI agents to discover and exploit a zero‑day vulnerability with minimal human input, Amazon reports",
+      "last_updated": "2026-11-24T12:30:05Z",
+      "score": 6.543,
+      "sources": [
+        {
+          "source_id": "ars-technica",
+          "title": "Amazon says hackers' AI agents found and exploited 0-day with little human input",
+          "url": "https://arstechnica.com/security/2026/11/amazon-says-hackers-ai-agents-found-and-exploited-0-day-with-little-human-input/"
+        }
+      ],
+      "what_happened": "Amazon reported that attackers employed AI agents, using the Cairn AI framework, to automatically locate and exploit a previously unknown (0‑day) software vulnerability, requiring little direct human involvement. The same Cairn framework is noted as being useful for both defenders and attackers.",
+      "why_it_matters": "The incident shows that AI can automate vulnerability discovery and exploitation, lowering the skill barrier for attackers and accelerating the threat timeline. It also highlights that the same AI tools can aid defenders, creating an arms race where both sides leverage automated reasoning to find and patch flaws faster."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers building LLM‑based systems may need to incorporate RECAP's summary‑generation and RL training loops, adjust data pipelines to produce and store compact summaries, and tune policies that depend on these summaries. The approach could change how backend services manage conversation state and memory for AI agents.",
+      "event_id": "evt_5b5230fa758613ad",
+      "first_seen": "2026-11-25T05:00:00Z",
+      "headline": "RECAP introduces RL framework for joint context compaction and policy learning in long-horizon LLM agents",
+      "last_updated": "2026-11-25T05:00:00Z",
+      "score": 6.34,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "RECAP: Training Long-horizon LLM Agents with Context Compaction",
+          "url": "https://arxiv.org/abs/2611.31258"
+        }
+      ],
+      "what_happened": "The paper titled RECAP proposes a reinforcement‑learning framework that trains large language model (LLM) agents to compress their interaction histories into summarized representations while simultaneously learning the agent policy. This joint training addresses the difficulty of preserving task‑relevant information in the summaries, which affect success over many future steps, enabling agents to operate under strict context‑size limits for long‑horizon tasks.",
+      "why_it_matters": "By allowing LLM agents to retain essential information in a compact form, RECAP makes it feasible to run longer, more complex tasks without exceeding model context windows, potentially improving performance and reducing compute costs for applications that require extended reasoning or multi‑step interactions."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.4,
+      "event_id": "evt_5e8eba5b15ac6044",
+      "first_seen": "2026-11-24T23:02:07Z",
+      "headline": "Simon Willison highlights three LLM inflection points, noting one-year anniversary of Claude Opus 4.5",
+      "last_updated": "2026-11-24T23:02:07Z",
+      "score": 6.138,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "Three LLM inflection points in twelve months",
+          "url": "https://simonwillison.net/2026/Nov/24/llm-inflection-points/"
+        }
+      ],
+      "what_happened": "Simon Willison delivered a keynote at the AI Engineer Code Summit, outlining three significant inflection points in large language model (LLM) capabilities over the past twelve months, with a focus on coding agents. He noted that November 24, 2026 marks the one‑year anniversary of the release of Claude Opus 4.5.",
+      "why_it_matters": "The identified inflection points suggest rapid advances in LLM performance, particularly for code‑generation tools, which could reshape how developers build and maintain software. The milestone of Claude Opus 4.5 underscores a concrete example of these advances reaching a year of usage."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Provides a framework and learning approach that developers can adopt to build agents capable of dynamic tool selection and sequencing, influencing backend pipelines that integrate multimodal models with external computational tools.",
+      "event_id": "evt_b77f0e482deef83a",
+      "first_seen": "2026-11-25T05:00:00Z",
+      "headline": "SpatialCraft paper proposes learning procedural tool orchestration for spatial reasoning agents",
+      "last_updated": "2026-11-25T05:00:00Z",
+      "score": 5.94,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "SpatialCraft: Evolving Procedural Intelligence from Experience and Skills for Spatial Reasoning Agents",
+          "url": "https://arxiv.org/abs/2611.31475"
+        }
+      ],
+      "what_happened": "The arXiv preprint SpatialCraft introduces a method for spatial reasoning agents to evolve procedural intelligence from experience and skill representations, aiming to improve how agents select, order, and interpret outputs from external 3D reconstruction, segmentation, and geometric computation tools, addressing the bottleneck of tool orchestration in stateless agents.",
+      "why_it_matters": "Better tool orchestration can reduce repeated mistakes across tasks, enabling agents to answer complex spatial questions more reliably and potentially improving performance of AI systems that depend on external geometry tools."
+    },
+    {
+      "category": "other",
+      "claims": [
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "GPT-6 models demonstrate intrinsic protein-design capabilities."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "GPT-6 models design protein structures and sequences using reasoning and code."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "openai"
+          ],
+          "text": "Lab tests found evidence of binding across five targets for GPT-6 designed proteins."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "Frontier models like GPT-6 Astra are increasingly able to do substantial reasoning without a monitorable chain of thought."
+        },
+        {
+          "contradicted_by": [],
+          "status": "unverified",
+          "supported_by": [
+            "arxiv-cs-ai"
+          ],
+          "text": "Chains of thought in GPT-6 models are becoming less legible and are often monitored asynchronously to reduce cost."
+        }
+      ],
+      "confidence": 0.85,
+      "developer_impact": "Engineers may need to integrate new model endpoints for protein‑design tasks and adapt pipelines to handle generated sequences. They should also consider incorporating monitorable‑by‑design components (e.g., GRAM, SGTM, DEMix, BTS) into LLM deployments to retain visibility into model reasoning and support asynchronous monitoring strategies.",
+      "event_id": "evt_ac2f786b30f6d457",
+      "first_seen": "2026-11-24T13:00:00Z",
+      "headline": "GPT-6 demonstrates protein‑design ability and spurs proposals for monitorable LLM architectures",
+      "last_updated": "2026-11-25T05:00:00Z",
+      "score": 5.77,
+      "sources": [
+        {
+          "source_id": "openai",
+          "title": "GPT-6 models demonstrate intrinsic protein-design capabilities",
+          "url": "https://openai.com/index/gpt-6-models-demonstrate-intrinsic-protein-design-capabilities"
+        },
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "Monitorable-by-design architectures for a post-Astra world: a compartmentalization-based approach",
+          "url": "https://arxiv.org/abs/2611.31610"
+        }
+      ],
+      "what_happened": "OpenAI reports that GPT‑6 models can design protein structures and sequences, using reasoning and code, and laboratory tests showed binding evidence on five targets. Separately, an arXiv pre‑print notes that frontier models such as GPT‑6 Astra perform substantial reasoning without a legible chain‑of‑thought, making real‑time monitoring costly, and proposes a monitorable‑by‑design architectural modification for future LLMs.",
+      "why_it_matters": "The protein‑design capability suggests LLMs can contribute directly to biotech research, potentially accelerating drug discovery. The monitorability concerns highlight emerging safety and compliance challenges as LLM reasoning becomes less transparent, prompting architectural changes to retain oversight and reduce monitoring costs."
+    }
+  ]
+}
