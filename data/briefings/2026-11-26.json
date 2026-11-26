@@ -1,0 +1,119 @@
+{
+  "covers_since": "2026-11-25T11:04:05.547169Z",
+  "day": "2026-11-26",
+  "generated_at": "2026-11-26T10:43:37.144162Z",
+  "stats": {
+    "articles": 521,
+    "duplicates_removed": 1,
+    "events": 107,
+    "events_shortlisted": 20,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 25,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 127.4
+  },
+  "stories": [
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.4,
+      "developer_impact": "Developers can access the open dataset, fine‑tune Nemotron 3.5 Parse for their tasks, and benefit from reduced inference latency when deploying the model.",
+      "event_id": "evt_3d2697b636d74b83",
+      "first_seen": "2026-11-26T05:05:36Z",
+      "headline": "Hugging Face releases Nemotron 3.5 Parse with open data, fine‑tuning and faster inference",
+      "last_updated": "2026-11-26T05:05:36Z",
+      "score": 6.422,
+      "sources": [
+        {
+          "source_id": "huggingface-blog",
+          "title": "Building on Nemotron 3.5 Parse: Open Data, Fine-Tuning, and Faster Inference",
+          "url": "https://huggingface.co/blog/nvidia/building-on-nemotron-35-parse-open-data-fine-tunin"
+        }
+      ],
+      "what_happened": "Hugging Face announced a new offering built on the Nemotron 3.5 Parse model that provides open data, supports fine‑tuning, and delivers faster inference.",
+      "why_it_matters": "Providing open data and fine‑tuning support lowers the barrier for customizing large language models, while faster inference reduces latency and compute cost for production workloads."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers would need to incorporate KiRA’s Kronecker input‑gated modules into their fine‑tuning pipelines, which may change parameter allocation strategies and offer more efficient training for large pretrained models.",
+      "event_id": "evt_17bcad2e36d06ce8",
+      "first_seen": "2026-11-26T05:00:00Z",
+      "headline": "KiRA introduces Kronecker input‑gated rank adaptation for parameter‑efficient fine‑tuning",
+      "last_updated": "2026-11-26T05:00:00Z",
+      "score": 6.19,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-lg",
+          "title": "KiRA: Kronecker Input-Gated Rank Adaptation for Parameter-Efficient Fine-Tuning of Pretrained Models",
+          "url": "https://arxiv.org/abs/2611.33236"
+        }
+      ],
+      "what_happened": "The paper presents KiRA, a new PEFT technique that uses Kronecker‑based input‑gated rank adaptation to vary the low‑rank update capacity per input, addressing the limitation that existing PEFT methods keep a fixed rank across all inputs.",
+      "why_it_matters": "By allowing the rank of updates to adapt to each input, KiRA could improve fine‑tuning performance while keeping parameter counts low, potentially reducing compute and memory costs compared to full fine‑tuning."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers integrating multimodal models may need to incorporate EVA's tool‑selection and evidence‑verification workflow, adjust prompting to request external visual evidence, and handle cases where the model must reconcile its internal predictions with the obtained evidence.",
+      "event_id": "evt_557aca624a23055f",
+      "first_seen": "2026-11-26T05:00:00Z",
+      "headline": "EVA introduces evidence-seeking visual agent to curb hallucinations in multimodal LLMs",
+      "last_updated": "2026-11-26T05:00:00Z",
+      "score": 6.14,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-ai",
+          "title": "EVA: Evidence-seeking Visual Agent for Hallucination-Resistant Multimodal Reasoning",
+          "url": "https://arxiv.org/abs/2611.33706"
+        }
+      ],
+      "what_happened": "The paper presents EVA, an Evidence‑seeking Visual Agent designed to reduce hallucinations in multimodal large language models (MLLMs). It identifies that hallucinations often stem from unchecked visual assumptions and that self‑reflection, multi‑agent debate, or counterfactual verification can amplify errors when they rely on the same faulty assumptions. EVA leverages external visual tools to obtain verifiable evidence, aiming to select appropriate tools, supply correct parameters, and incorporate the evidence into the model's reasoning process.",
+      "why_it_matters": "By grounding multimodal reasoning in externally verified visual evidence, EVA improves the reliability and trustworthiness of MLLM outputs. This reduces the risk of erroneous conclusions in applications such as visual question answering, image captioning, and AI‑assisted decision making, where inaccurate visual inference can have downstream consequences."
+    },
+    {
+      "category": "infrastructure",
+      "claims": [],
+      "confidence": 0.9,
+      "developer_impact": "If the satellite network becomes operational, developers could eventually tap ultra‑low‑latency AI compute located in space, affecting decisions about where to run latency‑sensitive models. No APIs or access details are provided yet, so immediate impact is limited.",
+      "event_id": "evt_cc44d5e0e57b06ca",
+      "first_seen": "2026-11-25T17:44:51Z",
+      "headline": "FCC approves SpaceX plan for up to 1 million AI chip satellites (Starmind)",
+      "last_updated": "2026-11-25T17:44:51Z",
+      "score": 5.867,
+      "sources": [
+        {
+          "source_id": "the-verge-ai",
+          "title": "FCC signs off on SpaceX’s plan to put up to 1 million data center satellites into space",
+          "url": "https://www.theverge.com/science/1042278/spacex-fcc-starmind-ai-space-data-centers"
+        }
+      ],
+      "what_happened": "The U.S. Federal Communications Commission granted SpaceX authorization to launch up to one million satellites equipped with AI chips as part of its \"Starmind\" initiative, marking the first regulatory approval for a space‑based AI data‑center concept. The filing notes that other companies, such as Google and Blue Origin, are also exploring similar satellite AI data‑center ideas.",
+      "why_it_matters": "Regulatory clearance clears a major hurdle for deploying large‑scale compute resources in orbit, potentially enabling lower‑latency AI services worldwide and opening a new class of infrastructure. It also raises considerations about orbital congestion, spectrum use, and the economics of space‑based compute versus terrestrial data centers."
+    },
+    {
+      "category": "research",
+      "claims": [],
+      "confidence": 0.85,
+      "developer_impact": "Developers may adopt hard‑negative contrastive training when fine‑tuning embedding models and can use the publicly released FOF‑Bench to evaluate factual robustness. This may require updating training pipelines and validation suites to incorporate the new benchmark and loss formulation.",
+      "event_id": "evt_c74ed50124d17eea",
+      "first_seen": "2026-11-26T05:00:00Z",
+      "headline": "New benchmark and contrastive training reduce factual errors in text embeddings",
+      "last_updated": "2026-11-26T05:00:00Z",
+      "score": 5.64,
+      "sources": [
+        {
+          "source_id": "arxiv-cs-cl",
+          "title": "Focus On Facts: Stylistically Invariant and Factually Sensitive Text Embeddings",
+          "url": "https://arxiv.org/abs/2611.33250"
+        }
+      ],
+      "what_happened": "Researchers identified that standard text embedding models often prioritize surface-form similarity over factual identity, preferring altered near‑copies with corrupted facts over fact‑preserving rewrites. They introduced hard‑negative contrastive supervision to mitigate this shortcut and created FOF‑Bench, an 83,263‑triplet benchmark covering five domains to evaluate factual sensitivity of embeddings.",
+      "why_it_matters": "Embedding models are widely used for retrieval, clustering, and downstream AI tasks. Improving factual sensitivity reduces the risk of propagating misinformation and enhances the reliability of systems that depend on semantic similarity, especially when texts differ stylistically but share factual content."
+    }
+  ]
+}
