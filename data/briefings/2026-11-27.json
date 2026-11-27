@@ -1,0 +1,117 @@
+{
+  "covers_since": "2026-11-26T10:43:08.761950Z",
+  "day": "2026-11-27",
+  "generated_at": "2026-11-27T10:44:39.719356Z",
+  "stats": {
+    "articles": 498,
+    "duplicates_removed": 50,
+    "events": 16,
+    "events_shortlisted": 16,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 21,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 91.0
+  },
+  "stories": [
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.4,
+      "event_id": "evt_6e454a90b9c6f234",
+      "first_seen": "2026-11-27T10:00:00Z",
+      "headline": "New prosthetic technology enables researchers to probe the human mind",
+      "last_updated": "2026-11-27T10:00:00Z",
+      "score": 4.562,
+      "sources": [
+        {
+          "source_id": "mit-technology-review",
+          "title": "Cutting-edge prosthetics allow researchers to probe the human mind",
+          "url": "https://www.technologyreview.com/2026/11/27/1149946/cutting-edge-prosthetics-allow-researchers-to-probe-the-human-mind/"
+        }
+      ],
+      "what_happened": "Researchers have developed cutting‑edge prosthetic devices that can be used to directly study brain activity, allowing scientists to probe the human mind in ways not previously possible.",
+      "why_it_matters": "The ability to access neural signals through prosthetics could accelerate neuroscience research, improve understanding of brain function, and inform new therapeutic approaches for neurological conditions."
+    },
+    {
+      "category": "benchmark",
+      "claims": [],
+      "confidence": 0.3,
+      "developer_impact": "Developers can use the dashboard to benchmark their llama.cpp deployments on AMD Ryzen and Radeon, informing optimization and hardware selection decisions.",
+      "event_id": "evt_a734da9d3a1d8760",
+      "first_seen": "2026-11-26T11:37:17Z",
+      "headline": "Llama.cpp benchmark dashboard launched for AMD Ryzen CPUs and Radeon GPUs",
+      "last_updated": "2026-11-26T11:37:17Z",
+      "score": 4.228,
+      "sources": [
+        {
+          "source_id": "huggingface-blog",
+          "title": "Introducing the llama.cpp benchmark dashboard for AMD Ryzen and Radeon",
+          "url": "https://huggingface.co/blog/ggml-org/llamacpp-amd-bench"
+        }
+      ],
+      "what_happened": "A new benchmark dashboard for the llama.cpp project targeting AMD Ryzen processors and Radeon graphics cards has been introduced, as announced in a Hugging Face blog post.",
+      "why_it_matters": "The dashboard gives developers concrete performance data for running llama.cpp on AMD hardware, helping them evaluate and compare efficiency across AMD CPU and GPU configurations."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.7,
+      "event_id": "evt_443cdd5dbbf5d340",
+      "first_seen": "2026-11-26T13:10:00Z",
+      "headline": "Next‑generation bionic hands with sensory feedback released",
+      "last_updated": "2026-11-26T13:10:00Z",
+      "score": 4.113,
+      "sources": [
+        {
+          "source_id": "mit-technology-review",
+          "title": "The Download: Better bionic hands and AI’s natural-gas boom",
+          "url": "https://www.technologyreview.com/2026/11/26/1149934/the-download-better-bionic-hands-ai-natural-gas-boom/"
+        }
+      ],
+      "what_happened": "The latest generation of prosthetic hands has been introduced, featuring the ability to convey tactile sensations to the user. The article cites a user, Avi Davidson, who after multiple prosthetics now has a hand that can feel.",
+      "why_it_matters": "Providing sensory feedback can improve prosthetic usability, allowing users to perform tasks with greater precision and a more natural experience, potentially advancing assistive technology adoption."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.4,
+      "developer_impact": "Developers with AMD GPUs can build and run llama.cpp using this fork, potentially adjusting build scripts or dependencies to target AMD architectures.",
+      "event_id": "evt_40cb249974695259",
+      "first_seen": "2026-11-26T17:11:29Z",
+      "headline": "AMD-specific fork of llama.cpp released",
+      "last_updated": "2026-11-26T17:11:29Z",
+      "score": 4.002,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "AMD-specific fork of llama.cpp",
+          "url": "https://devnull.land/amd-specific-llama-cpp"
+        }
+      ],
+      "what_happened": "A fork of the llama.cpp project tailored for AMD hardware has been published, as reported on Hacker News.",
+      "why_it_matters": "The fork gives AMD GPU users a version of llama.cpp that may run more efficiently on their hardware, expanding access to LLaMA model inference beyond NVIDIA‑centric builds."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.3,
+      "developer_impact": "Developers may adopt AI‑assisted tools to simplify self‑hosting tasks.",
+      "event_id": "evt_aebfbe56731bd98a",
+      "first_seen": "2026-11-26T21:47:45Z",
+      "headline": "AI made self‑hosting fun again",
+      "last_updated": "2026-11-26T21:47:45Z",
+      "score": 3.652,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "AI made self-hosting fun again",
+          "url": "https://janlukas.blog/posts/ai-self-hosting"
+        }
+      ],
+      "what_happened": "An article reports that AI technologies have renewed interest in self‑hosting, making the process more enjoyable.",
+      "why_it_matters": "If self‑hosting becomes more enjoyable, developers may be more inclined to run services locally rather than relying on third‑party hosting."
+    }
+  ]
+}
