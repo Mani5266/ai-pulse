@@ -1,0 +1,118 @@
+{
+  "covers_since": "2026-11-27T10:43:08.761950Z",
+  "day": "2026-11-28",
+  "generated_at": "2026-11-28T10:06:09.338952Z",
+  "stats": {
+    "articles": 448,
+    "duplicates_removed": 1,
+    "events": 13,
+    "events_shortlisted": 13,
+    "feeds_failed": 2,
+    "feeds_ok": 23,
+    "model_calls": 18,
+    "model_failures": 0,
+    "provider": "chain(groq:openai/gpt-oss-120b, openrouter:nvidia/nemotron-3-super-120b-a12b:free)",
+    "runtime_seconds": 85.4
+  },
+  "stories": [
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.45,
+      "developer_impact": "Developers should audit WebRTC usage, consider restricting or disabling it, and add monitoring or CSP rules to block unauthorized data streams.",
+      "event_id": "evt_6281386251445d32",
+      "first_seen": "2026-11-27T15:40:31Z",
+      "headline": "Credit‑card skimming scripts using WebRTC discovered on major e‑commerce sites",
+      "last_updated": "2026-11-27T15:40:31Z",
+      "score": 5.053,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Credit card skimming scripts using WebRTC found on popular shopping sites",
+          "url": "https://www.infohawk.com/news/2026-11-27-black-friday-webrtc-skimmer"
+        }
+      ],
+      "what_happened": "Security researchers identified JavaScript skimming code that leverages WebRTC to capture credit‑card data on several popular shopping websites.",
+      "why_it_matters": "The scripts can exfiltrate payment information directly from users’ browsers, raising the risk of large‑scale card theft and undermining consumer trust in online retail."
+    },
+    {
+      "category": "other",
+      "claims": [],
+      "confidence": 0.4,
+      "event_id": "evt_807ee205622074b4",
+      "first_seen": "2026-11-28T03:19:20Z",
+      "headline": "Unkernel compiles real Linux kernel to WebAssembly",
+      "last_updated": "2026-11-28T03:19:20Z",
+      "score": 5.003,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Unkernel: Real Linux kernel, compiled to WebAssembly",
+          "url": "https://unkernel.dev/"
+        }
+      ],
+      "what_happened": "A project named Unkernel has compiled the real Linux kernel into WebAssembly, as reported on Hacker News.",
+      "why_it_matters": "The article suggests the compilation could enable running the Linux kernel in WebAssembly environments, but provides no further detail."
+    },
+    {
+      "category": "ai_agents",
+      "claims": [],
+      "confidence": 0.3,
+      "developer_impact": "Developers using n8n can assign tasks to the Nod personal agent, extending automation capabilities without writing custom code.",
+      "event_id": "evt_e3ee6f591d9a20e8",
+      "first_seen": "2026-11-27T11:00:00Z",
+      "headline": "AI attempts to tackle major physics puzzle and n8n launches personal agent Nod for job automation",
+      "last_updated": "2026-11-27T11:00:00Z",
+      "score": 4.485,
+      "sources": [
+        {
+          "source_id": "the-rundown",
+          "title": "AI takes a swing at physics' biggest puzzle",
+          "url": "https://www.therundown.ai/articles/ai-takes-a-swing-at-physics-biggest-puzzle"
+        }
+      ],
+      "what_happened": "The article notes that artificial intelligence is being applied to what is described as physics' biggest puzzle. It also mentions a new feature called Nod, a personal agent from the automation platform n8n, that can be given jobs to perform.",
+      "why_it_matters": "If AI can contribute to solving a fundamental physics problem, it could accelerate research in that field. The Nod agent provides a way for users to automate tasks, potentially streamlining workflows for developers and other users of n8n."
+    },
+    {
+      "category": "product",
+      "claims": [],
+      "confidence": 0.7,
+      "developer_impact": "Developers using Convex skills must consider that app ideas may be sent off‑site; they may need to audit skill behavior, adjust usage, or seek alternatives to protect confidential information.",
+      "event_id": "evt_42b6c44ba3384d39",
+      "first_seen": "2026-11-27T18:02:45Z",
+      "headline": "Convex backend skill transmits user app ideas to remote server without disclosure",
+      "last_updated": "2026-11-27T18:02:45Z",
+      "score": 4.242,
+      "sources": [
+        {
+          "source_id": "hacker-news",
+          "title": "Convex skills send the user's app idea to a remote server without telling them",
+          "url": "https://github.com/convex/convex-backend-skill/issues/64"
+        }
+      ],
+      "what_happened": "A Convex skill was found to automatically send the user's app idea to a remote server, and it does so without informing the user.",
+      "why_it_matters": "The behavior raises privacy and trust concerns, as developers and users may unintentionally expose proprietary or sensitive app concepts to external services."
+    },
+    {
+      "category": "model_release",
+      "claims": [],
+      "confidence": 0.96,
+      "developer_impact": "Developers can now create new chart plugins via the new hook with fewer friction points, and they have a dedicated website for reference and examples. This streamlines the workflow for adding custom visualizations to Datasette projects.",
+      "event_id": "evt_07fffdf07c77b17b",
+      "first_seen": "2026-11-24T04:24:29Z",
+      "headline": "datasette-charts 0.4a0 adds extensible chart plugin hook and improves ergonomics",
+      "last_updated": "2026-11-27T23:57:17Z",
+      "score": 3.287,
+      "sources": [
+        {
+          "source_id": "simon-willison",
+          "title": "datasette-charts 0.4a0",
+          "url": "https://simonwillison.net/2026/Nov/27/datasette-charts/"
+        }
+      ],
+      "what_happened": "The datasette-charts plugin was released as version 0.4a0. It introduces a dedicated plugin hook that lets other plugins define new chart types. The author used Claude Opus 5.5 to build experimental plugins, identified design friction, and this release addresses those issues, making additional chart plugin development more ergonomic. A documentation website (charts.datasette.io) was also launched.",
+      "why_it_matters": "By exposing a stable hook for custom chart types, developers can more easily extend Datasette with bespoke visualizations, reducing development overhead and accelerating integration of data‑driven UI components. The ergonomic improvements lower the barrier for creating and sharing chart plugins, potentially broadening the ecosystem and enabling faster prototyping of data‑visual analytics."
+    }
+  ]
+}
